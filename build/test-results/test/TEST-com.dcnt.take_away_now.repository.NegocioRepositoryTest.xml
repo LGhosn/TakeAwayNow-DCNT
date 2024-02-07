@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dcnt.take_away_now.repository.NegocioRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-01-25T18:20:51" hostname="DESKTOP-FB7HCB6" time="0.032">
+  <properties/>
+  <testcase name="SeEncuentraUnNegocioQueExiste()" classname="com.dcnt.take_away_now.repository.NegocioRepositoryTest" time="0.019"/>
+  <testcase name="NoSeEncuentraUnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.repository.NegocioRepositoryTest" time="0.012"/>
+  <system-out><![CDATA[2024-01-25T15:20:51.278-03:00  INFO 8780 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.NegocioRepositoryTest]: NegocioRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-01-25T15:20:51.325-03:00  INFO 8780 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.NegocioRepositoryTest
+Hibernate: 
+    insert 
+    into
+        negocios
+        (dia_apertura, dia_cierre, horario_apertura, horario_cierre, nombre, saldo, id_negocio) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        n1_0.id_negocio,
+        n1_0.dia_apertura,
+        n1_0.dia_cierre,
+        n1_0.horario_apertura,
+        n1_0.horario_cierre,
+        n1_0.nombre,
+        n1_0.saldo 
+    from
+        negocios n1_0 
+    where
+        n1_0.nombre=?
+Hibernate: 
+    insert 
+    into
+        negocios
+        (dia_apertura, dia_cierre, horario_apertura, horario_cierre, nombre, saldo, id_negocio) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        n1_0.id_negocio,
+        n1_0.dia_apertura,
+        n1_0.dia_cierre,
+        n1_0.horario_apertura,
+        n1_0.horario_cierre,
+        n1_0.nombre,
+        n1_0.saldo 
+    from
+        negocios n1_0 
+    where
+        n1_0.nombre=?
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
