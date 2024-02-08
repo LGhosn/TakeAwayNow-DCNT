@@ -42,12 +42,12 @@ public class ClienteController {
      *   Métodos Post *
      ******************/
     @PostMapping("/")
-    public ResponseEntity<HttpStatus> crearCliente(@RequestBody String nombreUsuario) {
+    public ResponseEntity<String> crearCliente(@RequestBody String nombreUsuario) {
         return clienteService.crearCliente(nombreUsuario);
     }
 
     @PostMapping("/{idCliente}/cargaDeSaldo/{saldoACargar}")
-    public ResponseEntity<HttpStatus> cargarSaldo(@RequestParam Long idCliente, @RequestParam BigDecimal saldoACargar) {
+    public ResponseEntity<String> cargarSaldo(@RequestParam Long idCliente, @RequestParam BigDecimal saldoACargar) {
         return clienteService.cargarSaldo(idCliente, saldoACargar);
     }
 

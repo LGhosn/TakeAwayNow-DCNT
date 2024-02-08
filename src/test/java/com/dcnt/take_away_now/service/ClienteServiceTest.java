@@ -20,6 +20,8 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.OK;
 
 @DataJpaTest
 class ClienteServiceTest {
@@ -42,26 +44,26 @@ class ClienteServiceTest {
     @Test
     void sePuedeCrearClienteNuevo() {
         //when
-        clienteService.crearCliente(username);
+        ResponseEntity<String> response = clienteService.crearCliente(username);
 
         //then
         Optional<Cliente> cliente = clienteRepository.findByUsuario(username);
         assertThat(cliente.get().getUsuario()).isEqualTo(username);
+        assertThat(response.getStatusCode()).isEqualTo(OK);
+        assertThat(response.getBody()).isEqualTo("Cliente creado con éxito.");
     }
 
     @Test
     void noSePuedeCrearDosClientesConElMismoUsername() {
-        //given
+        // given
         clienteService.crearCliente(username);
-        //when
-        assertThatThrownBy(
-                () -> {
-                    clienteService.crearCliente(username);
-                }
-        )
-        // then: "se lanza error"
-        .isInstanceOf(RuntimeException.class)
-        .hasMessageContaining("Ya existe un usuario con el nombre ingresado.");
+
+        // when
+        ResponseEntity<String> response = clienteService.crearCliente(username);
+
+        // then
+        assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
+        assertThat(response.getBody()).isEqualTo("Ya existe un usuario con el nombre ingresado.");
     }
 
     @Test
@@ -107,24 +109,22 @@ class ClienteServiceTest {
         Optional<Cliente> messi = clienteRepository.findByUsuario(username);
 
         //when
-        clienteService.cargarSaldo(messi.get().getId(), BigDecimal.valueOf(100));
+        ResponseEntity<String> response = clienteService.cargarSaldo(messi.get().getId(), BigDecimal.valueOf(100));
 
         //then
         Dinero saldo = messi.get().getSaldo();
         assertThat(saldo).isEqualTo(new Dinero(100));
+        assertThat(response.getStatusCode()).isEqualTo(OK);
+        assertThat(response.getBody()).isEqualTo("Se han cargado correctamente a su saldo el monto de $100.");
     }
 
     @Test
     void noSePuedeCargarSaldoAUnClienteQueNoExiste() {
         //when
-        assertThatThrownBy(
-                () -> {
-                    clienteService.cargarSaldo(1L, BigDecimal.valueOf(100));
+        ResponseEntity<String> response = clienteService.cargarSaldo(1L, BigDecimal.valueOf(100));
 
-                }
-        )
-                // then: "se lanza error"
-                .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("No existe el cliente en la base de datos.");
+        // then
+        assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
+        assertThat(response.getBody()).isEqualTo("No existe el cliente en la base de datos.");
     }
 }

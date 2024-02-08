@@ -47,8 +47,7 @@ public class NegocioController {
      *   Métodos Post *
      ******************/
     @PostMapping("/")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<org.apache.hc.core5.http.HttpStatus> crearNegocio(
+    public ResponseEntity<String> crearNegocio(
             @RequestParam String nombre,
             @RequestParam DayOfWeek diaDeApertura,
             @RequestParam DayOfWeek diaDeCierre,
@@ -60,7 +59,7 @@ public class NegocioController {
         return negocioService.crearNegocio(nombre, diaDeApertura, diaDeCierre, horaApertura, minutoApertura, horaCierre, minutoCierre);
     }
     @PostMapping("/{negocioId}/productos/")
-    public ResponseEntity<org.apache.hc.core5.http.HttpStatus> crearProducto(
+    public ResponseEntity<String> crearProducto(
             @PathVariable Long negocioId,
             @RequestParam String nombreDelProducto,
             @RequestParam Long stock,
@@ -73,7 +72,7 @@ public class NegocioController {
      *   Métodos Patch *
      *******************/
     @PatchMapping("/{negocioId}/productos/{productoId}")
-    public ResponseEntity<org.apache.hc.core5.http.HttpStatus> modificarProducto(
+    public ResponseEntity<String> modificarProducto(
             @PathVariable Long negocioId,
             @PathVariable Long productoId,
             @RequestParam Long stock,
@@ -84,7 +83,7 @@ public class NegocioController {
     }
 
     @PatchMapping("/{negocioId}/horariosDeTrabajo")
-    public ResponseEntity<org.apache.hc.core5.http.HttpStatus> modificarHorariosDelNegocio(
+    public ResponseEntity<String> modificarHorariosDelNegocio(
             @PathVariable Long negocioId,
             @RequestParam int horaApertura,
             @RequestParam int minutoApertura,
@@ -95,7 +94,7 @@ public class NegocioController {
     }
 
     @PatchMapping("/{negocioId}/diasDeTrabajo")
-    public ResponseEntity<org.apache.hc.core5.http.HttpStatus> modificarDiasDeAperturaDelNegocio(
+    public ResponseEntity<String> modificarDiasDeAperturaDelNegocio(
             @PathVariable Long negocioId,
             @RequestParam DayOfWeek diaDeApertura,
             @RequestParam DayOfWeek diaDeCierre
@@ -107,7 +106,7 @@ public class NegocioController {
     *   Métodos Delete *
     ********************/
     @DeleteMapping("/{negocioId}/productos/{productoId}")
-    public ResponseEntity<org.apache.hc.core5.http.HttpStatus> eliminarProducto(
+    public ResponseEntity<String> eliminarProducto(
             @PathVariable Long negocioId,
             @PathVariable Long productoId
     ) {

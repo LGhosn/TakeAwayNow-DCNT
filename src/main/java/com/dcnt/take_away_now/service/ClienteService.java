@@ -33,22 +33,26 @@ public class ClienteService {
         Cliente cliente = clienteRepository.findById(idCliente).orElseThrow( () -> new RuntimeException("No existe el cliente en la base de datos."));
         return cliente.getUsuario();
     }
-    public ResponseEntity<HttpStatus> crearCliente(String usuario) {
+    public ResponseEntity<String> crearCliente(String usuario) {
         Optional<Cliente> optionalCliente = clienteRepository.findByUsuario(usuario);
         if (optionalCliente.isPresent()) {
-            throw new RuntimeException("Ya existe un usuario con el nombre ingresado.");
+            return ResponseEntity.internalServerError().body("Ya existe un usuario con el nombre ingresado.");
         }
 
         this.clienteRepository.save(new Cliente(usuario));
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("Cliente creado con éxito.");
     }
 
-    public ResponseEntity<HttpStatus> cargarSaldo(Long idCliente, BigDecimal saldoACargar) {
-        Cliente cliente = clienteRepository.findById(idCliente).orElseThrow( () -> new RuntimeException("No existe el cliente en la base de datos."));
+    public ResponseEntity<String> cargarSaldo(Long idCliente, BigDecimal saldoACargar) {
+        Optional<Cliente> optionalCliente = clienteRepository.findById(idCliente);
+        if (optionalCliente.isEmpty()) {
+            return ResponseEntity.internalServerError().body("No existe el cliente en la base de datos.");
+        }
 
+        Cliente cliente = optionalCliente.get();
         cliente.setSaldo(cliente.getSaldo().plus(new Dinero(saldoACargar)));
         this.clienteRepository.save(cliente);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("Se han cargado correctamente a su saldo el monto de $" + saldoACargar + "." );
     }
     public void eliminarCliente(Long idCliente) {
         clienteRepository.deleteById(idCliente);

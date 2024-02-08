@@ -81,7 +81,7 @@ class NegocioControllerTest {
                 .param("horaCierre", String.valueOf(HoraCierre))
                 .param("minutoCierre", String.valueOf(MinutoCierre))
         );
-        response.andExpect(MockMvcResultMatchers.status().isCreated());
+        response.andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test

@@ -34,7 +34,7 @@ public class PedidoController {
      *   Métodos Post *
      ******************/
     @PostMapping("/")
-    public ResponseEntity<org.apache.hc.core5.http.HttpStatus> confirmarPedido(@RequestBody InfoPedidoDto infoPedido) {
+    public ResponseEntity<String> confirmarPedido(@RequestBody InfoPedidoDto infoPedido) {
         return pedidoService.verificarPedido(infoPedido);
     }
 
@@ -42,27 +42,27 @@ public class PedidoController {
      *   Métodos Patch *
      *******************/
     @PatchMapping("/{pedidoId}/marcarComienzoDePreparacion")
-    public ResponseEntity<org.apache.hc.core5.http.HttpStatus> marcarComienzoDePreparacion(@PathVariable Long pedidoId) {
+    public ResponseEntity<String> marcarComienzoDePreparacion(@PathVariable Long pedidoId) {
         return pedidoService.marcarComienzoDePreparacion(pedidoId);
     }
 
     @PatchMapping("/{pedidoId}/marcarPedidoListoParaRetirar")
-    public ResponseEntity<org.apache.hc.core5.http.HttpStatus> marcarPedidoListoParaRetirar(@PathVariable Long pedidoId) {
+    public ResponseEntity<String> marcarPedidoListoParaRetirar(@PathVariable Long pedidoId) {
         return pedidoService.marcarPedidoListoParaRetirar(pedidoId);
     }
 
     @PatchMapping("/{pedidoId}/confirmarRetiroDelPedido")
-    public ResponseEntity<org.apache.hc.core5.http.HttpStatus> confirmarRetiroDelPedido(@PathVariable Long pedidoId) {
+    public ResponseEntity<String> confirmarRetiroDelPedido(@PathVariable Long pedidoId) {
         return pedidoService.confirmarRetiroDelPedido(pedidoId);
     }
 
     @PatchMapping("/{pedidoId}/devolverPedido")
-    public ResponseEntity<org.apache.hc.core5.http.HttpStatus> devolverPedido(@PathVariable Long pedidoId) {
+    public ResponseEntity<String> devolverPedido(@PathVariable Long pedidoId) {
         return pedidoService.devolverPedido(pedidoId);
     }
 
     @PatchMapping("/{pedidoId}/cancelarPedido")
-    public ResponseEntity<org.apache.hc.core5.http.HttpStatus> cancelarPedido(@PathVariable Long pedidoId) {
+    public ResponseEntity<String> cancelarPedido(@PathVariable Long pedidoId) {
         return pedidoService.cancelarPedido(pedidoId);
     }
 }

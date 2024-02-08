@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1.373s</div>
+<div class="counter">0.395s</div>
 <p>duration</p>
 </div>
 </td>
@@ -66,6 +66,9 @@
 <li>
 <a href="#tab1">Standard output</a>
 </li>
+<li>
+<a href="#tab2">Standard error</a>
+</li>
 </ul>
 <div id="tab0" class="tab">
 <h2>Tests</h2>
@@ -79,7 +82,7 @@
 </thead>
 <tr>
 <td class="success">contextLoads()</td>
-<td class="success">1.373s</td>
+<td class="success">0.395s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -87,8 +90,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>15:20:27.919 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.dcnt.take_away_now.TakeAwayNowApplicationTests]: TakeAwayNowApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-15:20:28.160 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.TakeAwayNowApplicationTests
+<pre>19:54:46.878 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.dcnt.take_away_now.TakeAwayNowApplicationTests]: TakeAwayNowApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:54:46.959 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.TakeAwayNowApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -98,19 +101,19 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2024-01-25T15:20:29.028-03:00  INFO 8780 --- [    Test worker] c.d.t.TakeAwayNowApplicationTests        : Starting TakeAwayNowApplicationTests using Java 17.0.9 with PID 8780 (started by santiago in C:\Users\santiago\OneDrive\Escritorio\take_away_now\take_away_now)
-2024-01-25T15:20:29.030-03:00  INFO 8780 --- [    Test worker] c.d.t.TakeAwayNowApplicationTests        : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2024-01-25T15:20:31.087-03:00  INFO 8780 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-01-25T15:20:31.244-03:00  INFO 8780 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 136 ms. Found 6 JPA repository interfaces.
-2024-01-25T15:20:32.307-03:00  INFO 8780 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-01-25T15:20:32.575-03:00  INFO 8780 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
-2024-01-25T15:20:32.687-03:00  INFO 8780 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-01-25T15:20:33.766-03:00  INFO 8780 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-01-25T15:20:33.856-03:00  INFO 8780 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-01-25T15:20:34.319-03:00  INFO 8780 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:DBNAME user=ROOT
-2024-01-25T15:20:34.323-03:00  INFO 8780 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-01-25T15:20:34.391-03:00  WARN 8780 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2024-01-25T15:20:38.864-03:00  INFO 8780 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-02-07T19:54:47.259-06:00  INFO 21688 --- [    Test worker] c.d.t.TakeAwayNowApplicationTests        : Starting TakeAwayNowApplicationTests using Java 21.0.2 with PID 21688 (started by santiago in C:\Users\santiago\Documents\GitHub\TakeAwayNow-DCNT)
+2024-02-07T19:54:47.260-06:00  INFO 21688 --- [    Test worker] c.d.t.TakeAwayNowApplicationTests        : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2024-02-07T19:54:47.852-06:00  INFO 21688 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-07T19:54:47.905-06:00  INFO 21688 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 46 ms. Found 6 JPA repository interfaces.
+2024-02-07T19:54:48.297-06:00  INFO 21688 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-07T19:54:48.356-06:00  INFO 21688 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-02-07T19:54:48.388-06:00  INFO 21688 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-02-07T19:54:48.611-06:00  INFO 21688 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-07T19:54:48.639-06:00  INFO 21688 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-02-07T19:54:48.812-06:00  INFO 21688 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:DBNAME user=ROOT
+2024-02-07T19:54:48.813-06:00  INFO 21688 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-02-07T19:54:48.835-06:00  WARN 21688 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-02-07T19:54:49.629-06:00  INFO 21688 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: 
     drop table if exists clientes cascade 
 Hibernate: 
@@ -213,11 +216,21 @@ Hibernate:
        add constraint FK5xwq1xi3k07xrjjpvvpxvdoku 
        foreign key (id_producto) 
        references productos
-2024-01-25T15:20:39.045-03:00  INFO 8780 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-01-25T15:20:40.444-03:00  INFO 8780 --- [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2024-01-25T15:20:42.945-03:00  WARN 8780 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-01-25T15:20:44.414-03:00  INFO 8780 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:DBNAME'
-2024-01-25T15:20:44.597-03:00  INFO 8780 --- [    Test worker] c.d.t.TakeAwayNowApplicationTests        : Started TakeAwayNowApplicationTests in 16.086 seconds (process running for 19.354)
+2024-02-07T19:54:49.691-06:00  INFO 21688 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-07T19:54:50.010-06:00  INFO 21688 --- [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-02-07T19:54:50.772-06:00  WARN 21688 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-02-07T19:54:51.152-06:00  INFO 21688 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:DBNAME'
+2024-02-07T19:54:51.208-06:00  INFO 21688 --- [    Test worker] c.d.t.TakeAwayNowApplicationTests        : Started TakeAwayNowApplicationTests in 4.132 seconds (process running for 5.244)
+</pre>
+</span>
+</div>
+<div id="tab2" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>WARNING: A Java agent has been loaded dynamically (C:\Users\santiago\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.10\90ed94ac044ea8953b224304c762316e91fd6b31\byte-buddy-agent-1.14.10.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
 </pre>
 </span>
 </div>
@@ -229,7 +242,7 @@ Hibernate:
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.5</a> at 25 ene. 2024 15:20:53</p>
+<a href="http://www.gradle.org">Gradle 8.5</a> at 7 feb 2024 19:54:54</p>
 </div>
 </div>
 </body>
