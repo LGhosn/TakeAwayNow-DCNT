@@ -65,4 +65,7 @@ public class ClienteService {
         return pedidoRepository.obtenerPedidosDelCliente(idCliente);
     }
 
+    public Cliente obtenerInfoCliente(Long idCliente) {
+        return clienteRepository.findById(idCliente).orElseThrow( () -> new RuntimeException("No existe el cliente en la base de datos.") );
+    }
 }

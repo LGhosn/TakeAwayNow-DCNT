@@ -28,6 +28,11 @@ public class ClienteController {
         return clienteService.obtenerClientes();
     }
 
+    @GetMapping("/{idCliente}")
+    public Cliente obtenerInfoCliente(@PathVariable Long idCliente) {
+        return clienteService.obtenerInfoCliente(idCliente);
+    }
+
     @GetMapping("/{idCliente}/pedidos/")
     public Collection<PedidoDto> obtenerPedidos(@PathVariable Long idCliente) {
         return clienteService.obtenerPedidos(idCliente);

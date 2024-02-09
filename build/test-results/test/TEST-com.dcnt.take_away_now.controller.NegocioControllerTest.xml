@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.controller.NegocioControllerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-02-08T01:54:52" hostname="DESKTOP-84L37D5" time="0.213">
+<testsuite name="com.dcnt.take_away_now.controller.NegocioControllerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-02-09T22:22:25" hostname="DESKTOP-84L37D5" time="0.264">
   <properties/>
-  <testcase name="modificarHorariosDelNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.031"/>
-  <testcase name="eliminarProducto()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.003"/>
-  <testcase name="sePuedeCrearProductoNuevo()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.098"/>
-  <testcase name="obtenerProductos()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.038"/>
-  <testcase name="sePuedeCrearNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.005"/>
-  <testcase name="modificarProducto()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.003"/>
-  <testcase name="noSePuedeCrearNegocioSiFaltanDatos()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.009"/>
+  <testcase name="modificarHorariosDelNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.038"/>
+  <testcase name="eliminarProducto()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.005"/>
+  <testcase name="sePuedeCrearProductoNuevo()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.125"/>
+  <testcase name="obtenerProductos()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.044"/>
+  <testcase name="sePuedeCrearNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.006"/>
+  <testcase name="modificarProducto()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.005"/>
+  <testcase name="noSePuedeCrearNegocioSiFaltanDatos()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.01"/>
   <testcase name="modificarDiasDeAperturaDelNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.003"/>
-  <testcase name="obtenerNegocios()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.008"/>
-  <system-out><![CDATA[2024-02-07T19:54:51.629-06:00  INFO 21688 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.controller.NegocioControllerTest]: NegocioControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-07T19:54:51.651-06:00  INFO 21688 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.controller.NegocioControllerTest
+  <testcase name="obtenerNegocios()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.007"/>
+  <system-out><![CDATA[2024-02-09T16:22:24.939-06:00  INFO 19580 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.controller.NegocioControllerTest]: NegocioControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-09T16:22:24.968-06:00  INFO 19580 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.controller.NegocioControllerTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -21,13 +21,13 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2024-02-07T19:54:51.672-06:00  INFO 21688 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Starting NegocioControllerTest using Java 21.0.2 with PID 21688 (started by santiago in C:\Users\santiago\Documents\GitHub\TakeAwayNow-DCNT)
-2024-02-07T19:54:51.673-06:00  INFO 21688 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : No active profile set, falling back to 1 default profile: "default"
-2024-02-07T19:54:52.231-06:00  INFO 21688 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2024-02-07T19:54:52.231-06:00  INFO 21688 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2024-02-07T19:54:52.234-06:00  INFO 21688 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2024-02-07T19:54:52.250-06:00  INFO 21688 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Started NegocioControllerTest in 0.596 seconds (process running for 6.286)
-2024-02-07T19:54:52.460-06:00  WARN 21688 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'nombre' for method parameter type String is not present]
+2024-02-09T16:22:24.996-06:00  INFO 19580 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Starting NegocioControllerTest using Java 21.0.2 with PID 19580 (started by santiago in C:\Users\santiago\Documents\GitHub\TakeAwayNow-DCNT)
+2024-02-09T16:22:24.996-06:00  INFO 19580 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : No active profile set, falling back to 1 default profile: "default"
+2024-02-09T16:22:25.738-06:00  INFO 19580 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-02-09T16:22:25.739-06:00  INFO 19580 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-02-09T16:22:25.743-06:00  INFO 19580 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2024-02-09T16:22:25.759-06:00  INFO 19580 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Started NegocioControllerTest in 0.787 seconds (process running for 8.091)
+2024-02-09T16:22:26.021-06:00  WARN 19580 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'nombre' for method parameter type String is not present]
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

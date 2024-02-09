@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.repository.ClienteRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-08T01:54:53" hostname="DESKTOP-84L37D5" time="0.171">
+<testsuite name="com.dcnt.take_away_now.repository.ClienteRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-09T22:22:26" hostname="DESKTOP-84L37D5" time="0.217">
   <properties/>
-  <testcase name="noSePuedeEncontrarUnUsuarioQueNoExiste()" classname="com.dcnt.take_away_now.repository.ClienteRepositoryTest" time="0.119"/>
-  <testcase name="sePuedeEncontrarUnUsuarioQueExiste()" classname="com.dcnt.take_away_now.repository.ClienteRepositoryTest" time="0.05"/>
-  <system-out><![CDATA[2024-02-07T19:54:52.484-06:00  INFO 21688 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.ClienteRepositoryTest]: ClienteRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-07T19:54:52.517-06:00  INFO 21688 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.ClienteRepositoryTest
+  <testcase name="noSePuedeEncontrarUnUsuarioQueNoExiste()" classname="com.dcnt.take_away_now.repository.ClienteRepositoryTest" time="0.145"/>
+  <testcase name="sePuedeEncontrarUnUsuarioQueExiste()" classname="com.dcnt.take_away_now.repository.ClienteRepositoryTest" time="0.07"/>
+  <system-out><![CDATA[2024-02-09T16:22:26.048-06:00  INFO 19580 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.ClienteRepositoryTest]: ClienteRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-09T16:22:26.085-06:00  INFO 19580 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.ClienteRepositoryTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -14,17 +14,17 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2024-02-07T19:54:52.556-06:00  INFO 21688 --- [    Test worker] c.d.t.repository.ClienteRepositoryTest   : Starting ClienteRepositoryTest using Java 21.0.2 with PID 21688 (started by santiago in C:\Users\santiago\Documents\GitHub\TakeAwayNow-DCNT)
-2024-02-07T19:54:52.557-06:00  INFO 21688 --- [    Test worker] c.d.t.repository.ClienteRepositoryTest   : No active profile set, falling back to 1 default profile: "default"
-2024-02-07T19:54:52.697-06:00  INFO 21688 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-02-07T19:54:52.718-06:00  INFO 21688 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 6 JPA repository interfaces.
-2024-02-07T19:54:52.739-06:00  INFO 21688 --- [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-02-07T19:54:52.767-06:00  INFO 21688 --- [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:3bd00d42-7e3b-43d9-98c7-e9d6a80c7ab0;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-07T19:54:52.794-06:00  INFO 21688 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-02-07T19:54:52.799-06:00  INFO 21688 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-02-07T19:54:52.805-06:00  INFO 21688 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-02-07T19:54:52.808-06:00  WARN 21688 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2024-02-07T19:54:52.905-06:00  INFO 21688 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-02-09T16:22:26.126-06:00  INFO 19580 --- [    Test worker] c.d.t.repository.ClienteRepositoryTest   : Starting ClienteRepositoryTest using Java 21.0.2 with PID 19580 (started by santiago in C:\Users\santiago\Documents\GitHub\TakeAwayNow-DCNT)
+2024-02-09T16:22:26.126-06:00  INFO 19580 --- [    Test worker] c.d.t.repository.ClienteRepositoryTest   : No active profile set, falling back to 1 default profile: "default"
+2024-02-09T16:22:26.279-06:00  INFO 19580 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-09T16:22:26.303-06:00  INFO 19580 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 24 ms. Found 6 JPA repository interfaces.
+2024-02-09T16:22:26.326-06:00  INFO 19580 --- [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-02-09T16:22:26.360-06:00  INFO 19580 --- [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:31fd811a-8a0d-43b0-9057-1a18f479637f;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-09T16:22:26.393-06:00  INFO 19580 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-09T16:22:26.399-06:00  INFO 19580 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-02-09T16:22:26.407-06:00  INFO 19580 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-09T16:22:26.410-06:00  WARN 19580 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-02-09T16:22:26.570-06:00  INFO 19580 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: 
     drop table if exists clientes cascade 
 Hibernate: 
@@ -127,8 +127,8 @@ Hibernate:
        add constraint FK5xwq1xi3k07xrjjpvvpxvdoku 
        foreign key (id_producto) 
        references productos
-2024-02-07T19:54:52.920-06:00  INFO 21688 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-02-07T19:54:53.109-06:00  INFO 21688 --- [    Test worker] c.d.t.repository.ClienteRepositoryTest   : Started ClienteRepositoryTest in 0.588 seconds (process running for 7.145)
+2024-02-09T16:22:26.595-06:00  INFO 19580 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-09T16:22:26.790-06:00  INFO 19580 --- [    Test worker] c.d.t.repository.ClienteRepositoryTest   : Started ClienteRepositoryTest in 0.701 seconds (process running for 9.122)
 Hibernate: 
     select
         c1_0.id_cliente,

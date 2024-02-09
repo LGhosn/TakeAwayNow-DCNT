@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.repository.ProductoRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-08T01:54:53" hostname="DESKTOP-84L37D5" time="0.013">
+<testsuite name="com.dcnt.take_away_now.repository.ProductoRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-09T22:22:27" hostname="DESKTOP-84L37D5" time="0.022">
   <properties/>
-  <testcase name="SeEncuentraUnProductoQueExiste()" classname="com.dcnt.take_away_now.repository.ProductoRepositoryTest" time="0.006"/>
-  <testcase name="NoSeEncuentraUnProductoQueNoExiste()" classname="com.dcnt.take_away_now.repository.ProductoRepositoryTest" time="0.006"/>
-  <system-out><![CDATA[2024-02-07T19:54:53.584-06:00  INFO 21688 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.ProductoRepositoryTest]: ProductoRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-07T19:54:53.592-06:00  INFO 21688 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.ProductoRepositoryTest
+  <testcase name="SeEncuentraUnProductoQueExiste()" classname="com.dcnt.take_away_now.repository.ProductoRepositoryTest" time="0.012"/>
+  <testcase name="NoSeEncuentraUnProductoQueNoExiste()" classname="com.dcnt.take_away_now.repository.ProductoRepositoryTest" time="0.009"/>
+  <system-out><![CDATA[2024-02-09T16:22:27.465-06:00  INFO 19580 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.ProductoRepositoryTest]: ProductoRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-09T16:22:27.479-06:00  INFO 19580 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.ProductoRepositoryTest
 Hibernate: 
     insert 
     into
