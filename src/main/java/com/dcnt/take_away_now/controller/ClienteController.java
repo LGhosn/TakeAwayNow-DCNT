@@ -47,7 +47,7 @@ public class ClienteController {
      *   Métodos Post *
      ******************/
     @PostMapping("/")
-    public ResponseEntity<String> crearCliente(@RequestBody String nombreUsuario) {
+    public ResponseEntity<String> crearCliente(@RequestParam String nombreUsuario) {
         return clienteService.crearCliente(nombreUsuario);
     }
 
