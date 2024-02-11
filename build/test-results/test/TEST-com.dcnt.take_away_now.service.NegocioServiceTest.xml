@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.service.NegocioServiceTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2024-02-09T22:50:41" hostname="DESKTOP-84L37D5" time="0.305">
+<testsuite name="com.dcnt.take_away_now.service.NegocioServiceTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2024-02-11T21:51:26" hostname="DESKTOP-84L37D5" time="0.398">
   <properties/>
-  <testcase name="sePuedeCrearProductoNuevoEnNegocioExistente()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.023"/>
-  <testcase name="eliminarProducto()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.039"/>
+  <testcase name="sePuedeCrearProductoNuevoEnNegocioExistente()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.027"/>
+  <testcase name="eliminarProducto()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.036"/>
   <testcase name="sePuedeCrearNegocioNuevo()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.014"/>
-  <testcase name="noSePuedeModificarDiasDeUnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.005"/>
-  <testcase name="obtenerProductos()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.037"/>
-  <testcase name="noSePuedeobtenerProductosDeUnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.006"/>
-  <testcase name="noSePuedeCrearNegocioExistente()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.009"/>
-  <testcase name="sePuedeModificarHorariosDelNegocio()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.011"/>
-  <testcase name="noSePuedeCrearProductoYaExistenteEnNegocioExistente()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.02"/>
-  <testcase name="seObtienenNegociosExistentes()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.013"/>
-  <testcase name="noSePuedeModificarHorariosDelNegocioCuandoElHorarioDeAperturaEsMayorAlDeCierre()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.008"/>
-  <testcase name="sePuedeModificarDiasDelNegocio()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.015"/>
-  <testcase name="noSePuedeModificarInventarioRegistroDeUnProductoQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.012"/>
-  <testcase name="noSePuedeModificarInventarioRegistroDeUnProductoQueNoTieneRelacionConUnNegocio()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.03"/>
+  <testcase name="noSePuedeModificarDiasDeUnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.007"/>
+  <testcase name="obtenerProductos()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.043"/>
+  <testcase name="noSePuedeobtenerProductosDeUnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.008"/>
+  <testcase name="noSePuedeCrearNegocioExistente()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.014"/>
+  <testcase name="sePuedeModificarHorariosDelNegocio()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.022"/>
+  <testcase name="noSePuedeCrearProductoYaExistenteEnNegocioExistente()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.033"/>
+  <testcase name="seObtienenNegociosExistentes()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.02"/>
+  <testcase name="noSePuedeModificarHorariosDelNegocioCuandoElHorarioDeAperturaEsMayorAlDeCierre()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.012"/>
+  <testcase name="sePuedeModificarDiasDelNegocio()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.018"/>
+  <testcase name="noSePuedeModificarInventarioRegistroDeUnProductoQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.04"/>
+  <testcase name="noSePuedeModificarInventarioRegistroDeUnProductoQueNoTieneRelacionConUnNegocio()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.037"/>
   <testcase name="noSePuedeModificarInventarioRegistroDeUnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.007"/>
   <testcase name="noSePuedeCrearProductoNuevoEnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.005"/>
   <testcase name="noSePuedeModificarHorariosDeUnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.005"/>
   <testcase name="sePuedeModificarInventarioRegistro()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.028"/>
-  <system-out><![CDATA[2024-02-09T16:50:41.022-06:00  INFO 4080 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.service.NegocioServiceTest]: NegocioServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-09T16:50:41.033-06:00  INFO 4080 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.service.NegocioServiceTest
+  <system-out><![CDATA[2024-02-11T15:51:26.075-06:00  INFO 2528 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.service.NegocioServiceTest]: NegocioServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-11T15:51:26.082-06:00  INFO 2528 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.service.NegocioServiceTest
 Hibernate: 
     select
         n1_0.id_negocio,

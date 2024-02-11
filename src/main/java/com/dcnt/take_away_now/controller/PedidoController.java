@@ -2,6 +2,7 @@ package com.dcnt.take_away_now.controller;
 
 import com.dcnt.take_away_now.domain.*;
 import com.dcnt.take_away_now.dto.InfoPedidoDto;
+import com.dcnt.take_away_now.dto.ProductoPedidoDto;
 import com.dcnt.take_away_now.repository.*;
 import com.dcnt.take_away_now.service.ClienteService;
 import com.dcnt.take_away_now.service.PedidoService;
@@ -28,6 +29,11 @@ public class PedidoController {
     @GetMapping("/")
     public Collection<Pedido> obtenerPedidos() {
         return pedidoService.obtenerPedidos();
+    }
+
+    @GetMapping("/{idPedido}")
+    public Collection<ProductoPedidoDto> obtenerDetalleDelPedido(@PathVariable Long idPedido) {
+        return pedidoService.obtenerDetalleDelPedido(idPedido);
     }
 
     /******************

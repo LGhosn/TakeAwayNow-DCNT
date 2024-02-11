@@ -266,4 +266,8 @@ public class PedidoService {
             inventarioRegistroRepository.save(inventarioRegistro);
         }
     }
+
+    public Collection<ProductoPedidoDto> obtenerDetalleDelPedido(Long idPedido) {
+        return productoPedidoRepository.obtenerProductosDelPedido(idPedido);
+    }
 }
