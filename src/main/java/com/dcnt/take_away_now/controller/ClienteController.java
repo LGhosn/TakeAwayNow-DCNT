@@ -52,7 +52,7 @@ public class ClienteController {
     }
 
     @PostMapping("/{idCliente}/cargaDeSaldo/{saldoACargar}")
-    public ResponseEntity<String> cargarSaldo(@RequestParam Long idCliente, @RequestParam BigDecimal saldoACargar) {
+    public ResponseEntity<String> cargarSaldo(@PathVariable Long idCliente, @PathVariable BigDecimal saldoACargar) {
         return clienteService.cargarSaldo(idCliente, saldoACargar);
     }
 
