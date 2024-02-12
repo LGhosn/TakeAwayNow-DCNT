@@ -21,10 +21,10 @@ import org.springframework.stereotype.Service;
 import static org.springframework.http.HttpStatus.*;
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Collection;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
+
 @SuppressWarnings("OptionalGetWithoutIsPresent")
 @AllArgsConstructor
 @Service
@@ -218,5 +218,31 @@ public class NegocioService {
         negocioRepository.findById(idNegocio).orElseThrow( () -> new RuntimeException("No existe el negocio en la base de datos.") );
 
         return pedidoRepository.obtenerPedidosDelNegocio(idNegocio);
+    }
+
+    public Collection<Negocio> obtenerNegociosAbiertos() {
+        Collection<Negocio> negocios = negocioRepository.findAll();
+        List<Negocio> negociosAbiertos = new ArrayList<>();
+
+        for (Negocio negocio : negocios) {
+            if (negocio.estaAbierto(LocalDateTime.now())) {
+                negociosAbiertos.add(negocio);
+            }
+        }
+
+        return negociosAbiertos;
+    }
+
+    public Collection<Negocio> obtenerNegociosCerrados() {
+        Collection<Negocio> negocios = negocioRepository.findAll();
+        List<Negocio> negociosCerrados = new ArrayList<>();
+
+        for (Negocio negocio : negocios) {
+            if (negocio.estaCerrado(LocalDateTime.now())) {
+                negociosCerrados.add(negocio);
+            }
+        }
+
+        return negociosCerrados;
     }
 }

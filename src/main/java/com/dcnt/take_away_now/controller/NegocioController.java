@@ -38,6 +38,16 @@ public class NegocioController {
         return negocioService.obtenerNegocios();
     }
 
+    @GetMapping("/negociosAbiertos")
+    public Collection<Negocio> obtenerNegociosAbiertos() {
+        return negocioService.obtenerNegociosAbiertos();
+    }
+
+    @GetMapping("/negociosCerrados")
+    public Collection<Negocio> obtenerNegociosCerrados() {
+        return negocioService.obtenerNegociosCerrados();
+    }
+
     @GetMapping("/{idNegocio}/pedidos/")
     public Collection<PedidoDto> obtenerPedidos(@PathVariable Long idNegocio) {
         return negocioService.obtenerPedidos(idNegocio);

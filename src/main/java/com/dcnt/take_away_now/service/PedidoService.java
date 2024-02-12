@@ -14,6 +14,8 @@ import org.apache.hc.core5.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import static org.springframework.http.HttpStatus.*;
+
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -56,6 +58,27 @@ public class PedidoService {
                 throw new RuntimeException("La cantidad solicitada para el producto "+ producto.getNombre() + " es mayor al stock disponible.");
             }
 
+        }
+        return true;
+    }
+
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
+    public boolean elClienteTieneSaldoSuficiente(Long idCliente, Map<Long, Integer> productos) {
+        Dinero precioTotalDelPedido = new Dinero(0);
+        for (Map.Entry<Long, Integer> entry : productos.entrySet()) {
+            Integer cantidadPedida = entry.getValue();
+            Producto producto = productoRepository.findById(entry.getKey()).get();
+            Cliente cliente = clienteRepository.findById(idCliente).get();
+
+            precioTotalDelPedido.plus(producto.getInventarioRegistro().getPrecio());
+
+            // Tomamos los montos a comparar.
+            BigDecimal montoActualTotalPedido = precioTotalDelPedido.getMonto();
+            BigDecimal montonTotalSaldoCliente = cliente.getSaldo().getMonto();
+
+            if (montoActualTotalPedido.compareTo(montonTotalSaldoCliente) > 0) {
+                return false;
+            }
         }
         return true;
     }
@@ -126,6 +149,10 @@ public class PedidoService {
 
         if (!sePuedeConfirmarUnPedidoParaEstosProductos(dto.getProductos(), dto.getIdNegocio())) {
             return ResponseEntity.status(BAD_REQUEST).body("Uno o más productos presentan un stock menor a la cantidad indicada en su pedido.");
+        }
+
+        if (!elClienteTieneSaldoSuficiente(dto.getIdCliente(), dto.getProductos())) {
+            return ResponseEntity.status(BAD_REQUEST).body("No posees saldo suficiente para confirmar este pedido.");
         }
 
         return confirmarPedido(dto);
