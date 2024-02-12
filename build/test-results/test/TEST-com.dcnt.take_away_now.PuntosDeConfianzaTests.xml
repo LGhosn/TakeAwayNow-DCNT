@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.PuntosDeConfianzaTests" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-02-12T20:38:06" hostname="LGG-W10" time="0.017">
+<testsuite name="com.dcnt.take_away_now.PuntosDeConfianzaTests" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-02-12T20:50:44" hostname="LGG-W10" time="0.021">
   <properties/>
   <testcase name="conviertoDiezPuntosDeConfianzaEnInteger()" classname="com.dcnt.take_away_now.PuntosDeConfianzaTests" time="0.005"/>
   <testcase name="conviertoVariableIntegerConValIgualADiezAValueObjectPuntosDeConfianzaConCantidadIgualADiez()" classname="com.dcnt.take_away_now.PuntosDeConfianzaTests" time="0.004"/>
   <testcase name="sumar50APuntosConCantidad100ElResultadoEs150()" classname="com.dcnt.take_away_now.PuntosDeConfianzaTests" time="0.001"/>
   <testcase name="alMultiplicarPuntosConCantidad100PorMenosUnoSeLanzaUnError()" classname="com.dcnt.take_away_now.PuntosDeConfianzaTests" time="0.001"/>
   <testcase name="restar150APuntosConCantidad100ElResultadoEsMenos50()" classname="com.dcnt.take_away_now.PuntosDeConfianzaTests" time="0.0"/>
-  <testcase name="contextLoads()" classname="com.dcnt.take_away_now.PuntosDeConfianzaTests" time="0.0"/>
+  <testcase name="contextLoads()" classname="com.dcnt.take_away_now.PuntosDeConfianzaTests" time="0.001"/>
   <testcase name="alMultiplicarPuntosConCantidad100Por5ElResultadoEs500()" classname="com.dcnt.take_away_now.PuntosDeConfianzaTests" time="0.0"/>
-  <testcase name="sumarPuntosConCantidad100YPuntosConCantidad50ElResultadoEs150()" classname="com.dcnt.take_away_now.PuntosDeConfianzaTests" time="0.001"/>
-  <testcase name="restarPuntosConCantidad100YPuntosConCantidad50ElResultadoEs50()" classname="com.dcnt.take_away_now.PuntosDeConfianzaTests" time="0.001"/>
+  <testcase name="sumarPuntosConCantidad100YPuntosConCantidad50ElResultadoEs150()" classname="com.dcnt.take_away_now.PuntosDeConfianzaTests" time="0.0"/>
+  <testcase name="restarPuntosConCantidad100YPuntosConCantidad50ElResultadoEs50()" classname="com.dcnt.take_away_now.PuntosDeConfianzaTests" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
