@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.repository.PedidoRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-12T20:50:58" hostname="LGG-W10" time="0.021">
+<testsuite name="com.dcnt.take_away_now.repository.PedidoRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-16T15:10:37" hostname="DESKTOP-84L37D5" time="0.03">
   <properties/>
   <testcase name="noSeEncuentraUnPedidoQueNoExisteById()" classname="com.dcnt.take_away_now.repository.PedidoRepositoryTest" time="0.008"/>
-  <testcase name="seEncuentraUnPedidoQueExisteById()" classname="com.dcnt.take_away_now.repository.PedidoRepositoryTest" time="0.011"/>
-  <system-out><![CDATA[2024-02-12T17:50:58.316-03:00  INFO 8384 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.PedidoRepositoryTest]: PedidoRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-12T17:50:58.349-03:00  INFO 8384 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.PedidoRepositoryTest
+  <testcase name="seEncuentraUnPedidoQueExisteById()" classname="com.dcnt.take_away_now.repository.PedidoRepositoryTest" time="0.021"/>
+  <system-out><![CDATA[2024-02-16T09:10:37.964-06:00  INFO 10528 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.PedidoRepositoryTest]: PedidoRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-16T09:10:37.976-06:00  INFO 10528 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.PedidoRepositoryTest
 Hibernate: 
     insert 
     into

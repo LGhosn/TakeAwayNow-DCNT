@@ -12,5 +12,5 @@ import java.util.Map;
 public class InfoPedidoDto {
     private Long idCliente;
     private Long idNegocio;
-    private Map<Long, Integer> productos;
+    private Map<Long,Map<String, Object>> productos;
 }

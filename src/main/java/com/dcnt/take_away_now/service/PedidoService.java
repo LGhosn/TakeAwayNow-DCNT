@@ -10,7 +10,6 @@ import com.dcnt.take_away_now.value_object.Dinero;
 import com.dcnt.take_away_now.value_object.PuntosDeConfianza;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.apache.hc.core5.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import static org.springframework.http.HttpStatus.*;
@@ -42,41 +41,64 @@ public class PedidoService {
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
-    public boolean sePuedeConfirmarUnPedidoParaEstosProductos(Map<Long, Integer> productos, Long idNegocio) {
-        for (Map.Entry<Long, Integer> entry : productos.entrySet()) {
-            if (!esUnProductoDeEseNegocio(idNegocio, entry.getKey())) {
-                throw new RuntimeException("Ha ocurrido un error ya que el producto " + productoRepository.findById(entry.getKey()).get().getNombre() + " no está disponible para este negocio.");
+    public boolean sePuedeConfirmarUnPedidoParaEstosProductos(Map<Long, Map<String, Object>> productos, Long idNegocio) {
+        for (Map.Entry<Long, Map<String, Object>> entry : productos.entrySet()) {
+            Long productId = entry.getKey();
+            Map<String, Object> productInfo = entry.getValue();
+
+            // Obtenemos la cantidad  pedida y si usa o no PdC
+            Integer cantidadPedida = (Integer) productInfo.get("cantidad");
+
+            if (!esUnProductoDeEseNegocio(idNegocio, productId)) {
+                throw new RuntimeException("Ha ocurrido un error ya que el producto " + productoRepository.findById(productId).get().getNombre() + " no está disponible para este negocio.");
             }
 
-            // Levantamos la cantidad pedida por el cliente y corroboramos que exista el stock necesario.
-            Integer cantidadPedida = entry.getValue();
-            Producto producto = productoRepository.findById(entry.getKey()).get();
+            Producto producto = productoRepository.findById(productId).get();
             Negocio negocio = negocioRepository.findById(idNegocio).get();
             InventarioRegistro inventarioRegistro = inventarioRegistroRepository.findByNegocioAndProducto(negocio, producto).get();
 
             if (cantidadPedida > inventarioRegistro.getStock()) {
                 throw new RuntimeException("La cantidad solicitada para el producto "+ producto.getNombre() + " es mayor al stock disponible.");
             }
-
         }
         return true;
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
-    public boolean elClienteTieneSaldoSuficiente(Long idCliente, Map<Long, Integer> productos) {
+    public boolean elClienteTieneSaldoSuficiente(Long idCliente, Map<Long, Map<String, Object>> productos) {
         Dinero precioTotalDelPedido = new Dinero(0);
-        for (Map.Entry<Long, Integer> entry : productos.entrySet()) {
-            Integer cantidadPedida = entry.getValue();
-            Producto producto = productoRepository.findById(entry.getKey()).get();
+        PuntosDeConfianza pdcTotalDelPedido = new PuntosDeConfianza(0);
+
+        for (Map.Entry<Long, Map<String, Object>> entry : productos.entrySet()) {
+            Long productId = entry.getKey();
+            Map<String, Object> productInfo = entry.getValue();
+
+            // Obtenemos la cantidad  pedida y si usa o no PdC
+            Integer cantidadPedida = (Integer) productInfo.get("cantidad");
+            Integer usaPdc = (Integer) productInfo.get("usaPdc");
+
+            Producto producto = productoRepository.findById(productId).get();
             Cliente cliente = clienteRepository.findById(idCliente).get();
 
-            precioTotalDelPedido.plus(producto.getInventarioRegistro().getPrecio());
+            // En caso de usar pdc para el producto iterado actualmente, sumamos a los pdc del pedido.
+            if (usaPdc == 1) {
+                pdcTotalDelPedido.plus(producto.getInventarioRegistro().getPrecioPDC().multiply(cantidadPedida));
+            } else {
+                precioTotalDelPedido.plus(producto.getInventarioRegistro().getPrecio().multiply(cantidadPedida));
+            }
 
             // Tomamos los montos a comparar.
             BigDecimal montoActualTotalPedido = precioTotalDelPedido.getMonto();
-            BigDecimal montonTotalSaldoCliente = cliente.getSaldo().getMonto();
+            BigDecimal montoTotalSaldoCliente = cliente.getSaldo().getMonto();
 
-            if (montoActualTotalPedido.compareTo(montonTotalSaldoCliente) > 0) {
+            Double cantidadPDCActualTotalPedido = pdcTotalDelPedido.getCantidad();
+            Double cantidadPDCTotalCliente = cliente.getPuntosDeConfianza().getCantidad();
+
+            if (montoActualTotalPedido.compareTo(montoTotalSaldoCliente) > 0) {
+                return false;
+            }
+
+            if (cantidadPDCActualTotalPedido.compareTo(cantidadPDCTotalCliente) > 0) {
                 return false;
             }
         }
@@ -86,23 +108,31 @@ public class PedidoService {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     public ResponseEntity<String> confirmarPedido(InfoPedidoDto dto) {
         // Dado que ya hemos corroborado todos los datos, procedemos a confirmar el pedido.
+
+        // Inicializamos las variables a utilizar para la resta de monto, pdc y la recompensa por la compra.
         Dinero precioTotalDelPedido = new Dinero(0);
         PuntosDeConfianza pdcTotalDelPedido = new PuntosDeConfianza((double) 0);
+        PuntosDeConfianza pdcRecompenza = new PuntosDeConfianza((double) 0);
+
+        // Levantamos los datos necesarios
         Negocio negocio = negocioRepository.findById(dto.getIdNegocio()).get();
         Cliente cliente = clienteRepository.findById(dto.getIdCliente()).get();
         Pedido pedido = new Pedido(negocio, cliente);
 
         pedidoRepository.save(pedido);
 
-        for (Map.Entry<Long, Integer> entry : dto.getProductos().entrySet()) {
-            Integer cantidadPedida = entry.getValue();
-            Producto producto = productoRepository.findById(entry.getKey()).get();
+        for (Map.Entry<Long, Map<String, Object>> entry : dto.getProductos().entrySet()) {
 
-            InventarioRegistro inventarioRegistro = inventarioRegistroRepository.findByNegocioAndProducto(negocio, producto).orElseThrow( () -> new RuntimeException("Ocurrió un error con el producto "+ producto.getNombre() +" al confirmar el pedido.") );
+            Long productId = entry.getKey();
+            Map<String, Object> productInfo = entry.getValue();
 
-            inventarioRegistro.setStock(inventarioRegistro.getStock() - cantidadPedida);
+            Producto producto = productoRepository.findById(productId).get();
+            Integer cantidadPedida = (Integer) productInfo.get("cantidad");
+            Integer usaPdc = (Integer) productInfo.get("usaPdc");
 
             // Actualizamos el InventarioRegistro con el nuevo stock.
+            InventarioRegistro inventarioRegistro = inventarioRegistroRepository.findByNegocioAndProducto(negocio, producto).orElseThrow( () -> new RuntimeException("Ocurrió un error con el producto "+ producto.getNombre() +" al confirmar el pedido.") );
+            inventarioRegistro.setStock(inventarioRegistro.getStock() - cantidadPedida);
             inventarioRegistroRepository.save(inventarioRegistro);
 
             // Relacionamos el producto con el pedido.
@@ -110,15 +140,22 @@ public class PedidoService {
             productoPedidoRepository.save(productoPedido);
 
             // Aumentamos el precio del pedido en función de la cantidad de productos solicitados y repetimos la operación para los pdc.
-            Dinero precioParcialPorProducto = new Dinero(cantidadPedida).multiply(inventarioRegistro.getPrecio());
-            precioTotalDelPedido = precioTotalDelPedido.plus(precioParcialPorProducto);
+            if (usaPdc == 1) {
+                PuntosDeConfianza pdcParcialesPorProducto = inventarioRegistro.getPrecioPDC().multiply(Double.valueOf(cantidadPedida));
+                pdcTotalDelPedido = pdcTotalDelPedido.plus(pdcParcialesPorProducto);
+            } else {
+                Dinero precioParcialPorProducto = new Dinero(inventarioRegistro.getPrecio().getMonto()).multiply(cantidadPedida);
+                precioTotalDelPedido = precioTotalDelPedido.plus(precioParcialPorProducto);
+            }
 
-            PuntosDeConfianza pdcParcialesPorProducto = inventarioRegistro.getRecompensaPuntosDeConfianza().multiply(Double.valueOf(cantidadPedida));
-            pdcTotalDelPedido = pdcTotalDelPedido.plus(pdcParcialesPorProducto);
+            // Finalmente vamos sumando la recompensa de pdc por este pedido.
+            pdcRecompenza = pdcRecompenza.plus(inventarioRegistro.getRecompensaPuntosDeConfianza().getCantidad());
         }
 
-        // Actualizamos el saldo y los puntos de confianza del cliente.
+        // Actualizamos el saldo y los puntos de confianza del cliente, tanto si ha gastado como si ha ganado.
         cliente.setSaldo(cliente.getSaldo().minus(precioTotalDelPedido));
+        cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().minus(pdcTotalDelPedido));
+        cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().plus(pdcRecompenza));
 
         if (cliente.getPuntosDeConfianza() != null) {
             cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().plus(pdcTotalDelPedido));

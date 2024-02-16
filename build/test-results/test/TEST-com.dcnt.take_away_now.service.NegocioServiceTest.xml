@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.service.NegocioServiceTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2024-02-12T20:50:58" hostname="LGG-W10" time="0.384">
+<testsuite name="com.dcnt.take_away_now.service.NegocioServiceTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2024-02-16T15:10:38" hostname="DESKTOP-84L37D5" time="0.196">
   <properties/>
-  <testcase name="sePuedeCrearProductoNuevoEnNegocioExistente()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.025"/>
-  <testcase name="eliminarProducto()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.034"/>
-  <testcase name="sePuedeCrearNegocioNuevo()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.009"/>
-  <testcase name="noSePuedeModificarDiasDeUnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.014"/>
-  <testcase name="obtenerProductos()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.05"/>
-  <testcase name="noSePuedeobtenerProductosDeUnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.006"/>
-  <testcase name="noSePuedeCrearNegocioExistente()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.009"/>
-  <testcase name="sePuedeModificarHorariosDelNegocio()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.018"/>
-  <testcase name="noSePuedeCrearProductoYaExistenteEnNegocioExistente()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.018"/>
-  <testcase name="seObtienenNegociosExistentes()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.024"/>
-  <testcase name="noSePuedeModificarHorariosDelNegocioCuandoElHorarioDeAperturaEsMayorAlDeCierre()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.022"/>
-  <testcase name="sePuedeModificarDiasDelNegocio()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.026"/>
-  <testcase name="noSePuedeModificarInventarioRegistroDeUnProductoQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.021"/>
-  <testcase name="noSePuedeModificarInventarioRegistroDeUnProductoQueNoTieneRelacionConUnNegocio()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.028"/>
-  <testcase name="noSePuedeModificarInventarioRegistroDeUnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.006"/>
-  <testcase name="noSePuedeCrearProductoNuevoEnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.005"/>
-  <testcase name="noSePuedeModificarHorariosDeUnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.006"/>
-  <testcase name="sePuedeModificarInventarioRegistro()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.044"/>
-  <system-out><![CDATA[2024-02-12T17:50:58.575-03:00  INFO 8384 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.service.NegocioServiceTest]: NegocioServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-12T17:50:58.594-03:00  INFO 8384 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.service.NegocioServiceTest
+  <testcase name="sePuedeCrearProductoNuevoEnNegocioExistente()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.018"/>
+  <testcase name="eliminarProducto()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.021"/>
+  <testcase name="sePuedeCrearNegocioNuevo()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.007"/>
+  <testcase name="noSePuedeModificarDiasDeUnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.003"/>
+  <testcase name="obtenerProductos()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.022"/>
+  <testcase name="noSePuedeobtenerProductosDeUnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.004"/>
+  <testcase name="noSePuedeCrearNegocioExistente()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.005"/>
+  <testcase name="sePuedeModificarHorariosDelNegocio()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.009"/>
+  <testcase name="noSePuedeCrearProductoYaExistenteEnNegocioExistente()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.012"/>
+  <testcase name="seObtienenNegociosExistentes()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.011"/>
+  <testcase name="noSePuedeModificarHorariosDelNegocioCuandoElHorarioDeAperturaEsMayorAlDeCierre()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.007"/>
+  <testcase name="sePuedeModificarDiasDelNegocio()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.009"/>
+  <testcase name="noSePuedeModificarInventarioRegistroDeUnProductoQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.008"/>
+  <testcase name="noSePuedeModificarInventarioRegistroDeUnProductoQueNoTieneRelacionConUnNegocio()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.018"/>
+  <testcase name="noSePuedeModificarInventarioRegistroDeUnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.003"/>
+  <testcase name="noSePuedeCrearProductoNuevoEnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.003"/>
+  <testcase name="noSePuedeModificarHorariosDeUnNegocioQueNoExiste()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.005"/>
+  <testcase name="sePuedeModificarInventarioRegistro()" classname="com.dcnt.take_away_now.service.NegocioServiceTest" time="0.018"/>
+  <system-out><![CDATA[2024-02-16T09:10:38.127-06:00  INFO 10528 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.service.NegocioServiceTest]: NegocioServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-16T09:10:38.135-06:00  INFO 10528 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.service.NegocioServiceTest
 Hibernate: 
     select
         n1_0.id_negocio,
@@ -67,9 +67,9 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -83,6 +83,7 @@ Hibernate:
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -110,6 +111,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -164,9 +166,9 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -180,6 +182,7 @@ Hibernate:
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -207,6 +210,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -220,6 +224,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -253,6 +258,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -362,9 +368,9 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -378,6 +384,7 @@ Hibernate:
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -404,9 +411,9 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -420,6 +427,7 @@ Hibernate:
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -446,9 +454,9 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -462,6 +470,7 @@ Hibernate:
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -639,9 +648,9 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -655,6 +664,7 @@ Hibernate:
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -957,9 +967,9 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -973,6 +983,7 @@ Hibernate:
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -1013,6 +1024,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -1106,9 +1118,9 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1122,6 +1134,7 @@ Hibernate:
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -1149,6 +1162,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -1163,6 +1177,7 @@ Hibernate:
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -1173,6 +1188,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 

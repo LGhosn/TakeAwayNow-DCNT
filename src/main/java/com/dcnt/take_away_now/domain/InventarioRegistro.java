@@ -36,6 +36,10 @@ public class InventarioRegistro {
     @Convert(converter = DineroAttributeConverter.class)
     private Dinero precio;
 
+    @Column(name="PRECIO_UNITARIO_PDC")
+    @Convert(converter = PuntosDeConfianzaAttributeConverter.class)
+    private PuntosDeConfianza precioPDC;
+
     @Column(name="RECOMPENSA_PDC")
     @Convert(converter = PuntosDeConfianzaAttributeConverter.class)
     private PuntosDeConfianza recompensaPuntosDeConfianza;

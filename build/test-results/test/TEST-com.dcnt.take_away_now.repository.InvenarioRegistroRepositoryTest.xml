@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2024-02-12T20:50:57" hostname="LGG-W10" time="0.412">
+<testsuite name="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2024-02-16T15:10:37" hostname="DESKTOP-84L37D5" time="0.249">
   <properties/>
-  <testcase name="noSeEncuentraInventarioRegisrtroPorNegocioYProductoInexistente()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.033"/>
-  <testcase name="noSeEliminaInventarioRegistroPorNegocioYProductoConProductoIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.043"/>
-  <testcase name="seEncuentraInventarioRegistroPorNegocioYProducto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.016"/>
-  <testcase name="noExisteInventarioRegistroPorNegocioYProductoConProductoIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.025"/>
-  <testcase name="existeInventarioRegistroPorNegocioYProducto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.021"/>
-  <testcase name="seEncuentraElProductoDelNegocioConIdNegocio()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.057"/>
-  <testcase name="noSeEliminaInventarioRegistroPorNegocioYProductoConNegocioIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.046"/>
-  <testcase name="seEliminaInventarioRegistroPorNegocioYProducto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.037"/>
-  <testcase name="noExisteInventarioRegistroPorNegocioyProductoConNegocioIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.016"/>
-  <testcase name="noExisteInventarioRegistroPorNegocioYProductoConNegocioYProductoIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.015"/>
-  <testcase name="noSeEncuentranProductosDelNegocioSinProductos()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.028"/>
-  <testcase name="noExisteInventarioRegistroPorNegocioYProductoInexistente()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.014"/>
-  <testcase name="noSeEliminaInventarioRegistroPorNegocioYProductoConNegocioYProductoIncorrectos()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.027"/>
-  <testcase name="seEncuentranLosProductosDelNegocioConIdNegocio()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.018"/>
-  <system-out><![CDATA[2024-02-12T17:50:57.826-03:00  INFO 8384 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest]: InvenarioRegistroRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-12T17:50:57.847-03:00  INFO 8384 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest
+  <testcase name="noSeEncuentraInventarioRegisrtroPorNegocioYProductoInexistente()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.022"/>
+  <testcase name="noSeEliminaInventarioRegistroPorNegocioYProductoConProductoIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.032"/>
+  <testcase name="seEncuentraInventarioRegistroPorNegocioYProducto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.021"/>
+  <testcase name="noExisteInventarioRegistroPorNegocioYProductoConProductoIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.013"/>
+  <testcase name="existeInventarioRegistroPorNegocioYProducto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.014"/>
+  <testcase name="seEncuentraElProductoDelNegocioConIdNegocio()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.027"/>
+  <testcase name="noSeEliminaInventarioRegistroPorNegocioYProductoConNegocioIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.017"/>
+  <testcase name="seEliminaInventarioRegistroPorNegocioYProducto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.021"/>
+  <testcase name="noExisteInventarioRegistroPorNegocioyProductoConNegocioIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.009"/>
+  <testcase name="noExisteInventarioRegistroPorNegocioYProductoConNegocioYProductoIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.012"/>
+  <testcase name="noSeEncuentranProductosDelNegocioSinProductos()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.012"/>
+  <testcase name="noExisteInventarioRegistroPorNegocioYProductoInexistente()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.011"/>
+  <testcase name="noSeEliminaInventarioRegistroPorNegocioYProductoConNegocioYProductoIncorrectos()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.014"/>
+  <testcase name="seEncuentranLosProductosDelNegocioConIdNegocio()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.013"/>
+  <system-out><![CDATA[2024-02-16T09:10:37.667-06:00  INFO 10528 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest]: InvenarioRegistroRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-16T09:10:37.677-06:00  INFO 10528 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest
 Hibernate: 
     insert 
     into
@@ -49,14 +49,15 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     select
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -97,15 +98,16 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     update
         inventario_registros 
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -116,6 +118,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -129,6 +132,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -169,15 +173,16 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     update
         inventario_registros 
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -188,6 +193,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -228,71 +234,16 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     update
         inventario_registros 
     set
         id_negocio=?,
         precio_unitario=?,
-        id_producto=?,
-        recompensa_pdc=?,
-        stock=? 
-    where
-        id_inventario_registro=?
-Hibernate: 
-    select
-        ir1_0.id_inventario_registro 
-    from
-        inventario_registros ir1_0 
-    where
-        ir1_0.id_negocio=? 
-        and ir1_0.id_producto=? 
-    fetch
-        first ? rows only
-Hibernate: 
-    insert 
-    into
-        negocios
-        (dia_apertura, dia_cierre, horario_apertura, horario_cierre, nombre, saldo, id_negocio) 
-    values
-        (?, ?, ?, ?, ?, ?, default)
-Hibernate: 
-    insert 
-    into
-        negocios
-        (dia_apertura, dia_cierre, horario_apertura, horario_cierre, nombre, saldo, id_negocio) 
-    values
-        (?, ?, ?, ?, ?, ?, default)
-Hibernate: 
-    insert 
-    into
-        productos
-        (id_inventario_registro, nombre, id_producto) 
-    values
-        (?, ?, default)
-Hibernate: 
-    insert 
-    into
-        productos
-        (id_inventario_registro, nombre, id_producto) 
-    values
-        (?, ?, default)
-Hibernate: 
-    insert 
-    into
-        inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
-    values
-        (?, ?, ?, ?, ?, default)
-Hibernate: 
-    update
-        inventario_registros 
-    set
-        id_negocio=?,
-        precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -340,15 +291,73 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     update
         inventario_registros 
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
+        id_producto=?,
+        recompensa_pdc=?,
+        stock=? 
+    where
+        id_inventario_registro=?
+Hibernate: 
+    select
+        ir1_0.id_inventario_registro 
+    from
+        inventario_registros ir1_0 
+    where
+        ir1_0.id_negocio=? 
+        and ir1_0.id_producto=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        negocios
+        (dia_apertura, dia_cierre, horario_apertura, horario_cierre, nombre, saldo, id_negocio) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        negocios
+        (dia_apertura, dia_cierre, horario_apertura, horario_cierre, nombre, saldo, id_negocio) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        productos
+        (id_inventario_registro, nombre, id_producto) 
+    values
+        (?, ?, default)
+Hibernate: 
+    insert 
+    into
+        productos
+        (id_inventario_registro, nombre, id_producto) 
+    values
+        (?, ?, default)
+Hibernate: 
+    insert 
+    into
+        inventario_registros
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    update
+        inventario_registros 
+    set
+        id_negocio=?,
+        precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -400,15 +409,16 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     update
         inventario_registros 
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -419,6 +429,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -432,6 +443,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -472,15 +484,16 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     update
         inventario_registros 
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -491,6 +504,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -510,6 +524,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -550,15 +565,16 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     update
         inventario_registros 
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -606,15 +622,16 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     update
         inventario_registros 
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -662,9 +679,9 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     select
         p1_0.id_producto,
@@ -711,9 +728,9 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     select
         ir1_0.id_inventario_registro 
@@ -756,15 +773,16 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     update
         inventario_registros 
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
@@ -775,6 +793,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -788,6 +807,7 @@ Hibernate:
         ir1_0.id_inventario_registro,
         ir1_0.id_negocio,
         ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
         ir1_0.id_producto,
         ir1_0.recompensa_pdc,
         ir1_0.stock 
@@ -828,22 +848,23 @@ Hibernate:
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
         inventario_registros
-        (id_negocio, precio_unitario, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     update
         inventario_registros 
     set
         id_negocio=?,
         precio_unitario=?,
+        precio_unitario_pdc=?,
         id_producto=?,
         recompensa_pdc=?,
         stock=? 
