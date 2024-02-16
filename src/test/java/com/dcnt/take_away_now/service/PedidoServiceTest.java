@@ -61,6 +61,7 @@ class PedidoServiceTest {
         pancho = new Producto("Pancho");
         productoRepository.save(pancho);
         clienteService = new ClienteService(clienteRepository, pedidoRepository, productoPedidoRepository);
+        clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
         negocioService = new NegocioService(negocioRepository, inventarioRegistroRepository, productoRepository,pedidoRepository);
         pedidoService = new PedidoService(pedidoRepository, clienteRepository, negocioRepository,productoRepository, inventarioRegistroRepository,productoPedidoRepository);
     }
@@ -84,7 +85,7 @@ class PedidoServiceTest {
     @Test
     void esUnProductoDeEseNegocio() {
         //given
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0), new PuntosDeConfianza(20.0));
         negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
         Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
 
@@ -105,7 +106,7 @@ class PedidoServiceTest {
     @Test
     void sePuedeConfirmarUnPedidoParaEstosProductos() {
         //given
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
         negocioService.crearProducto(negocio.getId(), "Coca Cola",inventarioRegistroDto);
         negocioService.crearProducto(negocio.getId(), "Paraguitas",inventarioRegistroDto);
@@ -144,7 +145,7 @@ class PedidoServiceTest {
     @Test
     void noSePuedeConfirmarUnPedidoParaEstosProductosPorqueNoHayStockSuficiente() {
         //given
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
         Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
 
@@ -167,7 +168,7 @@ class PedidoServiceTest {
     @Test
     void sePuedeConfirmarPedido() {
         //given
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
         Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
 
@@ -187,7 +188,7 @@ class PedidoServiceTest {
     @Test
     void verificarPedido() {
         //given
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
         Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
 
@@ -208,7 +209,7 @@ class PedidoServiceTest {
     @Test
     void verificarPedidoLanzaQueNoExisteCliente() {
         //given
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
         Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
 
@@ -230,7 +231,7 @@ class PedidoServiceTest {
     @Test
     void verificarPedidoLanzaQueNoExisteNegocio() {
         //given
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
         Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
 
@@ -411,7 +412,7 @@ class PedidoServiceTest {
         clienteRepository.save(cliente);
         clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
 
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
         Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
 
@@ -450,7 +451,7 @@ class PedidoServiceTest {
         clienteRepository.save(cliente);
         clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
 
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
         Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
 
@@ -490,7 +491,7 @@ class PedidoServiceTest {
         clienteRepository.save(cliente);
         clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
 
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
         Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
 
@@ -576,7 +577,7 @@ class PedidoServiceTest {
         clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
 
         Long stockInicial = 10L;
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(stockInicial, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(stockInicial, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
         Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
 
@@ -609,5 +610,98 @@ class PedidoServiceTest {
 
         assertThat(saldoPostConfirmarPedido).isEqualTo(new Dinero(100));
         assertThat(saldoPostCancelacion).isEqualTo(new Dinero(1000));
+    }
+
+    @Test
+    void sePuedeComprarUnProductoConPdc() {
+        //given
+        Cliente cliente = new Cliente("Messi");
+        clienteRepository.save(cliente);
+        clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
+
+        Long stockInicial = 10L;
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(stockInicial, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
+        negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
+        Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
+
+        Map<Long, Map<String, Object>> productos =
+                Map.of(
+                        alfajor.get().getId(), Map.of("cantidad", 9, "usaPdc", 0)
+                );
+        InfoPedidoDto infoPedidoDto = new InfoPedidoDto(cliente.getId(), negocio.getId(), productos);
+        pedidoService.confirmarPedido(infoPedidoDto);
+
+        Collection<PedidoDto> pedidos = clienteService.obtenerPedidos(cliente.getId());
+        for (PedidoDto entry: pedidos) {
+            pedidoService.marcarComienzoDePreparacion(entry.getIdPedido());
+            pedidoService.marcarPedidoListoParaRetirar(entry.getIdPedido());
+            pedidoService.confirmarRetiroDelPedido(entry.getIdPedido());
+        }
+        PuntosDeConfianza pdcPostConfirmarPedido1 = cliente.getPuntosDeConfianza();
+
+
+        Map<Long, Map<String, Object>> productos2 =
+                Map.of(
+                        alfajor.get().getId(), Map.of("cantidad", 1, "usaPdc", 1)
+                );
+        InfoPedidoDto infoPedidoDto2 = new InfoPedidoDto(cliente.getId(), negocio.getId(), productos2);
+
+        //when
+        pedidoService.confirmarPedido(infoPedidoDto2);
+
+        //then
+        Dinero saldoPostConfirmarPedido = cliente.getSaldo();
+        PuntosDeConfianza pdcPostConfirmarPedido = cliente.getPuntosDeConfianza();
+
+        assertThat(saldoPostConfirmarPedido).isEqualTo(new Dinero(100));
+        assertThat(pdcPostConfirmarPedido1).isEqualTo(new PuntosDeConfianza(180));
+        assertThat(pdcPostConfirmarPedido).isEqualTo(new PuntosDeConfianza(160));
+
+    }
+
+    @Test
+    void sePuedeComprarUnProductoConPdcYDinero() {
+        //given
+        Cliente cliente = new Cliente("Messi");
+        clienteRepository.save(cliente);
+        clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
+
+        Long stockInicial = 10L;
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(stockInicial, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(40.0));
+        negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
+        Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
+
+        Map<Long, Map<String, Object>> productos =
+                Map.of(
+                        alfajor.get().getId(), Map.of("cantidad", 1, "usaPdc", 0)
+                );
+        InfoPedidoDto infoPedidoDto = new InfoPedidoDto(cliente.getId(), negocio.getId(), productos);
+        pedidoService.confirmarPedido(infoPedidoDto);
+
+        Collection<PedidoDto> pedidos = clienteService.obtenerPedidos(cliente.getId());
+        for (PedidoDto entry: pedidos) {
+            pedidoService.marcarComienzoDePreparacion(entry.getIdPedido());
+            pedidoService.marcarPedidoListoParaRetirar(entry.getIdPedido());
+            pedidoService.confirmarRetiroDelPedido(entry.getIdPedido());
+        }
+        PuntosDeConfianza pdcPostConfirmarPedido1 = cliente.getPuntosDeConfianza();
+
+
+        Map<Long, Map<String, Object>> productos2 =
+                Map.of(
+                        alfajor.get().getId(), Map.of("cantidad", 1, "usaPdc", 1)
+                );
+        InfoPedidoDto infoPedidoDto2 = new InfoPedidoDto(cliente.getId(), negocio.getId(), productos2);
+
+        //when
+        pedidoService.confirmarPedido(infoPedidoDto2);
+
+        //then
+        Dinero saldoPostConfirmarPedido = cliente.getSaldo();
+        PuntosDeConfianza pdcPostConfirmarPedido = cliente.getPuntosDeConfianza();
+
+        assertThat(saldoPostConfirmarPedido).isEqualTo(new Dinero(BigDecimal.valueOf(850.0)));
+        assertThat(pdcPostConfirmarPedido1).isEqualTo(new PuntosDeConfianza(20));
+        assertThat(pdcPostConfirmarPedido).isEqualTo(new PuntosDeConfianza(0));
     }
 }

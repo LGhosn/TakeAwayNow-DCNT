@@ -74,9 +74,10 @@ public class NegocioController {
             @RequestParam String nombreDelProducto,
             @RequestParam Long stock,
             @RequestParam BigDecimal precio,
-            @RequestParam Double recompensaPuntosDeConfianza
+            @RequestParam Double recompensaPuntosDeConfianza,
+            @RequestParam Double precioPdc
     ) {
-        return negocioService.crearProducto(negocioId, nombreDelProducto, new InventarioRegistroDto(stock, new Dinero(precio), new PuntosDeConfianza(recompensaPuntosDeConfianza)));
+        return negocioService.crearProducto(negocioId, nombreDelProducto, new InventarioRegistroDto(stock, new Dinero(precio), new PuntosDeConfianza(recompensaPuntosDeConfianza), new PuntosDeConfianza(precioPdc)));
     }
     /*******************
      *   Métodos Patch *

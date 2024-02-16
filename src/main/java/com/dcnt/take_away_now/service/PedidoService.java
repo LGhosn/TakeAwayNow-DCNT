@@ -120,6 +120,8 @@ public class PedidoService {
 
         pedidoRepository.save(pedido);
 
+        PuntosDeConfianza pdcCliente = cliente.getPuntosDeConfianza();
+        Boolean usoTodosSusPdc = false;
         for (Map.Entry<Long, Map<String, Object>> entry : dto.getProductos().entrySet()) {
 
             Long productId = entry.getKey();
@@ -139,18 +141,27 @@ public class PedidoService {
             productoPedidoRepository.save(productoPedido);
 
             // Aumentamos el precio del pedido en función de la cantidad de productos solicitados y repetimos la operación para los pdc.
-            if (usaPdc == 1) {
+            if (usaPdc == 1 && !usoTodosSusPdc) {
                 PuntosDeConfianza pdcParcialesPorProducto = inventarioRegistro.getPrecioPDC().multiply(Double.valueOf(cantidadPedida));
+                if (pdcCliente.getCantidad() < pdcParcialesPorProducto.getCantidad()) {
+                    pdcTotalDelPedido = pdcCliente;
+                    usoTodosSusPdc = true;
+                    double porcentajeFaltante = pdcCliente.getCantidad() / pdcParcialesPorProducto.getCantidad();
+                    Dinero precioParcialPorProducto = new Dinero(inventarioRegistro.getPrecio().getMonto()).multiply(new Dinero(BigDecimal.valueOf(porcentajeFaltante))).multiply(cantidadPedida);
+                    precioTotalDelPedido = precioTotalDelPedido.plus(precioParcialPorProducto);
+                    continue;
+                }
                 pdcTotalDelPedido = pdcTotalDelPedido.plus(pdcParcialesPorProducto);
             } else {
                 Dinero precioParcialPorProducto = new Dinero(inventarioRegistro.getPrecio().getMonto()).multiply(cantidadPedida);
                 precioTotalDelPedido = precioTotalDelPedido.plus(precioParcialPorProducto);
             }
-
-            // Finalmente vamos sumando la recompensa de pdc por este pedido.
         }
 
         // Actualizamos el saldo y los puntos de confianza del cliente, tanto si ha gastado como si ha ganado.
+        if (cliente.getSaldo().minus(precioTotalDelPedido).compareTo(new Dinero(0)) < 0) {
+            throw new RuntimeException("No tenes el Dinero suficiente para realizar la compra");
+        }
         cliente.setSaldo(cliente.getSaldo().minus(precioTotalDelPedido));
         cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().minus(pdcTotalDelPedido));
 
@@ -242,7 +253,7 @@ public class PedidoService {
             Producto p = entry.getProducto();
             InventarioRegistro inventarioRegistro = inventarioRegistroRepository.findByNegocioAndProducto(pedido.getNegocio(), p).orElseThrow( () -> new RuntimeException("Ocurrió un error con el producto "+ entry.getProducto().getNombre() +" al confirmar el pedido.") );
 
-            pdcRecompensa = pdcRecompensa.plus(inventarioRegistro.getRecompensaPuntosDeConfianza().getCantidad());
+            pdcRecompensa = pdcRecompensa.plus(inventarioRegistro.getRecompensaPuntosDeConfianza().getCantidad() * entry.getCantidad());
         }
 
         cliente.setPuntosDeConfianza(pdcRecompensa);

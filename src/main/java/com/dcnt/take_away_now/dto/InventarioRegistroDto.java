@@ -13,4 +13,5 @@ public class InventarioRegistroDto {
     private Long Stock;
     private Dinero precio;
     private PuntosDeConfianza recompensaPuntosDeConfianza;
+    private PuntosDeConfianza precioPDC;
 }

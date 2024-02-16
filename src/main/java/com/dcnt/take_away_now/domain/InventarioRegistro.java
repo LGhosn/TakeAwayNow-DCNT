@@ -48,5 +48,6 @@ public class InventarioRegistro {
         this.stock = dto.getStock();
         this.precio = dto.getPrecio();
         this.recompensaPuntosDeConfianza = dto.getRecompensaPuntosDeConfianza();
+        this.precioPDC = dto.getPrecioPDC();
     }
 }

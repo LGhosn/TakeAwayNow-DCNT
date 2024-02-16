@@ -111,6 +111,7 @@ class NegocioControllerTest {
                         .param("stock", "5")
                         .param("precio", "100")
                         .param("recompensaPuntosDeConfianza", "20")
+                        .param("precioPdc", "20")
         );
 
         response.andExpect(MockMvcResultMatchers.status().isOk());

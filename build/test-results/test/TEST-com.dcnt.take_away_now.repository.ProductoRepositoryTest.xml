@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.repository.ProductoRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-16T12:58:51" hostname="LGG-W10" time="0.022">
+<testsuite name="com.dcnt.take_away_now.repository.ProductoRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-16T17:53:49" hostname="LGG-W10" time="0.027">
   <properties/>
-  <testcase name="SeEncuentraUnProductoQueExiste()" classname="com.dcnt.take_away_now.repository.ProductoRepositoryTest" time="0.012"/>
+  <testcase name="SeEncuentraUnProductoQueExiste()" classname="com.dcnt.take_away_now.repository.ProductoRepositoryTest" time="0.015"/>
   <testcase name="NoSeEncuentraUnProductoQueNoExiste()" classname="com.dcnt.take_away_now.repository.ProductoRepositoryTest" time="0.009"/>
-  <system-out><![CDATA[2024-02-16T09:58:51.246-03:00  INFO 14268 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.ProductoRepositoryTest]: ProductoRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-16T09:58:51.258-03:00  INFO 14268 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.ProductoRepositoryTest
+  <system-out><![CDATA[2024-02-16T14:53:49.460-03:00  INFO 6976 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.ProductoRepositoryTest]: ProductoRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-16T14:53:49.471-03:00  INFO 6976 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.ProductoRepositoryTest
 Hibernate: 
     insert 
     into

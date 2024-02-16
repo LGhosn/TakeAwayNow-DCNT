@@ -108,7 +108,7 @@ class NegocioServiceTest {
     void sePuedeCrearProductoNuevoEnNegocioExistente() {
         //given
         negocioService.crearNegocio(nombrePaseoColon, DiaDeApertura, DiaDeCierre,HoraApertura, MinutoApertura, HoraCierre, MinutoCierre);
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         Optional<Negocio> negocio = negocioRepository.findByNombre(nombrePaseoColon);
         //when
         response = negocioService.crearProducto(negocio.get().getId(), "Pancho",inventarioRegistroDto);
@@ -124,7 +124,7 @@ class NegocioServiceTest {
     void noSePuedeCrearProductoYaExistenteEnNegocioExistente() {
         //given
         negocioService.crearNegocio(nombrePaseoColon, DiaDeApertura, DiaDeCierre,HoraApertura, MinutoApertura, HoraCierre, MinutoCierre);
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         Optional<Negocio> negocio = negocioRepository.findByNombre(nombrePaseoColon);
         negocioService.crearProducto(negocio.get().getId(), "Pancho",inventarioRegistroDto);
         //when
@@ -136,7 +136,7 @@ class NegocioServiceTest {
     @Test
     void noSePuedeCrearProductoNuevoEnNegocioQueNoExiste() {
         //given
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         //when
         response = negocioService.crearProducto(1L, "Pancho",inventarioRegistroDto);
         //then
@@ -147,7 +147,7 @@ class NegocioServiceTest {
     void eliminarProducto() {
         //given
         negocioService.crearNegocio(nombrePaseoColon, DiaDeApertura, DiaDeCierre,HoraApertura, MinutoApertura, HoraCierre, MinutoCierre);
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         Optional<Negocio> negocio = negocioRepository.findByNombre(nombrePaseoColon);
         negocioService.crearProducto(negocio.get().getId(), "Pancho",inventarioRegistroDto);
         Optional<Producto> producto = productoRepository.findByNombre("Pancho");
@@ -166,7 +166,7 @@ class NegocioServiceTest {
     void obtenerProductos() {
         //given
         negocioService.crearNegocio(nombrePaseoColon, DiaDeApertura, DiaDeCierre,HoraApertura, MinutoApertura, HoraCierre, MinutoCierre);
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         Optional<Negocio> negocio = negocioRepository.findByNombre(nombrePaseoColon);
         negocioService.crearProducto(negocio.get().getId(), "Pancho",inventarioRegistroDto);
         negocioService.crearProducto(negocio.get().getId(), "Coca Cola",inventarioRegistroDto);
@@ -203,7 +203,7 @@ class NegocioServiceTest {
     void sePuedeModificarInventarioRegistro() {
         //given
         negocioService.crearNegocio(nombrePaseoColon, DiaDeApertura, DiaDeCierre,HoraApertura, MinutoApertura, HoraCierre, MinutoCierre);
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         Optional<Negocio> negocio = negocioRepository.findByNombre(nombrePaseoColon);
         negocioService.crearProducto(negocio.get().getId(), "Pancho",inventarioRegistroDto);
         Optional<Producto> producto = productoRepository.findByNombre("Pancho");
@@ -231,7 +231,7 @@ class NegocioServiceTest {
     void noSePuedeModificarInventarioRegistroDeUnProductoQueNoExiste() {
         //given
         negocioService.crearNegocio(nombrePaseoColon, DiaDeApertura, DiaDeCierre,HoraApertura, MinutoApertura, HoraCierre, MinutoCierre);
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         Optional<Negocio> negocio = negocioRepository.findByNombre(nombrePaseoColon);
         // when: "Se intenta modificar un inventarioRegistro de un producto que no existe"
         response = negocioService.modificarInventarioRegistro(negocio.get().getId(),1L,20L,BigDecimal.valueOf(150), 25.0);
@@ -246,7 +246,7 @@ class NegocioServiceTest {
         //given
         negocioService.crearNegocio(nombrePaseoColon, DiaDeApertura, DiaDeCierre,HoraApertura, MinutoApertura, HoraCierre, MinutoCierre);
         negocioService.crearNegocio("Buffet Las Heras", DiaDeApertura, DiaDeCierre,HoraApertura, MinutoApertura, HoraCierre, MinutoCierre);
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         Optional<Negocio> paseoColon = negocioRepository.findByNombre(nombrePaseoColon);
         negocioService.crearProducto(paseoColon.get().getId(), "Pancho",inventarioRegistroDto);
         Optional<Producto> producto = productoRepository.findByNombre("Pancho");
