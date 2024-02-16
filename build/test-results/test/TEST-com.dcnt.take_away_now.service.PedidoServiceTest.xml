@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.service.PedidoServiceTest" tests="30" skipped="0" failures="0" errors="0" timestamp="2024-02-16T18:18:46" hostname="LGG-W10" time="0.778">
+<testsuite name="com.dcnt.take_away_now.service.PedidoServiceTest" tests="30" skipped="0" failures="0" errors="0" timestamp="2024-02-16T23:37:24" hostname="LGG-W10" time="1.154">
   <properties/>
-  <testcase name="noSePuedeMarcarComienzoDePreparacionAUnPedidoQueNoEstaEnAguardandoPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.011"/>
-  <testcase name="noSePuedeMarcarPedidoDevueltoAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.01"/>
-  <testcase name="noSePuedeMarcarListoParaRetirarAUnPedidoQueNoEstaEnPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.011"/>
-  <testcase name="sePuedeComprarUnProductoConPdc()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.087"/>
-  <testcase name="cuandoSeCancelaUnPedidoEnPreparacionNoSeDevulveElSaldo()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.045"/>
-  <testcase name="cuandoSeDevuelveUnPedidoSeLeDevuelveElSaldoAlClienteYElStockDeLosProductos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.06"/>
-  <testcase name="noSePuedeConfirmarUnPedidoParaEstosProductosPorqueNoEsUnProductoDelNegocio()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.015"/>
-  <testcase name="noSePuedeConfirmarUnPedidoParaEstosProductosPorqueNoHayStockSuficiente()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.029"/>
-  <testcase name="noEsUnProductoDeEseNegocio()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.012"/>
-  <testcase name="cuandoSeCancelaUnPedidoEnAguardandoPreparacionSeDevulveElSaldo()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.061"/>
-  <testcase name="sePuedeMarcarComienzoDePreparacionAUnPedidoQueEstaAguardandoPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.01"/>
-  <testcase name="verificarPedidoLanzaQueNoExisteCliente()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.019"/>
-  <testcase name="sePuedeComprarUnProductoConPdcYDinero()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.056"/>
-  <testcase name="sePuedeMarcarListoParaRetirarAUnPedidoQueEstaEnPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.011"/>
-  <testcase name="noSePuedeCancelarAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.009"/>
-  <testcase name="noSePuedeConfirmarRetiroAUnPedidoQueNoEstaListoParaRetirar()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.009"/>
-  <testcase name="noSePuedeConfirmarRetiroAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.009"/>
-  <testcase name="sePuedeConfirmarRetiroAUnPedidoQueEstaListoParaRetirar()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.014"/>
-  <testcase name="sePuedeConfirmarUnPedidoParaEstosProductos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.054"/>
-  <testcase name="noSePuedeMarcarListoParaRetirarAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.009"/>
-  <testcase name="sePuedeMarcarPedidoDevueltoAUnPedidoQueEstaRetirado()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.013"/>
-  <testcase name="verificarPedidoLanzaQueNoExisteNegocio()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.019"/>
-  <testcase name="esUnProductoDeEseNegocio()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.019"/>
-  <testcase name="verificarPedido()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.032"/>
-  <testcase name="sePuedeConfirmarPedido()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.021"/>
-  <testcase name="noSePuedeMarcarComienzoDePreparacionAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.007"/>
-  <testcase name="cuandoSeCancelaUnPedidoListoParaRetirarNoSeDevulveElSaldoYSeLeSacanLosPuntosDeConfianza()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.053"/>
-  <testcase name="obtenerPedidos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.01"/>
-  <testcase name="sePuedeCancelarAUnPedidoQueEstaAguardandoPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.017"/>
-  <testcase name="noSePuedeMarcarPedidoDevueltoAUnPedidoQueNoEstaRetirado()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.01"/>
-  <system-out><![CDATA[2024-02-16T15:18:46.360-03:00  INFO 5804 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.service.PedidoServiceTest]: PedidoServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-16T15:18:46.371-03:00  INFO 5804 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.service.PedidoServiceTest
+  <testcase name="noSePuedeMarcarComienzoDePreparacionAUnPedidoQueNoEstaEnAguardandoPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.014"/>
+  <testcase name="noSePuedeMarcarPedidoDevueltoAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.011"/>
+  <testcase name="noSePuedeMarcarListoParaRetirarAUnPedidoQueNoEstaEnPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.015"/>
+  <testcase name="sePuedeComprarUnProductoConPdc()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.141"/>
+  <testcase name="cuandoSeCancelaUnPedidoEnPreparacionNoSeDevulveElSaldo()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.05"/>
+  <testcase name="cuandoSeDevuelveUnPedidoSeLeDevuelveElSaldoAlClienteYElStockDeLosProductos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.053"/>
+  <testcase name="noSePuedeConfirmarUnPedidoParaEstosProductosPorqueNoEsUnProductoDelNegocio()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.012"/>
+  <testcase name="noSePuedeConfirmarUnPedidoParaEstosProductosPorqueNoHayStockSuficiente()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.024"/>
+  <testcase name="noEsUnProductoDeEseNegocio()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.014"/>
+  <testcase name="cuandoSeCancelaUnPedidoEnAguardandoPreparacionSeDevulveElSaldo()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.046"/>
+  <testcase name="sePuedeMarcarComienzoDePreparacionAUnPedidoQueEstaAguardandoPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.012"/>
+  <testcase name="verificarPedidoLanzaQueNoExisteCliente()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.017"/>
+  <testcase name="sePuedeComprarUnProductoConPdcYDinero()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.058"/>
+  <testcase name="sePuedeMarcarListoParaRetirarAUnPedidoQueEstaEnPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.012"/>
+  <testcase name="noSePuedeCancelarAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.013"/>
+  <testcase name="noSePuedeConfirmarRetiroAUnPedidoQueNoEstaListoParaRetirar()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.029"/>
+  <testcase name="noSePuedeConfirmarRetiroAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.035"/>
+  <testcase name="sePuedeConfirmarRetiroAUnPedidoQueEstaListoParaRetirar()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.083"/>
+  <testcase name="sePuedeConfirmarUnPedidoParaEstosProductos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.08"/>
+  <testcase name="noSePuedeMarcarListoParaRetirarAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.01"/>
+  <testcase name="sePuedeMarcarPedidoDevueltoAUnPedidoQueEstaRetirado()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.061"/>
+  <testcase name="verificarPedidoLanzaQueNoExisteNegocio()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.017"/>
+  <testcase name="esUnProductoDeEseNegocio()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.016"/>
+  <testcase name="verificarPedido()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.024"/>
+  <testcase name="sePuedeConfirmarPedido()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.094"/>
+  <testcase name="noSePuedeMarcarComienzoDePreparacionAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.019"/>
+  <testcase name="cuandoSeCancelaUnPedidoListoParaRetirarNoSeDevulveElSaldoYSeLeSacanLosPuntosDeConfianza()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.065"/>
+  <testcase name="obtenerPedidos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.015"/>
+  <testcase name="sePuedeCancelarAUnPedidoQueEstaAguardandoPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.016"/>
+  <testcase name="noSePuedeMarcarPedidoDevueltoAUnPedidoQueNoEstaRetirado()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.011"/>
+  <system-out><![CDATA[2024-02-16T20:37:24.733-03:00  INFO 2356 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.service.PedidoServiceTest]: PedidoServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-16T20:37:24.752-03:00  INFO 2356 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.service.PedidoServiceTest
 Hibernate: 
     insert 
     into
@@ -603,6 +603,37 @@ Hibernate:
             on p1_0.id_negocio=n1_0.id_negocio 
     where
         c1_0.id_cliente=?
+Hibernate: 
+    select
+        p2_0.id_producto,
+        p2_0.id_inventario_registro,
+        p2_0.nombre,
+        pp1_0.cantidad,
+        ir1_0.precio_unitario 
+    from
+        productos_pedidos pp1_0 
+    join
+        productos p2_0 
+            on p2_0.id_producto=pp1_0.id_producto 
+    join
+        inventario_registros ir1_0 
+            on ir1_0.id_producto=pp1_0.id_producto 
+    where
+        pp1_0.id_pedido=?
+Hibernate: 
+    select
+        ir1_0.id_inventario_registro,
+        ir1_0.id_negocio,
+        ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
+        ir1_0.id_producto,
+        ir1_0.recompensa_pdc,
+        ir1_0.stock 
+    from
+        inventario_registros ir1_0 
+    where
+        ir1_0.id_negocio=? 
+        and ir1_0.id_producto=?
 Hibernate: 
     select
         p2_0.id_producto,
@@ -1304,6 +1335,37 @@ Hibernate:
             on p1_0.id_negocio=n1_0.id_negocio 
     where
         c1_0.id_cliente=?
+Hibernate: 
+    select
+        p2_0.id_producto,
+        p2_0.id_inventario_registro,
+        p2_0.nombre,
+        pp1_0.cantidad,
+        ir1_0.precio_unitario 
+    from
+        productos_pedidos pp1_0 
+    join
+        productos p2_0 
+            on p2_0.id_producto=pp1_0.id_producto 
+    join
+        inventario_registros ir1_0 
+            on ir1_0.id_producto=pp1_0.id_producto 
+    where
+        pp1_0.id_pedido=?
+Hibernate: 
+    select
+        ir1_0.id_inventario_registro,
+        ir1_0.id_negocio,
+        ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
+        ir1_0.id_producto,
+        ir1_0.recompensa_pdc,
+        ir1_0.stock 
+    from
+        inventario_registros ir1_0 
+    where
+        ir1_0.id_negocio=? 
+        and ir1_0.id_producto=?
 Hibernate: 
     select
         p2_0.id_producto,
@@ -3021,6 +3083,37 @@ Hibernate:
         ir1_0.id_negocio=? 
         and ir1_0.id_producto=?
 Hibernate: 
+    select
+        p2_0.id_producto,
+        p2_0.id_inventario_registro,
+        p2_0.nombre,
+        pp1_0.cantidad,
+        ir1_0.precio_unitario 
+    from
+        productos_pedidos pp1_0 
+    join
+        productos p2_0 
+            on p2_0.id_producto=pp1_0.id_producto 
+    join
+        inventario_registros ir1_0 
+            on ir1_0.id_producto=pp1_0.id_producto 
+    where
+        pp1_0.id_pedido=?
+Hibernate: 
+    select
+        ir1_0.id_inventario_registro,
+        ir1_0.id_negocio,
+        ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
+        ir1_0.id_producto,
+        ir1_0.recompensa_pdc,
+        ir1_0.stock 
+    from
+        inventario_registros ir1_0 
+    where
+        ir1_0.id_negocio=? 
+        and ir1_0.id_producto=?
+Hibernate: 
     insert 
     into
         clientes
@@ -3108,6 +3201,23 @@ Hibernate:
         (id_cliente, codigo, estado, fecha_y_hora_entrega, id_negocio, precio_total, id_pedido) 
     values
         (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        p2_0.id_producto,
+        p2_0.id_inventario_registro,
+        p2_0.nombre,
+        pp1_0.cantidad,
+        ir1_0.precio_unitario 
+    from
+        productos_pedidos pp1_0 
+    join
+        productos p2_0 
+            on p2_0.id_producto=pp1_0.id_producto 
+    join
+        inventario_registros ir1_0 
+            on ir1_0.id_producto=pp1_0.id_producto 
+    where
+        pp1_0.id_pedido=?
 Hibernate: 
     select
         p2_0.id_producto,

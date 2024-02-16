@@ -411,8 +411,9 @@ class PedidoServiceTest {
         Cliente cliente = new Cliente("Messi");
         clienteRepository.save(cliente);
         clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
+        PuntosDeConfianza veintePdc = new PuntosDeConfianza(20.0);
 
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), veintePdc,veintePdc);
         negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
         Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
 
@@ -441,7 +442,7 @@ class PedidoServiceTest {
         assertThat(puntosPostConfirmarPedido).isEqualTo(new PuntosDeConfianza(0));
         assertThat(saldoPostCancelacion).isEqualTo(new Dinero(1000));
         // se le resta un 5% de los puntos de confianza
-        assertThat(puntosPostCancelacion).isEqualTo(puntosPostConfirmarPedido.minus(puntosPostConfirmarPedido.multiply(0.05)));
+        assertThat(puntosPostCancelacion).isEqualTo(puntosPostConfirmarPedido.minus(veintePdc.multiply(9).multiply(0.05)));
     }
 
     @Test
@@ -450,9 +451,9 @@ class PedidoServiceTest {
         Cliente cliente = new Cliente("Messi");
         clienteRepository.save(cliente);
         clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
+        PuntosDeConfianza veintePdc = new PuntosDeConfianza(20.0);
 
-        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
-        negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), veintePdc,veintePdc);negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
         Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
 
         Map<Long, Map<String, Object>> productos =
@@ -481,7 +482,7 @@ class PedidoServiceTest {
         assertThat(puntosPostConfirmarPedido).isEqualTo(new PuntosDeConfianza(0));
         assertThat(saldoPostCancelacion).isEqualTo(new Dinero(100));
         // se le resta un 20% de los puntos de confianza
-        assertThat(puntosPostCancelacion).isEqualTo(puntosPostConfirmarPedido.minus(puntosPostConfirmarPedido.multiply(0.2)));
+        assertThat(puntosPostCancelacion).isEqualTo(puntosPostConfirmarPedido.minus(veintePdc.multiply(9).multiply(0.20)));
     }
 
     @Test
@@ -601,7 +602,7 @@ class PedidoServiceTest {
         }
 
         //then
-        Dinero saldoPostCancelacion = cliente.getSaldo();
+        Dinero saldoPostDevolucion = cliente.getSaldo();
 
         Collection<ProductoDto> productosNegocio = negocioService.obtenerProductos(negocio.getId());
         for (ProductoDto entry: productosNegocio) {
@@ -609,7 +610,7 @@ class PedidoServiceTest {
         }
 
         assertThat(saldoPostConfirmarPedido).isEqualTo(new Dinero(100));
-        assertThat(saldoPostCancelacion).isEqualTo(new Dinero(1000));
+        assertThat(saldoPostDevolucion).isEqualTo(new Dinero(1000));
     }
 
     @Test

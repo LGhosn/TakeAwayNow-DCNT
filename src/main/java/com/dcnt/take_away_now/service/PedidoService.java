@@ -246,15 +246,7 @@ public class PedidoService {
 
         // le doy al cliente sus pdc
         Cliente cliente = pedido.getCliente();
-        Collection< ProductoPedidoDto> productoPedidoDtos = productoPedidoRepository.obtenerProductosDelPedido(pedido.getId());
-
-        PuntosDeConfianza pdcRecompensa = new PuntosDeConfianza(0);
-        for (ProductoPedidoDto entry : productoPedidoDtos) {
-            Producto p = entry.getProducto();
-            InventarioRegistro inventarioRegistro = inventarioRegistroRepository.findByNegocioAndProducto(pedido.getNegocio(), p).orElseThrow( () -> new RuntimeException("Ocurrió un error con el producto "+ entry.getProducto().getNombre() +" al confirmar el pedido.") );
-
-            pdcRecompensa = pdcRecompensa.plus(inventarioRegistro.getRecompensaPuntosDeConfianza().getCantidad() * entry.getCantidad());
-        }
+        PuntosDeConfianza pdcRecompensa =  obtenerPuntosDeConfianzaDeUnPedido(idPedido);
 
         cliente.setPuntosDeConfianza(pdcRecompensa);
 
@@ -279,9 +271,15 @@ public class PedidoService {
 
         Cliente c = clienteRepository.findById(pedido.getCliente().getId()).orElseThrow( () -> new RuntimeException("Ocurrió un error al obtener los datos del cliente."));
 
-        // En caso de que el estado sea AGUARDANDO_PREPARACION, entonces recupera su dinero.
+        PuntosDeConfianza pdcPedido = obtenerPuntosDeConfianzaDeUnPedido(idPedido);
+        // En caso de que el estado sea AGUARDANDO_PREPARACION, entonces el cliente pierde puntos de confianza (levemente, un 5% del total que del pedido) pero recupera su dinero.
         if (pedido.getEstado() == EstadoDelPedido.AGUARDANDO_PREPARACION) {
+            c.setPuntosDeConfianza(c.getPuntosDeConfianza().minus(pdcPedido.multiply(0.05)));
             c.setSaldo(c.getSaldo().plus(pedido.getPrecioTotal()));
+        }else if (pedido.getEstado() == EstadoDelPedido.EN_PREPARACION) {
+                //En caso de que el estado sea EN_PREPARACION, entonces el cliente pierde puntos de confianza (notablemente, un 20% del total del pedido), no recupera su dinero.
+                c.setPuntosDeConfianza(
+                        c.getPuntosDeConfianza().minus(pdcPedido.multiply(0.20)));
         } else if(pedido.getEstado() == EstadoDelPedido.LISTO_PARA_RETIRAR) {
             //En caso de que el estado sea LISTO_PARA_RETIRAR, entonces el cliente pierde puntos de confianza (significativamente, pierde un 100% del total que posee), no recupera su dinero.
             c.setPuntosDeConfianza(new PuntosDeConfianza((double) 0));
@@ -345,5 +343,19 @@ public class PedidoService {
 
     public Collection<ProductoPedidoDto> obtenerDetalleDelPedido(Long idPedido) {
         return productoPedidoRepository.obtenerProductosDelPedido(idPedido);
+    }
+
+    private PuntosDeConfianza obtenerPuntosDeConfianzaDeUnPedido(Long idPedido) {
+        Collection< ProductoPedidoDto> productoPedidoDtos = productoPedidoRepository.obtenerProductosDelPedido(idPedido);
+        Pedido pedido = pedidoRepository.findById(idPedido).get();
+
+        PuntosDeConfianza pdcRecompensa = new PuntosDeConfianza(0);
+        for (ProductoPedidoDto entry : productoPedidoDtos) {
+            Producto p = entry.getProducto();
+            InventarioRegistro inventarioRegistro = inventarioRegistroRepository.findByNegocioAndProducto(pedido.getNegocio(), p).orElseThrow( () -> new RuntimeException("Ocurrió un error con el producto "+ entry.getProducto().getNombre() +" al confirmar el pedido.") );
+
+            pdcRecompensa = pdcRecompensa.plus(inventarioRegistro.getRecompensaPuntosDeConfianza().getCantidad() * entry.getCantidad());
+        }
+        return pdcRecompensa;
     }
 }

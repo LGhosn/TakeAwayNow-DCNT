@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.DineroTests" tests="8" skipped="0" failures="0" errors="0" timestamp="2024-02-16T18:18:34" hostname="LGG-W10" time="0.1">
+<testsuite name="com.dcnt.take_away_now.DineroTests" tests="8" skipped="0" failures="0" errors="0" timestamp="2024-02-16T23:37:06" hostname="LGG-W10" time="0.184">
   <properties/>
-  <testcase name="noPuedoMultiplicarDineroPorUnNumeroNegativo()" classname="com.dcnt.take_away_now.DineroTests" time="0.079"/>
-  <testcase name="tengoDosPesosLoMultiplicoPorCincoYObtengoDiezPesos()" classname="com.dcnt.take_away_now.DineroTests" time="0.003"/>
-  <testcase name="conviertoDosPesosEnDineroABigDecimal()" classname="com.dcnt.take_away_now.DineroTests" time="0.002"/>
+  <testcase name="noPuedoMultiplicarDineroPorUnNumeroNegativo()" classname="com.dcnt.take_away_now.DineroTests" time="0.146"/>
+  <testcase name="tengoDosPesosLoMultiplicoPorCincoYObtengoDiezPesos()" classname="com.dcnt.take_away_now.DineroTests" time="0.009"/>
+  <testcase name="conviertoDosPesosEnDineroABigDecimal()" classname="com.dcnt.take_away_now.DineroTests" time="0.01"/>
   <testcase name="noPuedoTenerDineroNegativo()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
-  <testcase name="noPuedoMultiplicarDineroPorCero()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
+  <testcase name="noPuedoMultiplicarDineroPorCero()" classname="com.dcnt.take_away_now.DineroTests" time="0.002"/>
   <testcase name="tengoDosPesosLeSumoTresPesosYObtengoCincoPesos()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
   <testcase name="contextLoads()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
-  <testcase name="conviertoVariableBigDecimalConValIgualADosAValueObjectDineroConMontoIgualADos()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
+  <testcase name="conviertoVariableBigDecimalConValIgualADosAValueObjectDineroConMontoIgualADos()" classname="com.dcnt.take_away_now.DineroTests" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
