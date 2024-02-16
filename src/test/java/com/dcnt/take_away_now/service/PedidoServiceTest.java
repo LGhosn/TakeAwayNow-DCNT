@@ -404,11 +404,8 @@ class PedidoServiceTest {
         assertThat(response.getBody()).isEqualTo("No existe el pedido que usted busca cancelar.");
     }
 
-    /*
-    TODO CORREGIR SERVICE Y TEST
     @Test
-
-    void cuandoSeCancelaUnPedidoEnAguardandoPreparacionSeDevulveElSaldoYSeLeSacanUnCincoPorcinetoDeLosPuntosDeConfianza() {
+    void cuandoSeCancelaUnPedidoEnAguardandoPreparacionSeDevulveElSaldo() {
         //given
         Cliente cliente = new Cliente("Messi");
         clienteRepository.save(cliente);
@@ -440,15 +437,14 @@ class PedidoServiceTest {
         PuntosDeConfianza puntosPostCancelacion = cliente.getPuntosDeConfianza();
 
         assertThat(saldoPostConfirmarPedido).isEqualTo(new Dinero(100));
-        assertThat(puntosPostConfirmarPedido).isEqualTo(new PuntosDeConfianza(180));
+        assertThat(puntosPostConfirmarPedido).isEqualTo(new PuntosDeConfianza(0));
         assertThat(saldoPostCancelacion).isEqualTo(new Dinero(1000));
         // se le resta un 5% de los puntos de confianza
         assertThat(puntosPostCancelacion).isEqualTo(puntosPostConfirmarPedido.minus(puntosPostConfirmarPedido.multiply(0.05)));
     }
 
-    TODO CORREGIR SERVICE Y TEST
     @Test
-    void cuandoSeCancelaUnPedidoEnPreparacionNoSeDevulveElSaldoYSeLeSacanUnVeintePorcienteDeLosPuntosDeConfianza() {
+    void cuandoSeCancelaUnPedidoEnPreparacionNoSeDevulveElSaldo() {
         //given
         Cliente cliente = new Cliente("Messi");
         clienteRepository.save(cliente);
@@ -481,13 +477,12 @@ class PedidoServiceTest {
         PuntosDeConfianza puntosPostCancelacion = cliente.getPuntosDeConfianza();
 
         assertThat(saldoPostConfirmarPedido).isEqualTo(new Dinero(100));
-        assertThat(puntosPostConfirmarPedido).isEqualTo(new PuntosDeConfianza(180));
+        assertThat(puntosPostConfirmarPedido).isEqualTo(new PuntosDeConfianza(0));
         assertThat(saldoPostCancelacion).isEqualTo(new Dinero(100));
         // se le resta un 20% de los puntos de confianza
         assertThat(puntosPostCancelacion).isEqualTo(puntosPostConfirmarPedido.minus(puntosPostConfirmarPedido.multiply(0.2)));
     }
 
-    TODO CORREGIR SERVICE Y TEST
     @Test
     void cuandoSeCancelaUnPedidoListoParaRetirarNoSeDevulveElSaldoYSeLeSacanLosPuntosDeConfianza() {
         //given
@@ -523,11 +518,11 @@ class PedidoServiceTest {
         PuntosDeConfianza puntosPostCancelacion = cliente.getPuntosDeConfianza();
 
         assertThat(saldoPostConfirmarPedido).isEqualTo(new Dinero(100));
-        assertThat(puntosPostConfirmarPedido).isEqualTo(new PuntosDeConfianza(180));
+        assertThat(puntosPostConfirmarPedido).isEqualTo(new PuntosDeConfianza(0));
         assertThat(saldoPostCancelacion).isEqualTo(new Dinero(100));
         assertThat(puntosPostCancelacion).isEqualTo(new PuntosDeConfianza(0));
     }
-    */
+
     @Test
     void sePuedeMarcarPedidoDevueltoAUnPedidoQueEstaRetirado() {
         //given

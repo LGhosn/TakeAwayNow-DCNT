@@ -112,7 +112,6 @@ public class PedidoService {
         // Inicializamos las variables a utilizar para la resta de monto, pdc y la recompensa por la compra.
         Dinero precioTotalDelPedido = new Dinero(0);
         PuntosDeConfianza pdcTotalDelPedido = new PuntosDeConfianza((double) 0);
-        PuntosDeConfianza pdcRecompenza = new PuntosDeConfianza((double) 0);
 
         // Levantamos los datos necesarios
         Negocio negocio = negocioRepository.findById(dto.getIdNegocio()).get();
@@ -149,19 +148,11 @@ public class PedidoService {
             }
 
             // Finalmente vamos sumando la recompensa de pdc por este pedido.
-            pdcRecompenza = pdcRecompenza.plus(inventarioRegistro.getRecompensaPuntosDeConfianza().getCantidad());
         }
 
         // Actualizamos el saldo y los puntos de confianza del cliente, tanto si ha gastado como si ha ganado.
         cliente.setSaldo(cliente.getSaldo().minus(precioTotalDelPedido));
         cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().minus(pdcTotalDelPedido));
-        cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().plus(pdcRecompenza));
-
-        if (cliente.getPuntosDeConfianza() != null) {
-            cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().plus(pdcTotalDelPedido));
-        } else {
-            cliente.setPuntosDeConfianza(pdcTotalDelPedido);
-        }
 
         // Actualizamos el saldo del negocio.
         negocio.setSaldo(negocio.getSaldo().plus(precioTotalDelPedido));
@@ -241,6 +232,21 @@ public class PedidoService {
         if (pedido.estado != EstadoDelPedido.LISTO_PARA_RETIRAR) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede retirar dicho pedido ya que el mismo no se encuentra listo para retirar.");
         }
+
+        // le doy al cliente sus pdc
+        Cliente cliente = pedido.getCliente();
+        Collection< ProductoPedidoDto> productoPedidoDtos = productoPedidoRepository.obtenerProductosDelPedido(pedido.getId());
+
+        PuntosDeConfianza pdcRecompensa = new PuntosDeConfianza(0);
+        for (ProductoPedidoDto entry : productoPedidoDtos) {
+            Producto p = entry.getProducto();
+            InventarioRegistro inventarioRegistro = inventarioRegistroRepository.findByNegocioAndProducto(pedido.getNegocio(), p).orElseThrow( () -> new RuntimeException("Ocurrió un error con el producto "+ entry.getProducto().getNombre() +" al confirmar el pedido.") );
+
+            pdcRecompensa = pdcRecompensa.plus(inventarioRegistro.getRecompensaPuntosDeConfianza().getCantidad());
+        }
+
+        cliente.setPuntosDeConfianza(pdcRecompensa);
+
         // Actualizamos el estado del pedido y se establece la fecha y hora de entrega.
         pedido.setFechaYHoraDeEntrega(LocalDateTime.now());
         pedido.setEstado(EstadoDelPedido.RETIRADO);
@@ -262,14 +268,9 @@ public class PedidoService {
 
         Cliente c = clienteRepository.findById(pedido.getCliente().getId()).orElseThrow( () -> new RuntimeException("Ocurrió un error al obtener los datos del cliente."));
 
-        // En caso de que el estado sea AGUARDANDO_PREPARACION, entonces el cliente pierde puntos de confianza (levemente, un 5% del total que posee) pero recupera su dinero.
+        // En caso de que el estado sea AGUARDANDO_PREPARACION, entonces recupera su dinero.
         if (pedido.getEstado() == EstadoDelPedido.AGUARDANDO_PREPARACION) {
-            c.setPuntosDeConfianza(c.getPuntosDeConfianza().minus(c.getPuntosDeConfianza().multiply(0.05)));
             c.setSaldo(c.getSaldo().plus(pedido.getPrecioTotal()));
-        } else if (pedido.getEstado() == EstadoDelPedido.EN_PREPARACION) {
-            //En caso de que el estado sea EN_PREPARACION, entonces el cliente pierde puntos de confianza (notablemente, un 20% del total que posee), no recupera su dinero.
-            c.setPuntosDeConfianza(
-                    c.getPuntosDeConfianza().minus(c.getPuntosDeConfianza().multiply(0.20)));
         } else if(pedido.getEstado() == EstadoDelPedido.LISTO_PARA_RETIRAR) {
             //En caso de que el estado sea LISTO_PARA_RETIRAR, entonces el cliente pierde puntos de confianza (significativamente, pierde un 100% del total que posee), no recupera su dinero.
             c.setPuntosDeConfianza(new PuntosDeConfianza((double) 0));

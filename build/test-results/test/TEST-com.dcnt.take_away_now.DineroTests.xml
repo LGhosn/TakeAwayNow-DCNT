@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.DineroTests" tests="8" skipped="0" failures="0" errors="0" timestamp="2024-02-16T15:10:30" hostname="DESKTOP-84L37D5" time="0.07">
+<testsuite name="com.dcnt.take_away_now.DineroTests" tests="8" skipped="0" failures="0" errors="0" timestamp="2024-02-16T12:58:39" hostname="LGG-W10" time="0.113">
   <properties/>
-  <testcase name="noPuedoMultiplicarDineroPorUnNumeroNegativo()" classname="com.dcnt.take_away_now.DineroTests" time="0.057"/>
-  <testcase name="tengoDosPesosLoMultiplicoPorCincoYObtengoDiezPesos()" classname="com.dcnt.take_away_now.DineroTests" time="0.003"/>
-  <testcase name="conviertoDosPesosEnDineroABigDecimal()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
-  <testcase name="noPuedoTenerDineroNegativo()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
+  <testcase name="noPuedoMultiplicarDineroPorUnNumeroNegativo()" classname="com.dcnt.take_away_now.DineroTests" time="0.083"/>
+  <testcase name="tengoDosPesosLoMultiplicoPorCincoYObtengoDiezPesos()" classname="com.dcnt.take_away_now.DineroTests" time="0.007"/>
+  <testcase name="conviertoDosPesosEnDineroABigDecimal()" classname="com.dcnt.take_away_now.DineroTests" time="0.005"/>
+  <testcase name="noPuedoTenerDineroNegativo()" classname="com.dcnt.take_away_now.DineroTests" time="0.003"/>
   <testcase name="noPuedoMultiplicarDineroPorCero()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
   <testcase name="tengoDosPesosLeSumoTresPesosYObtengoCincoPesos()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
   <testcase name="contextLoads()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
