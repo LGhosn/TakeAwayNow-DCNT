@@ -24,7 +24,7 @@ public interface InventarioRegistroRepository extends JpaRepository<InventarioRe
 
     boolean existsByNegocioAndProducto(Negocio negocio, Producto producto);
 
-    @Query( "SELECT new com.dcnt.take_away_now.dto.ProductoDto(p.id, p.nombre, ir.stock, ir.precio, ir.recompensaPuntosDeConfianza) " +
+    @Query( "SELECT new com.dcnt.take_away_now.dto.ProductoDto(p.id, p.nombre, ir.stock, ir.precio, ir.recompensaPuntosDeConfianza, ir.precioPDC) " +
             "FROM InventarioRegistro ir "+
             "INNER JOIN Producto p on ir.producto.id = p.id " +
             "WHERE ir.negocio.id = :idNegocio")

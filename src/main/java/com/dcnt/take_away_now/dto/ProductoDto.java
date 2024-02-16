@@ -15,4 +15,5 @@ public class ProductoDto {
     private Long Stock;
     private Dinero precio;
     private PuntosDeConfianza recompensaPuntosDeConfianza;
+    private PuntosDeConfianza precioPdc;
 }
