@@ -143,7 +143,8 @@ public class NegocioService {
             Long productoId,
             Long stock,
             BigDecimal precio,
-            Double recompensaPuntosDeConfianza
+            Double recompensaPuntosDeConfianza,
+            Double precioPdc
     ) {
         // Corroboramos la existencia del negocio.
         Optional<Negocio> optionalNegocio = negocioRepository.findById(negocioId);
@@ -168,6 +169,7 @@ public class NegocioService {
         inventarioRegistroExistente.setStock(stock);
         inventarioRegistroExistente.setPrecio(new Dinero(precio));
         inventarioRegistroExistente.setRecompensaPuntosDeConfianza(new PuntosDeConfianza(recompensaPuntosDeConfianza));
+        inventarioRegistroExistente.setPrecioPDC(new PuntosDeConfianza(precioPdc));
         inventarioRegistroRepository.save(inventarioRegistroExistente);
 
         return ResponseEntity.status(ACCEPTED).body("El producto fue modificado correctamente.");

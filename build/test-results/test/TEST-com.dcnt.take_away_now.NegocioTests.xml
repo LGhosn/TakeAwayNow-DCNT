@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.NegocioTests" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-02-16T18:04:26" hostname="LGG-W10" time="0.022">
+<testsuite name="com.dcnt.take_away_now.NegocioTests" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-02-16T18:18:35" hostname="LGG-W10" time="0.018">
   <properties/>
-  <testcase name="crearUnNegocioConElHorarioDeAperturaPosteriorAlDeCierreLanzaException()" classname="com.dcnt.take_away_now.NegocioTests" time="0.009"/>
-  <testcase name="unNegocioSeEncuentraAbiertoSiAbreDeLunesAViernesYPreguntoUnJueves()" classname="com.dcnt.take_away_now.NegocioTests" time="0.003"/>
+  <testcase name="crearUnNegocioConElHorarioDeAperturaPosteriorAlDeCierreLanzaException()" classname="com.dcnt.take_away_now.NegocioTests" time="0.008"/>
+  <testcase name="unNegocioSeEncuentraAbiertoSiAbreDeLunesAViernesYPreguntoUnJueves()" classname="com.dcnt.take_away_now.NegocioTests" time="0.001"/>
   <testcase name="unNegocioSeEncuentraCerradoSiAbreDeLunesAViernesYPreguntoUnSabado()" classname="com.dcnt.take_away_now.NegocioTests" time="0.001"/>
   <testcase name="contextLoads()" classname="com.dcnt.take_away_now.NegocioTests" time="0.001"/>
   <testcase name="unNegocioSeEncuentraCerradoSiAbreDeLunesAViernesDe9A18YPreguntoUnMartesPorLaMadrugada()" classname="com.dcnt.take_away_now.NegocioTests" time="0.001"/>

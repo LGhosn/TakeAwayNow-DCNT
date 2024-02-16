@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.controller.NegocioControllerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-02-16T18:04:37" hostname="LGG-W10" time="0.334">
+<testsuite name="com.dcnt.take_away_now.controller.NegocioControllerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-02-16T18:18:43" hostname="LGG-W10" time="0.362">
   <properties/>
-  <testcase name="modificarHorariosDelNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.051"/>
-  <testcase name="eliminarProducto()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.007"/>
-  <testcase name="sePuedeCrearProductoNuevo()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.153"/>
-  <testcase name="obtenerProductos()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.066"/>
+  <testcase name="modificarHorariosDelNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.073"/>
+  <testcase name="eliminarProducto()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.016"/>
+  <testcase name="sePuedeCrearProductoNuevo()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.159"/>
+  <testcase name="obtenerProductos()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.061"/>
   <testcase name="sePuedeCrearNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.007"/>
-  <testcase name="modificarProducto()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.005"/>
-  <testcase name="noSePuedeCrearNegocioSiFaltanDatos()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.007"/>
-  <testcase name="modificarDiasDeAperturaDelNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.005"/>
+  <testcase name="modificarProducto()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.004"/>
+  <testcase name="noSePuedeCrearNegocioSiFaltanDatos()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.008"/>
+  <testcase name="modificarDiasDeAperturaDelNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.006"/>
   <testcase name="obtenerNegocios()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.009"/>
-  <system-out><![CDATA[2024-02-16T15:04:36.004-03:00  INFO 10928 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.controller.NegocioControllerTest]: NegocioControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-16T15:04:36.126-03:00  INFO 10928 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.controller.NegocioControllerTest
+  <system-out><![CDATA[2024-02-16T15:18:42.363-03:00  INFO 5804 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.controller.NegocioControllerTest]: NegocioControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-16T15:18:42.471-03:00  INFO 5804 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.controller.NegocioControllerTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -21,16 +21,16 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2024-02-16T15:04:36.173-03:00  INFO 10928 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Starting NegocioControllerTest using Java 21.0.1 with PID 10928 (started by Lautaro in D:\dcnt back\TakeAwayNow-DCNT)
-2024-02-16T15:04:36.174-03:00  INFO 10928 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : No active profile set, falling back to 1 default profile: "default"
-2024-02-16T15:04:37.244-03:00  INFO 10928 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2024-02-16T15:04:37.245-03:00  INFO 10928 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2024-02-16T15:04:37.249-03:00  INFO 10928 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
-2024-02-16T15:04:37.267-03:00  INFO 10928 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Started NegocioControllerTest in 1.136 seconds (process running for 11.419)
-2024-02-16T15:04:37.528-03:00  WARN 10928 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
-2024-02-16T15:04:37.533-03:00  WARN 10928 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
-2024-02-16T15:04:37.535-03:00  WARN 10928 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
-2024-02-16T15:04:37.597-03:00  WARN 10928 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'nombre' for method parameter type String is not present]
+2024-02-16T15:18:42.513-03:00  INFO 5804 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Starting NegocioControllerTest using Java 21.0.1 with PID 5804 (started by Lautaro in D:\dcnt back\TakeAwayNow-DCNT)
+2024-02-16T15:18:42.514-03:00  INFO 5804 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : No active profile set, falling back to 1 default profile: "default"
+2024-02-16T15:18:43.483-03:00  INFO 5804 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-02-16T15:18:43.487-03:00  INFO 5804 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-02-16T15:18:43.493-03:00  INFO 5804 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+2024-02-16T15:18:43.508-03:00  INFO 5804 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Started NegocioControllerTest in 1.029 seconds (process running for 9.642)
+2024-02-16T15:18:43.800-03:00  WARN 5804 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
+2024-02-16T15:18:43.802-03:00  WARN 5804 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
+2024-02-16T15:18:43.806-03:00  WARN 5804 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
+2024-02-16T15:18:43.863-03:00  WARN 5804 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'nombre' for method parameter type String is not present]
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

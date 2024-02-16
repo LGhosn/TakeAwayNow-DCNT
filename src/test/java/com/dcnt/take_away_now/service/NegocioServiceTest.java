@@ -208,7 +208,7 @@ class NegocioServiceTest {
         negocioService.crearProducto(negocio.get().getId(), "Pancho",inventarioRegistroDto);
         Optional<Producto> producto = productoRepository.findByNombre("Pancho");
         //when
-        response = negocioService.modificarInventarioRegistro(negocio.get().getId(), producto.get().getId(), 20L, BigDecimal.valueOf(150), 25.0);
+        response = negocioService.modificarInventarioRegistro(negocio.get().getId(), producto.get().getId(), 20L, BigDecimal.valueOf(150), 25.0, 50.0);
         //then
         Optional<InventarioRegistro> optInventarioRegistro = inventarioRegistroRepository.findByNegocioAndProducto(negocio.get(), producto.get());
         assertThat(optInventarioRegistro.get().getStock()).isEqualTo(20L);
@@ -221,7 +221,7 @@ class NegocioServiceTest {
     @Test
     void noSePuedeModificarInventarioRegistroDeUnNegocioQueNoExiste() {
         // when: "Se intenta modificar un inventarioRegistro de un negocio que no existe"
-        response = negocioService.modificarInventarioRegistro(1L,1L,20L,BigDecimal.valueOf(150), 25.0);
+        response = negocioService.modificarInventarioRegistro(1L,1L,20L,BigDecimal.valueOf(150), 25.0,50.0);
 
         // then: "se lanza error"
         assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
@@ -234,7 +234,7 @@ class NegocioServiceTest {
         InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         Optional<Negocio> negocio = negocioRepository.findByNombre(nombrePaseoColon);
         // when: "Se intenta modificar un inventarioRegistro de un producto que no existe"
-        response = negocioService.modificarInventarioRegistro(negocio.get().getId(),1L,20L,BigDecimal.valueOf(150), 25.0);
+        response = negocioService.modificarInventarioRegistro(negocio.get().getId(),1L,20L,BigDecimal.valueOf(150), 25.0,50.0);
 
         // then: "se lanza error"
         assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
@@ -253,7 +253,7 @@ class NegocioServiceTest {
         Optional<Negocio> lasHeras = negocioRepository.findByNombre("Buffet Las Heras");
 
         // when: "Se intenta modificar un inventarioRegistro de un producto que no tiene relacion con el negocio"
-        response = negocioService.modificarInventarioRegistro(lasHeras.get().getId(),producto.get().getId(), 20L,BigDecimal.valueOf(150), 25.0);
+        response = negocioService.modificarInventarioRegistro(lasHeras.get().getId(),producto.get().getId(), 20L,BigDecimal.valueOf(150), 25.0,50.0);
 
         //then
         assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);

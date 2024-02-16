@@ -88,9 +88,10 @@ public class NegocioController {
             @PathVariable Long productoId,
             @RequestParam Long stock,
             @RequestParam BigDecimal precio,
-            @RequestParam Double recompensaPuntosDeConfianza
+            @RequestParam Double recompensaPuntosDeConfianza,
+            @RequestParam Double precioPdc
     ) {
-        return negocioService.modificarInventarioRegistro(negocioId, productoId, stock, precio, recompensaPuntosDeConfianza);
+        return negocioService.modificarInventarioRegistro(negocioId, productoId, stock, precio, recompensaPuntosDeConfianza, precioPdc);
     }
 
     @PatchMapping("/{negocioId}/horariosDeTrabajo")
