@@ -254,7 +254,7 @@ public class NegocioService {
         }
 
         Negocio negocio = n.get();
-        response.put("mensaje", "A laburar" + nombre +"!");
+        response.put("mensaje", "A laburar " + nombre +"!");
         response.put("id", negocio.getId());
         return ResponseEntity.ok().body(response);
     }
