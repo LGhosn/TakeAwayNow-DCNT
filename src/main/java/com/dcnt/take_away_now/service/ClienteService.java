@@ -14,9 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @AllArgsConstructor
 @Service
@@ -73,11 +71,16 @@ public class ClienteService {
         return clienteRepository.findById(idCliente).orElseThrow( () -> new RuntimeException("No existe el cliente en la base de datos.") );
     }
 
-    public ResponseEntity<String> corroborarExistencia(String usuario) {
+    public ResponseEntity<Map<String, Object>> corroborarExistencia(String usuario) {
         Optional<Cliente> c = clienteRepository.findByUsuario(usuario);
+        Map<String, Object> response = new HashMap<>();
         if (c.isEmpty()) {
-            return ResponseEntity.badRequest().body("No existe un cliente con ese usuario en la base de datos.");
+            response.put("mensaje", "No existe un cliente con ese usuario en la base de datos.");
+            return ResponseEntity.badRequest().body(response);
         }
-        return ResponseEntity.ok().body("Hola de nuevo " + usuario + " !" );
+        Cliente cliente = c.get();
+        response.put("mensaje", "Hola de nuevo " + usuario + " !");
+        response.put("id", cliente.getId()); // Suponiendo que Cliente tiene un campo "id"
+        return ResponseEntity.ok().body(response);
     }
 }

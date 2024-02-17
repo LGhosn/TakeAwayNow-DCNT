@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Map;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -44,7 +45,7 @@ public class ClienteController {
     }
 
     @GetMapping("/corroborarExistencia/{usuario}")
-    public ResponseEntity<String> obtenerUsuario(@PathVariable String usuario) {
+    public ResponseEntity<Map<String, Object>> obtenerUsuario(@PathVariable String usuario) {
         return clienteService.corroborarExistencia(usuario);
     }
 

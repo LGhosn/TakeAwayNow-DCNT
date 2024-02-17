@@ -245,12 +245,18 @@ public class NegocioService {
         return negociosCerrados;
     }
 
-    public ResponseEntity<String> corroborarExistencia(String nombre) {
+    public ResponseEntity<Map<String, Object>> corroborarExistencia(String nombre) {
         Optional<Negocio> n = negocioRepository.findByNombre(nombre);
+        Map<String, Object> response = new HashMap<>();
         if (n.isEmpty()) {
-            return ResponseEntity.badRequest().body("No existe un negocio con ese nombre en la base de datos.");
+            response.put("mensaje", "No existe un negocio con ese nombre en la base de datos.");
+            return ResponseEntity.badRequest().body(response);
         }
-        return ResponseEntity.ok().body("A laburar " + nombre + " !" );
+
+        Negocio negocio = n.get();
+        response.put("mensaje", "A laburar" + nombre +"!");
+        response.put("id", negocio.getId());
+        return ResponseEntity.ok().body(response);
     }
 
     public Negocio obtenerInfoNegocio(Long idNegocio) {

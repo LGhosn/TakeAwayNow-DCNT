@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.util.Collection;
+import java.util.Map;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -55,7 +56,7 @@ public class NegocioController {
     }
 
     @GetMapping("/corroborarExistencia/{nombre}")
-    public ResponseEntity<String> obtenerNegocio(@PathVariable String nombre) {
+    public ResponseEntity<Map<String, Object>> obtenerNegocio(@PathVariable String nombre) {
         return negocioService.corroborarExistencia(nombre);
     }
 
