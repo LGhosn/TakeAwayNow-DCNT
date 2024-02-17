@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.594s</div>
+<div class="counter">0.212s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,47 +79,47 @@
 </thead>
 <tr>
 <td class="success">eliminarProducto()</td>
-<td class="success">0.010s</td>
+<td class="success">0.005s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">modificarDiasDeAperturaDelNegocio()</td>
-<td class="success">0.007s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">modificarHorariosDelNegocio()</td>
-<td class="success">0.095s</td>
+<td class="success">0.032s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">modificarProducto()</td>
-<td class="success">0.009s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">noSePuedeCrearNegocioSiFaltanDatos()</td>
-<td class="success">0.014s</td>
+<td class="success">0.006s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">obtenerNegocios()</td>
-<td class="success">0.018s</td>
+<td class="success">0.008s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">obtenerProductos()</td>
-<td class="success">0.099s</td>
+<td class="success">0.043s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">sePuedeCrearNegocio()</td>
-<td class="success">0.009s</td>
+<td class="success">0.006s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">sePuedeCrearProductoNuevo()</td>
-<td class="success">0.333s</td>
+<td class="success">0.106s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -127,8 +127,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2024-02-16T20:37:18.861-03:00  INFO 2356 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.controller.NegocioControllerTest]: NegocioControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-16T20:37:18.955-03:00  INFO 2356 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.controller.NegocioControllerTest
+<pre>2024-02-16T20:42:31.278-06:00  INFO 30944 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.controller.NegocioControllerTest]: NegocioControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-16T20:42:31.300-06:00  INFO 30944 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.controller.NegocioControllerTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -138,16 +138,16 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2024-02-16T20:37:19.025-03:00  INFO 2356 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Starting NegocioControllerTest using Java 21.0.1 with PID 2356 (started by Lautaro in D:\dcnt back\TakeAwayNow-DCNT)
-2024-02-16T20:37:19.025-03:00  INFO 2356 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2024-02-16T20:37:20.443-03:00  INFO 2356 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2024-02-16T20:37:20.443-03:00  INFO 2356 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2024-02-16T20:37:20.449-03:00  INFO 2356 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
-2024-02-16T20:37:20.473-03:00  INFO 2356 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Started NegocioControllerTest in 1.511 seconds (process running for 15.267)
-2024-02-16T20:37:20.978-03:00  WARN 2356 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
-2024-02-16T20:37:20.981-03:00  WARN 2356 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
-2024-02-16T20:37:20.985-03:00  WARN 2356 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
-2024-02-16T20:37:21.085-03:00  WARN 2356 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'nombre' for method parameter type String is not present]
+2024-02-16T20:42:31.324-06:00  INFO 30944 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Starting NegocioControllerTest using Java 21.0.2 with PID 30944 (started by santiago in C:\Users\santiago\Documents\GitHub\TakeAwayNow-DCNT)
+2024-02-16T20:42:31.324-06:00  INFO 30944 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2024-02-16T20:42:31.927-06:00  INFO 30944 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-02-16T20:42:31.928-06:00  INFO 30944 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-02-16T20:42:31.930-06:00  INFO 30944 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2024-02-16T20:42:31.946-06:00  INFO 30944 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Started NegocioControllerTest in 0.641 seconds (process running for 6.812)
+2024-02-16T20:42:32.119-06:00  WARN 30944 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
+2024-02-16T20:42:32.122-06:00  WARN 30944 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
+2024-02-16T20:42:32.124-06:00  WARN 30944 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
+2024-02-16T20:42:32.169-06:00  WARN 30944 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'nombre' for method parameter type String is not present]
 </pre>
 </span>
 </div>
@@ -159,7 +159,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.5</a> at 16 feb 2024 20:37:26</p>
+<a href="http://www.gradle.org">Gradle 8.5</a> at 16 feb 2024 20:42:34</p>
 </div>
 </div>
 </body>

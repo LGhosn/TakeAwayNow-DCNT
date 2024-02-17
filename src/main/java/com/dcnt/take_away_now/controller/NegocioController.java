@@ -53,6 +53,11 @@ public class NegocioController {
         return negocioService.obtenerPedidos(idNegocio);
     }
 
+    @GetMapping("/corroborarExistencia/{nombre}")
+    public ResponseEntity<String> obtenerNegocio(@PathVariable String nombre) {
+        return negocioService.corroborarExistencia(nombre);
+    }
+
     /******************
      *   Métodos Post *
      ******************/

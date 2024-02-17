@@ -406,7 +406,7 @@ class PedidoServiceTest {
     }
 
     @Test
-    void cuandoSeCancelaUnPedidoEnAguardandoPreparacionSeDevulveElSaldo() {
+    void cuandoSeCancelaUnPedidoEnAguardandoPreparacionSeDevulveElSaldoYSeDisminuyenLosPdcEnUnCincoPorcientoDelTotalDeLaRecompenzaDelPedido() {
         //given
         Cliente cliente = new Cliente("Messi");
         clienteRepository.save(cliente);
@@ -446,7 +446,7 @@ class PedidoServiceTest {
     }
 
     @Test
-    void cuandoSeCancelaUnPedidoEnPreparacionNoSeDevulveElSaldo() {
+    void cuandoSeCancelaUnPedidoEnPreparacionNoSeDevulveElSaldoYDisminuyenLosPdcEnUnVeintePorcientoDelTotalDeLaRecompenzaDelPedido() {
         //given
         Cliente cliente = new Cliente("Messi");
         clienteRepository.save(cliente);

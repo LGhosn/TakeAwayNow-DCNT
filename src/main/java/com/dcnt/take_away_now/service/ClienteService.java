@@ -49,6 +49,10 @@ public class ClienteService {
             return ResponseEntity.internalServerError().body("No existe el cliente en la base de datos.");
         }
 
+        if (saldoACargar.compareTo(BigDecimal.ZERO) <= 0) {
+            return ResponseEntity.internalServerError().body("No se puede cargar saldo con un monto menor o igual a cero.");
+        }
+
         Cliente cliente = optionalCliente.get();
         cliente.setSaldo(cliente.getSaldo().plus(new Dinero(saldoACargar)));
         this.clienteRepository.save(cliente);
@@ -67,5 +71,13 @@ public class ClienteService {
 
     public Cliente obtenerInfoCliente(Long idCliente) {
         return clienteRepository.findById(idCliente).orElseThrow( () -> new RuntimeException("No existe el cliente en la base de datos.") );
+    }
+
+    public ResponseEntity<String> corroborarExistencia(String usuario) {
+        Optional<Cliente> c = clienteRepository.findByUsuario(usuario);
+        if (c.isEmpty()) {
+            return ResponseEntity.badRequest().body("No existe un cliente con ese usuario en la base de datos.");
+        }
+        return ResponseEntity.ok().body("Hola de nuevo " + usuario + " !" );
     }
 }

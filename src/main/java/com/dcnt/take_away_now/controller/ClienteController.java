@@ -43,6 +43,11 @@ public class ClienteController {
         return clienteService.obtenerUsuario(idCliente);
     }
 
+    @GetMapping("/corroborarExistencia/{usuario}")
+    public ResponseEntity<String> obtenerUsuario(@PathVariable String usuario) {
+        return clienteService.corroborarExistencia(usuario);
+    }
+
     /******************
      *   Métodos Post *
      ******************/

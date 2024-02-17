@@ -1,9 +1,6 @@
 package com.dcnt.take_away_now.service;
 
-import com.dcnt.take_away_now.domain.InventarioRegistro;
-import com.dcnt.take_away_now.domain.Negocio;
-import com.dcnt.take_away_now.domain.Pedido;
-import com.dcnt.take_away_now.domain.Producto;
+import com.dcnt.take_away_now.domain.*;
 import com.dcnt.take_away_now.dto.InventarioRegistroDto;
 import com.dcnt.take_away_now.dto.PedidoDto;
 import com.dcnt.take_away_now.dto.ProductoDto;
@@ -246,5 +243,13 @@ public class NegocioService {
         }
 
         return negociosCerrados;
+    }
+
+    public ResponseEntity<String> corroborarExistencia(String nombre) {
+        Optional<Negocio> n = negocioRepository.findByNombre(nombre);
+        if (n.isEmpty()) {
+            return ResponseEntity.badRequest().body("No existe un negocio con ese nombre en la base de datos.");
+        }
+        return ResponseEntity.ok().body("A laburar " + nombre + " !" );
     }
 }
