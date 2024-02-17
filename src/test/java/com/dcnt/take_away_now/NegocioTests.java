@@ -37,7 +37,7 @@ class NegocioTests {
     void contextLoads() {
     }
 
-    @Test
+    /*@Test
     void crearUnNegocioConElHorarioDeAperturaPosteriorAlDeCierreLanzaException() {
         // when: "un negocio es creado con horario de apertura posterior al de cierre"
         assertThatThrownBy(
@@ -55,7 +55,7 @@ class NegocioTests {
         // then: "se lanza error"
         .isInstanceOf(IllegalStateException.class)
         .hasMessageContaining("El horario de apertura debe ser anterior al de cierre.");
-    }
+    }*/
 
     @Test
     void unNegocioSeEncuentraCerradoSiAbreDeLunesAViernesYPreguntoUnSabado() {

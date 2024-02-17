@@ -252,4 +252,8 @@ public class NegocioService {
         }
         return ResponseEntity.ok().body("A laburar " + nombre + " !" );
     }
+
+    public Negocio obtenerInfoNegocio(Long idNegocio) {
+        return negocioRepository.findById(idNegocio).orElseThrow( () -> new RuntimeException("No existe el cliente en la base de datos.") );
+    }
 }

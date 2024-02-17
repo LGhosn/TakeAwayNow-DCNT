@@ -3,17 +3,12 @@ package com.dcnt.take_away_now.controller;
 import com.dcnt.take_away_now.domain.*;
 import com.dcnt.take_away_now.dto.InfoPedidoDto;
 import com.dcnt.take_away_now.dto.ProductoPedidoDto;
-import com.dcnt.take_away_now.repository.*;
-import com.dcnt.take_away_now.service.ClienteService;
 import com.dcnt.take_away_now.service.PedidoService;
-import com.dcnt.take_away_now.value_object.Dinero;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @AllArgsConstructor
@@ -64,7 +59,17 @@ public class PedidoController {
 
     @PatchMapping("/{pedidoId}/devolverPedido")
     public ResponseEntity<String> devolverPedido(@PathVariable Long pedidoId) {
-        return pedidoService.devolverPedido(pedidoId);
+        return pedidoService.solicitarDevolucion(pedidoId);
+    }
+
+    @PatchMapping("/{pedidoId}/aceptarDevolucion")
+    public ResponseEntity<String> aceptarDevolucion(@PathVariable Long pedidoId) {
+        return pedidoService.aceptarDevolucion(pedidoId);
+    }
+
+    @PatchMapping("/{pedidoId}/denegarDevolucion")
+    public ResponseEntity<String> denegarDevolucion(@PathVariable Long pedidoId) {
+        return pedidoService.denegarDevolucion(pedidoId);
     }
 
     @PatchMapping("/{pedidoId}/cancelarPedido")

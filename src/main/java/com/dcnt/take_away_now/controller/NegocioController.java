@@ -1,5 +1,6 @@
 package com.dcnt.take_away_now.controller;
 
+import com.dcnt.take_away_now.domain.Cliente;
 import com.dcnt.take_away_now.domain.Negocio;
 import com.dcnt.take_away_now.dto.InventarioRegistroDto;
 import com.dcnt.take_away_now.dto.PedidoDto;
@@ -56,6 +57,11 @@ public class NegocioController {
     @GetMapping("/corroborarExistencia/{nombre}")
     public ResponseEntity<String> obtenerNegocio(@PathVariable String nombre) {
         return negocioService.corroborarExistencia(nombre);
+    }
+
+    @GetMapping("/{idNegocio}")
+    public Negocio obtenerInfoNegocio(@PathVariable Long idNegocio) {
+        return negocioService.obtenerInfoNegocio(idNegocio);
     }
 
     /******************

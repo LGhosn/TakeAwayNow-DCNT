@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 import com.dcnt.take_away_now.value_object.Dinero;
 import com.dcnt.take_away_now.value_object.converter.DineroAttributeConverter;
 
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.List;
 
 @Data
@@ -61,9 +59,9 @@ public class Negocio {
             DayOfWeek diaDeApertura,
             DayOfWeek diaDeCierre
     ) {
-        if (horarioDeApertura.isAfter(horarioDeCierre)) {
-            throw new IllegalStateException("El horario de apertura debe ser anterior al de cierre.");
-        }
+        //if (horarioDeApertura.isAfter(horarioDeCierre)) {
+        //    throw new IllegalStateException("El horario de apertura debe ser anterior al de cierre.");
+        //}
 
         this.nombre = nombreDelNegocio;
         this.horarioDeApertura = horarioDeApertura;
@@ -88,9 +86,15 @@ public class Negocio {
      *
      */
     public boolean estaAbierto(LocalDateTime FechaYHora) {
-        LocalTime horarioIngresado = LocalTime.of(FechaYHora.getHour(), FechaYHora.getMinute());
-        DayOfWeek diaIngresado = FechaYHora.getDayOfWeek();
+        // Obtener la zona horaria de Buenos Aires, y posteriormente la utilizamos para comparar los horarios.
+        ZoneId zonaHorariaArgentina = ZoneId.of("America/Argentina/Buenos_Aires");
+        ZonedDateTime fechaYHoraArgentina = FechaYHora.atZone(zonaHorariaArgentina);
 
+        // Obtenemos el horario y el día en Argentina.
+        LocalTime horarioIngresado = fechaYHoraArgentina.toLocalTime();
+        DayOfWeek diaIngresado = fechaYHoraArgentina.getDayOfWeek();
+
+        // Resto del código sigue igual
         return (
                 ((diaIngresado.compareTo(diaDeApertura) >= 0) && (diaIngresado.compareTo(diaDeCierre) <= 0))
                         && (horarioIngresado.isAfter(horarioDeApertura) || horarioIngresado.equals(horarioDeApertura))

@@ -281,8 +281,12 @@ public class PedidoService {
                 c.setPuntosDeConfianza(
                         c.getPuntosDeConfianza().minus(pdcPedido.multiply(0.20)));
         } else if(pedido.getEstado() == EstadoDelPedido.LISTO_PARA_RETIRAR) {
-            //En caso de que el estado sea LISTO_PARA_RETIRAR, entonces el cliente pierde puntos de confianza (significativamente, pierde un 100% del total que posee), no recupera su dinero.
-            c.setPuntosDeConfianza(new PuntosDeConfianza((double) 0));
+            //En caso de que el estado sea LISTO_PARA_RETIRAR, entonces el cliente pierde puntos de confianza (significativamente, pierde un 100% del total que posee o en caso de tener pdc negativos, adeudará 500 pdc adicionales) y no recupera su dinero.
+            if (c.getPuntosDeConfianza().getCantidad() <= 0) {
+                c.setPuntosDeConfianza(c.getPuntosDeConfianza().minus(500));
+            } else {
+                c.setPuntosDeConfianza(new PuntosDeConfianza((double) 0));
+            }
         }
 
         clienteRepository.save(c);
@@ -296,23 +300,40 @@ public class PedidoService {
         return ResponseEntity.status(ACCEPTED).body("Se ha cancelado el pedido.");
     }
 
-    public ResponseEntity<String> devolverPedido(Long idPedido) {
+    public ResponseEntity<String> solicitarDevolucion(Long idPedido) {
         Optional<Pedido> optionalPedido = pedidoRepository.findById(idPedido);
         if (optionalPedido.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("No existe el pedido que usted busca devolver.");
+            return ResponseEntity.status(NOT_FOUND).body("No existe el pedido que usted busca solicitar su devolución.");
         }
 
         Pedido pedido = optionalPedido.get();
         if (pedido.estado != EstadoDelPedido.RETIRADO) {
-            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede devolver dicho pedido ya que el mismo no se encontraba retirado.");
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede solicitar la devolución de dicho pedido ya que el mismo no se encontraba retirado.");
         }
 
-        // Verificamos si pasaron menos de 5 minutos desde su entrega.
+        // Verificamos si pasaron menos de 5 minutos desde su retiro.
         if (Duration.between(pedido.getFechaYHoraDeEntrega(), LocalDateTime.now()).toMinutes() > 5) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("El tiempo de tolerancia para devolver un pedido es de cinco minutos y el mismo ya ha expirado.");
         }
 
-        // El cliente obtiene su dinero nuevamente.
+        // Actualizamos el estado del pedido.
+        pedido.setEstado(EstadoDelPedido.DEVOLUCION_SOLICITADA);
+        pedidoRepository.save(pedido);
+        return ResponseEntity.status(ACCEPTED).body("Se ha solicitado la devolución del pedido correctamente.");
+    }
+
+    public ResponseEntity<String> aceptarDevolucion(Long idPedido) {
+        Optional<Pedido> optionalPedido = pedidoRepository.findById(idPedido);
+        if (optionalPedido.isEmpty()) {
+            return ResponseEntity.status(NOT_FOUND).body("No existe el pedido al cual usted busca aceptar su devolución.");
+        }
+
+        Pedido pedido = optionalPedido.get();
+        if (pedido.estado != EstadoDelPedido.DEVOLUCION_SOLICITADA) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede aceptar la devolución de dicho pedido ya que el mismo no se encuentra solicitando devolución.");
+        }
+
+        // El cliente obtiene su dinero nuevamente y sus pdc no se ven afectados.
         Cliente c = clienteRepository.findById(pedido.getCliente().getId()).orElseThrow( () -> new RuntimeException("Ocurrió un error al reintegrar el total del pedido al cliente."));
         c.setSaldo(c.getSaldo().plus(pedido.getPrecioTotal()));
 
@@ -320,9 +341,28 @@ public class PedidoService {
         devolverStockDeUnPedido(pedido);
 
         // Actualizamos el estado del pedido.
-        pedido.setEstado(EstadoDelPedido.DEVUELTO);
+        pedido.setEstado(EstadoDelPedido.DEVOLUCION_ACEPTADA);
         pedidoRepository.save(pedido);
-        return ResponseEntity.status(ACCEPTED).body("Se ha confirmado la devolución del pedido.");
+        return ResponseEntity.status(ACCEPTED).body("Se ha aceptado la devolución del pedido correctamente.");
+    }
+
+    public ResponseEntity<String> denegarDevolucion(Long idPedido) {
+        Optional<Pedido> optionalPedido = pedidoRepository.findById(idPedido);
+        if (optionalPedido.isEmpty()) {
+            return ResponseEntity.status(NOT_FOUND).body("No existe el pedido al cual usted busca denegar su devolución.");
+        }
+
+        Pedido pedido = optionalPedido.get();
+        if (pedido.estado != EstadoDelPedido.DEVOLUCION_SOLICITADA) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede denegar la devolución de dicho pedido ya que el mismo no se encuentra solicitando devolución.");
+        }
+
+        // El cliente no obtiene su dinero nuevamente ni sus pdc no se ven afectados y dado que no se devuelve el pedido, el stock queda tal cual.
+
+        // Actualizamos el estado del pedido.
+        pedido.setEstado(EstadoDelPedido.DEVOLUCION_DENEGADA);
+        pedidoRepository.save(pedido);
+        return ResponseEntity.status(ACCEPTED).body("Se ha denegado la devolución del pedido correctamente.");
     }
 
     private void devolverStockDeUnPedido(Pedido pedido) {

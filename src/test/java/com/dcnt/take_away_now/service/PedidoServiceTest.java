@@ -8,9 +8,7 @@ import com.dcnt.take_away_now.dto.ProductoDto;
 import com.dcnt.take_away_now.repository.*;
 import com.dcnt.take_away_now.value_object.Dinero;
 import com.dcnt.take_away_now.value_object.PuntosDeConfianza;
-import org.apache.hc.core5.http.HttpStatus;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -21,13 +19,12 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Collection;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
+
 @DataJpaTest
 class PedidoServiceTest {
     @Autowired
@@ -522,11 +519,11 @@ class PedidoServiceTest {
         assertThat(saldoPostConfirmarPedido).isEqualTo(new Dinero(100));
         assertThat(puntosPostConfirmarPedido).isEqualTo(new PuntosDeConfianza(0));
         assertThat(saldoPostCancelacion).isEqualTo(new Dinero(100));
-        assertThat(puntosPostCancelacion).isEqualTo(new PuntosDeConfianza(0));
+        assertThat(puntosPostCancelacion).isEqualTo(new PuntosDeConfianza(-500));
     }
 
     @Test
-    void sePuedeMarcarPedidoDevueltoAUnPedidoQueEstaRetirado() {
+    void sePuedeSolicitarDevolucionDeUnPedidoQueFueRetiradoHaceMenosDeCincoMinutos() {
         //given
         Cliente cliente = new Cliente("Messi");
         clienteRepository.save(cliente);
@@ -537,25 +534,25 @@ class PedidoServiceTest {
         pedidoService.confirmarRetiroDelPedido(pedido1.getId());
 
         //when
-        response = pedidoService.devolverPedido(pedido1.getId());
+        response = pedidoService.solicitarDevolucion(pedido1.getId());
 
         //then
         assertThat(response.getStatusCode()).isEqualTo(ACCEPTED);
-        assertThat(response.getBody()).isEqualTo("Se ha confirmado la devolución del pedido.");
+        assertThat(response.getBody()).isEqualTo("Se ha solicitado la devolución del pedido correctamente.");
     }
 
     @Test
-    void noSePuedeMarcarPedidoDevueltoAUnPedidoQueNoExiste() {
+    void noSePuedeSolicitarDevolucionDeUnPedidoQueNoExiste() {
         //when
-        response = pedidoService.devolverPedido(1L);
+        response = pedidoService.solicitarDevolucion(1L);
 
         // then: "se lanza error"
         assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
-        assertThat(response.getBody()).isEqualTo("No existe el pedido que usted busca devolver.");
+        assertThat(response.getBody()).isEqualTo("No existe el pedido que usted busca solicitar su devolución.");
     }
 
     @Test
-    void noSePuedeMarcarPedidoDevueltoAUnPedidoQueNoEstaRetirado() {
+    void noSePuedeSolicitarDevolucionDeUnPedidoQueNoEstaRetirado() {
         //given
         Cliente cliente = new Cliente("Messi");
         clienteRepository.save(cliente);
@@ -563,15 +560,15 @@ class PedidoServiceTest {
         pedidoRepository.save(pedido1);
 
         //when
-        response = pedidoService.devolverPedido(pedido1.getId());
+        response = pedidoService.solicitarDevolucion(pedido1.getId());
 
         // then: "se lanza error"
         assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
-        assertThat(response.getBody()).isEqualTo("No se puede devolver dicho pedido ya que el mismo no se encontraba retirado.");
+        assertThat(response.getBody()).isEqualTo("No se puede solicitar la devolución de dicho pedido ya que el mismo no se encontraba retirado.");
     }
 
     @Test
-    void cuandoSeDevuelveUnPedidoSeLeDevuelveElSaldoAlClienteYElStockDeLosProductos() {
+    void cuandoSeAceptaLaDevolucionDeUnPedidoSeLeDevuelveElSaldoAlClienteYElStockDeLosProductos() {
         //given
         Cliente cliente = new Cliente("Messi");
         clienteRepository.save(cliente);
@@ -598,11 +595,12 @@ class PedidoServiceTest {
             pedidoService.marcarComienzoDePreparacion(entry.getIdPedido());
             pedidoService.marcarPedidoListoParaRetirar(entry.getIdPedido());
             pedidoService.confirmarRetiroDelPedido(entry.getIdPedido());
-            pedidoService.devolverPedido(entry.getIdPedido());
+            pedidoService.solicitarDevolucion(entry.getIdPedido());
+            pedidoService.aceptarDevolucion(entry.getIdPedido());
         }
 
         //then
-        Dinero saldoPostDevolucion = cliente.getSaldo();
+        Dinero saldoPostDevolucionAceptada = cliente.getSaldo();
 
         Collection<ProductoDto> productosNegocio = negocioService.obtenerProductos(negocio.getId());
         for (ProductoDto entry: productosNegocio) {
@@ -610,7 +608,51 @@ class PedidoServiceTest {
         }
 
         assertThat(saldoPostConfirmarPedido).isEqualTo(new Dinero(100));
-        assertThat(saldoPostDevolucion).isEqualTo(new Dinero(1000));
+        assertThat(saldoPostDevolucionAceptada).isEqualTo(new Dinero(1000));
+    }
+
+    @Test
+    void cuandoSeDeniegaLaDevolucionDeUnPedidoNoSeLeDevuelveElSaldoAlClienteNiElStockDeLosProductos() {
+        //given
+        Cliente cliente = new Cliente("Messi");
+        clienteRepository.save(cliente);
+        clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
+
+        Long stockInicial = 10L;
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(stockInicial, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
+        negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
+        Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
+
+        Map<Long, Map<String, Object>> productos =
+                Map.of(
+                        alfajor.get().getId(), Map.of("cantidad", 9, "usaPdc", 0)
+                );
+        InfoPedidoDto infoPedidoDto = new InfoPedidoDto(cliente.getId(), negocio.getId(), productos);
+        pedidoService.confirmarPedido(infoPedidoDto);
+
+        Dinero saldoPostConfirmarPedido = cliente.getSaldo();
+
+        Collection<PedidoDto> pedidos = clienteService.obtenerPedidos(cliente.getId());
+
+        //when
+        for (PedidoDto entry: pedidos) {
+            pedidoService.marcarComienzoDePreparacion(entry.getIdPedido());
+            pedidoService.marcarPedidoListoParaRetirar(entry.getIdPedido());
+            pedidoService.confirmarRetiroDelPedido(entry.getIdPedido());
+            pedidoService.solicitarDevolucion(entry.getIdPedido());
+            pedidoService.denegarDevolucion(entry.getIdPedido());
+        }
+
+        //then
+        Dinero saldoPostDevolucionDenegada = cliente.getSaldo();
+
+        Collection<ProductoDto> productosNegocio = negocioService.obtenerProductos(negocio.getId());
+        for (ProductoDto entry: productosNegocio) {
+            assertThat(entry.getStock()).isEqualTo(10L - 9);
+        }
+
+        assertThat(saldoPostConfirmarPedido).isEqualTo(new Dinero(100));
+        assertThat(saldoPostDevolucionDenegada).isEqualTo(new Dinero(100));
     }
 
     @Test
