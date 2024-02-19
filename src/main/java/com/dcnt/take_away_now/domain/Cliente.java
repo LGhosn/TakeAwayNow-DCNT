@@ -1,5 +1,6 @@
 package com.dcnt.take_away_now.domain;
 
+import com.dcnt.take_away_now.repository.BeneficioRepository;
 import com.dcnt.take_away_now.value_object.Dinero;
 import com.dcnt.take_away_now.value_object.PuntosDeConfianza;
 import com.dcnt.take_away_now.value_object.converter.DineroAttributeConverter;
@@ -14,6 +15,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Data
 @NoArgsConstructor
@@ -36,12 +39,35 @@ public class Cliente {
     @Convert(converter = PuntosDeConfianzaAttributeConverter.class)
     private PuntosDeConfianza puntosDeConfianza= new PuntosDeConfianza((double) 0);
 
+    @Column(name="ID_PLAN")
+    private long IdPlan = -1;
+
+    @Column(name="FECHA_SUBSCRIPCION")
+    private LocalDateTime fechaSubscripcion;
+
+    @Column(name="FECHA_DE_CUMPLEANIOS")
+    private LocalDateTime fechaDeCumpleanios;
+
+    @Column(name="FECHA_CANJE_POR_CUMPLEANIOS")
+    private LocalDateTime fechaCanjePorCumpleanios;
+
     @JsonBackReference
     @OneToMany(targetEntity = Pedido.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Pedido> pedidos;
 
-    public Cliente(String nombreDeUsuario) {
+
+    public Cliente(String nombreDeUsuario, LocalDateTime fechaDeCumpleanios) {
         this.usuario = nombreDeUsuario;
+        this.fechaDeCumpleanios = fechaDeCumpleanios;
     }
 
+    public boolean beneficioDeCumpleanios() {
+        boolean esCumpleanios =  this.fechaDeCumpleanios.equals(LocalDateTime.now());
+        boolean noFueCanjeado = this.fechaCanjePorCumpleanios == null || this.fechaCanjePorCumpleanios.getYear() != LocalDateTime.now().getYear();
+        return esCumpleanios && noFueCanjeado;
+    }
+
+    public void seCanjeoBeneficioDeCumpleanios() {
+        this.fechaCanjePorCumpleanios = LocalDateTime.now();
+    }
 }

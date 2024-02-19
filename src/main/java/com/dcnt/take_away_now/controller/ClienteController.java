@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -42,13 +43,18 @@ public class ClienteController {
      *   Métodos Post *
      ******************/
     @PostMapping("/")
-    public ResponseEntity<String> crearCliente(@RequestBody String nombreUsuario) {
-        return clienteService.crearCliente(nombreUsuario);
+    public ResponseEntity<String> crearCliente(@RequestBody String nombreUsuario, @RequestBody LocalDateTime fechaDeCumpleanios) {
+        return clienteService.crearCliente(nombreUsuario, fechaDeCumpleanios);
     }
 
     @PostMapping("/{idCliente}/cargaDeSaldo/{saldoACargar}")
     public ResponseEntity<String> cargarSaldo(@RequestParam Long idCliente, @RequestParam BigDecimal saldoACargar) {
         return clienteService.cargarSaldo(idCliente, saldoACargar);
+    }
+
+    @PostMapping("/{idCliente}/subscribir/{idPlan}")
+    public ResponseEntity<String> subscribirPlanPrime(@PathVariable Long idCliente, @PathVariable Long idPlan) {
+        return clienteService.subscribirPlan(idCliente, idPlan);
     }
 
     /*******************

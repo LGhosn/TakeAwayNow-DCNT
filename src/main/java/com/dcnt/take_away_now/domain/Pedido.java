@@ -2,7 +2,9 @@ package com.dcnt.take_away_now.domain;
 
 import com.dcnt.take_away_now.enums.EstadoDelPedido;
 import com.dcnt.take_away_now.value_object.Dinero;
+import com.dcnt.take_away_now.value_object.PuntosDeConfianza;
 import com.dcnt.take_away_now.value_object.converter.DineroAttributeConverter;
+import com.dcnt.take_away_now.value_object.converter.PuntosDeConfianzaAttributeConverter;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -45,6 +47,10 @@ public class Pedido {
     @ManyToOne(targetEntity = Negocio.class)
     @JoinColumn(name = "ID_NEGOCIO")
     private Negocio negocio;
+
+    @Column(name="PUNTOS_DE_CONFIANZA_GANADOS")
+    @Convert(converter = PuntosDeConfianzaAttributeConverter.class)
+    private PuntosDeConfianza puntosDeConfianzaGanados;
 
     public Pedido(Negocio negocio, Cliente cliente) {
         this.negocio = negocio;

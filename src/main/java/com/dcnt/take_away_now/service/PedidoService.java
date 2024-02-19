@@ -27,6 +27,8 @@ public class PedidoService {
     private final ProductoRepository productoRepository;
     private final InventarioRegistroRepository inventarioRegistroRepository;
     private final ProductoPedidoRepository productoPedidoRepository;
+    private final PlanRepository planRepository;
+    private final BeneficioRepository beneficioRepository;
 
     public Collection<Pedido> obtenerPedidos() {
         return pedidoRepository.findAll();
@@ -67,6 +69,25 @@ public class PedidoService {
         PuntosDeConfianza pdcTotalDelPedido = new PuntosDeConfianza((double) 0);
         Negocio negocio = negocioRepository.findById(dto.getIdNegocio()).get();
         Cliente cliente = clienteRepository.findById(dto.getIdCliente()).get();
+
+        // Si el cliente cumple años, se le otorga un beneficio.
+        int cantidadGratis = 0;
+        Optional<Beneficio> optionalBeneficio = beneficioRepository.findByNombre("cumpleanios");
+        // coleccion de precios de los productos
+        List<Dinero> precios = new ArrayList<>();
+
+        if (optionalBeneficio.isPresent() && cliente.beneficioDeCumpleanios()) {
+            Beneficio beneficio = optionalBeneficio.get();
+
+            // Sumamos puntos de confianza al cliente.
+            // TODO: NO SE SI ESTO DE DEBERIA HACER ACA
+            cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().plus(beneficio.getPuntosDeConfianzaAdicionales()));
+
+            // Obtenemos cantidad de productos gratis.
+            cantidadGratis = beneficio.getCantidadDeProductosGratis();
+            cliente.seCanjeoBeneficioDeCumpleanios();
+        }
+
         Pedido pedido = new Pedido(negocio, cliente);
 
         pedidoRepository.save(pedido);
@@ -87,15 +108,40 @@ public class PedidoService {
             productoPedidoRepository.save(productoPedido);
 
             // Aumentamos el precio del pedido en función de la cantidad de productos solicitados y repetimos la operación para los pdc.
-            Dinero precioParcialPorProducto = new Dinero(cantidadPedida).multiply(inventarioRegistro.getPrecio());
+            Dinero precio = inventarioRegistro.getPrecio();
+            Dinero precioParcialPorProducto = new Dinero(cantidadPedida).multiply(precio);
             precioTotalDelPedido = precioTotalDelPedido.plus(precioParcialPorProducto);
+
+            // Agregar precio a la coleccion
+            precios.add(precioParcialPorProducto);
 
             PuntosDeConfianza pdcParcialesPorProducto = inventarioRegistro.getRecompensaPuntosDeConfianza().multiply(Double.valueOf(cantidadPedida));
             pdcTotalDelPedido = pdcTotalDelPedido.plus(pdcParcialesPorProducto);
         }
 
+        // Si el cliente esta subscripto a un plan, se le aplica el descuento correspondiente.
+        Optional<Plan> optionalPlan = planRepository.findById(cliente.getIdPlan());
+        if (optionalPlan.isPresent()) {
+            precioTotalDelPedido = precioTotalDelPedido.multiply(optionalPlan.get().getDescuento()).divide(100);
+        }
+
+        // Ordenar precios de menor a mayor
+        precios.sort(Comparator.naturalOrder());
+
+        // Restar el precio los productos gratis
+        for (int i = 0; i < cantidadGratis; i++) {
+            precioTotalDelPedido = precioTotalDelPedido.minus(precios.get(i));
+        }
+
         // Actualizamos el saldo y los puntos de confianza del cliente.
         cliente.setSaldo(cliente.getSaldo().minus(precioTotalDelPedido));
+
+        // Guardamos puntos de confianza por el pedido.
+        pedido.setPuntosDeConfianzaGanados(pdcTotalDelPedido);
+
+        // Otorgamos los puntos de confianza correspondientes al cliente.
+        int multiplicadorPuntosDeConfianza = optionalPlan.map(Plan::getMultiplicadorDePuntosDeConfianza).orElse(1);
+        pdcTotalDelPedido = pdcTotalDelPedido.multiply(multiplicadorPuntosDeConfianza);
 
         if (cliente.getPuntosDeConfianza() != null) {
             cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().plus(pdcTotalDelPedido));
@@ -198,17 +244,21 @@ public class PedidoService {
 
         Cliente c = clienteRepository.findById(pedido.getCliente().getId()).orElseThrow( () -> new RuntimeException("Ocurrió un error al obtener los datos del cliente."));
 
-        // En caso de que el estado sea AGUARDANDO_PREPARACION, entonces el cliente pierde puntos de confianza (levemente, un 5% del total que posee) pero recupera su dinero.
-        if (pedido.getEstado() == EstadoDelPedido.AGUARDANDO_PREPARACION) {
-            c.setPuntosDeConfianza(c.getPuntosDeConfianza().minus(c.getPuntosDeConfianza().multiply(0.05)));
-            c.setSaldo(c.getSaldo().plus(pedido.getPrecioTotal()));
-        } else if (pedido.getEstado() == EstadoDelPedido.EN_PREPARACION) {
-            //En caso de que el estado sea EN_PREPARACION, entonces el cliente pierde puntos de confianza (notablemente, un 20% del total que posee), no recupera su dinero.
-            c.setPuntosDeConfianza(
-                    c.getPuntosDeConfianza().minus(c.getPuntosDeConfianza().multiply(0.20)));
-        } else if(pedido.getEstado() == EstadoDelPedido.LISTO_PARA_RETIRAR) {
-            //En caso de que el estado sea LISTO_PARA_RETIRAR, entonces el cliente pierde puntos de confianza (significativamente, pierde un 100% del total que posee), no recupera su dinero.
-            c.setPuntosDeConfianza(new PuntosDeConfianza((double) 0));
+        // Si el cliente esta subscripto a un plan sin costo por cancelacion de pedidos, entonces no se le descuenta puntos de confianza.
+        Optional<Plan> optionalPlan = planRepository.findById(c.getIdPlan());
+        if (optionalPlan.isPresent() && !optionalPlan.get().isCancelacionSinCosto()) {
+            // En caso de que el estado sea AGUARDANDO_PREPARACION, entonces el cliente pierde puntos de confianza (levemente, un 5% del total que posee) pero recupera su dinero.
+            if (pedido.getEstado() == EstadoDelPedido.AGUARDANDO_PREPARACION) {
+                c.setPuntosDeConfianza(c.getPuntosDeConfianza().minus(c.getPuntosDeConfianza().multiply(0.05)));
+                c.setSaldo(c.getSaldo().plus(pedido.getPrecioTotal()));
+            } else if (pedido.getEstado() == EstadoDelPedido.EN_PREPARACION) {
+                //En caso de que el estado sea EN_PREPARACION, entonces el cliente pierde puntos de confianza (notablemente, un 20% del total que posee), no recupera su dinero.
+                c.setPuntosDeConfianza(
+                        c.getPuntosDeConfianza().minus(c.getPuntosDeConfianza().multiply(0.20)));
+            } else if(pedido.getEstado() == EstadoDelPedido.LISTO_PARA_RETIRAR) {
+                //En caso de que el estado sea LISTO_PARA_RETIRAR, entonces el cliente pierde puntos de confianza (significativamente, pierde un 100% del total que posee), no recupera su dinero.
+                c.setPuntosDeConfianza(new PuntosDeConfianza((double) 0));
+            }
         }
 
         clienteRepository.save(c);
@@ -245,6 +295,14 @@ public class PedidoService {
         // Se actualiza el stock de cada producto
         devolverStockDeUnPedido(pedido);
 
+        // Si el cliente esta subsicrito a un plan que entrega puntos de confianza al devolver un pedido, entonces se le otorgan.
+        Optional<Plan> optionalPlan = planRepository.findById(c.getIdPlan());
+        if (optionalPlan.isPresent()) {
+            Plan plan = optionalPlan.get();
+            PuntosDeConfianza pdcExtra = pedido.getPuntosDeConfianzaGanados().multiply(plan.getPorcentajeExtraDePuntosDeConfianzaPorDevolucion()/100);
+            c.setPuntosDeConfianza(c.getPuntosDeConfianza().plus(pdcExtra));
+        }
+
         // Actualizamos el estado del pedido.
         pedido.setEstado(EstadoDelPedido.DEVUELTO);
         pedidoRepository.save(pedido);
@@ -252,7 +310,7 @@ public class PedidoService {
     }
 
     private void devolverStockDeUnPedido(Pedido pedido) {
-        Collection< ProductoPedidoDto> productoPedidoDtos = productoPedidoRepository.obtenerProductosDelPedido(pedido.getId());
+        Collection <ProductoPedidoDto> productoPedidoDtos = productoPedidoRepository.obtenerProductosDelPedido(pedido.getId());
 
         //Se actualiza el stock de cada producto
         for (ProductoPedidoDto entry : productoPedidoDtos) {

@@ -72,4 +72,18 @@ public class Dinero implements Comparable<Dinero> {
         return new Dinero(resultado);
     }
 
+    /**
+     *
+     * Divide el monto actual y la cantidad indicada. Si la cantidad es negativa se lanza
+     * un error.
+     *
+     */
+    public Dinero divide(int cantidad) {
+        if (cantidad <= 0) {
+            throw new IllegalStateException("No se puede dividir el dinero por cero o un numero negativo.");
+        }
+        BigDecimal resultado = this.getMonto().divide(BigDecimal.valueOf(cantidad));
+        return new Dinero(resultado);
+    }
+
 }
