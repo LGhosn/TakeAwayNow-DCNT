@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">31</div>
+<div class="counter">32</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.390s</div>
+<div class="counter">1.786s</div>
 <p>duration</p>
 </div>
 </td>
@@ -66,6 +66,9 @@
 <li>
 <a href="#tab1">Standard output</a>
 </li>
+<li>
+<a href="#tab2">Standard error</a>
+</li>
 </ul>
 <div id="tab0" class="tab">
 <h2>Tests</h2>
@@ -79,157 +82,162 @@
 </thead>
 <tr>
 <td class="success">cuandoSeAceptaLaDevolucionDeUnPedidoSeLeDevuelveElSaldoAlClienteYElStockDeLosProductos()</td>
-<td class="success">0.029s</td>
+<td class="success">0.085s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">cuandoSeCancelaUnPedidoEnAguardandoPreparacionSeDevulveElSaldoYSeDisminuyenLosPdcEnUnCincoPorcientoDelTotalDeLaRecompenzaDelPedido()</td>
-<td class="success">0.022s</td>
+<td class="success">0.040s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">cuandoSeCancelaUnPedidoEnPreparacionNoSeDevulveElSaldoYDisminuyenLosPdcEnUnVeintePorcientoDelTotalDeLaRecompenzaDelPedido()</td>
-<td class="success">0.028s</td>
+<td class="success">0.053s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">cuandoSeCancelaUnPedidoListoParaRetirarNoSeDevulveElSaldoYSeLeSacanLosPuntosDeConfianza()</td>
-<td class="success">0.019s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">cuandoSeDeniegaLaDevolucionDeUnPedidoNoSeLeDevuelveElSaldoAlClienteNiElStockDeLosProductos()</td>
-<td class="success">0.019s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">esUnProductoDeEseNegocio()</td>
-<td class="success">0.010s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">noEsUnProductoDeEseNegocio()</td>
-<td class="success">0.006s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">noSePuedeCancelarAUnPedidoQueNoExiste()</td>
-<td class="success">0.006s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">noSePuedeConfirmarRetiroAUnPedidoQueNoEstaListoParaRetirar()</td>
-<td class="success">0.006s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">noSePuedeConfirmarRetiroAUnPedidoQueNoExiste()</td>
-<td class="success">0.005s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">noSePuedeConfirmarUnPedidoParaEstosProductosPorqueNoEsUnProductoDelNegocio()</td>
-<td class="success">0.007s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">noSePuedeConfirmarUnPedidoParaEstosProductosPorqueNoHayStockSuficiente()</td>
-<td class="success">0.017s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">noSePuedeMarcarComienzoDePreparacionAUnPedidoQueNoEstaEnAguardandoPreparacion()</td>
-<td class="success">0.007s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">noSePuedeMarcarComienzoDePreparacionAUnPedidoQueNoExiste()</td>
-<td class="success">0.004s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">noSePuedeMarcarListoParaRetirarAUnPedidoQueNoEstaEnPreparacion()</td>
-<td class="success">0.005s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">noSePuedeMarcarListoParaRetirarAUnPedidoQueNoExiste()</td>
-<td class="success">0.006s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">noSePuedeSolicitarDevolucionDeUnPedidoQueNoEstaRetirado()</td>
-<td class="success">0.005s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">noSePuedeSolicitarDevolucionDeUnPedidoQueNoExiste()</td>
-<td class="success">0.005s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">obtenerPedidos()</td>
-<td class="success">0.005s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">sePuedeCancelarAUnPedidoQueEstaAguardandoPreparacion()</td>
-<td class="success">0.007s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">sePuedeComprarUnProductoConPdc()</td>
 <td class="success">0.034s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">sePuedeComprarUnProductoConPdcYDinero()</td>
-<td class="success">0.028s</td>
+<td class="success">cuandoSeDeniegaLaDevolucionDeUnPedidoNoSeLeDevuelveElSaldoAlClienteNiElStockDeLosProductos()</td>
+<td class="success">0.034s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">sePuedeConfirmarPedido()</td>
+<td class="success">esUnProductoDeEseNegocio()</td>
+<td class="success">0.034s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">noEsUnProductoDeEseNegocio()</td>
 <td class="success">0.010s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">sePuedeConfirmarRetiroAUnPedidoQueEstaListoParaRetirar()</td>
-<td class="success">0.010s</td>
+<td class="success">noSePuedeCancelarAUnPedidoQueNoExiste()</td>
+<td class="success">0.009s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">sePuedeConfirmarUnPedidoParaEstosProductos()</td>
-<td class="success">0.035s</td>
+<td class="success">noSePuedeConfirmarRetiroAUnPedidoQueNoEstaListoParaRetirar()</td>
+<td class="success">0.011s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">sePuedeMarcarComienzoDePreparacionAUnPedidoQueEstaAguardandoPreparacion()</td>
-<td class="success">0.006s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">sePuedeMarcarListoParaRetirarAUnPedidoQueEstaEnPreparacion()</td>
-<td class="success">0.007s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">sePuedeSolicitarDevolucionDeUnPedidoQueFueRetiradoHaceMenosDeCincoMinutos()</td>
-<td class="success">0.006s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">verificarPedido()</td>
-<td class="success">0.013s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">verificarPedidoLanzaQueNoExisteCliente()</td>
+<td class="success">noSePuedeConfirmarRetiroAUnPedidoQueNoExiste()</td>
 <td class="success">0.012s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">verificarPedidoLanzaQueNoExisteNegocio()</td>
+<td class="success">noSePuedeConfirmarUnPedidoParaEstosProductosPorqueNoEsUnProductoDelNegocio()</td>
+<td class="success">0.017s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">noSePuedeConfirmarUnPedidoParaEstosProductosPorqueNoHayStockSuficiente()</td>
+<td class="success">0.026s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">noSePuedeMarcarComienzoDePreparacionAUnPedidoQueNoEstaEnAguardandoPreparacion()</td>
+<td class="success">0.807s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">noSePuedeMarcarComienzoDePreparacionAUnPedidoQueNoExiste()</td>
+<td class="success">0.010s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">noSePuedeMarcarListoParaRetirarAUnPedidoQueNoEstaEnPreparacion()</td>
+<td class="success">0.015s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">noSePuedeMarcarListoParaRetirarAUnPedidoQueNoExiste()</td>
+<td class="success">0.012s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">noSePuedeSolicitarDevolucionDeUnPedidoQueNoEstaRetirado()</td>
+<td class="success">0.009s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">noSePuedeSolicitarDevolucionDeUnPedidoQueNoExiste()</td>
 <td class="success">0.011s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">obtenerPedidos()</td>
+<td class="success">0.015s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">sePuedeCancelarAUnPedidoQueEstaAguardandoPreparacion()</td>
+<td class="success">0.010s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">sePuedeComprarUnProductoConPdc()</td>
+<td class="success">0.095s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">sePuedeComprarUnProductoConPdcYDinero()</td>
+<td class="success">0.055s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">sePuedeConfirmarPedido()</td>
+<td class="success">0.019s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">sePuedeConfirmarRetiroAUnPedidoQueEstaListoParaRetirar()</td>
+<td class="success">0.021s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">sePuedeConfirmarUnPedidoParaEstosProductos()</td>
+<td class="success">0.050s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">sePuedeMarcarComienzoDePreparacionAUnPedidoQueEstaAguardandoPreparacion()</td>
+<td class="success">0.012s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">sePuedeMarcarListoParaRetirarAUnPedidoQueEstaEnPreparacion()</td>
+<td class="success">0.011s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">sePuedeSolicitarDevolucionDeUnPedidoQueFueRetiradoHaceMenosDeCincoMinutos()</td>
+<td class="success">0.015s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">veinticincoPorcientoDeDescuentoPorSerSuCumpleanios()</td>
+<td class="success">0.177s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">verificarPedido()</td>
+<td class="success">0.029s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">verificarPedidoLanzaQueNoExisteCliente()</td>
+<td class="success">0.029s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">verificarPedidoLanzaQueNoExisteNegocio()</td>
+<td class="success">0.019s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -237,8 +245,151 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2024-02-20T19:17:17.644-06:00  INFO 21868 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.service.PedidoServiceTest]: PedidoServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-20T19:17:17.651-06:00  INFO 21868 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.service.PedidoServiceTest
+<pre>19:55:46.452 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.dcnt.take_away_now.service.PedidoServiceTest]: PedidoServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:55:46.655 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.service.PedidoServiceTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2024-02-20T19:55:47.263-03:00  INFO 2220 --- [    Test worker] c.d.t.service.PedidoServiceTest          : Starting PedidoServiceTest using Java 21.0.1 with PID 2220 (started by Lautaro in D:\dcnt back\TakeAwayNow-DCNT)
+2024-02-20T19:55:47.264-03:00  INFO 2220 --- [    Test worker] c.d.t.service.PedidoServiceTest          : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2024-02-20T19:55:47.883-03:00  INFO 2220 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-20T19:55:47.989-03:00  INFO 2220 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 94 ms. Found 7 JPA repository interfaces.
+2024-02-20T19:55:48.068-03:00  INFO 2220 --- [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-02-20T19:55:48.302-03:00  INFO 2220 --- [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:c8f43f13-19cf-4cce-9846-36d4e52a3a5a;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-20T19:55:48.731-03:00  INFO 2220 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-20T19:55:48.838-03:00  INFO 2220 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-02-20T19:55:48.893-03:00  INFO 2220 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-02-20T19:55:49.302-03:00  INFO 2220 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-20T19:55:49.379-03:00  WARN 2220 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-02-20T19:55:50.874-03:00  INFO 2220 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: 
+    drop table if exists clientes cascade 
+Hibernate: 
+    drop table if exists inventario_registros cascade 
+Hibernate: 
+    drop table if exists negocios cascade 
+Hibernate: 
+    drop table if exists pedidos cascade 
+Hibernate: 
+    drop table if exists planes cascade 
+Hibernate: 
+    drop table if exists productos cascade 
+Hibernate: 
+    drop table if exists productos_pedidos cascade 
+Hibernate: 
+    create table clientes (
+        fecha_nacimiento date,
+        pdc float(53),
+        saldo numeric(38,2),
+        id_cliente bigint generated by default as identity,
+        id_plan bigint,
+        usuario varchar(255),
+        primary key (id_cliente)
+    )
+Hibernate: 
+    create table inventario_registros (
+        precio_unitario numeric(38,2),
+        precio_unitario_pdc float(53),
+        recompensa_pdc float(53),
+        id_inventario_registro bigint generated by default as identity,
+        id_negocio bigint,
+        id_producto bigint unique,
+        stock bigint,
+        primary key (id_inventario_registro)
+    )
+Hibernate: 
+    create table negocios (
+        dia_apertura tinyint check (dia_apertura between 0 and 6),
+        dia_cierre tinyint check (dia_cierre between 0 and 6),
+        horario_apertura time(6),
+        horario_cierre time(6),
+        saldo numeric(38,2),
+        id_negocio bigint generated by default as identity,
+        nombre varchar(255),
+        primary key (id_negocio)
+    )
+Hibernate: 
+    create table pedidos (
+        estado tinyint check (estado between 0 and 7),
+        precio_total numeric(38,2),
+        fecha_y_hora_entrega timestamp(6),
+        id_cliente bigint,
+        id_negocio bigint,
+        id_pedido bigint generated by default as identity,
+        codigo varchar(255),
+        primary key (id_pedido)
+    )
+Hibernate: 
+    create table planes (
+        cancelacion_sin_costo boolean,
+        multiplicador_de_puntos_de_confianza integer,
+        porcentaje_de_descuento integer,
+        porcentaje_extra_de_puntos_de_confianza_por_devolucion integer,
+        precio numeric(38,2),
+        puntos_de_confianza_por_subscripcion float(53),
+        id_plan bigint generated by default as identity,
+        nombre varchar(255),
+        primary key (id_plan)
+    )
+Hibernate: 
+    create table productos (
+        id_inventario_registro bigint unique,
+        id_producto bigint generated by default as identity,
+        nombre varchar(255),
+        primary key (id_producto)
+    )
+Hibernate: 
+    create table productos_pedidos (
+        cantidad integer,
+        id_pedido bigint,
+        id_producto bigint,
+        id_producto_pedido bigint generated by default as identity,
+        primary key (id_producto_pedido)
+    )
+Hibernate: 
+    alter table if exists inventario_registros 
+       add constraint FKgk0emireeu3u0g15pi6uth3tw 
+       foreign key (id_negocio) 
+       references negocios
+Hibernate: 
+    alter table if exists inventario_registros 
+       add constraint FKaa8b1cqh28krjla4q0rldgjdw 
+       foreign key (id_producto) 
+       references productos
+Hibernate: 
+    alter table if exists pedidos 
+       add constraint FKdnomiluem4t3x66t6b9aher47 
+       foreign key (id_cliente) 
+       references clientes
+Hibernate: 
+    alter table if exists pedidos 
+       add constraint FKhmtsw5m7flxgsvx60sorc5g3e 
+       foreign key (id_negocio) 
+       references negocios
+Hibernate: 
+    alter table if exists productos 
+       add constraint FKd8x4sfyyvh5ecf784239ete7u 
+       foreign key (id_inventario_registro) 
+       references inventario_registros
+Hibernate: 
+    alter table if exists productos_pedidos 
+       add constraint FKgvy13jpycywx60hasm7k3w2f 
+       foreign key (id_pedido) 
+       references pedidos
+Hibernate: 
+    alter table if exists productos_pedidos 
+       add constraint FK5xwq1xi3k07xrjjpvvpxvdoku 
+       foreign key (id_producto) 
+       references productos
+2024-02-20T19:55:50.967-03:00  INFO 2220 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-20T19:55:51.644-03:00  INFO 2220 --- [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-02-20T19:55:52.519-03:00  INFO 2220 --- [    Test worker] c.d.t.service.PedidoServiceTest          : Started PedidoServiceTest in 5.757 seconds (process running for 7.465)
 Hibernate: 
     insert 
     into
@@ -274,6 +425,136 @@ Hibernate:
         (id_cliente, codigo, estado, fecha_y_hora_entrega, id_negocio, precio_total, id_pedido) 
     values
         (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        clientes
+        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+    values
+        (?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        negocios
+        (dia_apertura, dia_cierre, horario_apertura, horario_cierre, nombre, saldo, id_negocio) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        productos
+        (id_inventario_registro, nombre, id_producto) 
+    values
+        (?, ?, default)
+Hibernate: 
+    insert 
+    into
+        clientes
+        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+    values
+        (?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.id_inventario_registro,
+        p1_0.nombre 
+    from
+        productos p1_0 
+    where
+        p1_0.nombre=?
+Hibernate: 
+    insert 
+    into
+        inventario_registros
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        productos
+        (id_inventario_registro, nombre, id_producto) 
+    values
+        (?, ?, default)
+Hibernate: 
+    update
+        clientes 
+    set
+        fecha_nacimiento=?,
+        id_plan=?,
+        pdc=?,
+        saldo=?,
+        usuario=? 
+    where
+        id_cliente=?
+Hibernate: 
+    update
+        clientes 
+    set
+        fecha_nacimiento=?,
+        id_plan=?,
+        pdc=?,
+        saldo=?,
+        usuario=? 
+    where
+        id_cliente=?
+Hibernate: 
+    update
+        inventario_registros 
+    set
+        id_negocio=?,
+        precio_unitario=?,
+        precio_unitario_pdc=?,
+        id_producto=?,
+        recompensa_pdc=?,
+        stock=? 
+    where
+        id_inventario_registro=?
+Hibernate: 
+    update
+        productos 
+    set
+        id_inventario_registro=?,
+        nombre=? 
+    where
+        id_producto=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.id_inventario_registro,
+        p1_0.nombre 
+    from
+        productos p1_0 
+    where
+        p1_0.nombre=?
+Hibernate: 
+    insert 
+    into
+        pedidos
+        (id_cliente, codigo, estado, fecha_y_hora_entrega, id_negocio, precio_total, id_pedido) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        ir1_0.id_inventario_registro,
+        ir1_0.id_negocio,
+        ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
+        ir1_0.id_producto,
+        ir1_0.recompensa_pdc,
+        ir1_0.stock 
+    from
+        inventario_registros ir1_0 
+    where
+        ir1_0.id_negocio=? 
+        and ir1_0.id_producto=?
+Hibernate: 
+    insert 
+    into
+        productos_pedidos
+        (cantidad, id_pedido, id_producto, id_producto_pedido) 
+    values
+        (?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -3774,6 +4055,16 @@ Hibernate:
 </pre>
 </span>
 </div>
+<div id="tab2" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>WARNING: A Java agent has been loaded dynamically (C:\Users\Lautaro\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.10\90ed94ac044ea8953b224304c762316e91fd6b31\byte-buddy-agent-1.14.10.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+</pre>
+</span>
+</div>
 </div>
 <div id="footer">
 <p>
@@ -3782,7 +4073,7 @@ Hibernate:
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.5</a> at 20 feb 2024 19:17:18</p>
+<a href="http://www.gradle.org">Gradle 8.5</a> at 20 feb 2024 19:56:00</p>
 </div>
 </div>
 </body>

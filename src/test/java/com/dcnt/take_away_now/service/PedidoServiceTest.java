@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import static org.springframework.http.HttpStatus.*;
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collection;
 import java.util.Map;
@@ -217,7 +218,7 @@ class PedidoServiceTest {
                         alfajor.get().getId(), Map.of("cantidad", 10, "usaPdc", 0)
                 );
 
-        InfoPedidoDto infoPedidoDto = new InfoPedidoDto(33L, negocio.getId(), productos);
+        InfoPedidoDto infoPedidoDto = new InfoPedidoDto(1L, negocio.getId(), productos);
 
         //when
         response = pedidoService.verificarPedido(infoPedidoDto);
@@ -748,5 +749,32 @@ class PedidoServiceTest {
         assertThat(saldoPostConfirmarPedido).isEqualTo(new Dinero(BigDecimal.valueOf(850.0)));
         assertThat(pdcPostConfirmarPedido1).isEqualTo(new PuntosDeConfianza(20));
         assertThat(pdcPostConfirmarPedido).isEqualTo(new PuntosDeConfianza(0));
+    }
+
+    @Test
+    void veinticincoPorcientoDeDescuentoPorSerSuCumpleanios() {
+        //given
+        Cliente cliente = new Cliente("Messi");
+        clienteRepository.save(cliente);
+        clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
+        LocalDate hoy = LocalDate.now();
+        clienteService.establecerFechaDeNacimiento(cliente.getId(), 1987,hoy.getMonth().getValue(), hoy.getDayOfMonth());
+
+        Long stockInicial = 10L;
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(stockInicial, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(40.0));
+        negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
+        Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
+
+        Map<Long, Map<String, Object>> productos =
+                Map.of(
+                        alfajor.get().getId(), Map.of("cantidad", 1, "usaPdc", 0)
+                );
+        InfoPedidoDto infoPedidoDto = new InfoPedidoDto(cliente.getId(), negocio.getId(), productos);
+
+        //when
+        pedidoService.confirmarPedido(infoPedidoDto);
+
+        //then
+        assertThat(cliente.getSaldo()).isEqualTo(new Dinero(975));
     }
 }

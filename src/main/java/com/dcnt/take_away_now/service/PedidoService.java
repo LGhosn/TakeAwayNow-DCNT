@@ -172,6 +172,12 @@ public class PedidoService {
             }
             precioTotalDelPedido = precioTotalDelPedido.multiply(p.get().getDescuento()).divide(100);
         }
+
+        // Si es el cumpleanios del cliente se le aplica un 25% de descuento extra al pedido
+        if (cliente.esSuCumpleanios()) {
+            precioTotalDelPedido = precioTotalDelPedido.multiply(25).divide(100);
+        }
+
         cliente.setSaldo(cliente.getSaldo().minus(precioTotalDelPedido));
         cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().minus(pdcTotalDelPedido));
 
