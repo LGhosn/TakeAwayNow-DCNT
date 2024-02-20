@@ -1,13 +1,11 @@
 package com.dcnt.take_away_now.service;
 
 import com.dcnt.take_away_now.domain.Cliente;
-import com.dcnt.take_away_now.domain.Pedido;
 import com.dcnt.take_away_now.repository.ClienteRepository;
 import com.dcnt.take_away_now.repository.PedidoRepository;
 import com.dcnt.take_away_now.repository.PlanRepository;
 import com.dcnt.take_away_now.repository.ProductoPedidoRepository;
 import com.dcnt.take_away_now.value_object.Dinero;
-import org.apache.hc.core5.http.HttpStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +17,6 @@ import java.util.Collection;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.OK;
 

@@ -104,4 +104,29 @@ class DineroTests {
         // then: "obtengo un big decimal con val = 2"
         assertThat(dosPesos).isEqualTo(new Dinero(2));
     }
+
+    @Test
+    void tengoDosPesosLoDividoPorDosYObtengoUnPeso() {
+        // given: "dos pesos"
+        Dinero dosPesos = new Dinero(2);
+
+        // when: "lo divido por dos"
+        Dinero unPeso = dosPesos.divide(2);
+
+        // then: "obtengo un peso"
+        assertThat(unPeso.getMonto()).isEqualTo(new BigDecimal(1));
+    }
+
+    @Test
+    void noPuedoDividirDineroPorCero() {
+        // given: "dos pesos"
+        Dinero dosPesos = new Dinero(2);
+
+        // when: "lo divido por cero"
+        assertThatThrownBy(() -> dosPesos.divide(0))
+
+        // then: "obtengo cero pesos"
+        .isInstanceOf(IllegalStateException.class)
+        .hasMessageContaining("No se puede dividir el dinero por cero o un numero negativo.");
+    }
 }
