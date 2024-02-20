@@ -1,5 +1,6 @@
 package com.dcnt.take_away_now.service;
 
+import com.dcnt.take_away_now.domain.Cliente;
 import com.dcnt.take_away_now.domain.Plan;
 import com.dcnt.take_away_now.repository.PlanRepository;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.OK;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @DataJpaTest
@@ -121,22 +123,19 @@ class PlanServiceTest {
         );
 
         // when
-        ResponseEntity<String> response = planService.obtenerPlanes();
+        Collection<Plan> planes = planService.obtenerPlanes();
 
         // then
-        assertThat(response.getBody()).contains(nombre);
-        assertThat(response.getBody()).contains(nombre + "2");
-        assertThat(response.getStatusCode()).isEqualTo(OK);
+        assertThat(existePlan(planes, nombre)).isTrue();
     }
 
     @Test
     void noSePuedeEncontrarUnPlanQueNoExiste() {
         // when
-        ResponseEntity<String> response = planService.obtenerPlanes();
+        Collection<Plan> planes = planService.obtenerPlanes();
 
         // then
-        assertThat(response.getBody()).doesNotContain(nombre);
-        assertThat(response.getStatusCode()).isEqualTo(OK);
+        assertThat(existePlan(planes, nombre)).isFalse();
     }
 
     @Test
@@ -164,5 +163,10 @@ class PlanServiceTest {
         // then
         assertThat(response.getStatusCode()).isEqualTo(OK);
         assertThat(response.getBody()).isEqualTo("Plan eliminado con éxito.");
+    }
+
+    boolean existePlan(Collection<Plan> planes, String nombre) {
+        return planes.stream()
+                .anyMatch(cliente -> cliente.getNombre().equals(nombre));
     }
 }

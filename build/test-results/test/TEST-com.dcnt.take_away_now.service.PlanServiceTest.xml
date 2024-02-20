@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dcnt.take_away_now.service.PlanServiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-02-20T18:08:30" hostname="LGG-W10" time="0.047">
+  <properties/>
+  <testcase name="noSePuedeCrearDosPlanesConElMismoNombre()" classname="com.dcnt.take_away_now.service.PlanServiceTest" time="0.008"/>
+  <testcase name="sePuedenEncontrarUnPlanesQueExistes()" classname="com.dcnt.take_away_now.service.PlanServiceTest" time="0.013"/>
+  <testcase name="sePuedeCrearPlanNuevo()" classname="com.dcnt.take_away_now.service.PlanServiceTest" time="0.007"/>
+  <testcase name="noSePuedeEncontrarUnPlanQueNoExiste()" classname="com.dcnt.take_away_now.service.PlanServiceTest" time="0.005"/>
+  <testcase name="sePuedeEliminarUnPlanExistente()" classname="com.dcnt.take_away_now.service.PlanServiceTest" time="0.011"/>
+  <system-out><![CDATA[2024-02-20T15:08:30.043-03:00  INFO 9704 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.service.PlanServiceTest]: PlanServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20T15:08:30.060-03:00  INFO 9704 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.service.PlanServiceTest
+Hibernate: 
+    select
+        p1_0.id_plan,
+        p1_0.cancelacion_sin_costo,
+        p1_0.porcentaje_de_descuento,
+        p1_0.multiplicador_de_puntos_de_confianza,
+        p1_0.nombre,
+        p1_0.porcentaje_extra_de_puntos_de_confianza_por_devolucion,
+        p1_0.precio,
+        p1_0.puntos_de_confianza_por_subscripcion 
+    from
+        planes p1_0 
+    where
+        p1_0.nombre=?
+Hibernate: 
+    insert 
+    into
+        planes
+        (cancelacion_sin_costo, porcentaje_de_descuento, multiplicador_de_puntos_de_confianza, nombre, porcentaje_extra_de_puntos_de_confianza_por_devolucion, precio, puntos_de_confianza_por_subscripcion, id_plan) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        p1_0.id_plan,
+        p1_0.cancelacion_sin_costo,
+        p1_0.porcentaje_de_descuento,
+        p1_0.multiplicador_de_puntos_de_confianza,
+        p1_0.nombre,
+        p1_0.porcentaje_extra_de_puntos_de_confianza_por_devolucion,
+        p1_0.precio,
+        p1_0.puntos_de_confianza_por_subscripcion 
+    from
+        planes p1_0 
+    where
+        p1_0.nombre=?
+Hibernate: 
+    select
+        p1_0.id_plan,
+        p1_0.cancelacion_sin_costo,
+        p1_0.porcentaje_de_descuento,
+        p1_0.multiplicador_de_puntos_de_confianza,
+        p1_0.nombre,
+        p1_0.porcentaje_extra_de_puntos_de_confianza_por_devolucion,
+        p1_0.precio,
+        p1_0.puntos_de_confianza_por_subscripcion 
+    from
+        planes p1_0 
+    where
+        p1_0.nombre=?
+Hibernate: 
+    insert 
+    into
+        planes
+        (cancelacion_sin_costo, porcentaje_de_descuento, multiplicador_de_puntos_de_confianza, nombre, porcentaje_extra_de_puntos_de_confianza_por_devolucion, precio, puntos_de_confianza_por_subscripcion, id_plan) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        p1_0.id_plan,
+        p1_0.cancelacion_sin_costo,
+        p1_0.porcentaje_de_descuento,
+        p1_0.multiplicador_de_puntos_de_confianza,
+        p1_0.nombre,
+        p1_0.porcentaje_extra_de_puntos_de_confianza_por_devolucion,
+        p1_0.precio,
+        p1_0.puntos_de_confianza_por_subscripcion 
+    from
+        planes p1_0 
+    where
+        p1_0.nombre=?
+Hibernate: 
+    insert 
+    into
+        planes
+        (cancelacion_sin_costo, porcentaje_de_descuento, multiplicador_de_puntos_de_confianza, nombre, porcentaje_extra_de_puntos_de_confianza_por_devolucion, precio, puntos_de_confianza_por_subscripcion, id_plan) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        p1_0.id_plan,
+        p1_0.cancelacion_sin_costo,
+        p1_0.porcentaje_de_descuento,
+        p1_0.multiplicador_de_puntos_de_confianza,
+        p1_0.nombre,
+        p1_0.porcentaje_extra_de_puntos_de_confianza_por_devolucion,
+        p1_0.precio,
+        p1_0.puntos_de_confianza_por_subscripcion 
+    from
+        planes p1_0
+Hibernate: 
+    select
+        p1_0.id_plan,
+        p1_0.cancelacion_sin_costo,
+        p1_0.porcentaje_de_descuento,
+        p1_0.multiplicador_de_puntos_de_confianza,
+        p1_0.nombre,
+        p1_0.porcentaje_extra_de_puntos_de_confianza_por_devolucion,
+        p1_0.precio,
+        p1_0.puntos_de_confianza_por_subscripcion 
+    from
+        planes p1_0 
+    where
+        p1_0.nombre=?
+Hibernate: 
+    insert 
+    into
+        planes
+        (cancelacion_sin_costo, porcentaje_de_descuento, multiplicador_de_puntos_de_confianza, nombre, porcentaje_extra_de_puntos_de_confianza_por_devolucion, precio, puntos_de_confianza_por_subscripcion, id_plan) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        p1_0.id_plan,
+        p1_0.cancelacion_sin_costo,
+        p1_0.porcentaje_de_descuento,
+        p1_0.multiplicador_de_puntos_de_confianza,
+        p1_0.nombre,
+        p1_0.porcentaje_extra_de_puntos_de_confianza_por_devolucion,
+        p1_0.precio,
+        p1_0.puntos_de_confianza_por_subscripcion 
+    from
+        planes p1_0 
+    where
+        p1_0.nombre=?
+Hibernate: 
+    select
+        p1_0.id_plan,
+        p1_0.cancelacion_sin_costo,
+        p1_0.porcentaje_de_descuento,
+        p1_0.multiplicador_de_puntos_de_confianza,
+        p1_0.nombre,
+        p1_0.porcentaje_extra_de_puntos_de_confianza_por_devolucion,
+        p1_0.precio,
+        p1_0.puntos_de_confianza_por_subscripcion 
+    from
+        planes p1_0
+Hibernate: 
+    select
+        p1_0.id_plan,
+        p1_0.cancelacion_sin_costo,
+        p1_0.porcentaje_de_descuento,
+        p1_0.multiplicador_de_puntos_de_confianza,
+        p1_0.nombre,
+        p1_0.porcentaje_extra_de_puntos_de_confianza_por_devolucion,
+        p1_0.precio,
+        p1_0.puntos_de_confianza_por_subscripcion 
+    from
+        planes p1_0 
+    where
+        p1_0.nombre=?
+Hibernate: 
+    insert 
+    into
+        planes
+        (cancelacion_sin_costo, porcentaje_de_descuento, multiplicador_de_puntos_de_confianza, nombre, porcentaje_extra_de_puntos_de_confianza_por_devolucion, precio, puntos_de_confianza_por_subscripcion, id_plan) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        p1_0.id_plan,
+        p1_0.cancelacion_sin_costo,
+        p1_0.porcentaje_de_descuento,
+        p1_0.multiplicador_de_puntos_de_confianza,
+        p1_0.nombre,
+        p1_0.porcentaje_extra_de_puntos_de_confianza_por_devolucion,
+        p1_0.precio,
+        p1_0.puntos_de_confianza_por_subscripcion 
+    from
+        planes p1_0 
+    where
+        p1_0.nombre=?
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

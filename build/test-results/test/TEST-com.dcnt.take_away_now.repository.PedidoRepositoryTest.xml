@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.repository.PedidoRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-20T04:13:16" hostname="DESKTOP-84L37D5" time="0.02">
+<testsuite name="com.dcnt.take_away_now.repository.PedidoRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-20T18:08:27" hostname="LGG-W10" time="0.049">
   <properties/>
-  <testcase name="noSeEncuentraUnPedidoQueNoExisteById()" classname="com.dcnt.take_away_now.repository.PedidoRepositoryTest" time="0.009"/>
-  <testcase name="seEncuentraUnPedidoQueExisteById()" classname="com.dcnt.take_away_now.repository.PedidoRepositoryTest" time="0.01"/>
-  <system-out><![CDATA[2024-02-19T22:13:16.288-06:00  INFO 20272 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.PedidoRepositoryTest]: PedidoRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19T22:13:16.297-06:00  INFO 20272 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.PedidoRepositoryTest
+  <testcase name="noSeEncuentraUnPedidoQueNoExisteById()" classname="com.dcnt.take_away_now.repository.PedidoRepositoryTest" time="0.023"/>
+  <testcase name="seEncuentraUnPedidoQueExisteById()" classname="com.dcnt.take_away_now.repository.PedidoRepositoryTest" time="0.022"/>
+  <system-out><![CDATA[2024-02-20T15:08:27.749-03:00  INFO 9704 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.PedidoRepositoryTest]: PedidoRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20T15:08:27.778-03:00  INFO 9704 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.PedidoRepositoryTest
 Hibernate: 
     insert 
     into

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.dcnt.take_away_now.domain.Plan;
+
+import java.util.Collection;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -32,8 +34,8 @@ public class PlanService {
         return ResponseEntity.ok().body("Plan creado con éxito.");
     }
 
-    public ResponseEntity<String> obtenerPlanes() {
-        return ResponseEntity.ok().body(planRepository.findAll().toString());
+    public Collection<Plan> obtenerPlanes() {
+        return planRepository.findAll();
     }
 
     public ResponseEntity<String> eliminarPlan(Long planId) {

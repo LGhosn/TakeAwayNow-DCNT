@@ -62,8 +62,8 @@ public class ClienteController {
         return clienteService.cargarSaldo(idCliente, saldoACargar);
     }
 
-    @PostMapping("/{idCliente}/establecerFechaDeNacimiento?year={yyyy}&month={mm}&day={dd}")
-    public ResponseEntity<String> establecerFechaDeNacimiento(@PathVariable Long idCliente, @PathVariable int yyyy, @PathVariable int mm, @PathVariable int dd) {
+    @PatchMapping("/{idCliente}/establecerFechaDeNacimiento")
+    public ResponseEntity<String> establecerFechaDeNacimiento(@PathVariable Long idCliente, @RequestParam int yyyy, @RequestParam int mm, @RequestParam int dd) {
         return clienteService.establecerFechaDeNacimiento(idCliente, yyyy, mm, dd);
     }
 

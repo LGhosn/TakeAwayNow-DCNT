@@ -102,7 +102,7 @@ public class ClienteService {
         LocalDate fechaNacimiento = LocalDate.of(yyyy, mm, dd);
 
         if (Period.between(fechaNacimiento, LocalDate.now()).getYears() < 18) {
-            return ResponseEntity.badRequest().body("No debes ser mayor de edad para acceder al beneficio por cumpleaños.");
+            return ResponseEntity.badRequest().body("Debes ser mayor de edad para acceder al beneficio por cumpleaños.");
         }
 
         Cliente cliente = c.get();

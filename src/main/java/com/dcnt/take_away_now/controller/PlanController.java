@@ -1,8 +1,11 @@
 package com.dcnt.take_away_now.controller;
 
+import com.dcnt.take_away_now.domain.Plan;
 import com.dcnt.take_away_now.service.PlanService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -28,7 +31,7 @@ public class PlanController {
      *******************/
 
     @GetMapping("/")
-    public ResponseEntity<String> obtenerPlanes() {
+    public Collection<Plan> obtenerPlanes() {
         return planService.obtenerPlanes();
     }
 

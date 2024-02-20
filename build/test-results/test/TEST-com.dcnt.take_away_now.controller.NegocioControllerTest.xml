@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.controller.NegocioControllerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-02-20T04:13:15" hostname="DESKTOP-84L37D5" time="0.203">
+<testsuite name="com.dcnt.take_away_now.controller.NegocioControllerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-02-20T18:08:23" hostname="LGG-W10" time="0.715">
   <properties/>
-  <testcase name="modificarHorariosDelNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.032"/>
-  <testcase name="eliminarProducto()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.003"/>
-  <testcase name="sePuedeCrearProductoNuevo()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.096"/>
-  <testcase name="obtenerProductos()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.036"/>
-  <testcase name="sePuedeCrearNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.009"/>
-  <testcase name="modificarProducto()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.002"/>
-  <testcase name="noSePuedeCrearNegocioSiFaltanDatos()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.004"/>
-  <testcase name="modificarDiasDeAperturaDelNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.002"/>
-  <testcase name="obtenerNegocios()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.007"/>
-  <system-out><![CDATA[2024-02-19T22:13:14.407-06:00  INFO 20272 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.controller.NegocioControllerTest]: NegocioControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-19T22:13:14.428-06:00  INFO 20272 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.controller.NegocioControllerTest
+  <testcase name="modificarHorariosDelNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.145"/>
+  <testcase name="eliminarProducto()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.019"/>
+  <testcase name="sePuedeCrearProductoNuevo()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.333"/>
+  <testcase name="obtenerProductos()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.122"/>
+  <testcase name="sePuedeCrearNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.013"/>
+  <testcase name="modificarProducto()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.012"/>
+  <testcase name="noSePuedeCrearNegocioSiFaltanDatos()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.014"/>
+  <testcase name="modificarDiasDeAperturaDelNegocio()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.008"/>
+  <testcase name="obtenerNegocios()" classname="com.dcnt.take_away_now.controller.NegocioControllerTest" time="0.015"/>
+  <system-out><![CDATA[2024-02-20T15:08:20.928-03:00  INFO 9704 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.controller.NegocioControllerTest]: NegocioControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20T15:08:21.012-03:00  INFO 9704 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.controller.NegocioControllerTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -21,16 +21,16 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2024-02-19T22:13:14.449-06:00  INFO 20272 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Starting NegocioControllerTest using Java 21.0.2 with PID 20272 (started by santiago in C:\Users\santiago\Documents\GitHub\TakeAwayNow-DCNT)
-2024-02-19T22:13:14.449-06:00  INFO 20272 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : No active profile set, falling back to 1 default profile: "default"
-2024-02-19T22:13:15.000-06:00  INFO 20272 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2024-02-19T22:13:15.000-06:00  INFO 20272 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2024-02-19T22:13:15.003-06:00  INFO 20272 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2024-02-19T22:13:15.015-06:00  INFO 20272 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Started NegocioControllerTest in 0.583 seconds (process running for 6.299)
-2024-02-19T22:13:15.173-06:00  WARN 20272 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
-2024-02-19T22:13:15.175-06:00  WARN 20272 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
-2024-02-19T22:13:15.176-06:00  WARN 20272 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
-2024-02-19T22:13:15.216-06:00  WARN 20272 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'nombre' for method parameter type String is not present]
+2024-02-20T15:08:21.116-03:00  INFO 9704 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Starting NegocioControllerTest using Java 21.0.1 with PID 9704 (started by Lautaro in D:\dcnt back\TakeAwayNow-DCNT)
+2024-02-20T15:08:21.117-03:00  INFO 9704 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : No active profile set, falling back to 1 default profile: "default"
+2024-02-20T15:08:23.117-03:00  INFO 9704 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-02-20T15:08:23.118-03:00  INFO 9704 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-02-20T15:08:23.126-03:00  INFO 9704 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2024-02-20T15:08:23.291-03:00  INFO 9704 --- [    Test worker] c.d.t.controller.NegocioControllerTest   : Started NegocioControllerTest in 2.271 seconds (process running for 17.799)
+2024-02-20T15:08:23.889-03:00  WARN 9704 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
+2024-02-20T15:08:23.896-03:00  WARN 9704 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
+2024-02-20T15:08:23.898-03:00  WARN 9704 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'precioPdc' for method parameter type Double is not present]
+2024-02-20T15:08:24.017-03:00  WARN 9704 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'nombre' for method parameter type String is not present]
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

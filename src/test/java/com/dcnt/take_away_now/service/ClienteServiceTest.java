@@ -15,10 +15,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Collection;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.springframework.http.HttpStatus.*;
 
 @DataJpaTest
@@ -242,4 +245,38 @@ class ClienteServiceTest {
         assertThat(messi.get().esPrime()).isTrue();
     }
 
+    @Test
+    void sePuedeEstablercerFechaDeNacimiento() {
+        // given
+        new Cliente(username);
+        clienteService.crearCliente(username);
+        Optional<Cliente> messi = clienteRepository.findByUsuario(username);
+        int year = 1987;
+        int mm = 06;
+        int dd = 24;
+
+        // when
+        clienteService.establecerFechaDeNacimiento(messi.get().getId(), year, mm, dd);
+
+        // then
+        LocalDate fechaDeNacimiento = LocalDate.of(year, mm, dd);
+        assertThat(messi.get().getFechaDeNacimiento()).isEqualTo(fechaDeNacimiento);
+    }
+    @Test
+    void noSePuedeEstablercerFechaDeNacimientoSiendoMenorDeEdad() {
+        // given
+        new Cliente(username);
+        clienteService.crearCliente(username);
+        Optional<Cliente> messi = clienteRepository.findByUsuario(username);
+        int year = 2010;
+        int mm = 06;
+        int dd = 24;
+
+        // when
+        ResponseEntity<String> response = clienteService.establecerFechaDeNacimiento(messi.get().getId(), year, mm, dd);
+
+        // then:
+        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertThat(response.getBody()).isEqualTo("Debes ser mayor de edad para acceder al beneficio por cumpleaños.");
+    }
 }
