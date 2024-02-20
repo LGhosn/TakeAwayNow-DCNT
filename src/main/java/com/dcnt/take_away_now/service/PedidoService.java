@@ -28,6 +28,7 @@ public class PedidoService {
     private final ProductoRepository productoRepository;
     private final InventarioRegistroRepository inventarioRegistroRepository;
     private final ProductoPedidoRepository productoPedidoRepository;
+    private final PlanRepository planRepository;
 
     public Collection<Pedido> obtenerPedidos() {
         return pedidoRepository.findAll();
@@ -162,6 +163,15 @@ public class PedidoService {
         if (cliente.getSaldo().minus(precioTotalDelPedido).compareTo(new Dinero(0)) < 0) {
             throw new RuntimeException("No tenes el Dinero suficiente para realizar la compra");
         }
+
+        // Si el cliente esta subscripto a un plan, se le aplica el descuento correspondiente.
+        if (cliente.esPrime()) {
+            Optional<Plan> p = planRepository.findById(cliente.getIdPlanPrime());
+            if (p.isEmpty()) {
+                return ResponseEntity.internalServerError().body("Ha ocurrido un error al procesar el plan del cliente.");
+            }
+            precioTotalDelPedido = precioTotalDelPedido.multiply(p.get().getDescuento()).divide(100);
+        }
         cliente.setSaldo(cliente.getSaldo().minus(precioTotalDelPedido));
         cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().minus(pdcTotalDelPedido));
 
@@ -248,6 +258,15 @@ public class PedidoService {
         Cliente cliente = pedido.getCliente();
         PuntosDeConfianza pdcRecompensa =  obtenerPuntosDeConfianzaDeUnPedido(idPedido);
 
+        // Si el cliente esta subscripto al plan prime, se le aplica el multiplicador correspondiente.
+        if (cliente.esPrime()) {
+            Optional<Plan> p = planRepository.findById(cliente.getIdPlanPrime());
+            if (p.isEmpty()) {
+                return ResponseEntity.internalServerError().body("Ha ocurrido un error al procesar el plan del cliente.");
+            }
+            pdcRecompensa = pdcRecompensa.multiply(p.get().getMultiplicadorDePuntosDeConfianza());
+        }
+
         cliente.setPuntosDeConfianza(pdcRecompensa);
 
         // Actualizamos el estado del pedido y se establece la fecha y hora de entrega.
@@ -272,21 +291,27 @@ public class PedidoService {
         Cliente c = clienteRepository.findById(pedido.getCliente().getId()).orElseThrow( () -> new RuntimeException("Ocurrió un error al obtener los datos del cliente."));
 
         PuntosDeConfianza pdcPedido = obtenerPuntosDeConfianzaDeUnPedido(idPedido);
-        // En caso de que el estado sea AGUARDANDO_PREPARACION, entonces el cliente pierde puntos de confianza (levemente, un 5% del total que del pedido) pero recupera su dinero.
-        if (pedido.getEstado() == EstadoDelPedido.AGUARDANDO_PREPARACION) {
-            c.setPuntosDeConfianza(c.getPuntosDeConfianza().minus(pdcPedido.multiply(0.05)));
-            c.setSaldo(c.getSaldo().plus(pedido.getPrecioTotal()));
-        }else if (pedido.getEstado() == EstadoDelPedido.EN_PREPARACION) {
+
+        if (!c.esPrime()) {
+            // En caso de que el estado sea AGUARDANDO_PREPARACION, entonces el cliente pierde puntos de confianza (levemente, un 5% del total que del pedido) pero recupera su dinero.
+            if (pedido.getEstado() == EstadoDelPedido.AGUARDANDO_PREPARACION) {
+                c.setPuntosDeConfianza(c.getPuntosDeConfianza().minus(pdcPedido.multiply(0.05)));
+                c.setSaldo(c.getSaldo().plus(pedido.getPrecioTotal()));
+            }else if (pedido.getEstado() == EstadoDelPedido.EN_PREPARACION) {
                 //En caso de que el estado sea EN_PREPARACION, entonces el cliente pierde puntos de confianza (notablemente, un 20% del total del pedido), no recupera su dinero.
                 c.setPuntosDeConfianza(
                         c.getPuntosDeConfianza().minus(pdcPedido.multiply(0.20)));
-        } else if(pedido.getEstado() == EstadoDelPedido.LISTO_PARA_RETIRAR) {
-            //En caso de que el estado sea LISTO_PARA_RETIRAR, entonces el cliente pierde puntos de confianza (significativamente, pierde un 100% del total que posee o en caso de tener pdc negativos, adeudará 500 pdc adicionales) y no recupera su dinero.
-            if (c.getPuntosDeConfianza().getCantidad() <= 0) {
-                c.setPuntosDeConfianza(c.getPuntosDeConfianza().minus(500));
-            } else {
-                c.setPuntosDeConfianza(new PuntosDeConfianza((double) 0));
+            } else if(pedido.getEstado() == EstadoDelPedido.LISTO_PARA_RETIRAR) {
+                //En caso de que el estado sea LISTO_PARA_RETIRAR, entonces el cliente pierde puntos de confianza (significativamente, pierde un 100% del total que posee o en caso de tener pdc negativos, adeudará 500 pdc adicionales) y no recupera su dinero.
+                if (c.getPuntosDeConfianza().getCantidad() <= 0) {
+                    c.setPuntosDeConfianza(c.getPuntosDeConfianza().minus(500));
+                } else {
+                    c.setPuntosDeConfianza(new PuntosDeConfianza((double) 0));
+                }
             }
+        } else {
+            // Al ser prime obtiene el dinero nuevamente.
+            c.setSaldo(c.getSaldo().plus(pedido.getPrecioTotal()));
         }
 
         clienteRepository.save(c);
@@ -311,10 +336,19 @@ public class PedidoService {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede solicitar la devolución de dicho pedido ya que el mismo no se encontraba retirado.");
         }
 
-        // Verificamos si pasaron menos de 5 minutos desde su retiro.
-        if (Duration.between(pedido.getFechaYHoraDeEntrega(), LocalDateTime.now()).toMinutes() > 5) {
-            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("El tiempo de tolerancia para devolver un pedido es de cinco minutos y el mismo ya ha expirado.");
+        // Corroboramos si el cliente tiene plan prime.
+        if (pedido.getCliente().esPrime()) {
+            // Verificamos si pasaron menos de 5 minutos desde su retiro.
+            if (Duration.between(pedido.getFechaYHoraDeEntrega(), LocalDateTime.now()).toMinutes() > 5) {
+                return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("El tiempo de tolerancia para devolver un pedido es de cinco minutos y el mismo ya ha expirado.");
+            }
+        } else {
+            // Verificamos si pasaron menos de 5 minutos desde su retiro.
+            if (Duration.between(pedido.getFechaYHoraDeEntrega(), LocalDateTime.now()).toMinutes() > 15) {
+                return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("El tiempo de tolerancia para devolver un pedido es de quince minutos para los beneficiarios del plan prime y el mismo ya ha expirado.");
+            }
         }
+
 
         // Actualizamos el estado del pedido.
         pedido.setEstado(EstadoDelPedido.DEVOLUCION_SOLICITADA);

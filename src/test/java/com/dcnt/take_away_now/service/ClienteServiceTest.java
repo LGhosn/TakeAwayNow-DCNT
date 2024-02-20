@@ -4,6 +4,7 @@ import com.dcnt.take_away_now.domain.Cliente;
 import com.dcnt.take_away_now.domain.Pedido;
 import com.dcnt.take_away_now.repository.ClienteRepository;
 import com.dcnt.take_away_now.repository.PedidoRepository;
+import com.dcnt.take_away_now.repository.PlanRepository;
 import com.dcnt.take_away_now.repository.ProductoPedidoRepository;
 import com.dcnt.take_away_now.value_object.Dinero;
 import org.apache.hc.core5.http.HttpStatus;
@@ -31,6 +32,8 @@ class ClienteServiceTest {
     private PedidoRepository pedidoRepository;
     @Autowired
     private ProductoPedidoRepository productoPedidoRepository;
+    @Autowired
+    private PlanRepository planRepository;
 
     private ClienteService clienteService;
 
@@ -38,7 +41,7 @@ class ClienteServiceTest {
     @BeforeEach
     void setUp() {
         username = "Lionel Messi";
-        clienteService = new ClienteService(clienteRepository, pedidoRepository, productoPedidoRepository);
+        clienteService = new ClienteService(clienteRepository, pedidoRepository, productoPedidoRepository, planRepository);
     }
 
     @Test

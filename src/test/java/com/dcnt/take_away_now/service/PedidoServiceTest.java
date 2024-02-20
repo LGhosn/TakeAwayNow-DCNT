@@ -39,6 +39,8 @@ class PedidoServiceTest {
     private InventarioRegistroRepository inventarioRegistroRepository;
     @Autowired
     private ProductoPedidoRepository productoPedidoRepository;
+    @Autowired
+    private PlanRepository planRepository;
     private NegocioService negocioService;
 
     private PedidoService pedidoService;
@@ -57,10 +59,10 @@ class PedidoServiceTest {
         negocioRepository.save(negocio);
         pancho = new Producto("Pancho");
         productoRepository.save(pancho);
-        clienteService = new ClienteService(clienteRepository, pedidoRepository, productoPedidoRepository);
+        clienteService = new ClienteService(clienteRepository, pedidoRepository, productoPedidoRepository, planRepository);
         clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
         negocioService = new NegocioService(negocioRepository, inventarioRegistroRepository, productoRepository,pedidoRepository);
-        pedidoService = new PedidoService(pedidoRepository, clienteRepository, negocioRepository,productoRepository, inventarioRegistroRepository,productoPedidoRepository);
+        pedidoService = new PedidoService(pedidoRepository, clienteRepository, negocioRepository,productoRepository, inventarioRegistroRepository,productoPedidoRepository, planRepository);
     }
 
     @Test
