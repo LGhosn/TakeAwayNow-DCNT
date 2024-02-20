@@ -133,6 +133,6 @@ public class ClienteService {
         Cliente cliente = c.get();
         cliente.setIdPlanPrime(p.get().getId());
         clienteRepository.save(cliente);
-        return ResponseEntity.badRequest().body("El plan Prime fue adquirido con éxito.");
+        return ResponseEntity.ok("El plan Prime fue adquirido con éxito.");
     }
 }

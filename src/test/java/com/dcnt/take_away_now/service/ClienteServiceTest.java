@@ -1,11 +1,13 @@
 package com.dcnt.take_away_now.service;
 
 import com.dcnt.take_away_now.domain.Cliente;
+import com.dcnt.take_away_now.domain.Plan;
 import com.dcnt.take_away_now.repository.ClienteRepository;
 import com.dcnt.take_away_now.repository.PedidoRepository;
 import com.dcnt.take_away_now.repository.PlanRepository;
 import com.dcnt.take_away_now.repository.ProductoPedidoRepository;
 import com.dcnt.take_away_now.value_object.Dinero;
+import com.dcnt.take_away_now.value_object.PuntosDeConfianza;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @DataJpaTest
 class ClienteServiceTest {
@@ -126,4 +127,119 @@ class ClienteServiceTest {
         assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
         assertThat(response.getBody()).isEqualTo("No existe el cliente en la base de datos.");
     }
+
+    @Test
+    void alCrearUnClienteNoEsPrime() {
+        // given
+        Cliente cliente = new Cliente(username);
+
+        // when
+        boolean esPrime = cliente.esPrime();
+
+        // then
+        assertThat(esPrime).isFalse();
+    }
+
+    // TESTS NO PUEDO OBTENER PLAN PRIME SI NO EXISTE
+    @Test
+    void noPuedoObtenerPlanPrimeSiNoExiste() {
+        // given
+        new Cliente(username);
+        clienteService.crearCliente(username);
+        Optional<Cliente> messi = clienteRepository.findByUsuario(username);
+
+        // when
+        if (messi.isEmpty()) {
+            throw new AssertionError("No se encontró el cliente creado.");
+        }
+
+        ResponseEntity<String> response = clienteService.obtenerPlanPrime(messi.get().getId());
+
+        // then
+        assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
+        assertThat(response.getBody()).isEqualTo("No existe el plan Prime en la base de datos.");
+    }
+
+    @Test
+    void noPuedoObtenerPlanPrimeSiNoExisteElCliente() {
+        // when
+        ResponseEntity<String> response = clienteService.obtenerPlanPrime(1L);
+
+        // then
+        assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
+        assertThat(response.getBody()).isEqualTo("No existe el cliente en la base de datos.");
+    }
+
+    @Test
+    void noPuedoObtenerPlanPrimeConSaldoInsuficiente() {
+        // given
+        new Cliente(username);
+        clienteService.crearCliente(username);
+        Optional<Cliente> messi = clienteRepository.findByUsuario(username);
+
+        // si no existe plan prime crearlo
+        Optional<Plan> optionalPlanPrime = planRepository.findByNombre("Prime");
+        if (optionalPlanPrime.isEmpty()) {
+            Plan planPrime = new Plan(
+                    "Prime",
+                    new Dinero(100),
+                    new PuntosDeConfianza(100),
+                    10,
+                    2,
+                    true,
+                    5
+            );
+
+            planRepository.save(planPrime);
+        }
+
+        // when
+        if (messi.isEmpty()) {
+            throw new AssertionError("No se encontró el cliente creado.");
+        }
+
+        ResponseEntity<String> response = clienteService.obtenerPlanPrime(messi.get().getId());
+
+        // then
+        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertThat(response.getBody()).isEqualTo("No posees saldo suficiente para adquirir el plan Prime.");
+    }
+
+    @Test
+    void alSubscribirseAUnPlanPrimeElClienteEsPrime() {
+        // given
+        new Cliente(username);
+        clienteService.crearCliente(username);
+        Optional<Cliente> messi = clienteRepository.findByUsuario(username);
+
+        // si no existe plan prime crearlo
+        Optional<Plan> optionalPlanPrime = planRepository.findByNombre("Prime");
+        if (optionalPlanPrime.isEmpty()) {
+            Plan planPrime = new Plan(
+                    "Prime",
+                    new Dinero(100),
+                    new PuntosDeConfianza(100),
+                    10,
+                    2,
+                    true,
+                    5
+            );
+
+            planRepository.save(planPrime);
+        }
+
+        // when
+        if (messi.isEmpty()) {
+            throw new AssertionError("No se encontró el cliente creado.");
+        }
+
+        clienteService.cargarSaldo(messi.get().getId(), BigDecimal.valueOf(200));
+        ResponseEntity<String> response = clienteService.obtenerPlanPrime(messi.get().getId());
+
+        // then
+        assertThat(response.getStatusCode()).isEqualTo(OK);
+        assertThat(response.getBody()).isEqualTo("El plan Prime fue adquirido con éxito.");
+        assertThat(messi.get().esPrime()).isTrue();
+    }
+
 }
