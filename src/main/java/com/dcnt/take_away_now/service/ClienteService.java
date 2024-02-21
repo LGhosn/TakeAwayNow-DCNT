@@ -47,15 +47,12 @@ public class ClienteService {
         if (optionalCliente.isEmpty()) {
             throw new RuntimeException("No existe el cliente en la base de datos.");
         }
-
-        if (saldoACargar.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new RuntimeException("No se puede cargar saldo con un monto menor o igual a cero.");
-        }
-
         Cliente cliente = optionalCliente.get();
-        cliente.setSaldo(cliente.getSaldo().plus(new Dinero(saldoACargar)));
+        cliente.cargarSaldo(saldoACargar);
+
         this.clienteRepository.save(cliente);
     }
+
     public void eliminarCliente(Long idCliente) {
         clienteRepository.deleteById(idCliente);
     }
@@ -85,19 +82,11 @@ public class ClienteService {
         if (c.isEmpty()) {
             throw new RuntimeException("No existe el cliente en la base de datos.");
         }
-
-        if (c.get().getFechaDeNacimiento() != null) {
-            throw new RuntimeException("No se puede cambiar la fecha de nacimiento una vez establecida.");
-        }
-
-        LocalDate fechaNacimiento = LocalDate.of(yyyy, mm, dd);
-
-        if (Period.between(fechaNacimiento, LocalDate.now()).getYears() < 18) {
-            throw new RuntimeException("Debes ser mayor de edad para acceder al beneficio por cumpleaños.");
-        }
-
         Cliente cliente = c.get();
-        cliente.setFechaDeNacimiento(fechaNacimiento);
+        LocalDate fechaNacimiento = LocalDate.of(yyyy, mm, dd);
+        LocalDate hoy = LocalDate.now();
+        cliente.establecerFechaDeNacimiento(fechaNacimiento, hoy);
+
         clienteRepository.save(cliente);
     }
 
@@ -112,20 +101,9 @@ public class ClienteService {
             throw new RuntimeException("No existe el plan Prime en la base de datos.");
         }
 
-        BigDecimal saldoCliente = c.get().getSaldo().getMonto();
-        BigDecimal precioPlanPrime = p.get().getPrecio().getMonto();
-
-        if (c.get().esPrime()) {
-            throw new RuntimeException("Ya estás suscripto al plan Prime.");
-        }
-
-        if (saldoCliente.compareTo(precioPlanPrime) < 0) {
-            throw new RuntimeException("No posees saldo suficiente para adquirir el plan Prime.");
-        }
-
-        // Guardamos la relación entre cliente y plan.
         Cliente cliente = c.get();
-        cliente.setIdPlanPrime(p.get().getId());
+        cliente.obtenerPlanPrime(p.get());
+
         clienteRepository.save(cliente);
     }
 }

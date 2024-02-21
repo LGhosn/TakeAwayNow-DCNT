@@ -10,10 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.List;
 
 @Data
@@ -73,4 +70,38 @@ public class Cliente {
         return fechaUltUsoBenefCumple != null && fechaUltUsoBenefCumple.getYear() != hoy.getYear();
     }
 
+    public void cargarSaldo(BigDecimal saldoACargar) {
+        if (saldoACargar.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new RuntimeException("No se puede cargar saldo con un monto menor o igual a cero.");
+        }
+        this.setSaldo(this.getSaldo().plus(new Dinero(saldoACargar)));
+    }
+
+    public void establecerFechaDeNacimiento(LocalDate fechaDeNacimiento, LocalDate hoy) {
+        if (this.getFechaDeNacimiento() != null) {
+            throw new RuntimeException("No se puede cambiar la fecha de nacimiento una vez establecida.");
+        }
+
+        if (Period.between(fechaDeNacimiento, hoy).getYears() < 18) {
+            throw new RuntimeException("Debes ser mayor de edad para acceder al beneficio por cumpleaños.");
+        }
+
+        this.setFechaDeNacimiento(fechaDeNacimiento);
+    }
+
+    public void obtenerPlanPrime(Plan plan) {
+        BigDecimal saldoCliente = this.getSaldo().getMonto();
+        BigDecimal precioPlanPrime = plan.getPrecio().getMonto();
+
+        if (this.esPrime()) {
+            throw new RuntimeException("Ya estás suscripto al plan Prime.");
+        }
+
+        if (saldoCliente.compareTo(precioPlanPrime) < 0) {
+            throw new RuntimeException("No posees saldo suficiente para adquirir el plan Prime.");
+        }
+
+        // Guardamos la relación entre cliente y plan.
+        this.setIdPlanPrime(plan.getId());
+    }
 }
