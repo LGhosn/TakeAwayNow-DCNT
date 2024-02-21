@@ -116,8 +116,9 @@ public class Cliente {
 
         // Guardamos la relación entre cliente y plan.
         this.setPlan(plan);
+        this.setSaldo(this.getSaldo().minus(plan.getPrecio()));
     }
-    public boolean tieneSaldoSuficiente(Dinero precioTotalDelPedido, PuntosDeConfianza pdcTotalDelPedido) {
+    public boolean tieneSaldoSuficiente(Dinero precioTotalDelPedido, PuntosDeConfianza pdcTotalDelPedido, boolean usaPdc) {
         // Tomamos los montos a comparar.
         BigDecimal montoActualTotalPedido = precioTotalDelPedido.getMonto();
         BigDecimal montoTotalSaldoCliente = this.getSaldo().getMonto();
@@ -125,13 +126,16 @@ public class Cliente {
         Double cantidadPDCActualTotalPedido = pdcTotalDelPedido.getCantidad();
         Double cantidadPDCTotalCliente = this.getPuntosDeConfianza().getCantidad();
 
+        if (usaPdc) {
+            if (cantidadPDCActualTotalPedido.compareTo(cantidadPDCTotalCliente) > 0) {
+                return false;
+            }
+        }
+
         if (montoActualTotalPedido.compareTo(montoTotalSaldoCliente) > 0) {
             return false;
         }
 
-        if (cantidadPDCActualTotalPedido.compareTo(cantidadPDCTotalCliente) > 0) {
-            return false;
-        }
         return  true;
     }
 }

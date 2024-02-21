@@ -107,7 +107,7 @@ public class PedidoService {
                 precioTotalDelPedido.plus(producto.getInventarioRegistro().getPrecio().multiply(cantidadPedida));
             }
 
-            if (!cliente.tieneSaldoSuficiente(precioTotalDelPedido, pdcTotalDelPedido))
+            if (!cliente.tieneSaldoSuficiente(precioTotalDelPedido, pdcTotalDelPedido, usaPdc == 1))
                 return false;
 
         }
