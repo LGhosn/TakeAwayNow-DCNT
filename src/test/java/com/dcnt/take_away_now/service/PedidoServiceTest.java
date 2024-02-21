@@ -860,4 +860,5 @@ class PedidoServiceTest {
         assertThat(pdcPostConfirmarRetiro).isEqualTo(new PuntosDeConfianza(1040));
         assertThat(saldoPostConfirmarRetiro).isEqualTo(new Dinero(825));
     }
+
 }

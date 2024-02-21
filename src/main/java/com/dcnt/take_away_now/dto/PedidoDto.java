@@ -1,7 +1,6 @@
 package com.dcnt.take_away_now.dto;
 
 import com.dcnt.take_away_now.domain.Pedido;
-import com.dcnt.take_away_now.enums.EstadoDelPedido;
 import com.dcnt.take_away_now.value_object.Dinero;
 import lombok.Data;
 

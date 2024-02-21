@@ -100,10 +100,4 @@ public class Negocio {
                         && (horarioIngresado.isBefore(horarioDeCierre) || horarioIngresado.equals(horarioDeCierre))
         );
     }
-
-    public void registrarProductoEnInventario(InventarioRegistro inventarioRegistro) {
-        if (inventarioRegistros != null) {
-            inventarioRegistros.add(inventarioRegistro);
-        }
-    }
 }

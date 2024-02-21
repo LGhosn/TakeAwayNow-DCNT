@@ -61,7 +61,8 @@ public class PedidoService {
             Integer cantidadPedida = (Integer) productInfo.get("cantidad");
 
             if (!esUnProductoDeEseNegocio(idNegocio, productId)) {
-                throw new RuntimeException("Ha ocurrido un error ya que el producto " + productoRepository.findById(productId).get().getNombre() + " no está disponible para este negocio.");
+                Producto producto = productoRepository.findById(productId).get();
+                throw new RuntimeException("Ha ocurrido un error ya que el producto " + producto.getNombre() + " no está disponible para este negocio.");
             }
 
             Producto producto = productoRepository.findById(productId).get();

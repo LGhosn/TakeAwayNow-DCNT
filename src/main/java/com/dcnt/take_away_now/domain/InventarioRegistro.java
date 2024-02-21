@@ -1,14 +1,14 @@
 package com.dcnt.take_away_now.domain;
 
 import com.dcnt.take_away_now.dto.InventarioRegistroDto;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import com.dcnt.take_away_now.value_object.Dinero;
 import com.dcnt.take_away_now.value_object.PuntosDeConfianza;
 import com.dcnt.take_away_now.value_object.converter.DineroAttributeConverter;
 import com.dcnt.take_away_now.value_object.converter.PuntosDeConfianzaAttributeConverter;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -44,10 +44,16 @@ public class InventarioRegistro {
     @Convert(converter = PuntosDeConfianzaAttributeConverter.class)
     private PuntosDeConfianza recompensaPuntosDeConfianza;
 
-    public InventarioRegistro(InventarioRegistroDto dto) {
-        this.stock = dto.getStock();
-        this.precio = dto.getPrecio();
-        this.recompensaPuntosDeConfianza = dto.getRecompensaPuntosDeConfianza();
-        this.precioPDC = dto.getPrecioPDC();
+    public InventarioRegistro(
+            Long stock,
+            Dinero precio,
+            PuntosDeConfianza recompensaPuntosDeConfianza,
+            PuntosDeConfianza PrecioPDC
+    ) {
+        this.stock = stock;
+        this.precio = precio;
+        this.recompensaPuntosDeConfianza = recompensaPuntosDeConfianza;
+        this.precioPDC = PrecioPDC;
     }
+
 }

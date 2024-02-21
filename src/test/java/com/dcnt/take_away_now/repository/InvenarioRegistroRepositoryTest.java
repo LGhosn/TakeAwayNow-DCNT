@@ -44,7 +44,7 @@ class InvenarioRegistroRepositoryTest {
         producto2 = new Producto("Producto 2");
         productoRepository.save(producto2);
         // crea un inventario registro
-        inventarioRegistro = new InventarioRegistro(new InventarioRegistroDto());
+        inventarioRegistro = new InventarioRegistro();
         inventarioRegistroRepository.save(inventarioRegistro);
     }
 
@@ -193,7 +193,7 @@ class InvenarioRegistroRepositoryTest {
         inventarioRegistro.setProducto(producto1);
         inventarioRegistro.setNegocio(negocio1);
         // and: otro inventario registro con negocio y un producto
-        InventarioRegistro inventarioRegistro2 = new InventarioRegistro(new InventarioRegistroDto());
+        InventarioRegistro inventarioRegistro2 = new InventarioRegistro();
         inventarioRegistro2.setProducto(producto2);
         inventarioRegistro2.setNegocio(negocio1);
         inventarioRegistroRepository.save(inventarioRegistro2);

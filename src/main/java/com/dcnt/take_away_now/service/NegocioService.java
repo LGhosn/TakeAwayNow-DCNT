@@ -1,10 +1,11 @@
 package com.dcnt.take_away_now.service;
 
-import com.dcnt.take_away_now.domain.*;
+import com.dcnt.take_away_now.domain.InventarioRegistro;
+import com.dcnt.take_away_now.domain.Negocio;
+import com.dcnt.take_away_now.domain.Producto;
 import com.dcnt.take_away_now.dto.InventarioRegistroDto;
 import com.dcnt.take_away_now.dto.PedidoDto;
 import com.dcnt.take_away_now.dto.ProductoDto;
-import com.dcnt.take_away_now.enums.EstadoDelPedido;
 import com.dcnt.take_away_now.repository.InventarioRegistroRepository;
 import com.dcnt.take_away_now.repository.NegocioRepository;
 import com.dcnt.take_away_now.repository.PedidoRepository;
@@ -12,10 +13,8 @@ import com.dcnt.take_away_now.repository.ProductoRepository;
 import com.dcnt.take_away_now.value_object.Dinero;
 import com.dcnt.take_away_now.value_object.PuntosDeConfianza;
 import lombok.AllArgsConstructor;
-import org.apache.hc.core5.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import static org.springframework.http.HttpStatus.*;
+
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -79,7 +78,28 @@ public class NegocioService {
         }
 
         // Creamos el nuevo producto y el registro.
-        InventarioRegistro nuevoInventarioRegistro = inventarioRegistroRepository.save(new InventarioRegistro(inventarioRegistroDto));
+
+        Long stock = inventarioRegistroDto.getStock();
+        if (stock <= 0) {
+            throw new RuntimeException("No se permite ingresar un stock negativo o igual a cero.");
+        }
+
+        Dinero precio = inventarioRegistroDto.getPrecio();
+        if (precio.getMonto().compareTo(BigDecimal.ZERO) <= 0) {
+            throw new RuntimeException("No se permite ingresar un precio negativo o igual a cero.");
+        }
+
+        PuntosDeConfianza recompensa = inventarioRegistroDto.getRecompensaPuntosDeConfianza();
+        if (recompensa.getCantidad() <= 0) {
+            throw new RuntimeException("No se permite ingresar una recompensa negativa o igual a cero.");
+        }
+
+        PuntosDeConfianza precioPDC = inventarioRegistroDto.getPrecioPDC();
+        if (precioPDC.getCantidad() <= 0) {
+            throw new RuntimeException("No se permite ingresar un precio de PDC negativo o igual a cero.");
+        }
+
+        InventarioRegistro nuevoInventarioRegistro = inventarioRegistroRepository.save(new InventarioRegistro(stock, precio, recompensa, precioPDC));
         Producto nuevoProducto = productoRepository.save(new Producto(nombreDelProducto));
 
         nuevoInventarioRegistro.setProducto(nuevoProducto);

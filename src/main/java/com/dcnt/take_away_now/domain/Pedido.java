@@ -1,6 +1,5 @@
 package com.dcnt.take_away_now.domain;
 
-import com.dcnt.take_away_now.enums.EstadoDelPedido;
 import com.dcnt.take_away_now.generador.GeneradorDeCodigo;
 import com.dcnt.take_away_now.value_object.Dinero;
 import com.dcnt.take_away_now.value_object.PuntosDeConfianza;
@@ -9,14 +8,11 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.cglib.core.Local;
 
-import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Data
 @NoArgsConstructor

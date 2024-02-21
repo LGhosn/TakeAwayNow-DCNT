@@ -57,7 +57,19 @@ public class Cliente {
     public boolean esPrime() { return plan != null; }
 
     public boolean esSuCumpleanios(LocalDate hoy) {
-        return fechaDeNacimiento != null && hoy.getDayOfMonth() == fechaDeNacimiento.getDayOfMonth() && hoy.getMonth() == fechaDeNacimiento.getMonth();
+        if (fechaDeNacimiento == null) {
+            return false;
+        }
+
+        if (hoy.getDayOfMonth() == fechaDeNacimiento.getDayOfMonth() && hoy.getMonth() == fechaDeNacimiento.getMonth()) {
+            // Verificamos si la fecha de nacimiento es el 29 de febrero, y en tal caso, si es un año bisiesto.
+            if (fechaDeNacimiento.getDayOfMonth() == 29 && fechaDeNacimiento.getMonth() == Month.FEBRUARY) {
+                return hoy.isLeapYear() && hoy.getDayOfYear() == fechaDeNacimiento.getDayOfYear();
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean todaviaNoUsaBeneficioCumple(LocalDate hoy) {
@@ -68,7 +80,7 @@ public class Cliente {
         }
 
         /* En caso de utilizarlo más de una vez */
-        return fechaUltUsoBenefCumple != null && fechaUltUsoBenefCumple.getYear() != hoy.getYear();
+        return fechaUltUsoBenefCumple.getYear() != hoy.getYear();
     }
 
     public void cargarSaldo(BigDecimal saldoACargar) {
