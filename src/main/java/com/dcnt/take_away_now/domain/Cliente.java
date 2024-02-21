@@ -53,4 +53,9 @@ public class Cliente {
 
     public boolean esPrime() { return idPlanPrime != null; }
 
+    public boolean esSuCumpleanios() {
+        LocalDate hoy = LocalDate.now();
+        return fechaDeNacimiento != null && hoy.getDayOfMonth() == fechaDeNacimiento.getDayOfMonth() && hoy.getMonth() == fechaDeNacimiento.getMonth();
+    }
+
 }

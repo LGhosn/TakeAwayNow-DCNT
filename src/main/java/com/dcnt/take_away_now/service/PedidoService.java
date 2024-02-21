@@ -267,6 +267,11 @@ public class PedidoService {
             pdcRecompensa = pdcRecompensa.multiply(p.get().getMultiplicadorDePuntosDeConfianza());
         }
 
+        // Si es el cumpleaños del cliente, le damos su regalito <3
+        if (cliente.esSuCumpleanios()) {
+            pdcRecompensa = pdcRecompensa.plus(1000);
+        }
+
         cliente.setPuntosDeConfianza(pdcRecompensa);
 
         // Actualizamos el estado del pedido y se establece la fecha y hora de entrega.
