@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
+
+import static org.springframework.http.HttpStatus.ACCEPTED;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -57,7 +60,16 @@ public class NegocioController {
 
     @GetMapping("/corroborarExistencia/{nombre}")
     public ResponseEntity<Map<String, Object>> obtenerNegocio(@PathVariable String nombre) {
-        return negocioService.corroborarExistencia(nombre);
+        Long idNegocio = negocioService.corroborarExistencia(nombre);
+        Map<String, Object> response = new HashMap<>();
+        if (idNegocio > 0) {
+            response.put("mensaje", "A laburar " + nombre +"!");
+            response.put("id", idNegocio);
+        } else {
+            response.put("mensaje", "No existe un negocio con ese nombre en la base de datos.");
+            ResponseEntity.badRequest().body(response);
+        }
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/{idNegocio}")
@@ -78,7 +90,12 @@ public class NegocioController {
             @RequestParam int horaCierre,
             @RequestParam int minutoCierre
     ) {
-        return negocioService.crearNegocio(nombre, diaDeApertura, diaDeCierre, horaApertura, minutoApertura, horaCierre, minutoCierre);
+        try {
+            negocioService.crearNegocio(nombre, diaDeApertura, diaDeCierre, horaApertura, minutoApertura, horaCierre, minutoCierre);
+        } catch (RuntimeException e) {
+            ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.ok().body("Negocio creado correctamente.");
     }
     @PostMapping("/{negocioId}/productos/")
     public ResponseEntity<String> crearProducto(
@@ -89,7 +106,12 @@ public class NegocioController {
             @RequestParam Double recompensaPuntosDeConfianza,
             @RequestParam Double precioPdc
     ) {
-        return negocioService.crearProducto(negocioId, nombreDelProducto, new InventarioRegistroDto(stock, new Dinero(precio), new PuntosDeConfianza(recompensaPuntosDeConfianza), new PuntosDeConfianza(precioPdc)));
+        try {
+            negocioService.crearProducto(negocioId, nombreDelProducto, new InventarioRegistroDto(stock, new Dinero(precio), new PuntosDeConfianza(recompensaPuntosDeConfianza), new PuntosDeConfianza(precioPdc)));
+        } catch (RuntimeException e) {
+            ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.ok().body("Se ha creado el producto correctamente.");
     }
     /*******************
      *   Métodos Patch *
@@ -103,7 +125,12 @@ public class NegocioController {
             @RequestParam Double recompensaPuntosDeConfianza,
             @RequestParam Double precioPdc
     ) {
-        return negocioService.modificarInventarioRegistro(negocioId, productoId, stock, precio, recompensaPuntosDeConfianza, precioPdc);
+        try {
+            negocioService.modificarInventarioRegistro(negocioId, productoId, stock, precio, recompensaPuntosDeConfianza, precioPdc);
+        } catch (RuntimeException e ) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.status(ACCEPTED).body("El producto fue modificado correctamente.");
     }
 
     @PatchMapping("/{negocioId}/horariosDeTrabajo")
@@ -114,7 +141,12 @@ public class NegocioController {
             @RequestParam int horaCierre,
             @RequestParam int minutoCierre
     ) {
-        return negocioService.modificarHorariosDelNegocio(negocioId, horaApertura, minutoApertura, horaCierre, minutoCierre);
+        try {
+            negocioService.modificarHorariosDelNegocio(negocioId, horaApertura, minutoApertura, horaCierre, minutoCierre);
+        } catch (RuntimeException e ) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.accepted().body("Los horarios fueron modificados correctamente.");
     }
 
     @PatchMapping("/{negocioId}/diasDeTrabajo")
@@ -123,7 +155,12 @@ public class NegocioController {
             @RequestParam DayOfWeek diaDeApertura,
             @RequestParam DayOfWeek diaDeCierre
     ) {
-        return negocioService.modificarDiasDeAperturaDelNegocio(negocioId, diaDeApertura, diaDeCierre);
+        try {
+            negocioService.modificarDiasDeAperturaDelNegocio(negocioId, diaDeApertura, diaDeCierre);
+        } catch(RuntimeException e ) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.accepted().body("Los dias de apertura y cierre fueron modificados correctamente.");
     }
 
     /*******************
@@ -134,6 +171,11 @@ public class NegocioController {
             @PathVariable Long negocioId,
             @PathVariable Long productoId
     ) {
-        return negocioService.eliminarProducto(negocioId, productoId);
+        try {
+            negocioService.eliminarProducto(negocioId, productoId);
+        } catch (RuntimeException e) {
+            return  ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.ok().body("Producto eliminado correctamente.");
     }
 }

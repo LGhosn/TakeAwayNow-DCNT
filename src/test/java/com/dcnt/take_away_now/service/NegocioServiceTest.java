@@ -64,24 +64,23 @@ class NegocioServiceTest {
     @Test
     void sePuedeCrearNegocioNuevo() {
         //when
-        response = negocioService.crearNegocio(nombrePaseoColon, DiaDeApertura, DiaDeCierre,HoraApertura, MinutoApertura, HoraCierre, MinutoCierre);
+        negocioService.crearNegocio(nombrePaseoColon, DiaDeApertura, DiaDeCierre,HoraApertura, MinutoApertura, HoraCierre, MinutoCierre);
         Optional<Negocio> negocio = negocioRepository.findByNombre(nombrePaseoColon);
         //then
         assertThat(negocio.isPresent()).isTrue();
         assertThat(negocio.get().getNombre()).isEqualTo(nombrePaseoColon);
-        assertThat(response.getStatusCode()).isEqualTo(OK);
-        assertThat(response.getBody()).isEqualTo("Negocio creado correctamente.");
     }
 
     @Test
     void noSePuedeCrearNegocioExistente() {
         //given
         negocioService.crearNegocio(nombrePaseoColon, DiaDeApertura, DiaDeCierre,HoraApertura, MinutoApertura, HoraCierre, MinutoCierre);
-        //when
-        response = negocioService.crearNegocio(nombrePaseoColon, DiaDeApertura, DiaDeCierre,HoraApertura, MinutoApertura, HoraCierre, MinutoCierre);
-        //then
-        assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
-        assertThat(response.getBody()).isEqualTo("Ya existe un negocio con ese nombre.");
+        // when
+        assertThatThrownBy(() -> negocioService.crearNegocio(nombrePaseoColon, DiaDeApertura, DiaDeCierre,HoraApertura, MinutoApertura, HoraCierre, MinutoCierre))
+
+        // then: "obtengo cero pesos"
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("Ya existe un negocio con ese nombre.");
     }
 
     @Test
@@ -111,14 +110,12 @@ class NegocioServiceTest {
         InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         Optional<Negocio> negocio = negocioRepository.findByNombre(nombrePaseoColon);
         //when
-        response = negocioService.crearProducto(negocio.get().getId(), "Pancho",inventarioRegistroDto);
+        negocioService.crearProducto(negocio.get().getId(), "Pancho",inventarioRegistroDto);
         //then
         Optional<Producto> producto = productoRepository.findByNombre("Pancho");
         boolean existeInventarioRegistro = inventarioRegistroRepository.findByNegocioAndProducto(negocio.get(), producto.get()).isPresent();
         assertThat(producto).isPresent();
         assertThat(existeInventarioRegistro).isTrue();
-        assertThat(response.getStatusCode()).isEqualTo(OK);
-        assertThat(response.getBody()).isEqualTo("Se ha creado el producto correctamente.");
     }
     @Test
     void noSePuedeCrearProductoYaExistenteEnNegocioExistente() {
@@ -127,21 +124,22 @@ class NegocioServiceTest {
         InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         Optional<Negocio> negocio = negocioRepository.findByNombre(nombrePaseoColon);
         negocioService.crearProducto(negocio.get().getId(), "Pancho",inventarioRegistroDto);
-        //when
-        response = negocioService.crearProducto(negocio.get().getId(), "Pancho",inventarioRegistroDto);
-        //then
-        assertThat(response.getStatusCode()).isEqualTo(FOUND);
-        assertThat(response.getBody()).isEqualTo("Ya existe un producto con este nombre y para este negocio.");
+        // when
+        assertThatThrownBy(() -> negocioService.crearProducto(negocio.get().getId(), "Pancho",inventarioRegistroDto))
+        // then: "obtengo cero pesos"
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("Ya existe un producto con este nombre y para este negocio.");
     }
     @Test
     void noSePuedeCrearProductoNuevoEnNegocioQueNoExiste() {
         //given
         InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
-        //when
-        response = negocioService.crearProducto(1L, "Pancho",inventarioRegistroDto);
-        //then
-        assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
-        assertThat(response.getBody()).isEqualTo("No existe el negocio para el cual busca crear el producto.");
+
+        // when
+        assertThatThrownBy(() -> negocioService.crearProducto(1L, "Pancho",inventarioRegistroDto))
+        // then: "obtengo cero pesos"
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No existe el negocio para el cual busca crear el producto.");
     }
     @Test
     void eliminarProducto() {
@@ -152,14 +150,12 @@ class NegocioServiceTest {
         negocioService.crearProducto(negocio.get().getId(), "Pancho",inventarioRegistroDto);
         Optional<Producto> producto = productoRepository.findByNombre("Pancho");
         //when
-        response = negocioService.eliminarProducto(negocio.get().getId(), producto.get().getId());
+        negocioService.eliminarProducto(negocio.get().getId(), producto.get().getId());
         //then
         boolean existeInventarioRegistro = inventarioRegistroRepository.findByNegocioAndProducto(negocio.get(), producto.get()).isPresent();
         boolean existeProducto = productoRepository.findByNombre("Pancho").isPresent();
         assertThat(existeInventarioRegistro).isFalse();
         assertThat(existeProducto).isFalse();
-        assertThat(response.getStatusCode()).isEqualTo(OK);
-        assertThat(response.getBody()).isEqualTo("Producto eliminado correctamente.");
     }
 
     @Test
@@ -208,24 +204,26 @@ class NegocioServiceTest {
         negocioService.crearProducto(negocio.get().getId(), "Pancho",inventarioRegistroDto);
         Optional<Producto> producto = productoRepository.findByNombre("Pancho");
         //when
-        response = negocioService.modificarInventarioRegistro(negocio.get().getId(), producto.get().getId(), 20L, BigDecimal.valueOf(150), 25.0, 50.0);
+        negocioService.modificarInventarioRegistro(negocio.get().getId(), producto.get().getId(), 20L, BigDecimal.valueOf(150), 25.0, 50.0);
         //then
         Optional<InventarioRegistro> optInventarioRegistro = inventarioRegistroRepository.findByNegocioAndProducto(negocio.get(), producto.get());
         assertThat(optInventarioRegistro.get().getStock()).isEqualTo(20L);
         assertThat(optInventarioRegistro.get().getPrecio()).isEqualTo(new Dinero(150));
         assertThat(optInventarioRegistro.get().getRecompensaPuntosDeConfianza()).isEqualTo(new PuntosDeConfianza(25.0));
-        assertThat(response.getStatusCode()).isEqualTo(ACCEPTED);
-        assertThat(response.getBody()).isEqualTo("El producto fue modificado correctamente.");
     }
 
     @Test
     void noSePuedeModificarInventarioRegistroDeUnNegocioQueNoExiste() {
         // when: "Se intenta modificar un inventarioRegistro de un negocio que no existe"
-        response = negocioService.modificarInventarioRegistro(1L,1L,20L,BigDecimal.valueOf(150), 25.0,50.0);
+        assertThatThrownBy(
+                () -> {
+                    negocioService.modificarInventarioRegistro(1L,1L,20L,BigDecimal.valueOf(150), 25.0,50.0);
+                }
+        )
 
         // then: "se lanza error"
-        assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
-        assertThat(response.getBody()).isEqualTo("No existe el negocio al cual se solicitó modificar uno de sus productos.");
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No existe el negocio al cual se solicitó modificar uno de sus productos.");
     }
     @Test
     void noSePuedeModificarInventarioRegistroDeUnProductoQueNoExiste() {
@@ -234,11 +232,15 @@ class NegocioServiceTest {
         InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(10L, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(20.0));
         Optional<Negocio> negocio = negocioRepository.findByNombre(nombrePaseoColon);
         // when: "Se intenta modificar un inventarioRegistro de un producto que no existe"
-        response = negocioService.modificarInventarioRegistro(negocio.get().getId(),1L,20L,BigDecimal.valueOf(150), 25.0,50.0);
+        assertThatThrownBy(
+                () -> {
+                    negocioService.modificarInventarioRegistro(negocio.get().getId(),1L,20L,BigDecimal.valueOf(150), 25.0,50.0);
+                }
+        )
 
         // then: "se lanza error"
-        assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
-        assertThat(response.getBody()).isEqualTo("No existe el producto al cual se solicitó modificar.");
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No existe el producto al cual se solicitó modificar.");
     }
 
     @Test
@@ -253,11 +255,15 @@ class NegocioServiceTest {
         Optional<Negocio> lasHeras = negocioRepository.findByNombre("Buffet Las Heras");
 
         // when: "Se intenta modificar un inventarioRegistro de un producto que no tiene relacion con el negocio"
-        response = negocioService.modificarInventarioRegistro(lasHeras.get().getId(),producto.get().getId(), 20L,BigDecimal.valueOf(150), 25.0,50.0);
+        assertThatThrownBy(
+                () -> {
+                    negocioService.modificarInventarioRegistro(lasHeras.get().getId(),producto.get().getId(), 20L,BigDecimal.valueOf(150), 25.0,50.0);
+                }
+        )
 
-        //then
-        assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
-        assertThat(response.getBody()).isEqualTo("El producto que busca modificar no existe para el negocio en cuestión.");
+        // then: "se lanza error"
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("El producto que busca modificar no existe para el negocio en cuestión.");
     }
 
     @Test
@@ -267,14 +273,12 @@ class NegocioServiceTest {
         Optional<Negocio> paseoColon = negocioRepository.findByNombre(nombrePaseoColon);
 
         // when
-        response = negocioService.modificarHorariosDelNegocio(paseoColon.get().getId(), 14, 30, 21, 0);
+        negocioService.modificarHorariosDelNegocio(paseoColon.get().getId(), 14, 30, 21, 0);
 
         //then
         paseoColon = negocioRepository.findByNombre(nombrePaseoColon);
         assertThat(paseoColon.get().horarioDeApertura).isEqualTo(LocalTime.of(14, 30, 0, 0));
         assertThat(paseoColon.get().horarioDeCierre).isEqualTo(LocalTime.of(21, 0, 0, 0));
-        assertThat(response.getStatusCode()).isEqualTo(ACCEPTED);
-        assertThat(response.getBody()).isEqualTo("Los horarios fueron modificados correctamente.");
     }
 
     @Test
@@ -284,21 +288,29 @@ class NegocioServiceTest {
         Optional<Negocio> paseoColon = negocioRepository.findByNombre(nombrePaseoColon);
 
         // when
-        response = negocioService.modificarHorariosDelNegocio(paseoColon.get().getId(), 21, 30, 14, 0);
+        assertThatThrownBy(
+                () -> {
+                    negocioService.modificarHorariosDelNegocio(paseoColon.get().getId(), 21, 30, 14, 0);
+                }
+        )
 
-        //then
-        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertThat(response.getBody()).isEqualTo("El horario de apertura debe ser anterior al de cierre.");
+        // then: "se lanza error"
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("El horario de apertura debe ser anterior al de cierre.");
     }
 
     @Test
     void noSePuedeModificarHorariosDeUnNegocioQueNoExiste() {
         // when
-        response = negocioService.modificarHorariosDelNegocio(1L, 14, 30, 21, 0);
+        assertThatThrownBy(
+                () -> {
+                    negocioService.modificarHorariosDelNegocio(1L, 14, 30, 21, 0);
+                }
+        )
 
-        //then
-        assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
-        assertThat(response.getBody()).isEqualTo("No existe el negocio para el cual se solicita cambiar el horario.");
+        // then: "se lanza error"
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No existe el negocio para el cual se solicita cambiar el horario.");
     }
 
     @Test
@@ -308,24 +320,26 @@ class NegocioServiceTest {
         Optional<Negocio> paseoColon = negocioRepository.findByNombre(nombrePaseoColon);
 
         // when
-        response = negocioService.modificarDiasDeAperturaDelNegocio(paseoColon.get().getId(), DayOfWeek.THURSDAY, DayOfWeek.SATURDAY);
+        negocioService.modificarDiasDeAperturaDelNegocio(paseoColon.get().getId(), DayOfWeek.THURSDAY, DayOfWeek.SATURDAY);
 
         //then
         paseoColon = negocioRepository.findByNombre(nombrePaseoColon);
         assertThat(paseoColon.get().diaDeApertura).isEqualTo( DayOfWeek.THURSDAY);
         assertThat(paseoColon.get().diaDeCierre).isEqualTo( DayOfWeek.SATURDAY);
-        assertThat(response.getStatusCode()).isEqualTo(ACCEPTED);
-        assertThat(response.getBody()).isEqualTo("Los dias de apertura y cierre fueron modificados correctamente.");
     }
 
     @Test
     void noSePuedeModificarDiasDeUnNegocioQueNoExiste() {
         // when
-        response = negocioService.modificarDiasDeAperturaDelNegocio(1L, DayOfWeek.THURSDAY, DayOfWeek.SATURDAY);
+        assertThatThrownBy(
+                () -> {
+                    negocioService.modificarDiasDeAperturaDelNegocio(1L, DayOfWeek.THURSDAY, DayOfWeek.SATURDAY);
+                }
+        )
 
-        //then
-        assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
-        assertThat(response.getBody()).isEqualTo("No existe el negocio para el cual se solicita cambiar los dias de apertura y cierre.");
+        // then: "se lanza error"
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No existe el negocio para el cual se solicita cambiar los dias de apertura y cierre.");
     }
 
 }

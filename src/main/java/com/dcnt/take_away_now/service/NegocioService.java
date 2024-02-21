@@ -31,7 +31,7 @@ public class NegocioService {
     private final ProductoRepository productoRepository;
     private final PedidoRepository pedidoRepository;
 
-    public ResponseEntity<String> crearNegocio(
+    public void crearNegocio(
             String nombre,
             DayOfWeek diaDeApertura,
             DayOfWeek diaDeCierre,
@@ -42,7 +42,7 @@ public class NegocioService {
     ) {
         Optional<Negocio> optionalNegocio = negocioRepository.findByNombre(nombre);
         if (optionalNegocio.isPresent()) {
-            return ResponseEntity.internalServerError().body("Ya existe un negocio con ese nombre.");
+            throw new RuntimeException("Ya existe un negocio con ese nombre.");
         }
 
         this.negocioRepository.save(
@@ -54,14 +54,13 @@ public class NegocioService {
                         diaDeCierre
                 )
         );
-        return ResponseEntity.ok().body("Negocio creado correctamente.");
     }
 
     public Collection<Negocio> obtenerNegocios() {
         return negocioRepository.findAll();
     }
 
-    public ResponseEntity<String> crearProducto(
+    public void crearProducto(
             Long negocioId,
             String nombreDelProducto,
             InventarioRegistroDto inventarioRegistroDto
@@ -69,13 +68,13 @@ public class NegocioService {
         // Corroboramos que exista el negocio.
         Optional<Negocio> optionalNegocio = negocioRepository.findById(negocioId);
         if (optionalNegocio.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("No existe el negocio para el cual busca crear el producto.");
+            throw new RuntimeException("No existe el negocio para el cual busca crear el producto.");
         }
 
         // Corroboramos que no exista un producto con el nombre pasado por parámetro para este negocio.
         Optional<Producto> optionalProducto = productoRepository.findByNombre(nombreDelProducto);
         if (optionalProducto.isPresent() && inventarioRegistroRepository.existsByNegocioAndProducto(optionalNegocio.get(), optionalProducto.get())) {
-            return ResponseEntity.status(FOUND).body("Ya existe un producto con este nombre y para este negocio.");
+            throw new RuntimeException("Ya existe un producto con este nombre y para este negocio.");
         }
 
         // Creamos el nuevo producto y el registro.
@@ -89,39 +88,35 @@ public class NegocioService {
 
         productoRepository.save(nuevoProducto);
         inventarioRegistroRepository.save(nuevoInventarioRegistro);
-
-        return ResponseEntity.ok().body("Se ha creado el producto correctamente.");
     }
 
-    public ResponseEntity<String> eliminarProducto(Long negocioId, Long productoId) {
+    public void eliminarProducto(Long negocioId, Long productoId) {
         Optional<Negocio> OptNegocio = negocioRepository.findById(negocioId);
         Optional<Producto> OptProducto = productoRepository.findById(productoId);
 
         // Corroboramos que dichos IDs pertenezcan a registros existentes en la DB.
         if (OptNegocio.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("El negocio para el cual busca eliminar dicho producto no existe.");
+            throw new RuntimeException("El negocio para el cual busca eliminar dicho producto no existe.");
         }
 
         if (OptProducto.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("El producto que busca eliminar no existe.");
+            throw new RuntimeException("El producto que busca eliminar no existe.");
         }
 
         Optional<InventarioRegistro> OptInventarioRegistro = inventarioRegistroRepository.findByNegocioAndProducto(OptNegocio.get(), OptProducto.get());
         // Corroboramos que exista la relación entre el negocio y el producto en cuestión.
         if (OptInventarioRegistro.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("El producto que busca eliminar no existe para el negocio en cuestión.");
+            throw new RuntimeException("El producto que busca eliminar no existe para el negocio en cuestión.");
         }
 
         // Borramos la relación de la tabla de correlación.
         OptProducto.get().setInventarioRegistro(null);
-        //TODO REVISAR CONDICION
         if (OptNegocio.get().getInventarioRegistros() != null ) {
             OptNegocio.get().getInventarioRegistros().remove(OptInventarioRegistro.get());
         }
         inventarioRegistroRepository.deleteByNegocioAndProducto(OptNegocio.get(), OptProducto.get());
         // Borramos el producto de su respectiva tabla.
         productoRepository.deleteById(OptProducto.get().getId());
-        return ResponseEntity.ok().body("Producto eliminado correctamente.");
     }
 
     public Collection<ProductoDto> obtenerProductos(Long negocioId) {
@@ -135,7 +130,7 @@ public class NegocioService {
         return inventarioRegistroRepository.obtenerProductosDelNegocio(negocioId);
     }
 
-    public ResponseEntity<String> modificarInventarioRegistro(
+    public void modificarInventarioRegistro(
             Long negocioId,
             Long productoId,
             Long stock,
@@ -146,19 +141,19 @@ public class NegocioService {
         // Corroboramos la existencia del negocio.
         Optional<Negocio> optionalNegocio = negocioRepository.findById(negocioId);
         if (optionalNegocio.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("No existe el negocio al cual se solicitó modificar uno de sus productos.");
+            throw new RuntimeException("No existe el negocio al cual se solicitó modificar uno de sus productos.");
         }
 
         // Corroboramos la existencia del producto.
         Optional<Producto> optionalProducto = productoRepository.findById(productoId);
         if (optionalProducto.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("No existe el producto al cual se solicitó modificar.");
+            throw new RuntimeException("No existe el producto al cual se solicitó modificar.");
         }
 
         // Corroboramos que exista la relación entre el negocio y el producto en cuestión.
         Optional<InventarioRegistro> optInventarioRegistro = inventarioRegistroRepository.findByNegocioAndProducto(optionalNegocio.get(), optionalProducto.get());
         if (optInventarioRegistro.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("El producto que busca modificar no existe para el negocio en cuestión.");
+            throw new RuntimeException("El producto que busca modificar no existe para el negocio en cuestión.");
         }
 
         // Finalmente modificamos el registro.
@@ -168,23 +163,21 @@ public class NegocioService {
         inventarioRegistroExistente.setRecompensaPuntosDeConfianza(new PuntosDeConfianza(recompensaPuntosDeConfianza));
         inventarioRegistroExistente.setPrecioPDC(new PuntosDeConfianza(precioPdc));
         inventarioRegistroRepository.save(inventarioRegistroExistente);
-
-        return ResponseEntity.status(ACCEPTED).body("El producto fue modificado correctamente.");
     }
 
-    public ResponseEntity<String> modificarHorariosDelNegocio(Long negocioId, int horaApertura, int minutoApertura, int horaCierre, int minutoCierre) {
+    public void modificarHorariosDelNegocio(Long negocioId, int horaApertura, int minutoApertura, int horaCierre, int minutoCierre) {
         LocalTime horarioApertura = LocalTime.of(horaApertura, minutoApertura);
         LocalTime horarioCierre = LocalTime.of(horaCierre, minutoCierre);
 
         // El horario de apertura debe ser anterior al de cierre.
         if (horarioApertura.isAfter(horarioCierre)) {
-            return ResponseEntity.status(BAD_REQUEST).body("El horario de apertura debe ser anterior al de cierre.");
+            throw new RuntimeException("El horario de apertura debe ser anterior al de cierre.");
         }
 
         // No existe el negocio para el cual se solicita cambiar el horario.
         Optional<Negocio> optionalNegocio = negocioRepository.findById(negocioId);
         if (optionalNegocio.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("No existe el negocio para el cual se solicita cambiar el horario.");
+            throw new RuntimeException("No existe el negocio para el cual se solicita cambiar el horario.");
         }
 
         Negocio negocioExistente =  optionalNegocio.get();
@@ -192,15 +185,13 @@ public class NegocioService {
         negocioExistente.setHorarioDeCierre(horarioCierre);
 
         negocioRepository.save(negocioExistente);
-
-        return ResponseEntity.accepted().body("Los horarios fueron modificados correctamente.");
     }
 
-    public ResponseEntity<String> modificarDiasDeAperturaDelNegocio(Long negocioId, DayOfWeek diaDeApertura, DayOfWeek diaDeCierre) {
+    public void modificarDiasDeAperturaDelNegocio(Long negocioId, DayOfWeek diaDeApertura, DayOfWeek diaDeCierre) {
         // No existe el negocio para el cual se solicita cambiar el horario.
         Optional<Negocio> optionalNegocio = negocioRepository.findById(negocioId);
         if (optionalNegocio.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("No existe el negocio para el cual se solicita cambiar los dias de apertura y cierre.");
+            throw new RuntimeException("No existe el negocio para el cual se solicita cambiar los dias de apertura y cierre.");
         }
 
         Negocio negocioExistente =  optionalNegocio.get();
@@ -208,8 +199,6 @@ public class NegocioService {
         negocioExistente.setDiaDeCierre(diaDeCierre);
 
         negocioRepository.save(negocioExistente);
-
-        return ResponseEntity.accepted().body("Los dias de apertura y cierre fueron modificados correctamente.");
     }
 
     public Collection<PedidoDto> obtenerPedidos(Long idNegocio) {
@@ -245,18 +234,14 @@ public class NegocioService {
         return negociosCerrados;
     }
 
-    public ResponseEntity<Map<String, Object>> corroborarExistencia(String nombre) {
+    public Long corroborarExistencia(String nombre) {
         Optional<Negocio> n = negocioRepository.findByNombre(nombre);
-        Map<String, Object> response = new HashMap<>();
         if (n.isEmpty()) {
-            response.put("mensaje", "No existe un negocio con ese nombre en la base de datos.");
-            return ResponseEntity.badRequest().body(response);
+            return (long)-1;
         }
 
         Negocio negocio = n.get();
-        response.put("mensaje", "A laburar " + nombre +"!");
-        response.put("id", negocio.getId());
-        return ResponseEntity.ok().body(response);
+        return negocio.getId();
     }
 
     public Negocio obtenerInfoNegocio(Long idNegocio) {
