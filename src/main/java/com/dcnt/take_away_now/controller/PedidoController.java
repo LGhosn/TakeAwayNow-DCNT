@@ -41,7 +41,7 @@ public class PedidoController {
         try {
             pedidoService.verificarPedido(infoPedido);
         } catch (RuntimeException e) {
-            ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
         return  ResponseEntity.ok().body("El pedido fue confirmado correctamente.");
     }
@@ -54,7 +54,7 @@ public class PedidoController {
         try {
             pedidoService.marcarComienzoDePreparacion(pedidoId);
         } catch (RuntimeException e) {
-            ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
         return ResponseEntity.status(ACCEPTED).body("Se ha marcado que el pedido está en comienzo de preparación.");
     }
@@ -64,7 +64,7 @@ public class PedidoController {
         try{
             pedidoService.marcarPedidoListoParaRetirar(pedidoId);
         } catch (RuntimeException e) {
-            ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
         return ResponseEntity.status(ACCEPTED).body("Se ha marcado que el pedido está listo para retirar.");
     }
@@ -74,7 +74,7 @@ public class PedidoController {
         try {
             pedidoService.confirmarRetiroDelPedido(pedidoId);
         } catch (RuntimeException e) {
-            ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
         return ResponseEntity.status(ACCEPTED).body("Se ha confirmado el retiro del pedido.");
     }
@@ -84,7 +84,7 @@ public class PedidoController {
         try {
             pedidoService.solicitarDevolucion(pedidoId);
         } catch (RuntimeException e) {
-            ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
         return ResponseEntity.status(ACCEPTED).body("Se ha solicitado la devolución del pedido correctamente.");
     }
@@ -94,7 +94,7 @@ public class PedidoController {
         try {
             pedidoService.aceptarDevolucion(pedidoId);
         } catch (RuntimeException e) {
-            ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
         return ResponseEntity.status(ACCEPTED).body("Se ha aceptado la devolución del pedido correctamente.");
     }
@@ -104,7 +104,7 @@ public class PedidoController {
         try {
             pedidoService.denegarDevolucion(pedidoId);
         } catch (RuntimeException e) {
-            ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
         return ResponseEntity.status(ACCEPTED).body("Se ha denegado la devolución del pedido correctamente.");
     }
@@ -114,7 +114,7 @@ public class PedidoController {
         try {
             pedidoService.cancelarPedido(pedidoId);
         } catch (RuntimeException e) {
-            ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
         return ResponseEntity.status(ACCEPTED).body("Se ha cancelado el pedido.");
     }

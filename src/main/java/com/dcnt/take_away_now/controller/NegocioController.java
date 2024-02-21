@@ -93,7 +93,7 @@ public class NegocioController {
         try {
             negocioService.crearNegocio(nombre, diaDeApertura, diaDeCierre, horaApertura, minutoApertura, horaCierre, minutoCierre);
         } catch (RuntimeException e) {
-            ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
         return ResponseEntity.ok().body("Negocio creado correctamente.");
     }
@@ -109,7 +109,7 @@ public class NegocioController {
         try {
             negocioService.crearProducto(negocioId, nombreDelProducto, new InventarioRegistroDto(stock, new Dinero(precio), new PuntosDeConfianza(recompensaPuntosDeConfianza), new PuntosDeConfianza(precioPdc)));
         } catch (RuntimeException e) {
-            ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
         return ResponseEntity.ok().body("Se ha creado el producto correctamente.");
     }
