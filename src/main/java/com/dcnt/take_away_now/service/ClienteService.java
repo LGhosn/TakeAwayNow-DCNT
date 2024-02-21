@@ -125,6 +125,10 @@ public class ClienteService {
         BigDecimal saldoCliente = c.get().getSaldo().getMonto();
         BigDecimal precioPlanPrime = p.get().getPrecio().getMonto();
 
+        if (c.get().esPrime()) {
+            return ResponseEntity.badRequest().body("Ya estás suscripto al plan Prime.");
+        }
+
         if (saldoCliente.compareTo(precioPlanPrime) < 0) {
             return ResponseEntity.badRequest().body("No posees saldo suficiente para adquirir el plan Prime.");
         }

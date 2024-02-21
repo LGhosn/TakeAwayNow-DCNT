@@ -209,6 +209,44 @@ class ClienteServiceTest {
     }
 
     @Test
+    void unClienteNoPuedeVolverASubscribirseAlPlanPrime() {
+        // given
+        new Cliente(username);
+        clienteService.crearCliente(username);
+        Optional<Cliente> messi = clienteRepository.findByUsuario(username);
+
+        // si no existe plan prime crearlo
+        Optional<Plan> optionalPlanPrime = planRepository.findByNombre("Prime");
+        if (optionalPlanPrime.isEmpty()) {
+            Plan planPrime = new Plan(
+                    "Prime",
+                    new Dinero(100),
+                    new PuntosDeConfianza(100),
+                    10,
+                    2,
+                    true,
+                    5
+            );
+
+            planRepository.save(planPrime);
+        }
+
+        // when
+        if (messi.isEmpty()) {
+            throw new AssertionError("No se encontró el cliente creado.");
+        }
+
+        clienteService.cargarSaldo(messi.get().getId(), BigDecimal.valueOf(200));
+        clienteService.obtenerPlanPrime(messi.get().getId());
+        ResponseEntity<String> response = clienteService.obtenerPlanPrime(messi.get().getId());
+
+        // then
+        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertThat(response.getBody()).isEqualTo("Ya estás suscripto al plan Prime.");
+        assertThat(messi.get().esPrime()).isTrue();
+    }
+
+    @Test
     void alSubscribirseAUnPlanPrimeElClienteEsPrime() {
         // given
         new Cliente(username);
