@@ -11,6 +11,9 @@ HELP.md
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
+.bin
+.gradle/
+build/
 
 ### IntelliJ IDEA ###
 .idea
