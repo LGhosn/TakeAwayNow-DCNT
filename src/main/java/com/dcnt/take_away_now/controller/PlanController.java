@@ -23,7 +23,13 @@ public class PlanController {
 
     @PostMapping("/")
     public ResponseEntity<String> crearPlan(@RequestParam String nombre, @RequestParam int precio, @RequestParam int puntosDeConfianza, @RequestParam int descuento, @RequestParam int multiplicadorPuntoDeConfianza, @RequestParam boolean cancelacionSinCosto, @RequestParam int porcentajeDePuntosDeConfianzaPorDevolucion) {
-        return planService.crearPlan(nombre, precio, puntosDeConfianza, descuento, multiplicadorPuntoDeConfianza, cancelacionSinCosto, porcentajeDePuntosDeConfianzaPorDevolucion);
+        try {
+            planService.crearPlan(nombre, precio, puntosDeConfianza, descuento, multiplicadorPuntoDeConfianza, cancelacionSinCosto, porcentajeDePuntosDeConfianzaPorDevolucion);
+        } catch (RuntimeException e ) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.ok().body("Plan creado con éxito.");
+
     }
 
     /*******************
@@ -41,7 +47,12 @@ public class PlanController {
 
     @DeleteMapping("/{planId}")
     public ResponseEntity<String> eliminarPlan(@PathVariable Long planId) {
-        return planService.eliminarPlan(planId);
+        try {
+            planService.eliminarPlan(planId);
+        } catch (RuntimeException e ) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.ok().body("Plan eliminado con éxito.");
     }
 
 }

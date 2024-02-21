@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.http.ResponseEntity;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -47,7 +48,7 @@ class PlanServiceTest {
     @Test
     void sePuedeCrearPlanNuevo() {
         // given
-        ResponseEntity<String> response = planService.crearPlan(
+        planService.crearPlan(
             nombre,
             precio,
             puntosDeConfianza,
@@ -66,8 +67,6 @@ class PlanServiceTest {
         }
 
         assertThat(plan.get().getNombre()).isEqualTo(nombre);
-        assertThat(response.getStatusCode()).isEqualTo(OK);
-        assertThat(response.getBody()).isEqualTo("Plan creado con éxito.");
     }
 
     @Test
@@ -82,21 +81,20 @@ class PlanServiceTest {
             cancelacionSinCosto,
             porcentajeExtraDePuntosDeConfianzaPorDevolucion
         );
-
-        // when
-        ResponseEntity<String> response = planService.crearPlan(
-            nombre,
-            precio,
-            puntosDeConfianza,
-            descuento,
-            multiplicadorDePuntosDeConfianza,
-            cancelacionSinCosto,
-            porcentajeExtraDePuntosDeConfianzaPorDevolucion
-        );
-
-        // then
-        assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
-        assertThat(response.getBody()).isEqualTo("Ya existe un plan con el nombre ingresado.");
+        assertThatThrownBy(() -> {
+            planService.crearPlan(
+                    nombre,
+                    precio,
+                    puntosDeConfianza,
+                    descuento,
+                    multiplicadorDePuntosDeConfianza,
+                    cancelacionSinCosto,
+                    porcentajeExtraDePuntosDeConfianzaPorDevolucion
+            );
+        })
+        // then: "obtengo cero pesos"
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("Ya existe un plan con el nombre ingresado.");
     }
 
     @Test
@@ -158,11 +156,10 @@ class PlanServiceTest {
             throw new AssertionError("No se encontró el plan creado.");
         }
 
-        ResponseEntity<String> response = planService.eliminarPlan(plan.get().getId());
+        planService.eliminarPlan(plan.get().getId());
 
         // then
-        assertThat(response.getStatusCode()).isEqualTo(OK);
-        assertThat(response.getBody()).isEqualTo("Plan eliminado con éxito.");
+        assertThat(planRepository.findByNombre(nombre).isEmpty()).isTrue();
     }
 
     boolean existePlan(Collection<Plan> planes, String nombre) {

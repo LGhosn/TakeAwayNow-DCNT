@@ -16,7 +16,7 @@ import java.util.Optional;
 public class PlanService {
     private final PlanRepository planRepository;
 
-    public ResponseEntity<String> crearPlan(
+    public void crearPlan(
             String nombre,
             int precio,
             int puntosDeConfiazna,
@@ -27,24 +27,22 @@ public class PlanService {
         Optional<Plan> optionalCliente = planRepository.findByNombre(nombre);
 
         if (optionalCliente.isPresent()) {
-            return ResponseEntity.internalServerError().body("Ya existe un plan con el nombre ingresado.");
+            throw new RuntimeException("Ya existe un plan con el nombre ingresado.");
         }
 
         this.planRepository.save(new Plan(nombre, new Dinero(precio), new PuntosDeConfianza(puntosDeConfiazna), descuento, multiplicadorPuntoDeConfianza, cancelacionSinCosto, porcentajeDePuntosDeConfianzaPorDevolucion));
-        return ResponseEntity.ok().body("Plan creado con éxito.");
     }
 
     public Collection<Plan> obtenerPlanes() {
         return planRepository.findAll();
     }
 
-    public ResponseEntity<String> eliminarPlan(Long planId) {
+    public void eliminarPlan(Long planId) {
         Optional<Plan> optionalPlan = planRepository.findById(planId);
         if (optionalPlan.isEmpty()) {
-            return ResponseEntity.internalServerError().body("No existe el plan en la base de datos.");
+            throw new RuntimeException("No existe el plan en la base de datos.");
         }
 
         planRepository.deleteById(planId);
-        return ResponseEntity.ok().body("Plan eliminado con éxito.");
     }
 }
