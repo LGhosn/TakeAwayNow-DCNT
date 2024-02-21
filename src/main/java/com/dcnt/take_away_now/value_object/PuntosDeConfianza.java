@@ -6,9 +6,8 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Data
-@NoArgsConstructor
 public class PuntosDeConfianza {
-    public Double cantidad;
+    private final Double cantidad;
 
     public PuntosDeConfianza(int cantidadInicial) {
         this.cantidad = (double) cantidadInicial;

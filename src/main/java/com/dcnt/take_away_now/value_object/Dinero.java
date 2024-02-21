@@ -8,9 +8,8 @@ import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Dinero implements Comparable<Dinero> {
-    public BigDecimal monto;
+    private final BigDecimal monto;
 
     public Dinero(int i) {
         this.monto = BigDecimal.valueOf(i);
