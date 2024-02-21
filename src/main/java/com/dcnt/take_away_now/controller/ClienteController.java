@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -41,12 +42,25 @@ public class ClienteController {
 
     @GetMapping("/{idCliente}/usuario")
     public String obtenerUsuario(@PathVariable Long idCliente) {
-        return clienteService.obtenerUsuario(idCliente);
+        try {
+            return clienteService.obtenerUsuario(idCliente);
+        } catch (RuntimeException e) {
+            return e.getMessage();
+        }
     }
 
     @GetMapping("/corroborarExistencia/{usuario}")
     public ResponseEntity<Map<String, Object>> obtenerUsuario(@PathVariable String usuario) {
-        return clienteService.corroborarExistencia(usuario);
+        Map<String, Object> response = new HashMap<>();
+        Long idCliente = clienteService.corroborarExistencia(usuario);
+        if ( idCliente > 0) {
+            response.put("mensaje", "Hola de nuevo " + usuario + " !");
+            response.put("id", idCliente);
+        } else {
+            response.put("mensaje", "No existe un cliente con ese usuario en la base de datos.");
+            return ResponseEntity.badRequest().body(response);
+        }
+        return ResponseEntity.ok().body(response);
     }
 
     /******************
@@ -54,22 +68,43 @@ public class ClienteController {
      ******************/
     @PostMapping("/")
     public ResponseEntity<String> crearCliente(@RequestParam String nombreUsuario) {
-        return clienteService.crearCliente(nombreUsuario);
+        try {
+            clienteService.crearCliente(nombreUsuario);
+        } catch (RuntimeException e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.ok().body("Cliente creado con éxito.");
     }
 
     @PostMapping("/{idCliente}/cargaDeSaldo/{saldoACargar}")
     public ResponseEntity<String> cargarSaldo(@PathVariable Long idCliente, @PathVariable BigDecimal saldoACargar) {
-        return clienteService.cargarSaldo(idCliente, saldoACargar);
+        try {
+            clienteService.cargarSaldo(idCliente, saldoACargar);
+        } catch (RuntimeException e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.ok().body("Se han cargado correctamente a su saldo el monto de $" + saldoACargar + "." );
+
     }
 
     @PatchMapping("/{idCliente}/establecerFechaDeNacimiento")
     public ResponseEntity<String> establecerFechaDeNacimiento(@PathVariable Long idCliente, @RequestParam int yyyy, @RequestParam int mm, @RequestParam int dd) {
-        return clienteService.establecerFechaDeNacimiento(idCliente, yyyy, mm, dd);
+        try {
+            clienteService.establecerFechaDeNacimiento(idCliente, yyyy, mm, dd);
+        } catch (RuntimeException e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.ok().body("Fecha de nacimiento guardada correctamente.");
     }
 
     @PostMapping("/{idCliente}/obtenerPlanPrime")
     public ResponseEntity<String> obtenerPlanPrime(@PathVariable Long idCliente) {
-        return clienteService.obtenerPlanPrime(idCliente);
+        try {
+            clienteService.obtenerPlanPrime(idCliente);
+        } catch (RuntimeException e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.ok("El plan Prime fue adquirido con éxito.");
     }
 
     /*******************

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.service.PlanServiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-02-21T03:52:02" hostname="LGG-W10" time="0.061">
+<testsuite name="com.dcnt.take_away_now.service.PlanServiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-02-21T04:29:25" hostname="LGG-W10" time="0.073">
   <properties/>
-  <testcase name="noSePuedeCrearDosPlanesConElMismoNombre()" classname="com.dcnt.take_away_now.service.PlanServiceTest" time="0.013"/>
-  <testcase name="sePuedenEncontrarUnPlanesQueExistes()" classname="com.dcnt.take_away_now.service.PlanServiceTest" time="0.012"/>
-  <testcase name="sePuedeCrearPlanNuevo()" classname="com.dcnt.take_away_now.service.PlanServiceTest" time="0.007"/>
-  <testcase name="noSePuedeEncontrarUnPlanQueNoExiste()" classname="com.dcnt.take_away_now.service.PlanServiceTest" time="0.012"/>
-  <testcase name="sePuedeEliminarUnPlanExistente()" classname="com.dcnt.take_away_now.service.PlanServiceTest" time="0.013"/>
-  <system-out><![CDATA[2024-02-21T00:52:02.292-03:00  INFO 17640 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.service.PlanServiceTest]: PlanServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-21T00:52:02.310-03:00  INFO 17640 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.service.PlanServiceTest
+  <testcase name="noSePuedeCrearDosPlanesConElMismoNombre()" classname="com.dcnt.take_away_now.service.PlanServiceTest" time="0.008"/>
+  <testcase name="sePuedenEncontrarUnPlanesQueExistes()" classname="com.dcnt.take_away_now.service.PlanServiceTest" time="0.013"/>
+  <testcase name="sePuedeCrearPlanNuevo()" classname="com.dcnt.take_away_now.service.PlanServiceTest" time="0.008"/>
+  <testcase name="noSePuedeEncontrarUnPlanQueNoExiste()" classname="com.dcnt.take_away_now.service.PlanServiceTest" time="0.005"/>
+  <testcase name="sePuedeEliminarUnPlanExistente()" classname="com.dcnt.take_away_now.service.PlanServiceTest" time="0.037"/>
+  <system-out><![CDATA[2024-02-21T01:29:25.635-03:00  INFO 17792 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.service.PlanServiceTest]: PlanServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-21T01:29:25.654-03:00  INFO 17792 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.service.PlanServiceTest
 Hibernate: 
     select
         p1_0.id_plan,

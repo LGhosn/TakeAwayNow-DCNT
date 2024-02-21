@@ -47,13 +47,11 @@ class ClienteServiceTest {
     @Test
     void sePuedeCrearClienteNuevo() {
         //when
-        ResponseEntity<String> response = clienteService.crearCliente(username);
+        clienteService.crearCliente(username);
 
         //then
         Optional<Cliente> cliente = clienteRepository.findByUsuario(username);
         assertThat(cliente.get().getUsuario()).isEqualTo(username);
-        assertThat(response.getStatusCode()).isEqualTo(OK);
-        assertThat(response.getBody()).isEqualTo("Cliente creado con éxito.");
     }
 
     @Test
@@ -62,11 +60,11 @@ class ClienteServiceTest {
         clienteService.crearCliente(username);
 
         // when
-        ResponseEntity<String> response = clienteService.crearCliente(username);
+        assertThatThrownBy(() -> clienteService.crearCliente(username))
 
-        // then
-        assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
-        assertThat(response.getBody()).isEqualTo("Ya existe un usuario con el nombre ingresado.");
+        // then: "obtengo cero pesos"
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("Ya existe un usuario con el nombre ingresado.");
     }
 
     @Test
@@ -112,23 +110,21 @@ class ClienteServiceTest {
         Optional<Cliente> messi = clienteRepository.findByUsuario(username);
 
         //when
-        ResponseEntity<String> response = clienteService.cargarSaldo(messi.get().getId(), BigDecimal.valueOf(100));
+        clienteService.cargarSaldo(messi.get().getId(), BigDecimal.valueOf(100));
 
         //then
         Dinero saldo = messi.get().getSaldo();
         assertThat(saldo).isEqualTo(new Dinero(100));
-        assertThat(response.getStatusCode()).isEqualTo(OK);
-        assertThat(response.getBody()).isEqualTo("Se han cargado correctamente a su saldo el monto de $100.");
     }
 
     @Test
     void noSePuedeCargarSaldoAUnClienteQueNoExiste() {
-        //when
-        ResponseEntity<String> response = clienteService.cargarSaldo(1L, BigDecimal.valueOf(100));
+        // when
+        assertThatThrownBy(() -> clienteService.cargarSaldo(1L, BigDecimal.valueOf(100)))
 
-        // then
-        assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
-        assertThat(response.getBody()).isEqualTo("No existe el cliente en la base de datos.");
+        // then: "obtengo cero pesos"
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No existe el cliente en la base de datos.");
     }
 
     @Test
@@ -151,26 +147,26 @@ class ClienteServiceTest {
         clienteService.crearCliente(username);
         Optional<Cliente> messi = clienteRepository.findByUsuario(username);
 
-        // when
         if (messi.isEmpty()) {
             throw new AssertionError("No se encontró el cliente creado.");
         }
 
-        ResponseEntity<String> response = clienteService.obtenerPlanPrime(messi.get().getId());
+        // when
+        assertThatThrownBy(() -> clienteService.obtenerPlanPrime(messi.get().getId()))
 
-        // then
-        assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
-        assertThat(response.getBody()).isEqualTo("No existe el plan Prime en la base de datos.");
+        // then: "obtengo cero pesos"
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No existe el plan Prime en la base de datos.");
     }
 
     @Test
     void noPuedoObtenerPlanPrimeSiNoExisteElCliente() {
         // when
-        ResponseEntity<String> response = clienteService.obtenerPlanPrime(1L);
+        assertThatThrownBy(() -> clienteService.obtenerPlanPrime(0L))
 
-        // then
-        assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
-        assertThat(response.getBody()).isEqualTo("No existe el cliente en la base de datos.");
+        // then: "obtengo cero pesos"
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No existe el cliente en la base de datos.");
     }
 
     @Test
@@ -201,11 +197,12 @@ class ClienteServiceTest {
             throw new AssertionError("No se encontró el cliente creado.");
         }
 
-        ResponseEntity<String> response = clienteService.obtenerPlanPrime(messi.get().getId());
+        // when
+        assertThatThrownBy(() -> clienteService.obtenerPlanPrime(messi.get().getId()))
 
-        // then
-        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertThat(response.getBody()).isEqualTo("No posees saldo suficiente para adquirir el plan Prime.");
+        // then: "obtengo cero pesos"
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No posees saldo suficiente para adquirir el plan Prime.");
     }
 
     @Test
@@ -238,11 +235,12 @@ class ClienteServiceTest {
 
         clienteService.cargarSaldo(messi.get().getId(), BigDecimal.valueOf(200));
         clienteService.obtenerPlanPrime(messi.get().getId());
-        ResponseEntity<String> response = clienteService.obtenerPlanPrime(messi.get().getId());
+        // when
+        assertThatThrownBy(() -> clienteService.obtenerPlanPrime(messi.get().getId()))
 
-        // then
-        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertThat(response.getBody()).isEqualTo("Ya estás suscripto al plan Prime.");
+        // then: "obtengo cero pesos"
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("Ya estás suscripto al plan Prime.");
         assertThat(messi.get().esPrime()).isTrue();
     }
 
@@ -275,11 +273,9 @@ class ClienteServiceTest {
         }
 
         clienteService.cargarSaldo(messi.get().getId(), BigDecimal.valueOf(200));
-        ResponseEntity<String> response = clienteService.obtenerPlanPrime(messi.get().getId());
+        clienteService.obtenerPlanPrime(messi.get().getId());
 
         // then
-        assertThat(response.getStatusCode()).isEqualTo(OK);
-        assertThat(response.getBody()).isEqualTo("El plan Prime fue adquirido con éxito.");
         assertThat(messi.get().esPrime()).isTrue();
     }
 
@@ -311,10 +307,10 @@ class ClienteServiceTest {
         int dd = 24;
 
         // when
-        ResponseEntity<String> response = clienteService.establecerFechaDeNacimiento(messi.get().getId(), year, mm, dd);
+        assertThatThrownBy(() -> clienteService.establecerFechaDeNacimiento(messi.get().getId(), year, mm, dd))
 
-        // then:
-        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertThat(response.getBody()).isEqualTo("Debes ser mayor de edad para acceder al beneficio por cumpleaños.");
+        // then: "obtengo cero pesos"
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("Debes ser mayor de edad para acceder al beneficio por cumpleaños.");
     }
 }

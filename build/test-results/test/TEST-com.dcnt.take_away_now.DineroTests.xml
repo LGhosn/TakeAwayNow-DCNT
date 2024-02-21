@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.DineroTests" tests="10" skipped="0" failures="0" errors="0" timestamp="2024-02-21T03:51:46" hostname="LGG-W10" time="0.152">
+<testsuite name="com.dcnt.take_away_now.DineroTests" tests="10" skipped="0" failures="0" errors="0" timestamp="2024-02-21T04:29:09" hostname="LGG-W10" time="0.147">
   <properties/>
-  <testcase name="noPuedoMultiplicarDineroPorUnNumeroNegativo()" classname="com.dcnt.take_away_now.DineroTests" time="0.117"/>
-  <testcase name="noPuedoDividirDineroPorCero()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
+  <testcase name="noPuedoMultiplicarDineroPorUnNumeroNegativo()" classname="com.dcnt.take_away_now.DineroTests" time="0.118"/>
+  <testcase name="noPuedoDividirDineroPorCero()" classname="com.dcnt.take_away_now.DineroTests" time="0.002"/>
   <testcase name="tengoDosPesosLoDividoPorDosYObtengoUnPeso()" classname="com.dcnt.take_away_now.DineroTests" time="0.005"/>
-  <testcase name="tengoDosPesosLoMultiplicoPorCincoYObtengoDiezPesos()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
+  <testcase name="tengoDosPesosLoMultiplicoPorCincoYObtengoDiezPesos()" classname="com.dcnt.take_away_now.DineroTests" time="0.0"/>
   <testcase name="conviertoDosPesosEnDineroABigDecimal()" classname="com.dcnt.take_away_now.DineroTests" time="0.003"/>
   <testcase name="noPuedoTenerDineroNegativo()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
-  <testcase name="noPuedoMultiplicarDineroPorCero()" classname="com.dcnt.take_away_now.DineroTests" time="0.0"/>
-  <testcase name="tengoDosPesosLeSumoTresPesosYObtengoCincoPesos()" classname="com.dcnt.take_away_now.DineroTests" time="0.002"/>
-  <testcase name="contextLoads()" classname="com.dcnt.take_away_now.DineroTests" time="0.0"/>
-  <testcase name="conviertoVariableBigDecimalConValIgualADosAValueObjectDineroConMontoIgualADos()" classname="com.dcnt.take_away_now.DineroTests" time="0.007"/>
+  <testcase name="noPuedoMultiplicarDineroPorCero()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
+  <testcase name="tengoDosPesosLeSumoTresPesosYObtengoCincoPesos()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
+  <testcase name="contextLoads()" classname="com.dcnt.take_away_now.DineroTests" time="0.003"/>
+  <testcase name="conviertoVariableBigDecimalConValIgualADosAValueObjectDineroConMontoIgualADos()" classname="com.dcnt.take_away_now.DineroTests" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
