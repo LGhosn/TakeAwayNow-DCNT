@@ -106,20 +106,9 @@ public class PedidoService {
                 precioTotalDelPedido.plus(producto.getInventarioRegistro().getPrecio().multiply(cantidadPedida));
             }
 
-            // Tomamos los montos a comparar.
-            BigDecimal montoActualTotalPedido = precioTotalDelPedido.getMonto();
-            BigDecimal montoTotalSaldoCliente = cliente.getSaldo().getMonto();
-
-            Double cantidadPDCActualTotalPedido = pdcTotalDelPedido.getCantidad();
-            Double cantidadPDCTotalCliente = cliente.getPuntosDeConfianza().getCantidad();
-
-            if (montoActualTotalPedido.compareTo(montoTotalSaldoCliente) > 0) {
+            if (!cliente.tieneSaldoSuficiente(precioTotalDelPedido, pdcTotalDelPedido))
                 return false;
-            }
 
-            if (cantidadPDCActualTotalPedido.compareTo(cantidadPDCTotalCliente) > 0) {
-                return false;
-            }
         }
         return true;
     }
@@ -184,29 +173,7 @@ public class PedidoService {
                 precioTotalDelPedido = precioTotalDelPedido.plus(precioParcialPorProducto);
             }
         }
-
-        // Actualizamos el saldo y los puntos de confianza del cliente, tanto si ha gastado como si ha ganado.
-        if (cliente.getSaldo().minus(precioTotalDelPedido).compareTo(new Dinero(0)) < 0) {
-            throw new RuntimeException("No tenes el Dinero suficiente para realizar la compra");
-        }
-
-        // Si el cliente esta subscripto a un plan, se le aplica el descuento correspondiente.
-        if (cliente.esPrime()) {
-            Optional<Plan> p = planRepository.findById(cliente.getIdPlanPrime());
-            if (p.isEmpty()) {
-                throw  new RuntimeException("Ha ocurrido un error al procesar el plan del cliente.");
-            }
-            precioTotalDelPedido = precioTotalDelPedido.multiply(p.get().getDescuento()).divide(100);
-        }
-
-        cliente.setSaldo(cliente.getSaldo().minus(precioTotalDelPedido));
-        cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().minus(pdcTotalDelPedido));
-
-        // Actualizamos el saldo del negocio.
-        negocio.setSaldo(negocio.getSaldo().plus(precioTotalDelPedido));
-
-        // Finalmente, guardamos el precio total del pedido.
-        pedido.setPrecioTotal(precioTotalDelPedido);
+        pedido.actualizarSaldosClienteYNegocio(precioTotalDelPedido, pdcTotalDelPedido);
         pedidoRepository.save(pedido);
     }
 
@@ -245,10 +212,7 @@ public class PedidoService {
         }
 
         Pedido pedido = optionalPedido.get();
-        if (pedido.estado != Pedido.EstadoDelPedido.AGUARDANDO_PREPARACION) {
-            throw  new RuntimeException("No se puede comenzar a preparar dicho pedido ya que el mismo no se encuentra aguardando preparación.");
-        }
-        pedido.setEstado(Pedido.EstadoDelPedido.EN_PREPARACION);
+        pedido.marcarComienzoDePreparcion();
         pedidoRepository.save(pedido);
     }
 
@@ -259,11 +223,7 @@ public class PedidoService {
         }
 
         Pedido pedido = optionalPedido.get();
-        if (pedido.estado != Pedido.EstadoDelPedido.EN_PREPARACION) {
-            throw  new RuntimeException("No se puede marcar dicho pedido como lista para retirar ya que el mismo no se encuentra en preparación.");
-        }
-        pedido.setEstado(Pedido.EstadoDelPedido.LISTO_PARA_RETIRAR);
-        pedido.setCodigoDeRetiro(GeneradorDeCodigo.generarCodigoAleatorio());
+        pedido.marcarPedidoListoParaRetirar();
         pedidoRepository.save(pedido);
     }
 
@@ -277,34 +237,8 @@ public class PedidoService {
         if (pedido.estado != Pedido.EstadoDelPedido.LISTO_PARA_RETIRAR) {
             throw  new RuntimeException("No se puede retirar dicho pedido ya que el mismo no se encuentra listo para retirar.");
         }
-
-        // le doy al cliente sus pdc y saldo de reintegro en caso de ser necesario.
-        Cliente cliente = pedido.getCliente();
         PuntosDeConfianza pdcRecompensa =  obtenerPuntosDeConfianzaDeUnPedido(idPedido);
-        Dinero reintegroPorBeneficios = new Dinero(0);
-
-        // Si el cliente esta subscripto al plan prime, se le aplica el multiplicador correspondiente.
-        if (cliente.esPrime()) {
-            Optional<Plan> p = planRepository.findById(cliente.getIdPlanPrime());
-            if (p.isEmpty()) {
-                throw  new RuntimeException("Ha ocurrido un error al procesar el plan del cliente.");
-            }
-            pdcRecompensa = pdcRecompensa.multiply(p.get().getMultiplicadorDePuntosDeConfianza());
-        }
-
-        // Si es el cumpleaños del cliente, le damos su regalito <3
-        if (cliente.esSuCumpleanios() && cliente.todaviaNoUsaBeneficioCumple()) {
-            pdcRecompensa = pdcRecompensa.plus(1000);
-            reintegroPorBeneficios = pedido.getPrecioTotal().multiply(25).divide(100);
-            cliente.setFechaUltUsoBenefCumple(LocalDate.now());
-        }
-
-        cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().plus(pdcRecompensa));
-        cliente.setSaldo(cliente.getSaldo().plus(reintegroPorBeneficios));
-
-        // Actualizamos el estado del pedido y se establece la fecha y hora de entrega.
-        pedido.setFechaYHoraDeEntrega(LocalDateTime.now());
-        pedido.setEstado(Pedido.EstadoDelPedido.RETIRADO);
+        pedido.confirmarRetiroDelPedido(pdcRecompensa);
         pedidoRepository.save(pedido);
     }
 
@@ -320,39 +254,15 @@ public class PedidoService {
             throw  new RuntimeException("No se puede cancelar dicho pedido ya que el mismo no se encuentra aguardando preparación, en preparación ni listo para retirar.");
         }
 
-        Cliente c = clienteRepository.findById(pedido.getCliente().getId()).orElseThrow( () -> new RuntimeException("Ocurrió un error al obtener los datos del cliente."));
-
         PuntosDeConfianza pdcPedido = obtenerPuntosDeConfianzaDeUnPedido(idPedido);
-
-        if (!c.esPrime()) {
-            // En caso de que el estado sea AGUARDANDO_PREPARACION, entonces el cliente pierde puntos de confianza (levemente, un 5% del total que del pedido) pero recupera su dinero.
-            if (pedido.getEstado() == Pedido.EstadoDelPedido.AGUARDANDO_PREPARACION) {
-                c.setPuntosDeConfianza(c.getPuntosDeConfianza().minus(pdcPedido.multiply(0.05)));
-                c.setSaldo(c.getSaldo().plus(pedido.getPrecioTotal()));
-            }else if (pedido.getEstado() == Pedido.EstadoDelPedido.EN_PREPARACION) {
-                //En caso de que el estado sea EN_PREPARACION, entonces el cliente pierde puntos de confianza (notablemente, un 20% del total del pedido), no recupera su dinero.
-                c.setPuntosDeConfianza(
-                        c.getPuntosDeConfianza().minus(pdcPedido.multiply(0.20)));
-            } else if(pedido.getEstado() == Pedido.EstadoDelPedido.LISTO_PARA_RETIRAR) {
-                //En caso de que el estado sea LISTO_PARA_RETIRAR, entonces el cliente pierde puntos de confianza (significativamente, pierde un 100% del total que posee o en caso de tener pdc negativos, adeudará 500 pdc adicionales) y no recupera su dinero.
-                if (c.getPuntosDeConfianza().getCantidad() <= 0) {
-                    c.setPuntosDeConfianza(c.getPuntosDeConfianza().minus(500));
-                } else {
-                    c.setPuntosDeConfianza(new PuntosDeConfianza((double) 0));
-                }
-            }
-        } else {
-            // Al ser prime obtiene el dinero nuevamente.
-            c.setSaldo(c.getSaldo().plus(pedido.getPrecioTotal()));
-        }
+        Cliente c = pedido.getCliente();
+        pedido.cancelarPedido(pdcPedido);
 
         clienteRepository.save(c);
 
         // Se actualiza el stock de cada producto
         devolverStockDeUnPedido(pedido);
 
-        // Actualizamos el estado del pedido.
-        pedido.setEstado(Pedido.EstadoDelPedido.CANCELADO);
         pedidoRepository.save(pedido);
     }
 
@@ -367,22 +277,7 @@ public class PedidoService {
             throw  new RuntimeException("No se puede solicitar la devolución de dicho pedido ya que el mismo no se encontraba retirado.");
         }
 
-        // Corroboramos si el cliente tiene plan prime.
-        if (pedido.getCliente().esPrime()) {
-            // Verificamos si pasaron menos de 5 minutos desde su retiro.
-            if (Duration.between(pedido.getFechaYHoraDeEntrega(), LocalDateTime.now()).toMinutes() > 5) {
-                throw  new RuntimeException("El tiempo de tolerancia para devolver un pedido es de cinco minutos y el mismo ya ha expirado.");
-            }
-        } else {
-            // Verificamos si pasaron menos de 5 minutos desde su retiro.
-            if (Duration.between(pedido.getFechaYHoraDeEntrega(), LocalDateTime.now()).toMinutes() > 15) {
-                throw  new RuntimeException("El tiempo de tolerancia para devolver un pedido es de quince minutos para los beneficiarios del plan prime y el mismo ya ha expirado.");
-            }
-        }
-
-
-        // Actualizamos el estado del pedido.
-        pedido.setEstado(Pedido.EstadoDelPedido.DEVOLUCION_SOLICITADA);
+        pedido.solicitarDevolucion();
         pedidoRepository.save(pedido);
     }
 
@@ -397,15 +292,11 @@ public class PedidoService {
             throw  new RuntimeException("No se puede aceptar la devolución de dicho pedido ya que el mismo no se encuentra solicitando devolución.");
         }
 
-        // El cliente obtiene su dinero nuevamente y sus pdc no se ven afectados.
-        Cliente c = clienteRepository.findById(pedido.getCliente().getId()).orElseThrow( () -> new RuntimeException("Ocurrió un error al reintegrar el total del pedido al cliente."));
-        c.setSaldo(c.getSaldo().plus(pedido.getPrecioTotal()));
+        pedido.aceptarDevolucion();
 
         // Se actualiza el stock de cada producto
         devolverStockDeUnPedido(pedido);
 
-        // Actualizamos el estado del pedido.
-        pedido.setEstado(Pedido.EstadoDelPedido.DEVOLUCION_ACEPTADA);
         pedidoRepository.save(pedido);
     }
 
@@ -420,10 +311,7 @@ public class PedidoService {
             throw  new RuntimeException("No se puede denegar la devolución de dicho pedido ya que el mismo no se encuentra solicitando devolución.");
         }
 
-        // El cliente no obtiene su dinero nuevamente ni sus pdc no se ven afectados y dado que no se devuelve el pedido, el stock queda tal cual.
-
-        // Actualizamos el estado del pedido.
-        pedido.setEstado(Pedido.EstadoDelPedido.DEVOLUCION_DENEGADA);
+        pedido.denegarDevolucion();
         pedidoRepository.save(pedido);
     }
 

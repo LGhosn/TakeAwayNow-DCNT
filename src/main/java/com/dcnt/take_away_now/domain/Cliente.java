@@ -6,6 +6,7 @@ import com.dcnt.take_away_now.value_object.converter.DineroAttributeConverter;
 import com.dcnt.take_away_now.value_object.converter.PuntosDeConfianzaAttributeConverter;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "CLIENTES")
 public class Cliente {
@@ -38,8 +40,9 @@ public class Cliente {
     @OneToMany(targetEntity = Pedido.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Pedido> pedidos;
 
-    @Column(name="ID_PLAN")
-    private Long idPlanPrime = null;
+    @ManyToOne(targetEntity = Plan.class)
+    @JoinColumn(name="ID_PLAN")
+    private Plan plan = null;
 
     @Column(name="FECHA_NACIMIENTO")
     private LocalDate fechaDeNacimiento = null;
@@ -51,7 +54,7 @@ public class Cliente {
         this.usuario = nombreDeUsuario;
     }
 
-    public boolean esPrime() { return idPlanPrime != null; }
+    public boolean esPrime() { return plan != null; }
 
     public boolean esSuCumpleanios() {
         LocalDate hoy = LocalDate.now();
@@ -102,6 +105,23 @@ public class Cliente {
         }
 
         // Guardamos la relación entre cliente y plan.
-        this.setIdPlanPrime(plan.getId());
+        this.setPlan(plan);
+    }
+    public boolean tieneSaldoSuficiente(Dinero precioTotalDelPedido, PuntosDeConfianza pdcTotalDelPedido) {
+        // Tomamos los montos a comparar.
+        BigDecimal montoActualTotalPedido = precioTotalDelPedido.getMonto();
+        BigDecimal montoTotalSaldoCliente = this.getSaldo().getMonto();
+
+        Double cantidadPDCActualTotalPedido = pdcTotalDelPedido.getCantidad();
+        Double cantidadPDCTotalCliente = this.getPuntosDeConfianza().getCantidad();
+
+        if (montoActualTotalPedido.compareTo(montoTotalSaldoCliente) > 0) {
+            return false;
+        }
+
+        if (cantidadPDCActualTotalPedido.compareTo(cantidadPDCTotalCliente) > 0) {
+            return false;
+        }
+        return  true;
     }
 }
