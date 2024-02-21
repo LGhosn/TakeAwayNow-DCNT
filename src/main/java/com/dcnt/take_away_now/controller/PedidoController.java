@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
+import static org.springframework.http.HttpStatus.ACCEPTED;
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @AllArgsConstructor
 @RestController
@@ -36,7 +38,12 @@ public class PedidoController {
      ******************/
     @PostMapping("/")
     public ResponseEntity<String> confirmarPedido(@RequestBody InfoPedidoDto infoPedido) {
-        return pedidoService.verificarPedido(infoPedido);
+        try {
+            pedidoService.verificarPedido(infoPedido);
+        } catch (RuntimeException e) {
+            ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return  ResponseEntity.ok().body("El pedido fue confirmado correctamente.");
     }
 
     /*******************
@@ -44,36 +51,71 @@ public class PedidoController {
      *******************/
     @PatchMapping("/{pedidoId}/marcarComienzoDePreparacion")
     public ResponseEntity<String> marcarComienzoDePreparacion(@PathVariable Long pedidoId) {
-        return pedidoService.marcarComienzoDePreparacion(pedidoId);
+        try {
+            pedidoService.marcarComienzoDePreparacion(pedidoId);
+        } catch (RuntimeException e) {
+            ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.status(ACCEPTED).body("Se ha marcado que el pedido está en comienzo de preparación.");
     }
 
     @PatchMapping("/{pedidoId}/marcarPedidoListoParaRetirar")
     public ResponseEntity<String> marcarPedidoListoParaRetirar(@PathVariable Long pedidoId) {
-        return pedidoService.marcarPedidoListoParaRetirar(pedidoId);
+        try{
+            pedidoService.marcarPedidoListoParaRetirar(pedidoId);
+        } catch (RuntimeException e) {
+            ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.status(ACCEPTED).body("Se ha marcado que el pedido está listo para retirar.");
     }
 
     @PatchMapping("/{pedidoId}/confirmarRetiroDelPedido")
     public ResponseEntity<String> confirmarRetiroDelPedido(@PathVariable Long pedidoId) {
-        return pedidoService.confirmarRetiroDelPedido(pedidoId);
+        try {
+            pedidoService.confirmarRetiroDelPedido(pedidoId);
+        } catch (RuntimeException e) {
+            ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.status(ACCEPTED).body("Se ha confirmado el retiro del pedido.");
     }
 
     @PatchMapping("/{pedidoId}/devolverPedido")
     public ResponseEntity<String> devolverPedido(@PathVariable Long pedidoId) {
-        return pedidoService.solicitarDevolucion(pedidoId);
+        try {
+            pedidoService.solicitarDevolucion(pedidoId);
+        } catch (RuntimeException e) {
+            ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.status(ACCEPTED).body("Se ha solicitado la devolución del pedido correctamente.");
     }
 
     @PatchMapping("/{pedidoId}/aceptarDevolucion")
     public ResponseEntity<String> aceptarDevolucion(@PathVariable Long pedidoId) {
-        return pedidoService.aceptarDevolucion(pedidoId);
+        try {
+            pedidoService.aceptarDevolucion(pedidoId);
+        } catch (RuntimeException e) {
+            ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.status(ACCEPTED).body("Se ha aceptado la devolución del pedido correctamente.");
     }
 
     @PatchMapping("/{pedidoId}/denegarDevolucion")
     public ResponseEntity<String> denegarDevolucion(@PathVariable Long pedidoId) {
-        return pedidoService.denegarDevolucion(pedidoId);
+        try {
+            pedidoService.denegarDevolucion(pedidoId);
+        } catch (RuntimeException e) {
+            ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.status(ACCEPTED).body("Se ha denegado la devolución del pedido correctamente.");
     }
 
     @PatchMapping("/{pedidoId}/cancelarPedido")
     public ResponseEntity<String> cancelarPedido(@PathVariable Long pedidoId) {
-        return pedidoService.cancelarPedido(pedidoId);
+        try {
+            pedidoService.cancelarPedido(pedidoId);
+        } catch (RuntimeException e) {
+            ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.status(ACCEPTED).body("Se ha cancelado el pedido.");
     }
 }

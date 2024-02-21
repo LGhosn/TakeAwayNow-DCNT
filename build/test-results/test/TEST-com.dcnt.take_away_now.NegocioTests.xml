@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.NegocioTests" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-02-21T04:50:11" hostname="LGG-W10" time="0.019">
+<testsuite name="com.dcnt.take_away_now.NegocioTests" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-02-21T05:24:09" hostname="LGG-W10" time="0.017">
   <properties/>
-  <testcase name="unNegocioSeEncuentraAbiertoSiAbreDeLunesAViernesYPreguntoUnJueves()" classname="com.dcnt.take_away_now.NegocioTests" time="0.014"/>
+  <testcase name="unNegocioSeEncuentraAbiertoSiAbreDeLunesAViernesYPreguntoUnJueves()" classname="com.dcnt.take_away_now.NegocioTests" time="0.01"/>
   <testcase name="unNegocioSeEncuentraCerradoSiAbreDeLunesAViernesYPreguntoUnSabado()" classname="com.dcnt.take_away_now.NegocioTests" time="0.001"/>
-  <testcase name="contextLoads()" classname="com.dcnt.take_away_now.NegocioTests" time="0.001"/>
+  <testcase name="contextLoads()" classname="com.dcnt.take_away_now.NegocioTests" time="0.0"/>
   <testcase name="unNegocioSeEncuentraCerradoSiAbreDeLunesAViernesDe9A18YPreguntoUnMartesPorLaMadrugada()" classname="com.dcnt.take_away_now.NegocioTests" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

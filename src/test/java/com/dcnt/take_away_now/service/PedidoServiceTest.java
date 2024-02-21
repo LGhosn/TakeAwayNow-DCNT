@@ -9,10 +9,13 @@ import com.dcnt.take_away_now.repository.*;
 import com.dcnt.take_away_now.value_object.Dinero;
 import com.dcnt.take_away_now.value_object.PuntosDeConfianza;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.http.ResponseEntity;
+
+import static com.dcnt.take_away_now.domain.Pedido.EstadoDelPedido.*;
 import static org.springframework.http.HttpStatus.*;
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
@@ -179,10 +182,9 @@ class PedidoServiceTest {
         InfoPedidoDto infoPedidoDto = new InfoPedidoDto(cliente.getId(), negocio.getId(), productos);
 
         //when
-        response = pedidoService.confirmarPedido(infoPedidoDto);
-
-        assertThat(response.getStatusCode()).isEqualTo(OK);
-        assertThat(response.getBody()).isEqualTo("El pedido fue confirmado correctamente.");
+        pedidoService.confirmarPedido(infoPedidoDto);
+        //then
+        assertThat(negocio.getSaldo()).isEqualTo(new Dinero(9 * 100));
     }
 
     @Test
@@ -199,11 +201,10 @@ class PedidoServiceTest {
         InfoPedidoDto infoPedidoDto = new InfoPedidoDto(cliente.getId(), negocio.getId(), productos);
 
         //when
-        response = pedidoService.verificarPedido(infoPedidoDto);
+        pedidoService.verificarPedido(infoPedidoDto);
 
         //then
-        assertThat(response.getStatusCode()).isEqualTo(OK);
-        assertThat(response.getBody()).isEqualTo("El pedido fue confirmado correctamente.");
+        assertThat(negocio.getSaldo()).isEqualTo(new Dinero(10 * 100));
     }
 
     @Test
@@ -221,11 +222,13 @@ class PedidoServiceTest {
         InfoPedidoDto infoPedidoDto = new InfoPedidoDto(1L, negocio.getId(), productos);
 
         //when
-        response = pedidoService.verificarPedido(infoPedidoDto);
+        assertThatThrownBy(() ->
+                pedidoService.verificarPedido(infoPedidoDto)
+        )
 
-        // then: "se lanza error"
-        assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
-        assertThat(response.getBody()).isEqualTo("No existe el cliente para el cual se busca verificar la integridad del pedido.");
+        // then: *se lanza error*
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No existe el cliente para el cual se busca verificar la integridad del pedido.");
     }
 
     @Test
@@ -244,11 +247,13 @@ class PedidoServiceTest {
         InfoPedidoDto infoPedidoDto = new InfoPedidoDto(cliente.getId(), 33L, productos);
 
         //when
-        response = pedidoService.verificarPedido(infoPedidoDto);
+        assertThatThrownBy(() ->
+                pedidoService.verificarPedido(infoPedidoDto)
+        )
 
-        // then: "se lanza error"
-        assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
-        assertThat(response.getBody()).isEqualTo("No existe el negocio para el cual se busca verificar la integridad del pedido.");
+        // then: *se lanza error*
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No existe el negocio para el cual se busca verificar la integridad del pedido.");
     }
 
     @Test
@@ -260,20 +265,21 @@ class PedidoServiceTest {
         pedidoRepository.save(pedido1);
 
         //when
-        response = pedidoService.marcarComienzoDePreparacion(pedido1.getId());
+        pedidoService.marcarComienzoDePreparacion(pedido1.getId());
 
-        //then
-        assertThat(response.getStatusCode()).isEqualTo(ACCEPTED);
-        assertThat(response.getBody()).isEqualTo("Se ha marcado que el pedido está en comienzo de preparación.");
+        assertThat(pedido1.getEstado()).isEqualTo(EN_PREPARACION);
     }
 
     @Test
     void noSePuedeMarcarComienzoDePreparacionAUnPedidoQueNoExiste() {
         //when
-        response = pedidoService.marcarComienzoDePreparacion(1L);
-        // then: "se lanza error"
-        assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
-        assertThat(response.getBody()).isEqualTo("No existe el pedido al cual usted quiere marcar su comienzo de preparación.");
+        assertThatThrownBy(() ->
+                pedidoService.marcarComienzoDePreparacion(1L)
+        )
+
+        // then: *se lanza error*
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No existe el pedido al cual usted quiere marcar su comienzo de preparación.");
     }
 
     @Test
@@ -286,11 +292,13 @@ class PedidoServiceTest {
         pedidoService.marcarComienzoDePreparacion(pedido1.getId());
 
         //when
-        response = pedidoService.marcarComienzoDePreparacion(pedido1.getId());
+        assertThatThrownBy(() ->
+                pedidoService.marcarComienzoDePreparacion(pedido1.getId())
+        )
 
-        // then: "se lanza error"
-        assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
-        assertThat(response.getBody()).isEqualTo("No se puede comenzar a preparar dicho pedido ya que el mismo no se encuentra aguardando preparación.");
+        // then: *se lanza error*
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No se puede comenzar a preparar dicho pedido ya que el mismo no se encuentra aguardando preparación.");
     }
 
     @Test
@@ -303,20 +311,22 @@ class PedidoServiceTest {
         pedidoService.marcarComienzoDePreparacion(pedido1.getId());
 
         //when
-        response = pedidoService.marcarPedidoListoParaRetirar(pedido1.getId());
+        pedidoService.marcarPedidoListoParaRetirar(pedido1.getId());
 
         //then
-        assertThat(response.getStatusCode()).isEqualTo(ACCEPTED);
-        assertThat(response.getBody()).isEqualTo("Se ha marcado que el pedido está listo para retirar.");
+        assertThat(pedido1.getEstado()).isEqualTo(LISTO_PARA_RETIRAR);
+
     }
     @Test
     void noSePuedeMarcarListoParaRetirarAUnPedidoQueNoExiste() {
         //when
-        response = pedidoService.marcarPedidoListoParaRetirar(1L);
+        assertThatThrownBy(() ->
+                pedidoService.marcarPedidoListoParaRetirar(1L)
+        )
 
-        // then: "se lanza error"
-        assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
-        assertThat(response.getBody()).isEqualTo("No existe el pedido al cual usted quiere marcar como disponible su retiro.");
+        // then: *se lanza error*
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No existe el pedido al cual usted quiere marcar como disponible su retiro.");
     }
 
     @Test
@@ -328,11 +338,13 @@ class PedidoServiceTest {
         pedidoRepository.save(pedido1);
 
         //when
-        response = pedidoService.marcarPedidoListoParaRetirar(pedido1.getId());
+        assertThatThrownBy(() ->
+                pedidoService.marcarPedidoListoParaRetirar(pedido1.getId())
+        )
 
-        // then: "se lanza error"
-        assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
-        assertThat(response.getBody()).isEqualTo("No se puede marcar dicho pedido como lista para retirar ya que el mismo no se encuentra en preparación.");
+        // then: *se lanza error*
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No se puede marcar dicho pedido como lista para retirar ya que el mismo no se encuentra en preparación.");
     }
 
     @Test
@@ -346,21 +358,22 @@ class PedidoServiceTest {
         pedidoService.marcarPedidoListoParaRetirar(pedido1.getId());
 
         //when
-        response = pedidoService.confirmarRetiroDelPedido(pedido1.getId());
+        pedidoService.confirmarRetiroDelPedido(pedido1.getId());
 
         //then
-        assertThat(response.getStatusCode()).isEqualTo(ACCEPTED);
-        assertThat(response.getBody()).isEqualTo("Se ha confirmado el retiro del pedido.");
+        assertThat(pedido1.getEstado()).isEqualTo(RETIRADO);
     }
 
     @Test
     void noSePuedeConfirmarRetiroAUnPedidoQueNoExiste() {
         //when
-        response = pedidoService.confirmarRetiroDelPedido(1L);
+        assertThatThrownBy(() ->
+                pedidoService.confirmarRetiroDelPedido(1L)
+        )
 
-        // then: "se lanza error"
-        assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
-        assertThat(response.getBody()).isEqualTo("No existe el pedido al cual usted quiere confirmar el retiro.");
+        // then: *se lanza error*
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No existe el pedido al cual usted quiere confirmar el retiro.");
     }
 
     @Test
@@ -372,11 +385,13 @@ class PedidoServiceTest {
         pedidoRepository.save(pedido1);
 
         //when
-        response = pedidoService.confirmarRetiroDelPedido(pedido1.getId());
+        assertThatThrownBy(() ->
+                pedidoService.confirmarRetiroDelPedido(pedido1.getId())
+        )
 
-        // then: "se lanza error"
-        assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
-        assertThat(response.getBody()).isEqualTo("No se puede retirar dicho pedido ya que el mismo no se encuentra listo para retirar.");
+        // then: *se lanza error*
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No se puede retirar dicho pedido ya que el mismo no se encuentra listo para retirar.");
     }
 
     @Test
@@ -388,21 +403,22 @@ class PedidoServiceTest {
         pedidoRepository.save(pedido1);
 
         //when
-        response = pedidoService.cancelarPedido(pedido1.getId());
+        pedidoService.cancelarPedido(pedido1.getId());
 
         //then
-        assertThat(response.getStatusCode()).isEqualTo(ACCEPTED);
-        assertThat(response.getBody()).isEqualTo("Se ha cancelado el pedido.");
+        assertThat(pedido1.getEstado()).isEqualTo(CANCELADO);
     }
 
     @Test
     void noSePuedeCancelarAUnPedidoQueNoExiste() {
         //when
-        response = pedidoService.cancelarPedido(1L);
+        assertThatThrownBy(() ->
+                pedidoService.cancelarPedido(1L)
+        )
 
-        // then: "se lanza error"
-        assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
-        assertThat(response.getBody()).isEqualTo("No existe el pedido que usted busca cancelar.");
+        // then: *se lanza error*
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No existe el pedido que usted busca cancelar.");
     }
 
     @Test
@@ -537,21 +553,22 @@ class PedidoServiceTest {
         pedidoService.confirmarRetiroDelPedido(pedido1.getId());
 
         //when
-        response = pedidoService.solicitarDevolucion(pedido1.getId());
+        pedidoService.solicitarDevolucion(pedido1.getId());
 
         //then
-        assertThat(response.getStatusCode()).isEqualTo(ACCEPTED);
-        assertThat(response.getBody()).isEqualTo("Se ha solicitado la devolución del pedido correctamente.");
+        assertThat(pedido1.getEstado()).isEqualTo(DEVOLUCION_SOLICITADA);
     }
 
     @Test
     void noSePuedeSolicitarDevolucionDeUnPedidoQueNoExiste() {
         //when
-        response = pedidoService.solicitarDevolucion(1L);
+        assertThatThrownBy(() ->
+                pedidoService.solicitarDevolucion(1L)
+        )
 
-        // then: "se lanza error"
-        assertThat(response.getStatusCode()).isEqualTo(NOT_FOUND);
-        assertThat(response.getBody()).isEqualTo("No existe el pedido que usted busca solicitar su devolución.");
+        // then: *se lanza error*
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No existe el pedido que usted busca solicitar su devolución.");
     }
 
     @Test
@@ -563,11 +580,13 @@ class PedidoServiceTest {
         pedidoRepository.save(pedido1);
 
         //when
-        response = pedidoService.solicitarDevolucion(pedido1.getId());
+        assertThatThrownBy(() ->
+                pedidoService.solicitarDevolucion(pedido1.getId())
+        )
 
-        // then: "se lanza error"
-        assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
-        assertThat(response.getBody()).isEqualTo("No se puede solicitar la devolución de dicho pedido ya que el mismo no se encontraba retirado.");
+        // then: *se lanza error*
+        .isInstanceOf(RuntimeException.class)
+        .hasMessageContaining("No se puede solicitar la devolución de dicho pedido ya que el mismo no se encontraba retirado.");
     }
 
     @Test
@@ -825,11 +844,13 @@ class PedidoServiceTest {
         pedidoService.confirmarPedido(infoPedidoDto);
         pedidos = clienteService.obtenerPedidos(cliente.getId());
         for (PedidoDto entry: pedidos) {
-            pedidoService.marcarComienzoDePreparacion(entry.getIdPedido());
-            pedidoService.marcarPedidoListoParaRetirar(entry.getIdPedido());
-            pedidoService.confirmarRetiroDelPedido(entry.getIdPedido());
-            pedidoService.solicitarDevolucion(entry.getIdPedido());
-            pedidoService.denegarDevolucion(entry.getIdPedido());
+            if (entry.getEstado() != DEVOLUCION_DENEGADA) {
+                pedidoService.marcarComienzoDePreparacion(entry.getIdPedido());
+                pedidoService.marcarPedidoListoParaRetirar(entry.getIdPedido());
+                pedidoService.confirmarRetiroDelPedido(entry.getIdPedido());
+                pedidoService.solicitarDevolucion(entry.getIdPedido());
+                pedidoService.denegarDevolucion(entry.getIdPedido());
+            }
         }
 
         //then

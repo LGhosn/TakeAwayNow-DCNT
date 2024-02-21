@@ -124,7 +124,7 @@ public class PedidoService {
         return true;
     }
 
-    public ResponseEntity<String> confirmarPedido(InfoPedidoDto dto) {
+    public void confirmarPedido(InfoPedidoDto dto) {
         // Dado que ya hemos corroborado todos los datos, procedemos a confirmar el pedido.
 
         // Inicializamos las variables a utilizar para la resta de monto, pdc y la recompensa por la compra.
@@ -194,7 +194,7 @@ public class PedidoService {
         if (cliente.esPrime()) {
             Optional<Plan> p = planRepository.findById(cliente.getIdPlanPrime());
             if (p.isEmpty()) {
-                return ResponseEntity.internalServerError().body("Ha ocurrido un error al procesar el plan del cliente.");
+                throw  new RuntimeException("Ha ocurrido un error al procesar el plan del cliente.");
             }
             precioTotalDelPedido = precioTotalDelPedido.multiply(p.get().getDescuento()).divide(100);
         }
@@ -208,30 +208,29 @@ public class PedidoService {
         // Finalmente, guardamos el precio total del pedido.
         pedido.setPrecioTotal(precioTotalDelPedido);
         pedidoRepository.save(pedido);
-        return  ResponseEntity.ok().body("El pedido fue confirmado correctamente.");
     }
 
     @Transactional
-    public ResponseEntity<String> verificarPedido(InfoPedidoDto dto) {
+    public void verificarPedido(InfoPedidoDto dto) {
         Optional<Cliente> optionalCliente = clienteRepository.findById(dto.getIdCliente());
         if (optionalCliente.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("No existe el cliente para el cual se busca verificar la integridad del pedido.");
+            throw  new RuntimeException("No existe el cliente para el cual se busca verificar la integridad del pedido.");
         }
 
         Optional<Negocio> optionalNegocio = negocioRepository.findById(dto.getIdNegocio());
         if (optionalNegocio.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("No existe el negocio para el cual se busca verificar la integridad del pedido.");
+            throw  new RuntimeException("No existe el negocio para el cual se busca verificar la integridad del pedido.");
         }
 
         if (!sePuedeConfirmarUnPedidoParaEstosProductos(dto.getProductos(), dto.getIdNegocio())) {
-            return ResponseEntity.status(BAD_REQUEST).body("Uno o más productos presentan un stock menor a la cantidad indicada en su pedido.");
+            throw  new RuntimeException("Uno o más productos presentan un stock menor a la cantidad indicada en su pedido.");
         }
 
         if (!elClienteTieneSaldoSuficiente(dto.getIdCliente(), dto.getProductos())) {
-            return ResponseEntity.status(BAD_REQUEST).body("No posees saldo suficiente para confirmar este pedido.");
+            throw  new RuntimeException("No posees saldo suficiente para confirmar este pedido.");
         }
 
-        return confirmarPedido(dto);
+        confirmarPedido(dto);
     }
 
 
@@ -239,46 +238,44 @@ public class PedidoService {
      *   Métodos referidos al cambio de estado de un pedido *
      ********************************************************/
 
-    public ResponseEntity<String> marcarComienzoDePreparacion(Long idPedido) {
+    public void marcarComienzoDePreparacion(Long idPedido) {
         Optional<Pedido> optionalPedido = pedidoRepository.findById(idPedido);
         if (optionalPedido.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("No existe el pedido al cual usted quiere marcar su comienzo de preparación.");
+            throw  new RuntimeException("No existe el pedido al cual usted quiere marcar su comienzo de preparación.");
         }
 
         Pedido pedido = optionalPedido.get();
         if (pedido.estado != Pedido.EstadoDelPedido.AGUARDANDO_PREPARACION) {
-            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede comenzar a preparar dicho pedido ya que el mismo no se encuentra aguardando preparación.");
+            throw  new RuntimeException("No se puede comenzar a preparar dicho pedido ya que el mismo no se encuentra aguardando preparación.");
         }
         pedido.setEstado(Pedido.EstadoDelPedido.EN_PREPARACION);
         pedidoRepository.save(pedido);
-        return ResponseEntity.status(ACCEPTED).body("Se ha marcado que el pedido está en comienzo de preparación.");
     }
 
-    public ResponseEntity<String> marcarPedidoListoParaRetirar(Long idPedido) {
+    public void marcarPedidoListoParaRetirar(Long idPedido) {
         Optional<Pedido> optionalPedido = pedidoRepository.findById(idPedido);
         if (optionalPedido.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("No existe el pedido al cual usted quiere marcar como disponible su retiro.");
+            throw  new RuntimeException("No existe el pedido al cual usted quiere marcar como disponible su retiro.");
         }
 
         Pedido pedido = optionalPedido.get();
         if (pedido.estado != Pedido.EstadoDelPedido.EN_PREPARACION) {
-            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede marcar dicho pedido como lista para retirar ya que el mismo no se encuentra en preparación.");
+            throw  new RuntimeException("No se puede marcar dicho pedido como lista para retirar ya que el mismo no se encuentra en preparación.");
         }
         pedido.setEstado(Pedido.EstadoDelPedido.LISTO_PARA_RETIRAR);
         pedido.setCodigoDeRetiro(GeneradorDeCodigo.generarCodigoAleatorio());
         pedidoRepository.save(pedido);
-        return ResponseEntity.status(ACCEPTED).body("Se ha marcado que el pedido está listo para retirar.");
     }
 
-    public ResponseEntity<String> confirmarRetiroDelPedido(Long idPedido) {
+    public void confirmarRetiroDelPedido(Long idPedido) {
         Optional<Pedido> optionalPedido = pedidoRepository.findById(idPedido);
         if (optionalPedido.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("No existe el pedido al cual usted quiere confirmar el retiro.");
+            throw  new RuntimeException("No existe el pedido al cual usted quiere confirmar el retiro.");
         }
 
         Pedido pedido = optionalPedido.get();
         if (pedido.estado != Pedido.EstadoDelPedido.LISTO_PARA_RETIRAR) {
-            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede retirar dicho pedido ya que el mismo no se encuentra listo para retirar.");
+            throw  new RuntimeException("No se puede retirar dicho pedido ya que el mismo no se encuentra listo para retirar.");
         }
 
         // le doy al cliente sus pdc y saldo de reintegro en caso de ser necesario.
@@ -290,7 +287,7 @@ public class PedidoService {
         if (cliente.esPrime()) {
             Optional<Plan> p = planRepository.findById(cliente.getIdPlanPrime());
             if (p.isEmpty()) {
-                return ResponseEntity.internalServerError().body("Ha ocurrido un error al procesar el plan del cliente.");
+                throw  new RuntimeException("Ha ocurrido un error al procesar el plan del cliente.");
             }
             pdcRecompensa = pdcRecompensa.multiply(p.get().getMultiplicadorDePuntosDeConfianza());
         }
@@ -309,19 +306,18 @@ public class PedidoService {
         pedido.setFechaYHoraDeEntrega(LocalDateTime.now());
         pedido.setEstado(Pedido.EstadoDelPedido.RETIRADO);
         pedidoRepository.save(pedido);
-        return ResponseEntity.status(ACCEPTED).body("Se ha confirmado el retiro del pedido.");
     }
 
-    public ResponseEntity<String> cancelarPedido(Long idPedido) {
+    public void cancelarPedido(Long idPedido) {
         Optional<Pedido> optionalPedido = pedidoRepository.findById(idPedido);
         if (optionalPedido.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("No existe el pedido que usted busca cancelar.");
+            throw  new RuntimeException("No existe el pedido que usted busca cancelar.");
         }
 
         Pedido pedido = optionalPedido.get();
         List<Pedido.EstadoDelPedido> estadosPosibles = Arrays.asList(Pedido.EstadoDelPedido.AGUARDANDO_PREPARACION, Pedido.EstadoDelPedido.EN_PREPARACION, Pedido.EstadoDelPedido.LISTO_PARA_RETIRAR);
         if (!estadosPosibles.contains(pedido.estado)) {
-            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede cancelar dicho pedido ya que el mismo no se encuentra aguardando preparación, en preparación ni listo para retirar.");
+            throw  new RuntimeException("No se puede cancelar dicho pedido ya que el mismo no se encuentra aguardando preparación, en preparación ni listo para retirar.");
         }
 
         Cliente c = clienteRepository.findById(pedido.getCliente().getId()).orElseThrow( () -> new RuntimeException("Ocurrió un error al obtener los datos del cliente."));
@@ -358,30 +354,29 @@ public class PedidoService {
         // Actualizamos el estado del pedido.
         pedido.setEstado(Pedido.EstadoDelPedido.CANCELADO);
         pedidoRepository.save(pedido);
-        return ResponseEntity.status(ACCEPTED).body("Se ha cancelado el pedido.");
     }
 
-    public ResponseEntity<String> solicitarDevolucion(Long idPedido) {
+    public void solicitarDevolucion(Long idPedido) {
         Optional<Pedido> optionalPedido = pedidoRepository.findById(idPedido);
         if (optionalPedido.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("No existe el pedido que usted busca solicitar su devolución.");
+            throw  new RuntimeException("No existe el pedido que usted busca solicitar su devolución.");
         }
 
         Pedido pedido = optionalPedido.get();
         if (pedido.estado != Pedido.EstadoDelPedido.RETIRADO) {
-            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede solicitar la devolución de dicho pedido ya que el mismo no se encontraba retirado.");
+            throw  new RuntimeException("No se puede solicitar la devolución de dicho pedido ya que el mismo no se encontraba retirado.");
         }
 
         // Corroboramos si el cliente tiene plan prime.
         if (pedido.getCliente().esPrime()) {
             // Verificamos si pasaron menos de 5 minutos desde su retiro.
             if (Duration.between(pedido.getFechaYHoraDeEntrega(), LocalDateTime.now()).toMinutes() > 5) {
-                return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("El tiempo de tolerancia para devolver un pedido es de cinco minutos y el mismo ya ha expirado.");
+                throw  new RuntimeException("El tiempo de tolerancia para devolver un pedido es de cinco minutos y el mismo ya ha expirado.");
             }
         } else {
             // Verificamos si pasaron menos de 5 minutos desde su retiro.
             if (Duration.between(pedido.getFechaYHoraDeEntrega(), LocalDateTime.now()).toMinutes() > 15) {
-                return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("El tiempo de tolerancia para devolver un pedido es de quince minutos para los beneficiarios del plan prime y el mismo ya ha expirado.");
+                throw  new RuntimeException("El tiempo de tolerancia para devolver un pedido es de quince minutos para los beneficiarios del plan prime y el mismo ya ha expirado.");
             }
         }
 
@@ -389,18 +384,17 @@ public class PedidoService {
         // Actualizamos el estado del pedido.
         pedido.setEstado(Pedido.EstadoDelPedido.DEVOLUCION_SOLICITADA);
         pedidoRepository.save(pedido);
-        return ResponseEntity.status(ACCEPTED).body("Se ha solicitado la devolución del pedido correctamente.");
     }
 
-    public ResponseEntity<String> aceptarDevolucion(Long idPedido) {
+    public void aceptarDevolucion(Long idPedido) {
         Optional<Pedido> optionalPedido = pedidoRepository.findById(idPedido);
         if (optionalPedido.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("No existe el pedido al cual usted busca aceptar su devolución.");
+            throw  new RuntimeException("No existe el pedido al cual usted busca aceptar su devolución.");
         }
 
         Pedido pedido = optionalPedido.get();
         if (pedido.estado != Pedido.EstadoDelPedido.DEVOLUCION_SOLICITADA) {
-            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede aceptar la devolución de dicho pedido ya que el mismo no se encuentra solicitando devolución.");
+            throw  new RuntimeException("No se puede aceptar la devolución de dicho pedido ya que el mismo no se encuentra solicitando devolución.");
         }
 
         // El cliente obtiene su dinero nuevamente y sus pdc no se ven afectados.
@@ -413,18 +407,17 @@ public class PedidoService {
         // Actualizamos el estado del pedido.
         pedido.setEstado(Pedido.EstadoDelPedido.DEVOLUCION_ACEPTADA);
         pedidoRepository.save(pedido);
-        return ResponseEntity.status(ACCEPTED).body("Se ha aceptado la devolución del pedido correctamente.");
     }
 
-    public ResponseEntity<String> denegarDevolucion(Long idPedido) {
+    public void denegarDevolucion(Long idPedido) {
         Optional<Pedido> optionalPedido = pedidoRepository.findById(idPedido);
         if (optionalPedido.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).body("No existe el pedido al cual usted busca denegar su devolución.");
+            throw  new RuntimeException("No existe el pedido al cual usted busca denegar su devolución.");
         }
 
         Pedido pedido = optionalPedido.get();
         if (pedido.estado != Pedido.EstadoDelPedido.DEVOLUCION_SOLICITADA) {
-            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede denegar la devolución de dicho pedido ya que el mismo no se encuentra solicitando devolución.");
+            throw  new RuntimeException("No se puede denegar la devolución de dicho pedido ya que el mismo no se encuentra solicitando devolución.");
         }
 
         // El cliente no obtiene su dinero nuevamente ni sus pdc no se ven afectados y dado que no se devuelve el pedido, el stock queda tal cual.
@@ -432,7 +425,6 @@ public class PedidoService {
         // Actualizamos el estado del pedido.
         pedido.setEstado(Pedido.EstadoDelPedido.DEVOLUCION_DENEGADA);
         pedidoRepository.save(pedido);
-        return ResponseEntity.status(ACCEPTED).body("Se ha denegado la devolución del pedido correctamente.");
     }
 
     private void devolverStockDeUnPedido(Pedido pedido) {
