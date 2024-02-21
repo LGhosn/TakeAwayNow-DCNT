@@ -97,7 +97,7 @@ public class ClienteController {
         return ResponseEntity.ok().body("Fecha de nacimiento guardada correctamente.");
     }
 
-    @PostMapping("/{idCliente}/obtenerPlanPrimee")
+    @PostMapping("/{idCliente}/obtenerPlanPrime")
     public ResponseEntity<String> obtenerPlanPrime(@PathVariable Long idCliente) {
         try {
             clienteService.obtenerPlanPrime(idCliente);
