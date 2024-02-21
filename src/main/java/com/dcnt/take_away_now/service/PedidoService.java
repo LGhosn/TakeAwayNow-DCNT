@@ -3,7 +3,6 @@ package com.dcnt.take_away_now.service;
 import com.dcnt.take_away_now.domain.*;
 import com.dcnt.take_away_now.dto.InfoPedidoDto;
 import com.dcnt.take_away_now.dto.ProductoPedidoDto;
-import com.dcnt.take_away_now.enums.EstadoDelPedido;
 import com.dcnt.take_away_now.generador.GeneradorDeCodigo;
 import com.dcnt.take_away_now.repository.*;
 import com.dcnt.take_away_now.value_object.Dinero;
@@ -35,14 +34,24 @@ public class PedidoService {
         return pedidoRepository.findAll();
     }
 
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
+
     public boolean esUnProductoDeEseNegocio(Long idNegocio, Long idProducto) {
+        if (negocioRepository.findById(idNegocio).isEmpty()) {
+            ResponseEntity.status(NOT_FOUND).body("No existe el negocio en la base de datos.");
+        }
+
+        if (productoRepository.findById(idProducto).isEmpty()) {
+            ResponseEntity.status(NOT_FOUND).body("No existe el producto en la base de datos.");
+        }
+
         Negocio negocio = negocioRepository.findById(idNegocio).get();
         Producto producto = productoRepository.findById(idProducto).get();
+
         return inventarioRegistroRepository.existsByNegocioAndProducto(negocio, producto);
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
+    /* Queda con esta annotation ya que previo al get se valida la existencia del registro en la base */
     public boolean sePuedeConfirmarUnPedidoParaEstosProductos(Map<Long, Map<String, Object>> productos, Long idNegocio) {
         for (Map.Entry<Long, Map<String, Object>> entry : productos.entrySet()) {
             Long productId = entry.getKey();
@@ -66,7 +75,6 @@ public class PedidoService {
         return true;
     }
 
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public boolean elClienteTieneSaldoSuficiente(Long idCliente, Map<Long, Map<String, Object>> productos) {
         Dinero precioTotalDelPedido = new Dinero(0);
         PuntosDeConfianza pdcTotalDelPedido = new PuntosDeConfianza(0);
@@ -78,6 +86,15 @@ public class PedidoService {
             // Obtenemos la cantidad  pedida y si usa o no PdC
             Integer cantidadPedida = (Integer) productInfo.get("cantidad");
             Integer usaPdc = (Integer) productInfo.get("usaPdc");
+
+            // Levantamos los datos necesarios
+            if (productoRepository.findById(productId).isEmpty()) {
+                ResponseEntity.status(NOT_FOUND).body("No existe el producto en la base de datos.");
+            }
+
+            if (clienteRepository.findById(idCliente).isEmpty()) {
+                ResponseEntity.status(NOT_FOUND).body("No existe el cliente en la base de datos.");
+            }
 
             Producto producto = productoRepository.findById(productId).get();
             Cliente cliente = clienteRepository.findById(idCliente).get();
@@ -107,7 +124,6 @@ public class PedidoService {
         return true;
     }
 
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public ResponseEntity<String> confirmarPedido(InfoPedidoDto dto) {
         // Dado que ya hemos corroborado todos los datos, procedemos a confirmar el pedido.
 
@@ -116,8 +132,17 @@ public class PedidoService {
         PuntosDeConfianza pdcTotalDelPedido = new PuntosDeConfianza((double) 0);
 
         // Levantamos los datos necesarios
+        if (negocioRepository.findById(dto.getIdNegocio()).isEmpty()) {
+            ResponseEntity.status(NOT_FOUND).body("No existe el negocio en la base de datos.");
+        }
+
+        if (clienteRepository.findById(dto.getIdCliente()).isPresent()) {
+            ResponseEntity.status(NOT_FOUND).body("No existe el cliente en la base de datos.");
+        }
+
         Negocio negocio = negocioRepository.findById(dto.getIdNegocio()).get();
         Cliente cliente = clienteRepository.findById(dto.getIdCliente()).get();
+
         Pedido pedido = new Pedido(negocio, cliente);
 
         pedidoRepository.save(pedido);
@@ -221,10 +246,10 @@ public class PedidoService {
         }
 
         Pedido pedido = optionalPedido.get();
-        if (pedido.estado != EstadoDelPedido.AGUARDANDO_PREPARACION) {
+        if (pedido.estado != Pedido.EstadoDelPedido.AGUARDANDO_PREPARACION) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede comenzar a preparar dicho pedido ya que el mismo no se encuentra aguardando preparación.");
         }
-        pedido.setEstado(EstadoDelPedido.EN_PREPARACION);
+        pedido.setEstado(Pedido.EstadoDelPedido.EN_PREPARACION);
         pedidoRepository.save(pedido);
         return ResponseEntity.status(ACCEPTED).body("Se ha marcado que el pedido está en comienzo de preparación.");
     }
@@ -236,10 +261,10 @@ public class PedidoService {
         }
 
         Pedido pedido = optionalPedido.get();
-        if (pedido.estado != EstadoDelPedido.EN_PREPARACION) {
+        if (pedido.estado != Pedido.EstadoDelPedido.EN_PREPARACION) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede marcar dicho pedido como lista para retirar ya que el mismo no se encuentra en preparación.");
         }
-        pedido.setEstado(EstadoDelPedido.LISTO_PARA_RETIRAR);
+        pedido.setEstado(Pedido.EstadoDelPedido.LISTO_PARA_RETIRAR);
         pedido.setCodigoDeRetiro(GeneradorDeCodigo.generarCodigoAleatorio());
         pedidoRepository.save(pedido);
         return ResponseEntity.status(ACCEPTED).body("Se ha marcado que el pedido está listo para retirar.");
@@ -252,7 +277,7 @@ public class PedidoService {
         }
 
         Pedido pedido = optionalPedido.get();
-        if (pedido.estado != EstadoDelPedido.LISTO_PARA_RETIRAR) {
+        if (pedido.estado != Pedido.EstadoDelPedido.LISTO_PARA_RETIRAR) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede retirar dicho pedido ya que el mismo no se encuentra listo para retirar.");
         }
 
@@ -282,7 +307,7 @@ public class PedidoService {
 
         // Actualizamos el estado del pedido y se establece la fecha y hora de entrega.
         pedido.setFechaYHoraDeEntrega(LocalDateTime.now());
-        pedido.setEstado(EstadoDelPedido.RETIRADO);
+        pedido.setEstado(Pedido.EstadoDelPedido.RETIRADO);
         pedidoRepository.save(pedido);
         return ResponseEntity.status(ACCEPTED).body("Se ha confirmado el retiro del pedido.");
     }
@@ -294,7 +319,7 @@ public class PedidoService {
         }
 
         Pedido pedido = optionalPedido.get();
-        List<EstadoDelPedido> estadosPosibles = Arrays.asList(EstadoDelPedido.AGUARDANDO_PREPARACION, EstadoDelPedido.EN_PREPARACION, EstadoDelPedido.LISTO_PARA_RETIRAR);
+        List<Pedido.EstadoDelPedido> estadosPosibles = Arrays.asList(Pedido.EstadoDelPedido.AGUARDANDO_PREPARACION, Pedido.EstadoDelPedido.EN_PREPARACION, Pedido.EstadoDelPedido.LISTO_PARA_RETIRAR);
         if (!estadosPosibles.contains(pedido.estado)) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede cancelar dicho pedido ya que el mismo no se encuentra aguardando preparación, en preparación ni listo para retirar.");
         }
@@ -305,14 +330,14 @@ public class PedidoService {
 
         if (!c.esPrime()) {
             // En caso de que el estado sea AGUARDANDO_PREPARACION, entonces el cliente pierde puntos de confianza (levemente, un 5% del total que del pedido) pero recupera su dinero.
-            if (pedido.getEstado() == EstadoDelPedido.AGUARDANDO_PREPARACION) {
+            if (pedido.getEstado() == Pedido.EstadoDelPedido.AGUARDANDO_PREPARACION) {
                 c.setPuntosDeConfianza(c.getPuntosDeConfianza().minus(pdcPedido.multiply(0.05)));
                 c.setSaldo(c.getSaldo().plus(pedido.getPrecioTotal()));
-            }else if (pedido.getEstado() == EstadoDelPedido.EN_PREPARACION) {
+            }else if (pedido.getEstado() == Pedido.EstadoDelPedido.EN_PREPARACION) {
                 //En caso de que el estado sea EN_PREPARACION, entonces el cliente pierde puntos de confianza (notablemente, un 20% del total del pedido), no recupera su dinero.
                 c.setPuntosDeConfianza(
                         c.getPuntosDeConfianza().minus(pdcPedido.multiply(0.20)));
-            } else if(pedido.getEstado() == EstadoDelPedido.LISTO_PARA_RETIRAR) {
+            } else if(pedido.getEstado() == Pedido.EstadoDelPedido.LISTO_PARA_RETIRAR) {
                 //En caso de que el estado sea LISTO_PARA_RETIRAR, entonces el cliente pierde puntos de confianza (significativamente, pierde un 100% del total que posee o en caso de tener pdc negativos, adeudará 500 pdc adicionales) y no recupera su dinero.
                 if (c.getPuntosDeConfianza().getCantidad() <= 0) {
                     c.setPuntosDeConfianza(c.getPuntosDeConfianza().minus(500));
@@ -331,7 +356,7 @@ public class PedidoService {
         devolverStockDeUnPedido(pedido);
 
         // Actualizamos el estado del pedido.
-        pedido.setEstado(EstadoDelPedido.CANCELADO);
+        pedido.setEstado(Pedido.EstadoDelPedido.CANCELADO);
         pedidoRepository.save(pedido);
         return ResponseEntity.status(ACCEPTED).body("Se ha cancelado el pedido.");
     }
@@ -343,7 +368,7 @@ public class PedidoService {
         }
 
         Pedido pedido = optionalPedido.get();
-        if (pedido.estado != EstadoDelPedido.RETIRADO) {
+        if (pedido.estado != Pedido.EstadoDelPedido.RETIRADO) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede solicitar la devolución de dicho pedido ya que el mismo no se encontraba retirado.");
         }
 
@@ -362,7 +387,7 @@ public class PedidoService {
 
 
         // Actualizamos el estado del pedido.
-        pedido.setEstado(EstadoDelPedido.DEVOLUCION_SOLICITADA);
+        pedido.setEstado(Pedido.EstadoDelPedido.DEVOLUCION_SOLICITADA);
         pedidoRepository.save(pedido);
         return ResponseEntity.status(ACCEPTED).body("Se ha solicitado la devolución del pedido correctamente.");
     }
@@ -374,7 +399,7 @@ public class PedidoService {
         }
 
         Pedido pedido = optionalPedido.get();
-        if (pedido.estado != EstadoDelPedido.DEVOLUCION_SOLICITADA) {
+        if (pedido.estado != Pedido.EstadoDelPedido.DEVOLUCION_SOLICITADA) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede aceptar la devolución de dicho pedido ya que el mismo no se encuentra solicitando devolución.");
         }
 
@@ -386,7 +411,7 @@ public class PedidoService {
         devolverStockDeUnPedido(pedido);
 
         // Actualizamos el estado del pedido.
-        pedido.setEstado(EstadoDelPedido.DEVOLUCION_ACEPTADA);
+        pedido.setEstado(Pedido.EstadoDelPedido.DEVOLUCION_ACEPTADA);
         pedidoRepository.save(pedido);
         return ResponseEntity.status(ACCEPTED).body("Se ha aceptado la devolución del pedido correctamente.");
     }
@@ -398,14 +423,14 @@ public class PedidoService {
         }
 
         Pedido pedido = optionalPedido.get();
-        if (pedido.estado != EstadoDelPedido.DEVOLUCION_SOLICITADA) {
+        if (pedido.estado != Pedido.EstadoDelPedido.DEVOLUCION_SOLICITADA) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede denegar la devolución de dicho pedido ya que el mismo no se encuentra solicitando devolución.");
         }
 
         // El cliente no obtiene su dinero nuevamente ni sus pdc no se ven afectados y dado que no se devuelve el pedido, el stock queda tal cual.
 
         // Actualizamos el estado del pedido.
-        pedido.setEstado(EstadoDelPedido.DEVOLUCION_DENEGADA);
+        pedido.setEstado(Pedido.EstadoDelPedido.DEVOLUCION_DENEGADA);
         pedidoRepository.save(pedido);
         return ResponseEntity.status(ACCEPTED).body("Se ha denegado la devolución del pedido correctamente.");
     }

@@ -16,6 +16,19 @@ import java.util.List;
 @Entity
 @Table(name = "PEDIDOS")
 public class Pedido {
+
+    public enum EstadoDelPedido {
+        AGUARDANDO_PREPARACION,
+        EN_PREPARACION,
+        LISTO_PARA_RETIRAR,
+        RETIRADO,
+        CANCELADO,
+        DEVOLUCION_SOLICITADA,
+        DEVOLUCION_ACEPTADA,
+        DEVOLUCION_DENEGADA
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ID_PEDIDO")

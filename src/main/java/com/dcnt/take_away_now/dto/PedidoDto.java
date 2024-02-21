@@ -1,5 +1,6 @@
 package com.dcnt.take_away_now.dto;
 
+import com.dcnt.take_away_now.domain.Pedido;
 import com.dcnt.take_away_now.enums.EstadoDelPedido;
 import com.dcnt.take_away_now.value_object.Dinero;
 import lombok.Data;
@@ -11,7 +12,7 @@ public class PedidoDto {
     private Long idPedido;
     private String usuarioCliente;
     private String negocio;
-    private EstadoDelPedido estado;
+    private Pedido.EstadoDelPedido estado;
     private Dinero precioTotal;
     private LocalDateTime fechaYHoraDeEntrega;
     private String codigoDeRetiro;
@@ -20,7 +21,7 @@ public class PedidoDto {
             Long idPedido,
             String usuarioCliente,
             String negocio,
-            EstadoDelPedido estado,
+            Pedido.EstadoDelPedido estado,
             Dinero precioTotal,
             LocalDateTime fechaYHoraDeEntrega,
             String codigoDeRetiro

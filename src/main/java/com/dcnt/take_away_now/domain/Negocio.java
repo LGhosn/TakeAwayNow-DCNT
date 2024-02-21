@@ -59,10 +59,6 @@ public class Negocio {
             DayOfWeek diaDeApertura,
             DayOfWeek diaDeCierre
     ) {
-        //if (horarioDeApertura.isAfter(horarioDeCierre)) {
-        //    throw new IllegalStateException("El horario de apertura debe ser anterior al de cierre.");
-        //}
-
         this.nombre = nombreDelNegocio;
         this.horarioDeApertura = horarioDeApertura;
         this.horarioDeCierre = horarioDeCierre;

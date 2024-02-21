@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2024-02-21T04:12:16" hostname="DESKTOP-84L37D5" time="0.223">
+<testsuite name="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2024-02-21T03:46:52" hostname="DESKTOP-84L37D5" time="0.242">
   <properties/>
-  <testcase name="noSeEncuentraInventarioRegisrtroPorNegocioYProductoInexistente()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.024"/>
-  <testcase name="noSeEliminaInventarioRegistroPorNegocioYProductoConProductoIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.03"/>
-  <testcase name="seEncuentraInventarioRegistroPorNegocioYProducto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.013"/>
-  <testcase name="noExisteInventarioRegistroPorNegocioYProductoConProductoIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.015"/>
-  <testcase name="existeInventarioRegistroPorNegocioYProducto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.012"/>
-  <testcase name="seEncuentraElProductoDelNegocioConIdNegocio()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.027"/>
-  <testcase name="noSeEliminaInventarioRegistroPorNegocioYProductoConNegocioIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.013"/>
-  <testcase name="seEliminaInventarioRegistroPorNegocioYProducto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.019"/>
-  <testcase name="noExisteInventarioRegistroPorNegocioyProductoConNegocioIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.01"/>
-  <testcase name="noExisteInventarioRegistroPorNegocioYProductoConNegocioYProductoIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.008"/>
+  <testcase name="noSeEncuentraInventarioRegisrtroPorNegocioYProductoInexistente()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.027"/>
+  <testcase name="noSeEliminaInventarioRegistroPorNegocioYProductoConProductoIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.027"/>
+  <testcase name="seEncuentraInventarioRegistroPorNegocioYProducto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.012"/>
+  <testcase name="noExisteInventarioRegistroPorNegocioYProductoConProductoIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.018"/>
+  <testcase name="existeInventarioRegistroPorNegocioYProducto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.013"/>
+  <testcase name="seEncuentraElProductoDelNegocioConIdNegocio()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.031"/>
+  <testcase name="noSeEliminaInventarioRegistroPorNegocioYProductoConNegocioIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.016"/>
+  <testcase name="seEliminaInventarioRegistroPorNegocioYProducto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.02"/>
+  <testcase name="noExisteInventarioRegistroPorNegocioyProductoConNegocioIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.013"/>
+  <testcase name="noExisteInventarioRegistroPorNegocioYProductoConNegocioYProductoIncorrecto()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.011"/>
   <testcase name="noSeEncuentranProductosDelNegocioSinProductos()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.01"/>
-  <testcase name="noExisteInventarioRegistroPorNegocioYProductoInexistente()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.01"/>
-  <testcase name="noSeEliminaInventarioRegistroPorNegocioYProductoConNegocioYProductoIncorrectos()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.01"/>
+  <testcase name="noExisteInventarioRegistroPorNegocioYProductoInexistente()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.011"/>
+  <testcase name="noSeEliminaInventarioRegistroPorNegocioYProductoConNegocioYProductoIncorrectos()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.011"/>
   <testcase name="seEncuentranLosProductosDelNegocioConIdNegocio()" classname="com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest" time="0.01"/>
-  <system-out><![CDATA[2024-02-20T22:12:16.880-06:00  INFO 23704 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest]: InvenarioRegistroRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-20T22:12:16.892-06:00  INFO 23704 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest
+  <system-out><![CDATA[2024-02-21T00:46:52.430-03:00  INFO 17720 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest]: InvenarioRegistroRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-21T00:46:52.440-03:00  INFO 17720 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.InvenarioRegistroRepositoryTest
 Hibernate: 
     insert 
     into

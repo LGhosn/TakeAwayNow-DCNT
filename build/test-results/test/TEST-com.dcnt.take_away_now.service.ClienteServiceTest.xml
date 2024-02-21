@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.service.ClienteServiceTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2024-02-21T04:12:17" hostname="DESKTOP-84L37D5" time="0.133">
+<testsuite name="com.dcnt.take_away_now.service.ClienteServiceTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2024-02-21T03:46:52" hostname="DESKTOP-84L37D5" time="0.133">
   <properties/>
-  <testcase name="noSePuedeCrearDosClientesConElMismoUsername()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.009"/>
+  <testcase name="noSePuedeCrearDosClientesConElMismoUsername()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.01"/>
   <testcase name="sePuedeEstablercerFechaDeNacimiento()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.018"/>
-  <testcase name="sePuedeObtenerClientesExistentes()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.017"/>
-  <testcase name="unClienteNoPuedeVolverASubscribirseAlPlanPrime()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.011"/>
+  <testcase name="sePuedeObtenerClientesExistentes()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.014"/>
+  <testcase name="unClienteNoPuedeVolverASubscribirseAlPlanPrime()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.013"/>
   <testcase name="noPuedoObtenerPlanPrimeSiNoExiste()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.008"/>
   <testcase name="alCrearUnClienteNoEsPrime()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.003"/>
-  <testcase name="noPuedoObtenerPlanPrimeConSaldoInsuficiente()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.011"/>
-  <testcase name="alSubscribirseAUnPlanPrimeElClienteEsPrime()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.01"/>
-  <testcase name="noSePuedeCargarSaldoAUnClienteQueNoExiste()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.005"/>
-  <testcase name="sePuedeCrearClienteNuevo()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.007"/>
-  <testcase name="noPuedoObtenerPlanPrimeSiNoExisteElCliente()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.003"/>
-  <testcase name="sePuedeEliminarUnCliente()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.009"/>
-  <testcase name="noSePuedeEstablercerFechaDeNacimientoSiendoMenorDeEdad()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.006"/>
-  <testcase name="sePuedeCargarSaldoAUnCliente()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.008"/>
-  <system-out><![CDATA[2024-02-20T22:12:17.222-06:00  INFO 23704 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.service.ClienteServiceTest]: ClienteServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-20T22:12:17.235-06:00  INFO 23704 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.service.ClienteServiceTest
+  <testcase name="noPuedoObtenerPlanPrimeConSaldoInsuficiente()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.01"/>
+  <testcase name="alSubscribirseAUnPlanPrimeElClienteEsPrime()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.009"/>
+  <testcase name="noSePuedeCargarSaldoAUnClienteQueNoExiste()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.004"/>
+  <testcase name="sePuedeCrearClienteNuevo()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.006"/>
+  <testcase name="noPuedoObtenerPlanPrimeSiNoExisteElCliente()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.004"/>
+  <testcase name="sePuedeEliminarUnCliente()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.01"/>
+  <testcase name="noSePuedeEstablercerFechaDeNacimientoSiendoMenorDeEdad()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.007"/>
+  <testcase name="sePuedeCargarSaldoAUnCliente()" classname="com.dcnt.take_away_now.service.ClienteServiceTest" time="0.006"/>
+  <system-out><![CDATA[2024-02-21T00:46:52.802-03:00  INFO 17720 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.service.ClienteServiceTest]: ClienteServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-21T00:46:52.818-03:00  INFO 17720 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.service.ClienteServiceTest
 Hibernate: 
     select
         c1_0.id_cliente,
