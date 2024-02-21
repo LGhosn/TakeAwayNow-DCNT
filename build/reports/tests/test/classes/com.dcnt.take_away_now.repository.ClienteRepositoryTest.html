@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - ClienteRepositoryTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>ClienteRepositoryTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.dcnt.take_away_now.repository.html">com.dcnt.take_away_now.repository</a> &gt; ClienteRepositoryTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">2</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.449s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">noSePuedeEncontrarUnUsuarioQueNoExiste()</td>
+<td class="success">0.335s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">sePuedeEncontrarUnUsuarioQueExiste()</td>
+<td class="success">0.114s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2024-02-21T02:29:54.126-03:00  INFO 13460 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.ClienteRepositoryTest]: ClienteRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-21T02:29:54.238-03:00  INFO 13460 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.ClienteRepositoryTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2024-02-21T02:29:54.329-03:00  INFO 13460 --- [    Test worker] c.d.t.repository.ClienteRepositoryTest   : Starting ClienteRepositoryTest using Java 21.0.1 with PID 13460 (started by Lautaro in D:\dcnt back\TakeAwayNow-DCNT)
+2024-02-21T02:29:54.330-03:00  INFO 13460 --- [    Test worker] c.d.t.repository.ClienteRepositoryTest   : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2024-02-21T02:29:54.609-03:00  INFO 13460 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-21T02:29:54.656-03:00  INFO 13460 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 44 ms. Found 7 JPA repository interfaces.
+2024-02-21T02:29:54.691-03:00  INFO 13460 --- [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-02-21T02:29:54.741-03:00  INFO 13460 --- [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:f695074e-0d99-4ab5-9aca-954f0b5de3f2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-21T02:29:54.789-03:00  INFO 13460 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-21T02:29:54.802-03:00  INFO 13460 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-02-21T02:29:54.821-03:00  INFO 13460 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-21T02:29:54.825-03:00  WARN 13460 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-02-21T02:29:55.204-03:00  INFO 13460 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: 
+    drop table if exists clientes cascade 
+Hibernate: 
+    drop table if exists inventario_registros cascade 
+Hibernate: 
+    drop table if exists negocios cascade 
+Hibernate: 
+    drop table if exists pedidos cascade 
+Hibernate: 
+    drop table if exists planes cascade 
+Hibernate: 
+    drop table if exists productos cascade 
+Hibernate: 
+    drop table if exists productos_pedidos cascade 
+Hibernate: 
+    create table clientes (
+        fecha_nacimiento date,
+        fecha_ult_uso_benef_cumple date,
+        pdc float(53),
+        saldo numeric(38,2),
+        id_cliente bigint generated by default as identity,
+        id_plan bigint,
+        usuario varchar(255),
+        primary key (id_cliente)
+    )
+Hibernate: 
+    create table inventario_registros (
+        precio_unitario numeric(38,2),
+        precio_unitario_pdc float(53),
+        recompensa_pdc float(53),
+        id_inventario_registro bigint generated by default as identity,
+        id_negocio bigint,
+        id_producto bigint unique,
+        stock bigint,
+        primary key (id_inventario_registro)
+    )
+Hibernate: 
+    create table negocios (
+        dia_apertura tinyint check (dia_apertura between 0 and 6),
+        dia_cierre tinyint check (dia_cierre between 0 and 6),
+        horario_apertura time(6),
+        horario_cierre time(6),
+        saldo numeric(38,2),
+        id_negocio bigint generated by default as identity,
+        nombre varchar(255),
+        primary key (id_negocio)
+    )
+Hibernate: 
+    create table pedidos (
+        estado tinyint check (estado between 0 and 7),
+        precio_total numeric(38,2),
+        fecha_y_hora_entrega timestamp(6),
+        id_cliente bigint,
+        id_negocio bigint,
+        id_pedido bigint generated by default as identity,
+        codigo varchar(255),
+        primary key (id_pedido)
+    )
+Hibernate: 
+    create table planes (
+        cancelacion_sin_costo boolean,
+        multiplicador_de_puntos_de_confianza integer,
+        porcentaje_de_descuento integer,
+        porcentaje_extra_de_puntos_de_confianza_por_devolucion integer,
+        precio numeric(38,2),
+        puntos_de_confianza_por_subscripcion float(53),
+        id_plan bigint generated by default as identity,
+        nombre varchar(255),
+        primary key (id_plan)
+    )
+Hibernate: 
+    create table productos (
+        id_inventario_registro bigint unique,
+        id_producto bigint generated by default as identity,
+        nombre varchar(255),
+        primary key (id_producto)
+    )
+Hibernate: 
+    create table productos_pedidos (
+        cantidad integer,
+        id_pedido bigint,
+        id_producto bigint,
+        id_producto_pedido bigint generated by default as identity,
+        primary key (id_producto_pedido)
+    )
+Hibernate: 
+    alter table if exists inventario_registros 
+       add constraint FKgk0emireeu3u0g15pi6uth3tw 
+       foreign key (id_negocio) 
+       references negocios
+Hibernate: 
+    alter table if exists inventario_registros 
+       add constraint FKaa8b1cqh28krjla4q0rldgjdw 
+       foreign key (id_producto) 
+       references productos
+Hibernate: 
+    alter table if exists pedidos 
+       add constraint FKdnomiluem4t3x66t6b9aher47 
+       foreign key (id_cliente) 
+       references clientes
+Hibernate: 
+    alter table if exists pedidos 
+       add constraint FKhmtsw5m7flxgsvx60sorc5g3e 
+       foreign key (id_negocio) 
+       references negocios
+Hibernate: 
+    alter table if exists productos 
+       add constraint FKd8x4sfyyvh5ecf784239ete7u 
+       foreign key (id_inventario_registro) 
+       references inventario_registros
+Hibernate: 
+    alter table if exists productos_pedidos 
+       add constraint FKgvy13jpycywx60hasm7k3w2f 
+       foreign key (id_pedido) 
+       references pedidos
+Hibernate: 
+    alter table if exists productos_pedidos 
+       add constraint FK5xwq1xi3k07xrjjpvvpxvdoku 
+       foreign key (id_producto) 
+       references productos
+2024-02-21T02:29:55.253-03:00  INFO 13460 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-21T02:29:55.567-03:00  INFO 13460 --- [    Test worker] c.d.t.repository.ClienteRepositoryTest   : Started ClienteRepositoryTest in 1.322 seconds (process running for 18.854)
+Hibernate: 
+    select
+        c1_0.id_cliente,
+        c1_0.fecha_nacimiento,
+        c1_0.fecha_ult_uso_benef_cumple,
+        c1_0.id_plan,
+        c1_0.pdc,
+        c1_0.saldo,
+        c1_0.usuario 
+    from
+        clientes c1_0 
+    where
+        c1_0.usuario=?
+Hibernate: 
+    insert 
+    into
+        clientes
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        c1_0.id_cliente,
+        c1_0.fecha_nacimiento,
+        c1_0.fecha_ult_uso_benef_cumple,
+        c1_0.id_plan,
+        c1_0.pdc,
+        c1_0.saldo,
+        c1_0.usuario 
+    from
+        clientes c1_0 
+    where
+        c1_0.usuario=?
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.5</a> at 21 feb 2024 02:29:58</p>
+</div>
+</div>
+</body>
+</html>

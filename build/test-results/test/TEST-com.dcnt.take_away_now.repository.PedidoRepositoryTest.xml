@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dcnt.take_away_now.repository.PedidoRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-02-21T05:29:56" hostname="LGG-W10" time="0.027">
+  <properties/>
+  <testcase name="noSeEncuentraUnPedidoQueNoExisteById()" classname="com.dcnt.take_away_now.repository.PedidoRepositoryTest" time="0.013"/>
+  <testcase name="seEncuentraUnPedidoQueExisteById()" classname="com.dcnt.take_away_now.repository.PedidoRepositoryTest" time="0.013"/>
+  <system-out><![CDATA[2024-02-21T02:29:56.565-03:00  INFO 13460 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.PedidoRepositoryTest]: PedidoRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-21T02:29:56.594-03:00  INFO 13460 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.PedidoRepositoryTest
+Hibernate: 
+    insert 
+    into
+        clientes
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        negocios
+        (dia_apertura, dia_cierre, horario_apertura, horario_cierre, nombre, saldo, id_negocio) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        p1_0.id_pedido 
+    from
+        pedidos p1_0 
+    where
+        p1_0.id_pedido=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        clientes
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        negocios
+        (dia_apertura, dia_cierre, horario_apertura, horario_cierre, nombre, saldo, id_negocio) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        pedidos
+        (id_cliente, codigo, estado, fecha_y_hora_entrega, id_negocio, precio_total, id_pedido) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        p1_0.id_pedido 
+    from
+        pedidos p1_0 
+    where
+        p1_0.id_pedido=? 
+    fetch
+        first ? rows only
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
