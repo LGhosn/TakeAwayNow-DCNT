@@ -47,6 +47,9 @@ public class Cliente {
     @Column(name="FECHA_NACIMIENTO")
     private LocalDate fechaDeNacimiento = null;
 
+    @Column(name="FECHA_ULT_USO_BENEF_CUMPLE")
+    private LocalDate fechaUltUsoBenefCumple = null;
+
     public Cliente(String nombreDeUsuario) {
         this.usuario = nombreDeUsuario;
     }
@@ -56,6 +59,18 @@ public class Cliente {
     public boolean esSuCumpleanios() {
         LocalDate hoy = LocalDate.now();
         return fechaDeNacimiento != null && hoy.getDayOfMonth() == fechaDeNacimiento.getDayOfMonth() && hoy.getMonth() == fechaDeNacimiento.getMonth();
+    }
+
+    public boolean todaviaNoUsaBeneficioCumple() {
+        LocalDate hoy = LocalDate.now();
+
+        /* En caso de utilizarlo por primera vez */
+        if (fechaUltUsoBenefCumple == null) {
+            return true;
+        }
+
+        /* En caso de utilizarlo más de una vez */
+        return fechaUltUsoBenefCumple != null && fechaUltUsoBenefCumple.getYear() != hoy.getYear();
     }
 
 }

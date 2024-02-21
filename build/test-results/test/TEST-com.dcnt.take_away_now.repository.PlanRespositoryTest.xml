@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.repository.PlanRespositoryTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-02-21T02:23:46" hostname="DESKTOP-84L37D5" time="0.055">
+<testsuite name="com.dcnt.take_away_now.repository.PlanRespositoryTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-02-21T04:12:17" hostname="DESKTOP-84L37D5" time="0.019">
   <properties/>
-  <testcase name="valoresDelPlanEncontradoSonCorrectos()" classname="com.dcnt.take_away_now.repository.PlanRespositoryTest" time="0.018"/>
-  <testcase name="noSePuedeEncontrarUnPlanQueNoExiste()" classname="com.dcnt.take_away_now.repository.PlanRespositoryTest" time="0.014"/>
-  <testcase name="sePuedeEncontrarUnPlanQueExiste()" classname="com.dcnt.take_away_now.repository.PlanRespositoryTest" time="0.016"/>
-  <system-out><![CDATA[2024-02-20T20:23:46.786-06:00  INFO 19940 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.PlanRespositoryTest]: PlanRespositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-20T20:23:46.802-06:00  INFO 19940 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.PlanRespositoryTest
+  <testcase name="valoresDelPlanEncontradoSonCorrectos()" classname="com.dcnt.take_away_now.repository.PlanRespositoryTest" time="0.007"/>
+  <testcase name="noSePuedeEncontrarUnPlanQueNoExiste()" classname="com.dcnt.take_away_now.repository.PlanRespositoryTest" time="0.004"/>
+  <testcase name="sePuedeEncontrarUnPlanQueExiste()" classname="com.dcnt.take_away_now.repository.PlanRespositoryTest" time="0.006"/>
+  <system-out><![CDATA[2024-02-20T22:12:17.168-06:00  INFO 23704 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.repository.PlanRespositoryTest]: PlanRespositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20T22:12:17.175-06:00  INFO 23704 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.repository.PlanRespositoryTest
 Hibernate: 
     insert 
     into

@@ -752,7 +752,7 @@ class PedidoServiceTest {
     }
 
     @Test
-    void veinticincoPorcientoDeDescuentoPorSerSuCumpleanios() {
+    void veinticincoPorcientoDeDescuentoYMilPuntosDeRegaloPorBeneficioDeCumpleanios() {
         //given
         Cliente cliente = new Cliente("Messi");
         clienteRepository.save(cliente);
@@ -773,8 +773,70 @@ class PedidoServiceTest {
 
         //when
         pedidoService.confirmarPedido(infoPedidoDto);
+        Collection<PedidoDto> pedidos = clienteService.obtenerPedidos(cliente.getId());
+
+        for (PedidoDto entry: pedidos) {
+            pedidoService.marcarComienzoDePreparacion(entry.getIdPedido());
+            pedidoService.marcarPedidoListoParaRetirar(entry.getIdPedido());
+            pedidoService.confirmarRetiroDelPedido(entry.getIdPedido());
+            pedidoService.solicitarDevolucion(entry.getIdPedido());
+            pedidoService.denegarDevolucion(entry.getIdPedido());
+        }
 
         //then
-        assertThat(cliente.getSaldo()).isEqualTo(new Dinero(975));
+        Dinero saldoPostConfirmarRetiro = cliente.getSaldo();
+        PuntosDeConfianza pdcPostConfirmarRetiro = cliente.getPuntosDeConfianza();
+
+        assertThat(pdcPostConfirmarRetiro).isEqualTo(new PuntosDeConfianza(1020));
+        assertThat(saldoPostConfirmarRetiro).isEqualTo(new Dinero(925));
+    }
+
+    @Test
+    void noSePuedeReutilizarElBeneficioDeCumpleanios() {
+        //given
+        Cliente cliente = new Cliente("Messi");
+        clienteRepository.save(cliente);
+        clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
+        LocalDate hoy = LocalDate.now();
+        clienteService.establecerFechaDeNacimiento(cliente.getId(), 1987,hoy.getMonth().getValue(), hoy.getDayOfMonth());
+
+        Long stockInicial = 10L;
+        InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(stockInicial, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(40.0));
+        negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
+        Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
+
+        Map<Long, Map<String, Object>> productos =
+                Map.of(
+                        alfajor.get().getId(), Map.of("cantidad", 1, "usaPdc", 0)
+                );
+        InfoPedidoDto infoPedidoDto = new InfoPedidoDto(cliente.getId(), negocio.getId(), productos);
+
+        //when
+        pedidoService.confirmarPedido(infoPedidoDto);
+        Collection<PedidoDto> pedidos = clienteService.obtenerPedidos(cliente.getId());
+        for (PedidoDto entry: pedidos) {
+            pedidoService.marcarComienzoDePreparacion(entry.getIdPedido());
+            pedidoService.marcarPedidoListoParaRetirar(entry.getIdPedido());
+            pedidoService.confirmarRetiroDelPedido(entry.getIdPedido());
+            pedidoService.solicitarDevolucion(entry.getIdPedido());
+            pedidoService.denegarDevolucion(entry.getIdPedido());
+        }
+
+        pedidoService.confirmarPedido(infoPedidoDto);
+        pedidos = clienteService.obtenerPedidos(cliente.getId());
+        for (PedidoDto entry: pedidos) {
+            pedidoService.marcarComienzoDePreparacion(entry.getIdPedido());
+            pedidoService.marcarPedidoListoParaRetirar(entry.getIdPedido());
+            pedidoService.confirmarRetiroDelPedido(entry.getIdPedido());
+            pedidoService.solicitarDevolucion(entry.getIdPedido());
+            pedidoService.denegarDevolucion(entry.getIdPedido());
+        }
+
+        //then
+        Dinero saldoPostConfirmarRetiro = cliente.getSaldo();
+        PuntosDeConfianza pdcPostConfirmarRetiro = cliente.getPuntosDeConfianza();
+
+        assertThat(pdcPostConfirmarRetiro).isEqualTo(new PuntosDeConfianza(1040));
+        assertThat(saldoPostConfirmarRetiro).isEqualTo(new Dinero(825));
     }
 }

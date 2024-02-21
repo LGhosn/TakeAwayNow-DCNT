@@ -1,47 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dcnt.take_away_now.service.PedidoServiceTest" tests="32" skipped="0" failures="0" errors="0" timestamp="2024-02-21T02:23:47" hostname="DESKTOP-84L37D5" time="0.791">
+<testsuite name="com.dcnt.take_away_now.service.PedidoServiceTest" tests="33" skipped="0" failures="0" errors="0" timestamp="2024-02-21T04:12:17" hostname="DESKTOP-84L37D5" time="0.704">
   <properties/>
-  <testcase name="noSePuedeMarcarComienzoDePreparacionAUnPedidoQueNoEstaEnAguardandoPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.016"/>
-  <testcase name="veinticincoPorcientoDeDescuentoPorSerSuCumpleanios()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.041"/>
-  <testcase name="noSePuedeMarcarListoParaRetirarAUnPedidoQueNoEstaEnPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.012"/>
-  <testcase name="sePuedeComprarUnProductoConPdc()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.063"/>
-  <testcase name="cuandoSeCancelaUnPedidoEnPreparacionNoSeDevulveElSaldoYDisminuyenLosPdcEnUnVeintePorcientoDelTotalDeLaRecompenzaDelPedido()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.063"/>
-  <testcase name="cuandoSeAceptaLaDevolucionDeUnPedidoSeLeDevuelveElSaldoAlClienteYElStockDeLosProductos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.086"/>
-  <testcase name="noSePuedeConfirmarUnPedidoParaEstosProductosPorqueNoEsUnProductoDelNegocio()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.015"/>
-  <testcase name="noSePuedeConfirmarUnPedidoParaEstosProductosPorqueNoHayStockSuficiente()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.032"/>
-  <testcase name="noEsUnProductoDeEseNegocio()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.014"/>
-  <testcase name="sePuedeMarcarComienzoDePreparacionAUnPedidoQueEstaAguardandoPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.015"/>
-  <testcase name="verificarPedidoLanzaQueNoExisteCliente()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.032"/>
-  <testcase name="sePuedeComprarUnProductoConPdcYDinero()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.053"/>
-  <testcase name="sePuedeMarcarListoParaRetirarAUnPedidoQueEstaEnPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.018"/>
-  <testcase name="noSePuedeCancelarAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.01"/>
-  <testcase name="noSePuedeSolicitarDevolucionDeUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.011"/>
+  <testcase name="noSePuedeMarcarComienzoDePreparacionAUnPedidoQueNoEstaEnAguardandoPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.012"/>
+  <testcase name="noSePuedeMarcarListoParaRetirarAUnPedidoQueNoEstaEnPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.013"/>
+  <testcase name="sePuedeComprarUnProductoConPdc()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.07"/>
+  <testcase name="noSePuedeReutilizarElBeneficioDeCumpleanios()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.057"/>
+  <testcase name="cuandoSeCancelaUnPedidoEnPreparacionNoSeDevulveElSaldoYDisminuyenLosPdcEnUnVeintePorcientoDelTotalDeLaRecompenzaDelPedido()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.043"/>
+  <testcase name="cuandoSeAceptaLaDevolucionDeUnPedidoSeLeDevuelveElSaldoAlClienteYElStockDeLosProductos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.038"/>
+  <testcase name="noSePuedeConfirmarUnPedidoParaEstosProductosPorqueNoEsUnProductoDelNegocio()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.008"/>
+  <testcase name="noSePuedeConfirmarUnPedidoParaEstosProductosPorqueNoHayStockSuficiente()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.018"/>
+  <testcase name="noEsUnProductoDeEseNegocio()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.01"/>
+  <testcase name="sePuedeMarcarComienzoDePreparacionAUnPedidoQueEstaAguardandoPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.009"/>
+  <testcase name="verificarPedidoLanzaQueNoExisteCliente()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.016"/>
+  <testcase name="sePuedeComprarUnProductoConPdcYDinero()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.039"/>
+  <testcase name="sePuedeMarcarListoParaRetirarAUnPedidoQueEstaEnPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.01"/>
+  <testcase name="noSePuedeCancelarAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.012"/>
+  <testcase name="noSePuedeSolicitarDevolucionDeUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.008"/>
   <testcase name="noSePuedeConfirmarRetiroAUnPedidoQueNoEstaListoParaRetirar()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.011"/>
-  <testcase name="noSePuedeConfirmarRetiroAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.007"/>
-  <testcase name="sePuedeConfirmarRetiroAUnPedidoQueEstaListoParaRetirar()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.012"/>
-  <testcase name="sePuedeConfirmarUnPedidoParaEstosProductos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.049"/>
-  <testcase name="noSePuedeMarcarListoParaRetirarAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.006"/>
-  <testcase name="verificarPedidoLanzaQueNoExisteNegocio()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.017"/>
+  <testcase name="veinticincoPorcientoDeDescuentoYMilPuntosDeRegaloPorBeneficioDeCumpleanios()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.037"/>
+  <testcase name="noSePuedeConfirmarRetiroAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.006"/>
+  <testcase name="sePuedeConfirmarRetiroAUnPedidoQueEstaListoParaRetirar()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.01"/>
+  <testcase name="sePuedeConfirmarUnPedidoParaEstosProductos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.035"/>
+  <testcase name="noSePuedeMarcarListoParaRetirarAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.007"/>
+  <testcase name="verificarPedidoLanzaQueNoExisteNegocio()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.014"/>
   <testcase name="esUnProductoDeEseNegocio()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.014"/>
-  <testcase name="verificarPedido()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.018"/>
-  <testcase name="noSePuedeSolicitarDevolucionDeUnPedidoQueNoEstaRetirado()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.006"/>
-  <testcase name="cuandoSeCancelaUnPedidoEnAguardandoPreparacionSeDevulveElSaldoYSeDisminuyenLosPdcEnUnCincoPorcientoDelTotalDeLaRecompenzaDelPedido()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.023"/>
-  <testcase name="sePuedeConfirmarPedido()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.013"/>
-  <testcase name="noSePuedeMarcarComienzoDePreparacionAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.005"/>
-  <testcase name="cuandoSeCancelaUnPedidoListoParaRetirarNoSeDevulveElSaldoYSeLeSacanLosPuntosDeConfianza()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.041"/>
-  <testcase name="cuandoSeDeniegaLaDevolucionDeUnPedidoNoSeLeDevuelveElSaldoAlClienteNiElStockDeLosProductos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.026"/>
-  <testcase name="sePuedeSolicitarDevolucionDeUnPedidoQueFueRetiradoHaceMenosDeCincoMinutos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.011"/>
-  <testcase name="obtenerPedidos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.012"/>
-  <testcase name="sePuedeCancelarAUnPedidoQueEstaAguardandoPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.007"/>
-  <system-out><![CDATA[2024-02-20T20:23:47.826-06:00  INFO 19940 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.service.PedidoServiceTest]: PedidoServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-20T20:23:47.839-06:00  INFO 19940 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.service.PedidoServiceTest
+  <testcase name="verificarPedido()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.022"/>
+  <testcase name="noSePuedeSolicitarDevolucionDeUnPedidoQueNoEstaRetirado()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.005"/>
+  <testcase name="cuandoSeCancelaUnPedidoEnAguardandoPreparacionSeDevulveElSaldoYSeDisminuyenLosPdcEnUnCincoPorcientoDelTotalDeLaRecompenzaDelPedido()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.027"/>
+  <testcase name="sePuedeConfirmarPedido()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.019"/>
+  <testcase name="noSePuedeMarcarComienzoDePreparacionAUnPedidoQueNoExiste()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.009"/>
+  <testcase name="cuandoSeCancelaUnPedidoListoParaRetirarNoSeDevulveElSaldoYSeLeSacanLosPuntosDeConfianza()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.037"/>
+  <testcase name="cuandoSeDeniegaLaDevolucionDeUnPedidoNoSeLeDevuelveElSaldoAlClienteNiElStockDeLosProductos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.028"/>
+  <testcase name="sePuedeSolicitarDevolucionDeUnPedidoQueFueRetiradoHaceMenosDeCincoMinutos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.01"/>
+  <testcase name="obtenerPedidos()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.01"/>
+  <testcase name="sePuedeCancelarAUnPedidoQueEstaAguardandoPreparacion()" classname="com.dcnt.take_away_now.service.PedidoServiceTest" time="0.01"/>
+  <system-out><![CDATA[2024-02-20T22:12:17.582-06:00  INFO 23704 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.dcnt.take_away_now.service.PedidoServiceTest]: PedidoServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-20T22:12:17.589-06:00  INFO 23704 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.dcnt.take_away_now.TakeAwayNowApplication for test class com.dcnt.take_away_now.service.PedidoServiceTest
 Hibernate: 
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -60,9 +61,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -74,9 +75,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -95,9 +96,44 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        pedidos
+        (id_cliente, codigo, estado, fecha_y_hora_entrega, id_negocio, precio_total, id_pedido) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        clientes
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        negocios
+        (dia_apertura, dia_cierre, horario_apertura, horario_cierre, nombre, saldo, id_negocio) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        productos
+        (id_inventario_registro, nombre, id_producto) 
+    values
+        (?, ?, default)
+Hibernate: 
+    insert 
+    into
+        clientes
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     select
         p1_0.id_producto,
@@ -126,6 +162,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -137,171 +174,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
-        id_plan=?,
-        pdc=?,
-        saldo=?,
-        usuario=? 
-    where
-        id_cliente=?
-Hibernate: 
-    update
-        inventario_registros 
-    set
-        id_negocio=?,
-        precio_unitario=?,
-        precio_unitario_pdc=?,
-        id_producto=?,
-        recompensa_pdc=?,
-        stock=? 
-    where
-        id_inventario_registro=?
-Hibernate: 
-    update
-        productos 
-    set
-        id_inventario_registro=?,
-        nombre=? 
-    where
-        id_producto=?
-Hibernate: 
-    select
-        p1_0.id_producto,
-        p1_0.id_inventario_registro,
-        p1_0.nombre 
-    from
-        productos p1_0 
-    where
-        p1_0.nombre=?
-Hibernate: 
-    insert 
-    into
-        pedidos
-        (id_cliente, codigo, estado, fecha_y_hora_entrega, id_negocio, precio_total, id_pedido) 
-    values
-        (?, ?, ?, ?, ?, ?, default)
-Hibernate: 
-    select
-        ir1_0.id_inventario_registro,
-        ir1_0.id_negocio,
-        ir1_0.precio_unitario,
-        ir1_0.precio_unitario_pdc,
-        ir1_0.id_producto,
-        ir1_0.recompensa_pdc,
-        ir1_0.stock 
-    from
-        inventario_registros ir1_0 
-    where
-        ir1_0.id_negocio=? 
-        and ir1_0.id_producto=?
-Hibernate: 
-    insert 
-    into
-        productos_pedidos
-        (cantidad, id_pedido, id_producto, id_producto_pedido) 
-    values
-        (?, ?, ?, default)
-Hibernate: 
-    insert 
-    into
-        clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
-    values
-        (?, ?, ?, ?, ?, default)
-Hibernate: 
-    insert 
-    into
-        negocios
-        (dia_apertura, dia_cierre, horario_apertura, horario_cierre, nombre, saldo, id_negocio) 
-    values
-        (?, ?, ?, ?, ?, ?, default)
-Hibernate: 
-    insert 
-    into
-        productos
-        (id_inventario_registro, nombre, id_producto) 
-    values
-        (?, ?, default)
-Hibernate: 
-    insert 
-    into
-        clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
-    values
-        (?, ?, ?, ?, ?, default)
-Hibernate: 
-    insert 
-    into
-        pedidos
-        (id_cliente, codigo, estado, fecha_y_hora_entrega, id_negocio, precio_total, id_pedido) 
-    values
-        (?, ?, ?, ?, ?, ?, default)
-Hibernate: 
-    insert 
-    into
-        clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
-    values
-        (?, ?, ?, ?, ?, default)
-Hibernate: 
-    insert 
-    into
-        negocios
-        (dia_apertura, dia_cierre, horario_apertura, horario_cierre, nombre, saldo, id_negocio) 
-    values
-        (?, ?, ?, ?, ?, ?, default)
-Hibernate: 
-    insert 
-    into
-        productos
-        (id_inventario_registro, nombre, id_producto) 
-    values
-        (?, ?, default)
-Hibernate: 
-    insert 
-    into
-        clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
-    values
-        (?, ?, ?, ?, ?, default)
-Hibernate: 
-    select
-        p1_0.id_producto,
-        p1_0.id_inventario_registro,
-        p1_0.nombre 
-    from
-        productos p1_0 
-    where
-        p1_0.nombre=?
-Hibernate: 
-    insert 
-    into
-        inventario_registros
-        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
-    values
-        (?, ?, ?, ?, ?, ?, default)
-Hibernate: 
-    insert 
-    into
-        productos
-        (id_inventario_registro, nombre, id_producto) 
-    values
-        (?, ?, default)
-Hibernate: 
-    update
-        clientes 
-    set
-        fecha_nacimiento=?,
-        id_plan=?,
-        pdc=?,
-        saldo=?,
-        usuario=? 
-    where
-        id_cliente=?
-Hibernate: 
-    update
-        clientes 
-    set
-        fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -382,6 +255,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -500,9 +374,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -521,9 +395,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     select
         p1_0.id_producto,
@@ -552,6 +426,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -563,6 +438,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -643,6 +519,387 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
+        id_plan=?,
+        pdc=?,
+        saldo=?,
+        usuario=? 
+    where
+        id_cliente=?
+Hibernate: 
+    update
+        inventario_registros 
+    set
+        id_negocio=?,
+        precio_unitario=?,
+        precio_unitario_pdc=?,
+        id_producto=?,
+        recompensa_pdc=?,
+        stock=? 
+    where
+        id_inventario_registro=?
+Hibernate: 
+    update
+        pedidos 
+    set
+        id_cliente=?,
+        codigo=?,
+        estado=?,
+        fecha_y_hora_entrega=?,
+        id_negocio=?,
+        precio_total=? 
+    where
+        id_pedido=?
+Hibernate: 
+    select
+        p1_0.id_pedido,
+        c2_0.usuario,
+        n2_0.nombre,
+        p1_0.estado,
+        p1_0.precio_total,
+        p1_0.fecha_y_hora_entrega,
+        p1_0.codigo 
+    from
+        pedidos p1_0 
+    join
+        clientes c2_0 
+            on c2_0.id_cliente=p1_0.id_cliente 
+    join
+        negocios n2_0 
+            on n2_0.id_negocio=p1_0.id_negocio 
+    join
+        clientes c1_0 
+            on p1_0.id_cliente=c1_0.id_cliente 
+    join
+        negocios n1_0 
+            on p1_0.id_negocio=n1_0.id_negocio 
+    where
+        c1_0.id_cliente=?
+Hibernate: 
+    select
+        p2_0.id_producto,
+        p2_0.id_inventario_registro,
+        p2_0.nombre,
+        pp1_0.cantidad,
+        ir1_0.precio_unitario 
+    from
+        productos_pedidos pp1_0 
+    join
+        productos p2_0 
+            on p2_0.id_producto=pp1_0.id_producto 
+    join
+        inventario_registros ir1_0 
+            on ir1_0.id_producto=pp1_0.id_producto 
+    where
+        pp1_0.id_pedido=?
+Hibernate: 
+    select
+        ir1_0.id_inventario_registro,
+        ir1_0.id_negocio,
+        ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
+        ir1_0.id_producto,
+        ir1_0.recompensa_pdc,
+        ir1_0.stock 
+    from
+        inventario_registros ir1_0 
+    where
+        ir1_0.id_negocio=? 
+        and ir1_0.id_producto=?
+Hibernate: 
+    insert 
+    into
+        pedidos
+        (id_cliente, codigo, estado, fecha_y_hora_entrega, id_negocio, precio_total, id_pedido) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        ir1_0.id_inventario_registro,
+        ir1_0.id_negocio,
+        ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
+        ir1_0.id_producto,
+        ir1_0.recompensa_pdc,
+        ir1_0.stock 
+    from
+        inventario_registros ir1_0 
+    where
+        ir1_0.id_negocio=? 
+        and ir1_0.id_producto=?
+Hibernate: 
+    insert 
+    into
+        productos_pedidos
+        (cantidad, id_pedido, id_producto, id_producto_pedido) 
+    values
+        (?, ?, ?, default)
+Hibernate: 
+    update
+        negocios 
+    set
+        dia_apertura=?,
+        dia_cierre=?,
+        horario_apertura=?,
+        horario_cierre=?,
+        nombre=?,
+        saldo=? 
+    where
+        id_negocio=?
+Hibernate: 
+    update
+        clientes 
+    set
+        fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
+        id_plan=?,
+        pdc=?,
+        saldo=?,
+        usuario=? 
+    where
+        id_cliente=?
+Hibernate: 
+    update
+        inventario_registros 
+    set
+        id_negocio=?,
+        precio_unitario=?,
+        precio_unitario_pdc=?,
+        id_producto=?,
+        recompensa_pdc=?,
+        stock=? 
+    where
+        id_inventario_registro=?
+Hibernate: 
+    update
+        pedidos 
+    set
+        id_cliente=?,
+        codigo=?,
+        estado=?,
+        fecha_y_hora_entrega=?,
+        id_negocio=?,
+        precio_total=? 
+    where
+        id_pedido=?
+Hibernate: 
+    update
+        pedidos 
+    set
+        id_cliente=?,
+        codigo=?,
+        estado=?,
+        fecha_y_hora_entrega=?,
+        id_negocio=?,
+        precio_total=? 
+    where
+        id_pedido=?
+Hibernate: 
+    select
+        p1_0.id_pedido,
+        c2_0.usuario,
+        n2_0.nombre,
+        p1_0.estado,
+        p1_0.precio_total,
+        p1_0.fecha_y_hora_entrega,
+        p1_0.codigo 
+    from
+        pedidos p1_0 
+    join
+        clientes c2_0 
+            on c2_0.id_cliente=p1_0.id_cliente 
+    join
+        negocios n2_0 
+            on n2_0.id_negocio=p1_0.id_negocio 
+    join
+        clientes c1_0 
+            on p1_0.id_cliente=c1_0.id_cliente 
+    join
+        negocios n1_0 
+            on p1_0.id_negocio=n1_0.id_negocio 
+    where
+        c1_0.id_cliente=?
+Hibernate: 
+    select
+        p2_0.id_producto,
+        p2_0.id_inventario_registro,
+        p2_0.nombre,
+        pp1_0.cantidad,
+        ir1_0.precio_unitario 
+    from
+        productos_pedidos pp1_0 
+    join
+        productos p2_0 
+            on p2_0.id_producto=pp1_0.id_producto 
+    join
+        inventario_registros ir1_0 
+            on ir1_0.id_producto=pp1_0.id_producto 
+    where
+        pp1_0.id_pedido=?
+Hibernate: 
+    select
+        ir1_0.id_inventario_registro,
+        ir1_0.id_negocio,
+        ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
+        ir1_0.id_producto,
+        ir1_0.recompensa_pdc,
+        ir1_0.stock 
+    from
+        inventario_registros ir1_0 
+    where
+        ir1_0.id_negocio=? 
+        and ir1_0.id_producto=?
+Hibernate: 
+    insert 
+    into
+        clientes
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        negocios
+        (dia_apertura, dia_cierre, horario_apertura, horario_cierre, nombre, saldo, id_negocio) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        productos
+        (id_inventario_registro, nombre, id_producto) 
+    values
+        (?, ?, default)
+Hibernate: 
+    insert 
+    into
+        clientes
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.id_inventario_registro,
+        p1_0.nombre 
+    from
+        productos p1_0 
+    where
+        p1_0.nombre=?
+Hibernate: 
+    insert 
+    into
+        inventario_registros
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        productos
+        (id_inventario_registro, nombre, id_producto) 
+    values
+        (?, ?, default)
+Hibernate: 
+    update
+        clientes 
+    set
+        fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
+        id_plan=?,
+        pdc=?,
+        saldo=?,
+        usuario=? 
+    where
+        id_cliente=?
+Hibernate: 
+    update
+        clientes 
+    set
+        fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
+        id_plan=?,
+        pdc=?,
+        saldo=?,
+        usuario=? 
+    where
+        id_cliente=?
+Hibernate: 
+    update
+        inventario_registros 
+    set
+        id_negocio=?,
+        precio_unitario=?,
+        precio_unitario_pdc=?,
+        id_producto=?,
+        recompensa_pdc=?,
+        stock=? 
+    where
+        id_inventario_registro=?
+Hibernate: 
+    update
+        productos 
+    set
+        id_inventario_registro=?,
+        nombre=? 
+    where
+        id_producto=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.id_inventario_registro,
+        p1_0.nombre 
+    from
+        productos p1_0 
+    where
+        p1_0.nombre=?
+Hibernate: 
+    insert 
+    into
+        pedidos
+        (id_cliente, codigo, estado, fecha_y_hora_entrega, id_negocio, precio_total, id_pedido) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        ir1_0.id_inventario_registro,
+        ir1_0.id_negocio,
+        ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
+        ir1_0.id_producto,
+        ir1_0.recompensa_pdc,
+        ir1_0.stock 
+    from
+        inventario_registros ir1_0 
+    where
+        ir1_0.id_negocio=? 
+        and ir1_0.id_producto=?
+Hibernate: 
+    insert 
+    into
+        productos_pedidos
+        (cantidad, id_pedido, id_producto, id_producto_pedido) 
+    values
+        (?, ?, ?, default)
+Hibernate: 
+    update
+        negocios 
+    set
+        dia_apertura=?,
+        dia_cierre=?,
+        horario_apertura=?,
+        horario_cierre=?,
+        nombre=?,
+        saldo=? 
+    where
+        id_negocio=?
+Hibernate: 
+    update
+        clientes 
+    set
+        fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -764,9 +1021,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -785,9 +1042,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     select
         p1_0.id_producto,
@@ -816,6 +1073,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -827,6 +1085,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -907,6 +1166,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -1029,6 +1289,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -1078,9 +1339,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1109,9 +1370,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1154,6 +1415,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -1217,9 +1479,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1248,9 +1510,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1269,9 +1531,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1283,9 +1545,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1328,6 +1590,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -1367,6 +1630,7 @@ Hibernate:
     select
         c1_0.id_cliente,
         c1_0.fecha_nacimiento,
+        c1_0.fecha_ult_uso_benef_cumple,
         c1_0.id_plan,
         c1_0.pdc,
         c1_0.saldo,
@@ -1379,9 +1643,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1400,9 +1664,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     select
         p1_0.id_producto,
@@ -1431,6 +1695,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -1442,6 +1707,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -1522,6 +1788,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -1640,9 +1907,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1661,9 +1928,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1675,9 +1942,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1697,6 +1964,7 @@ Hibernate:
         p1_0.id_pedido,
         c1_0.id_cliente,
         c1_0.fecha_nacimiento,
+        c1_0.fecha_ult_uso_benef_cumple,
         c1_0.id_plan,
         c1_0.pdc,
         c1_0.saldo,
@@ -1726,9 +1994,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1748,6 +2016,7 @@ Hibernate:
         p1_0.id_pedido,
         c1_0.id_cliente,
         c1_0.fecha_nacimiento,
+        c1_0.fecha_ult_uso_benef_cumple,
         c1_0.id_plan,
         c1_0.pdc,
         c1_0.saldo,
@@ -1777,9 +2046,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1798,9 +2067,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1812,9 +2081,245 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        negocios
+        (dia_apertura, dia_cierre, horario_apertura, horario_cierre, nombre, saldo, id_negocio) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        productos
+        (id_inventario_registro, nombre, id_producto) 
+    values
+        (?, ?, default)
+Hibernate: 
+    insert 
+    into
+        clientes
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.id_inventario_registro,
+        p1_0.nombre 
+    from
+        productos p1_0 
+    where
+        p1_0.nombre=?
+Hibernate: 
+    insert 
+    into
+        inventario_registros
+        (id_negocio, precio_unitario, precio_unitario_pdc, id_producto, recompensa_pdc, stock, id_inventario_registro) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        productos
+        (id_inventario_registro, nombre, id_producto) 
+    values
+        (?, ?, default)
+Hibernate: 
+    update
+        clientes 
+    set
+        fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
+        id_plan=?,
+        pdc=?,
+        saldo=?,
+        usuario=? 
+    where
+        id_cliente=?
+Hibernate: 
+    update
+        clientes 
+    set
+        fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
+        id_plan=?,
+        pdc=?,
+        saldo=?,
+        usuario=? 
+    where
+        id_cliente=?
+Hibernate: 
+    update
+        inventario_registros 
+    set
+        id_negocio=?,
+        precio_unitario=?,
+        precio_unitario_pdc=?,
+        id_producto=?,
+        recompensa_pdc=?,
+        stock=? 
+    where
+        id_inventario_registro=?
+Hibernate: 
+    update
+        productos 
+    set
+        id_inventario_registro=?,
+        nombre=? 
+    where
+        id_producto=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.id_inventario_registro,
+        p1_0.nombre 
+    from
+        productos p1_0 
+    where
+        p1_0.nombre=?
+Hibernate: 
+    insert 
+    into
+        pedidos
+        (id_cliente, codigo, estado, fecha_y_hora_entrega, id_negocio, precio_total, id_pedido) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        ir1_0.id_inventario_registro,
+        ir1_0.id_negocio,
+        ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
+        ir1_0.id_producto,
+        ir1_0.recompensa_pdc,
+        ir1_0.stock 
+    from
+        inventario_registros ir1_0 
+    where
+        ir1_0.id_negocio=? 
+        and ir1_0.id_producto=?
+Hibernate: 
+    insert 
+    into
+        productos_pedidos
+        (cantidad, id_pedido, id_producto, id_producto_pedido) 
+    values
+        (?, ?, ?, default)
+Hibernate: 
+    update
+        negocios 
+    set
+        dia_apertura=?,
+        dia_cierre=?,
+        horario_apertura=?,
+        horario_cierre=?,
+        nombre=?,
+        saldo=? 
+    where
+        id_negocio=?
+Hibernate: 
+    update
+        clientes 
+    set
+        fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
+        id_plan=?,
+        pdc=?,
+        saldo=?,
+        usuario=? 
+    where
+        id_cliente=?
+Hibernate: 
+    update
+        inventario_registros 
+    set
+        id_negocio=?,
+        precio_unitario=?,
+        precio_unitario_pdc=?,
+        id_producto=?,
+        recompensa_pdc=?,
+        stock=? 
+    where
+        id_inventario_registro=?
+Hibernate: 
+    update
+        pedidos 
+    set
+        id_cliente=?,
+        codigo=?,
+        estado=?,
+        fecha_y_hora_entrega=?,
+        id_negocio=?,
+        precio_total=? 
+    where
+        id_pedido=?
+Hibernate: 
+    select
+        p1_0.id_pedido,
+        c2_0.usuario,
+        n2_0.nombre,
+        p1_0.estado,
+        p1_0.precio_total,
+        p1_0.fecha_y_hora_entrega,
+        p1_0.codigo 
+    from
+        pedidos p1_0 
+    join
+        clientes c2_0 
+            on c2_0.id_cliente=p1_0.id_cliente 
+    join
+        negocios n2_0 
+            on n2_0.id_negocio=p1_0.id_negocio 
+    join
+        clientes c1_0 
+            on p1_0.id_cliente=c1_0.id_cliente 
+    join
+        negocios n1_0 
+            on p1_0.id_negocio=n1_0.id_negocio 
+    where
+        c1_0.id_cliente=?
+Hibernate: 
+    select
+        p2_0.id_producto,
+        p2_0.id_inventario_registro,
+        p2_0.nombre,
+        pp1_0.cantidad,
+        ir1_0.precio_unitario 
+    from
+        productos_pedidos pp1_0 
+    join
+        productos p2_0 
+            on p2_0.id_producto=pp1_0.id_producto 
+    join
+        inventario_registros ir1_0 
+            on ir1_0.id_producto=pp1_0.id_producto 
+    where
+        pp1_0.id_pedido=?
+Hibernate: 
+    select
+        ir1_0.id_inventario_registro,
+        ir1_0.id_negocio,
+        ir1_0.precio_unitario,
+        ir1_0.precio_unitario_pdc,
+        ir1_0.id_producto,
+        ir1_0.recompensa_pdc,
+        ir1_0.stock 
+    from
+        inventario_registros ir1_0 
+    where
+        ir1_0.id_negocio=? 
+        and ir1_0.id_producto=?
+Hibernate: 
+    insert 
+    into
+        clientes
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1834,6 +2339,7 @@ Hibernate:
         p1_0.id_pedido,
         c1_0.id_cliente,
         c1_0.fecha_nacimiento,
+        c1_0.fecha_ult_uso_benef_cumple,
         c1_0.id_plan,
         c1_0.pdc,
         c1_0.saldo,
@@ -1863,9 +2369,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1884,9 +2390,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1915,9 +2421,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -1960,6 +2466,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -2175,9 +2682,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -2197,6 +2704,7 @@ Hibernate:
         p1_0.id_pedido,
         c1_0.id_cliente,
         c1_0.fecha_nacimiento,
+        c1_0.fecha_ult_uso_benef_cumple,
         c1_0.id_plan,
         c1_0.pdc,
         c1_0.saldo,
@@ -2226,9 +2734,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -2271,6 +2779,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -2323,9 +2832,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -2368,6 +2877,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -2417,9 +2927,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -2462,6 +2972,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -2553,9 +3064,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -2574,9 +3085,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -2588,9 +3099,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -2609,9 +3120,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     select
         p1_0.id_producto,
@@ -2640,6 +3151,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -2651,6 +3163,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -2731,6 +3244,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -2852,9 +3366,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -2897,6 +3411,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -2964,9 +3479,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -2986,6 +3501,7 @@ Hibernate:
         p1_0.id_pedido,
         c1_0.id_cliente,
         c1_0.fecha_nacimiento,
+        c1_0.fecha_ult_uso_benef_cumple,
         c1_0.id_plan,
         c1_0.pdc,
         c1_0.saldo,
@@ -3015,9 +3531,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -3036,9 +3552,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     select
         p1_0.id_producto,
@@ -3067,6 +3583,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -3078,6 +3595,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -3158,6 +3676,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -3279,9 +3798,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -3300,9 +3819,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     select
         p1_0.id_producto,
@@ -3331,6 +3850,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -3342,6 +3862,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -3422,6 +3943,7 @@ Hibernate:
         clientes 
     set
         fecha_nacimiento=?,
+        fecha_ult_uso_benef_cumple=?,
         id_plan=?,
         pdc=?,
         saldo=?,
@@ -3527,9 +4049,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -3548,9 +4070,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -3579,9 +4101,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -3632,9 +4154,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into
@@ -3653,9 +4175,9 @@ Hibernate:
     insert 
     into
         clientes
-        (fecha_nacimiento, id_plan, pdc, saldo, usuario, id_cliente) 
+        (fecha_nacimiento, fecha_ult_uso_benef_cumple, id_plan, pdc, saldo, usuario, id_cliente) 
     values
-        (?, ?, ?, ?, ?, default)
+        (?, ?, ?, ?, ?, ?, default)
 Hibernate: 
     insert 
     into

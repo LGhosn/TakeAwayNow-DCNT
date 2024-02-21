@@ -16,6 +16,7 @@ import static org.springframework.http.HttpStatus.*;
 
 import java.math.BigDecimal;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -173,11 +174,6 @@ public class PedidoService {
             precioTotalDelPedido = precioTotalDelPedido.multiply(p.get().getDescuento()).divide(100);
         }
 
-        // Si es el cumpleanios del cliente se le aplica un 25% de descuento extra al pedido
-        if (cliente.esSuCumpleanios()) {
-            precioTotalDelPedido = precioTotalDelPedido.multiply(25).divide(100);
-        }
-
         cliente.setSaldo(cliente.getSaldo().minus(precioTotalDelPedido));
         cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().minus(pdcTotalDelPedido));
 
@@ -260,9 +256,10 @@ public class PedidoService {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("No se puede retirar dicho pedido ya que el mismo no se encuentra listo para retirar.");
         }
 
-        // le doy al cliente sus pdc
+        // le doy al cliente sus pdc y saldo de reintegro en caso de ser necesario.
         Cliente cliente = pedido.getCliente();
         PuntosDeConfianza pdcRecompensa =  obtenerPuntosDeConfianzaDeUnPedido(idPedido);
+        Dinero reintegroPorBeneficios = new Dinero(0);
 
         // Si el cliente esta subscripto al plan prime, se le aplica el multiplicador correspondiente.
         if (cliente.esPrime()) {
@@ -274,11 +271,14 @@ public class PedidoService {
         }
 
         // Si es el cumpleaños del cliente, le damos su regalito <3
-        if (cliente.esSuCumpleanios()) {
+        if (cliente.esSuCumpleanios() && cliente.todaviaNoUsaBeneficioCumple()) {
             pdcRecompensa = pdcRecompensa.plus(1000);
+            reintegroPorBeneficios = pedido.getPrecioTotal().multiply(25).divide(100);
+            cliente.setFechaUltUsoBenefCumple(LocalDate.now());
         }
 
-        cliente.setPuntosDeConfianza(pdcRecompensa);
+        cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().plus(pdcRecompensa));
+        cliente.setSaldo(cliente.getSaldo().plus(reintegroPorBeneficios));
 
         // Actualizamos el estado del pedido y se establece la fecha y hora de entrega.
         pedido.setFechaYHoraDeEntrega(LocalDateTime.now());
