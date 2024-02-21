@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.cglib.core.Local;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -106,7 +107,7 @@ public class Pedido {
         this.setCodigoDeRetiro(GeneradorDeCodigo.generarCodigoAleatorio());
     }
 
-    public void confirmarRetiroDelPedido(PuntosDeConfianza pdcRecompensa) {
+    public void confirmarRetiroDelPedido(PuntosDeConfianza pdcRecompensa, LocalDate hoy) {
         // le doy al cliente sus pdc y saldo de reintegro en caso de ser necesario.
         Cliente cliente = this.getCliente();
         Dinero reintegroPorBeneficios = new Dinero(0);
@@ -118,10 +119,10 @@ public class Pedido {
         }
 
         // Si es el cumpleaños del cliente, le damos su regalito <3
-        if (cliente.esSuCumpleanios() && cliente.todaviaNoUsaBeneficioCumple()) {
+        if (cliente.esSuCumpleanios(hoy) && cliente.todaviaNoUsaBeneficioCumple(hoy)) {
             pdcRecompensa = pdcRecompensa.plus(1000);
             reintegroPorBeneficios = this.getPrecioTotal().multiply(25).divide(100);
-            cliente.setFechaUltUsoBenefCumple(LocalDate.now());
+            cliente.setFechaUltUsoBenefCumple(hoy);
         }
 
         cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().plus(pdcRecompensa));

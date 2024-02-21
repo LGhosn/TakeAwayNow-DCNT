@@ -56,13 +56,11 @@ public class Cliente {
 
     public boolean esPrime() { return plan != null; }
 
-    public boolean esSuCumpleanios() {
-        LocalDate hoy = LocalDate.now();
+    public boolean esSuCumpleanios(LocalDate hoy) {
         return fechaDeNacimiento != null && hoy.getDayOfMonth() == fechaDeNacimiento.getDayOfMonth() && hoy.getMonth() == fechaDeNacimiento.getMonth();
     }
 
-    public boolean todaviaNoUsaBeneficioCumple() {
-        LocalDate hoy = LocalDate.now();
+    public boolean todaviaNoUsaBeneficioCumple(LocalDate hoy) {
 
         /* En caso de utilizarlo por primera vez */
         if (fechaUltUsoBenefCumple == null) {

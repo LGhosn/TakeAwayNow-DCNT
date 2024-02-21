@@ -238,7 +238,7 @@ public class PedidoService {
             throw  new RuntimeException("No se puede retirar dicho pedido ya que el mismo no se encuentra listo para retirar.");
         }
         PuntosDeConfianza pdcRecompensa =  obtenerPuntosDeConfianzaDeUnPedido(idPedido);
-        pedido.confirmarRetiroDelPedido(pdcRecompensa);
+        pedido.confirmarRetiroDelPedido(pdcRecompensa, LocalDate.now());
         pedidoRepository.save(pedido);
     }
 
