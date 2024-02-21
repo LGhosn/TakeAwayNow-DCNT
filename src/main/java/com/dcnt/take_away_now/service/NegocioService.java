@@ -70,6 +70,7 @@ public class NegocioService {
         if (optionalNegocio.isEmpty()) {
             throw new RuntimeException("No existe el negocio para el cual busca crear el producto.");
         }
+        Negocio negocioExistente = optionalNegocio.get();
 
         // Corroboramos que no exista un producto con el nombre pasado por parámetro para este negocio.
         Optional<Producto> optionalProducto = productoRepository.findByNombre(nombreDelProducto);
@@ -80,7 +81,6 @@ public class NegocioService {
         // Creamos el nuevo producto y el registro.
         InventarioRegistro nuevoInventarioRegistro = inventarioRegistroRepository.save(new InventarioRegistro(inventarioRegistroDto));
         Producto nuevoProducto = productoRepository.save(new Producto(nombreDelProducto));
-        Negocio negocioExistente = optionalNegocio.get();
 
         nuevoInventarioRegistro.setProducto(nuevoProducto);
         nuevoInventarioRegistro.setNegocio(negocioExistente);
