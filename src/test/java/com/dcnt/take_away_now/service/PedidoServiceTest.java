@@ -502,7 +502,7 @@ class PedidoServiceTest {
     }
 
     @Test
-    void cuandoSeCancelaUnPedidoListoParaRetirarNoSeDevulveElSaldoYSeLeSacanLosPuntosDeConfianza() {
+    void cuandoSeCancelaUnPedidoListoParaRetirarNoSeDevulveElSaldoYSeLeSacanQuinientosPdc() {
         //given
         Cliente cliente = new Cliente("Messi");
         clienteRepository.save(cliente);

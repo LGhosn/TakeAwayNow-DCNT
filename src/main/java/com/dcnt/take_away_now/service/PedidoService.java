@@ -120,6 +120,7 @@ public class PedidoService {
         // Inicializamos las variables a utilizar para la resta de monto, pdc y la recompensa por la compra.
         Dinero precioTotalDelPedido = new Dinero(0);
         PuntosDeConfianza pdcTotalDelPedido = new PuntosDeConfianza((double) 0);
+        boolean usaPdcEnPedido = false;
 
         // Levantamos los datos necesarios
         if (negocioRepository.findById(dto.getIdNegocio()).isEmpty()) {
@@ -157,6 +158,9 @@ public class PedidoService {
             ProductoPedido productoPedido = new ProductoPedido(cantidadPedida, pedido, producto);
             productoPedidoRepository.save(productoPedido);
 
+            // En caso de usar pdc lo tenemos en cuenta a la hora de restar saldo y cantidad pdc.
+            usaPdcEnPedido = usaPdc == 1;
+
             // Aumentamos el precio del pedido en función de la cantidad de productos solicitados y repetimos la operación para los pdc.
             if (usaPdc == 1 && !usoTodosSusPdc) {
                 PuntosDeConfianza pdcParcialesPorProducto = inventarioRegistro.getPrecioPDC().multiply(Double.valueOf(cantidadPedida));
@@ -174,7 +178,7 @@ public class PedidoService {
                 precioTotalDelPedido = precioTotalDelPedido.plus(precioParcialPorProducto);
             }
         }
-        pedido.actualizarSaldosClienteYNegocio(precioTotalDelPedido, pdcTotalDelPedido);
+        pedido.actualizarSaldosClienteYNegocio(precioTotalDelPedido, pdcTotalDelPedido, usaPdcEnPedido);
         pedidoRepository.save(pedido);
     }
 

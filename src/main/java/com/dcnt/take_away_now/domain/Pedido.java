@@ -38,7 +38,7 @@ public class Pedido {
     private Long id;
 
     @Column(name="ESTADO")
-    public EstadoDelPedido estado = EstadoDelPedido.AGUARDANDO_PREPARACION;
+    public Pedido.EstadoDelPedido estado = Pedido.EstadoDelPedido.AGUARDANDO_PREPARACION;
 
     @Column(name="PRECIO_TOTAL")
     @Convert(converter = DineroAttributeConverter.class)
@@ -67,8 +67,14 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public void actualizarSaldosClienteYNegocio(Dinero precioTotalDelPedido, PuntosDeConfianza pdcTotalDelPedido) {
+    public void actualizarSaldosClienteYNegocio(Dinero precioTotalDelPedido, PuntosDeConfianza pdcTotalDelPedido, boolean usaPdcEnPedido) {
         // Actualizamos el saldo y los puntos de confianza del cliente, tanto si ha gastado como si ha ganado.
+        if (usaPdcEnPedido) {
+            if (cliente.getPuntosDeConfianza().getCantidad().compareTo(pdcTotalDelPedido.getCantidad()) < 0 ) {
+                throw new RuntimeException("No tenes los pdc suficiente para realizar la compra");
+            }
+        }
+
         if (cliente.getSaldo().minus(precioTotalDelPedido).compareTo(new Dinero(0)) < 0) {
             throw new RuntimeException("No tenes el Dinero suficiente para realizar la compra");
         }
@@ -140,12 +146,8 @@ public class Pedido {
                 cliente.setPuntosDeConfianza(
                         cliente.getPuntosDeConfianza().minus(pdcPedido.multiply(0.20)));
             } else if(this.getEstado() == Pedido.EstadoDelPedido.LISTO_PARA_RETIRAR) {
-                //En caso de que el estado sea LISTO_PARA_RETIRAR, entonces el cliente pierde puntos de confianza (significativamente, pierde un 100% del total que posee o en caso de tener pdc negativos, adeudará 500 pdc adicionales) y no recupera su dinero.
-                if (cliente.getPuntosDeConfianza().getCantidad() <= 0) {
-                    cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().minus(500));
-                } else {
-                    cliente.setPuntosDeConfianza(new PuntosDeConfianza((double) 0));
-                }
+                //En caso de que el estado sea LISTO_PARA_RETIRAR, entonces el cliente pierde puntos de confianza (significativamente, pierde un total de 500 pdc) y no recupera su dinero.
+                cliente.setPuntosDeConfianza(cliente.getPuntosDeConfianza().minus(500));
             }
         } else {
             // Al ser prime obtiene el dinero nuevamente.
@@ -158,7 +160,7 @@ public class Pedido {
 
     public void solicitarDevolucion() {
         // Corroboramos si el cliente tiene plan prime.
-        if (this.getCliente().esPrime()) {
+        if (!this.getCliente().esPrime()) {
             // Verificamos si pasaron menos de 5 minutos desde su retiro.
             if (Duration.between(this.getFechaYHoraDeEntrega(), LocalDateTime.now()).toMinutes() > 5) {
                 throw  new RuntimeException("El tiempo de tolerancia para devolver un pedido es de cinco minutos y el mismo ya ha expirado.");
