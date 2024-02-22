@@ -82,7 +82,7 @@ public class Pedido {
         // Si el cliente esta subscripto a un plan, se le aplica el descuento correspondiente.
         if (cliente.esPrime()) {
             Plan p = cliente.getPlan();
-            precioTotalDelPedido = precioTotalDelPedido.multiply(p.getDescuento()).divide(100);
+            precioTotalDelPedido = precioTotalDelPedido.multiply(100 - p.getDescuento()).divide(100);
         }
 
         cliente.setSaldo(cliente.getSaldo().minus(precioTotalDelPedido));

@@ -138,8 +138,6 @@ public class PedidoService {
 
         pedidoRepository.save(pedido);
 
-        PuntosDeConfianza pdcCliente = cliente.getPuntosDeConfianza();
-        Boolean usoTodosSusPdc = false;
         for (Map.Entry<Long, Map<String, Object>> entry : dto.getProductos().entrySet()) {
 
             Long productId = entry.getKey();
@@ -162,16 +160,8 @@ public class PedidoService {
             usaPdcEnPedido = usaPdc == 1;
 
             // Aumentamos el precio del pedido en función de la cantidad de productos solicitados y repetimos la operación para los pdc.
-            if (usaPdc == 1 && !usoTodosSusPdc) {
+            if (usaPdc == 1) {
                 PuntosDeConfianza pdcParcialesPorProducto = inventarioRegistro.getPrecioPDC().multiply(Double.valueOf(cantidadPedida));
-                if (pdcCliente.getCantidad() < pdcParcialesPorProducto.getCantidad()) {
-                    pdcTotalDelPedido = pdcCliente;
-                    usoTodosSusPdc = true;
-                    double porcentajeFaltante = pdcCliente.getCantidad() / pdcParcialesPorProducto.getCantidad();
-                    Dinero precioParcialPorProducto = new Dinero(inventarioRegistro.getPrecio().getMonto()).multiply(new Dinero(BigDecimal.valueOf(porcentajeFaltante))).multiply(cantidadPedida);
-                    precioTotalDelPedido = precioTotalDelPedido.plus(precioParcialPorProducto);
-                    continue;
-                }
                 pdcTotalDelPedido = pdcTotalDelPedido.plus(pdcParcialesPorProducto);
             } else {
                 Dinero precioParcialPorProducto = new Dinero(inventarioRegistro.getPrecio().getMonto()).multiply(cantidadPedida);
@@ -199,7 +189,7 @@ public class PedidoService {
         }
 
         if (!elClienteTieneSaldoSuficiente(dto.getIdCliente(), dto.getProductos())) {
-            throw  new RuntimeException("No posees saldo suficiente para confirmar este pedido.");
+            throw  new RuntimeException("No posees saldo o pdc suficiente para confirmar este pedido.");
         }
 
         confirmarPedido(dto);

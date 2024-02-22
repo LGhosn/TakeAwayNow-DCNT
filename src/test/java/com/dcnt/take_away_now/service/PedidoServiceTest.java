@@ -728,17 +728,21 @@ class PedidoServiceTest {
     void sePuedeComprarUnProductoConPdcYDinero() {
         //given
         Cliente cliente = new Cliente("Messi");
+        cliente.setPuntosDeConfianza(new PuntosDeConfianza(100));
         clienteRepository.save(cliente);
         clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
 
         Long stockInicial = 10L;
         InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(stockInicial, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(40.0));
         negocioService.crearProducto(negocio.getId(), "Alfajor",inventarioRegistroDto);
+        negocioService.crearProducto(negocio.getId(), "Coca",inventarioRegistroDto);
         Optional<Producto> alfajor = productoRepository.findByNombre("Alfajor");
+        Optional<Producto> coca = productoRepository.findByNombre("Coca");
 
         Map<Long, Map<String, Object>> productos =
                 Map.of(
-                        alfajor.get().getId(), Map.of("cantidad", 1, "usaPdc", 0)
+                        alfajor.get().getId(), Map.of("cantidad", 1, "usaPdc", 0),
+                        coca.get().getId(), Map.of("cantidad", 1, "usaPdc", 1)
                 );
         InfoPedidoDto infoPedidoDto = new InfoPedidoDto(cliente.getId(), negocio.getId(), productos);
         pedidoService.confirmarPedido(infoPedidoDto);
@@ -749,25 +753,13 @@ class PedidoServiceTest {
             pedidoService.marcarPedidoListoParaRetirar(entry.getIdPedido());
             pedidoService.confirmarRetiroDelPedido(entry.getIdPedido());
         }
-        PuntosDeConfianza pdcPostConfirmarPedido1 = cliente.getPuntosDeConfianza();
-
-
-        Map<Long, Map<String, Object>> productos2 =
-                Map.of(
-                        alfajor.get().getId(), Map.of("cantidad", 1, "usaPdc", 1)
-                );
-        InfoPedidoDto infoPedidoDto2 = new InfoPedidoDto(cliente.getId(), negocio.getId(), productos2);
-
-        //when
-        pedidoService.confirmarPedido(infoPedidoDto2);
 
         //then
         Dinero saldoPostConfirmarPedido = cliente.getSaldo();
         PuntosDeConfianza pdcPostConfirmarPedido = cliente.getPuntosDeConfianza();
 
-        assertThat(saldoPostConfirmarPedido).isEqualTo(new Dinero(BigDecimal.valueOf(850.0)));
-        assertThat(pdcPostConfirmarPedido1).isEqualTo(new PuntosDeConfianza(20));
-        assertThat(pdcPostConfirmarPedido).isEqualTo(new PuntosDeConfianza(0));
+        assertThat(saldoPostConfirmarPedido).isEqualTo(new Dinero(BigDecimal.valueOf(900)));
+        assertThat(pdcPostConfirmarPedido).isEqualTo(new PuntosDeConfianza(100));
     }
 
     @Test

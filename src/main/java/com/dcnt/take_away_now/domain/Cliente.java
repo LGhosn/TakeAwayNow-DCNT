@@ -126,16 +126,15 @@ public class Cliente {
         Double cantidadPDCActualTotalPedido = pdcTotalDelPedido.getCantidad();
         Double cantidadPDCTotalCliente = this.getPuntosDeConfianza().getCantidad();
 
+        // Vemos si marcó en algún producto que quiere usar pdc.
         if (usaPdc) {
+            // Vemos si la cantidad de pdc de los productos a comprar con pdc es mayor a los pdc del cliente
             if (cantidadPDCActualTotalPedido.compareTo(cantidadPDCTotalCliente) > 0) {
                 return false;
             }
         }
 
-        if (montoActualTotalPedido.compareTo(montoTotalSaldoCliente) > 0) {
-            return false;
-        }
-
-        return  true;
+        // Vemos si el saldo del cliente es mayor al saldo del pedido.
+        return montoActualTotalPedido.compareTo(montoTotalSaldoCliente) <= 0;
     }
 }
