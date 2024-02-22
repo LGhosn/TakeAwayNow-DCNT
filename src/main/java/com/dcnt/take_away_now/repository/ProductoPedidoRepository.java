@@ -12,7 +12,7 @@ import java.util.Collection;
 
 @Repository
 public interface ProductoPedidoRepository extends JpaRepository<ProductoPedido, Long> {
-    @Query("SELECT new com.dcnt.take_away_now.dto.ProductoPedidoDto(pp.producto, pp.cantidad, ir.precio) " +
+    @Query("SELECT new com.dcnt.take_away_now.dto.ProductoPedidoDto(pp.producto, pp.cantidad, ir.precio, ir.precioPDC) " +
             "FROM ProductoPedido pp " +
             "INNER JOIN InventarioRegistro ir on ir.producto.id = pp.producto.id " +
             "WHERE pp.pedido.id = :idPedido"

@@ -2,6 +2,7 @@ package com.dcnt.take_away_now.dto;
 
 import com.dcnt.take_away_now.domain.Pedido;
 import com.dcnt.take_away_now.value_object.Dinero;
+import com.dcnt.take_away_now.value_object.PuntosDeConfianza;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ public class PedidoDto {
     private Dinero precioTotal;
     private LocalDateTime fechaYHoraDeEntrega;
     private String codigoDeRetiro;
+    private PuntosDeConfianza precioPDC;
 
     public PedidoDto(
             Long idPedido,
@@ -23,7 +25,8 @@ public class PedidoDto {
             Pedido.EstadoDelPedido estado,
             Dinero precioTotal,
             LocalDateTime fechaYHoraDeEntrega,
-            String codigoDeRetiro
+            String codigoDeRetiro,
+            PuntosDeConfianza precioPDC
     ) {
         this.idPedido = idPedido;
         this.usuarioCliente = usuarioCliente;
@@ -32,5 +35,6 @@ public class PedidoDto {
         this.precioTotal = precioTotal;
         this.fechaYHoraDeEntrega = fechaYHoraDeEntrega;
         this.codigoDeRetiro = codigoDeRetiro;
+        this.precioPDC = precioPDC;
     }
 }

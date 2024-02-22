@@ -109,7 +109,7 @@ public class Pedido {
         this.setCodigoDeRetiro(GeneradorDeCodigo.generarCodigoAleatorio());
     }
 
-    public void confirmarRetiroDelPedido(PuntosDeConfianza pdcRecompensa, LocalDate hoy) {
+public void confirmarRetiroDelPedido(PuntosDeConfianza pdcRecompensa, LocalDate hoy) {
         // le doy al cliente sus pdc y saldo de reintegro en caso de ser necesario.
         Cliente cliente = this.getCliente();
         Dinero reintegroPorBeneficios = new Dinero(0);
