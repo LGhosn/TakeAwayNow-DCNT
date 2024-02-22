@@ -16,7 +16,6 @@ public class PedidoDto {
     private Dinero precioTotal;
     private LocalDateTime fechaYHoraDeEntrega;
     private String codigoDeRetiro;
-    private PuntosDeConfianza precioPDC;
 
     public PedidoDto(
             Long idPedido,
@@ -25,8 +24,7 @@ public class PedidoDto {
             Pedido.EstadoDelPedido estado,
             Dinero precioTotal,
             LocalDateTime fechaYHoraDeEntrega,
-            String codigoDeRetiro,
-            PuntosDeConfianza precioPDC
+            String codigoDeRetiro
     ) {
         this.idPedido = idPedido;
         this.usuarioCliente = usuarioCliente;
@@ -35,6 +33,5 @@ public class PedidoDto {
         this.precioTotal = precioTotal;
         this.fechaYHoraDeEntrega = fechaYHoraDeEntrega;
         this.codigoDeRetiro = codigoDeRetiro;
-        this.precioPDC = precioPDC;
     }
 }
