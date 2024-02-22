@@ -1,10 +1,8 @@
 package com.dcnt.take_away_now;
 
-import org.junit.jupiter.api.Test;
 import com.dcnt.take_away_now.value_object.PuntosDeConfianza;
 import com.dcnt.take_away_now.value_object.converter.PuntosDeConfianzaAttributeConverter;
-
-import java.math.BigDecimal;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;

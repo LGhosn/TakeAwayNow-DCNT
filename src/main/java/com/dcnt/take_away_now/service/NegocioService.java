@@ -80,24 +80,9 @@ public class NegocioService {
         // Creamos el nuevo producto y el registro.
 
         Long stock = inventarioRegistroDto.getStock();
-        if (stock <= 0) {
-            throw new RuntimeException("No se permite ingresar un stock negativo o igual a cero.");
-        }
-
         Dinero precio = inventarioRegistroDto.getPrecio();
-        if (precio.getMonto().compareTo(BigDecimal.ZERO) <= 0) {
-            throw new RuntimeException("No se permite ingresar un precio negativo o igual a cero.");
-        }
-
         PuntosDeConfianza recompensa = inventarioRegistroDto.getRecompensaPuntosDeConfianza();
-        if (recompensa.getCantidad() <= 0) {
-            throw new RuntimeException("No se permite ingresar una recompensa negativa o igual a cero.");
-        }
-
         PuntosDeConfianza precioPDC = inventarioRegistroDto.getPrecioPDC();
-        if (precioPDC.getCantidad() <= 0) {
-            throw new RuntimeException("No se permite ingresar un precio de PDC negativo o igual a cero.");
-        }
 
         InventarioRegistro nuevoInventarioRegistro = inventarioRegistroRepository.save(new InventarioRegistro(stock, precio, recompensa, precioPDC));
         Producto nuevoProducto = productoRepository.save(new Producto(nombreDelProducto));
@@ -188,11 +173,6 @@ public class NegocioService {
     public void modificarHorariosDelNegocio(Long negocioId, int horaApertura, int minutoApertura, int horaCierre, int minutoCierre) {
         LocalTime horarioApertura = LocalTime.of(horaApertura, minutoApertura);
         LocalTime horarioCierre = LocalTime.of(horaCierre, minutoCierre);
-
-        // El horario de apertura debe ser anterior al de cierre.
-        if (horarioApertura.isAfter(horarioCierre)) {
-            throw new RuntimeException("El horario de apertura debe ser anterior al de cierre.");
-        }
 
         // No existe el negocio para el cual se solicita cambiar el horario.
         Optional<Negocio> optionalNegocio = negocioRepository.findById(negocioId);

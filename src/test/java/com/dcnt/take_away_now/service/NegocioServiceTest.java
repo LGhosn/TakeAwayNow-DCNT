@@ -282,24 +282,6 @@ class NegocioServiceTest {
     }
 
     @Test
-    void noSePuedeModificarHorariosDelNegocioCuandoElHorarioDeAperturaEsMayorAlDeCierre() {
-        //given
-        negocioService.crearNegocio(nombrePaseoColon, DiaDeApertura, DiaDeCierre,HoraApertura, MinutoApertura, HoraCierre, MinutoCierre);
-        Optional<Negocio> paseoColon = negocioRepository.findByNombre(nombrePaseoColon);
-
-        // when
-        assertThatThrownBy(
-                () -> {
-                    negocioService.modificarHorariosDelNegocio(paseoColon.get().getId(), 21, 30, 14, 0);
-                }
-        )
-
-        // then: "se lanza error"
-        .isInstanceOf(RuntimeException.class)
-        .hasMessageContaining("El horario de apertura debe ser anterior al de cierre.");
-    }
-
-    @Test
     void noSePuedeModificarHorariosDeUnNegocioQueNoExiste() {
         // when
         assertThatThrownBy(

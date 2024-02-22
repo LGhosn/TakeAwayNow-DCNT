@@ -37,26 +37,6 @@ class NegocioTests {
     void contextLoads() {
     }
 
-    /*@Test
-    void crearUnNegocioConElHorarioDeAperturaPosteriorAlDeCierreLanzaException() {
-        // when: "un negocio es creado con horario de apertura posterior al de cierre"
-        assertThatThrownBy(
-                () -> {
-                    Negocio negocioResultante = new Negocio(
-                        "Buffet Paseo Colón",
-                        HoraDeCierre,
-                        HoraDeApertura,
-                        DiaDeApertura,
-                        DiaDeCierre
-                    );
-                }
-        )
-
-        // then: "se lanza error"
-        .isInstanceOf(IllegalStateException.class)
-        .hasMessageContaining("El horario de apertura debe ser anterior al de cierre.");
-    }*/
-
     @Test
     void unNegocioSeEncuentraCerradoSiAbreDeLunesAViernesYPreguntoUnSabado() {
         // given: "horarios de apertura y cierre, y días de la semana para la apertura y el cierre"
