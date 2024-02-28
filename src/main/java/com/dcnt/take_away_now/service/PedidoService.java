@@ -51,13 +51,12 @@ public class PedidoService {
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
-    /* Queda con esta annotation ya que previo al get se valida la existencia del registro en la base */
+    /* Queda con esta annotation, ya que previo al get se valida la existencia del registro en la base */
     public boolean sePuedeConfirmarUnPedidoParaEstosProductos(Map<Long, Map<String, Object>> productos, Long idNegocio) {
         for (Map.Entry<Long, Map<String, Object>> entry : productos.entrySet()) {
             Long productId = entry.getKey();
             Map<String, Object> productInfo = entry.getValue();
 
-            // Obtenemos la cantidad  pedida y si usa o no PdC
             Integer cantidadPedida = (Integer) productInfo.get("cantidad");
 
             if (!esUnProductoDeEseNegocio(idNegocio, productId)) {
@@ -84,7 +83,7 @@ public class PedidoService {
             Long productId = entry.getKey();
             Map<String, Object> productInfo = entry.getValue();
 
-            // Obtenemos la cantidad  pedida y si usa o no PdC
+            // Obtenemos la cantidad pedida y si usa o no PdC
             Integer cantidadPedida = (Integer) productInfo.get("cantidad");
             Integer usaPdc = (Integer) productInfo.get("usaPdc");
 
@@ -229,11 +228,9 @@ public class PedidoService {
         }
 
         Pedido pedido = optionalPedido.get();
-        if (pedido.estado != Pedido.EstadoDelPedido.LISTO_PARA_RETIRAR) {
-            throw  new RuntimeException("No se puede retirar dicho pedido ya que el mismo no se encuentra listo para retirar.");
-        }
         PuntosDeConfianza pdcRecompensa =  obtenerPuntosDeConfianzaDeUnPedido(idPedido);
         pedido.confirmarRetiroDelPedido(pdcRecompensa, LocalDate.now());
+
         pedidoRepository.save(pedido);
     }
 
@@ -243,13 +240,9 @@ public class PedidoService {
             throw  new RuntimeException("No existe el pedido que usted busca cancelar.");
         }
 
-        Pedido pedido = optionalPedido.get();
-        List<Pedido.EstadoDelPedido> estadosPosibles = Arrays.asList(Pedido.EstadoDelPedido.AGUARDANDO_PREPARACION, Pedido.EstadoDelPedido.EN_PREPARACION, Pedido.EstadoDelPedido.LISTO_PARA_RETIRAR);
-        if (!estadosPosibles.contains(pedido.estado)) {
-            throw  new RuntimeException("No se puede cancelar dicho pedido ya que el mismo no se encuentra aguardando preparación, en preparación ni listo para retirar.");
-        }
-
         PuntosDeConfianza pdcPedido = obtenerPuntosDeConfianzaDeUnPedido(idPedido);
+
+        Pedido pedido = optionalPedido.get();
         Cliente c = pedido.getCliente();
         pedido.cancelarPedido(pdcPedido);
 
@@ -268,11 +261,8 @@ public class PedidoService {
         }
 
         Pedido pedido = optionalPedido.get();
-        if (pedido.estado != Pedido.EstadoDelPedido.RETIRADO) {
-            throw  new RuntimeException("No se puede solicitar la devolución de dicho pedido ya que el mismo no se encontraba retirado.");
-        }
-
         pedido.solicitarDevolucion();
+
         pedidoRepository.save(pedido);
     }
 
@@ -283,10 +273,6 @@ public class PedidoService {
         }
 
         Pedido pedido = optionalPedido.get();
-        if (pedido.estado != Pedido.EstadoDelPedido.DEVOLUCION_SOLICITADA) {
-            throw  new RuntimeException("No se puede aceptar la devolución de dicho pedido ya que el mismo no se encuentra solicitando devolución.");
-        }
-
         pedido.aceptarDevolucion();
 
         // Se actualiza el stock de cada producto
@@ -302,11 +288,8 @@ public class PedidoService {
         }
 
         Pedido pedido = optionalPedido.get();
-        if (pedido.estado != Pedido.EstadoDelPedido.DEVOLUCION_SOLICITADA) {
-            throw  new RuntimeException("No se puede denegar la devolución de dicho pedido ya que el mismo no se encuentra solicitando devolución.");
-        }
-
         pedido.denegarDevolucion();
+
         pedidoRepository.save(pedido);
     }
 

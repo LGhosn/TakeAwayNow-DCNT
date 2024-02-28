@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @Data
@@ -110,6 +111,11 @@ public class Pedido {
     }
 
 public void confirmarRetiroDelPedido(PuntosDeConfianza pdcRecompensa, LocalDate hoy) {
+        // Corroboramos que el pedido se encuentre en el estado adecuado.
+        if (this.estado != Pedido.EstadoDelPedido.LISTO_PARA_RETIRAR) {
+            throw  new RuntimeException("No se puede retirar dicho pedido ya que el mismo no se encuentra listo para retirar.");
+        }
+
         // le doy al cliente sus pdc y saldo de reintegro en caso de ser necesario.
         Cliente cliente = this.getCliente();
         Dinero reintegroPorBeneficios = new Dinero(0);
@@ -136,6 +142,13 @@ public void confirmarRetiroDelPedido(PuntosDeConfianza pdcRecompensa, LocalDate 
     }
 
     public void cancelarPedido(PuntosDeConfianza pdcPedido) {
+        // Corroboramos que el pedido se encuentre en el estado adecuado.
+        List<Pedido.EstadoDelPedido> estadosPosibles = Arrays.asList(Pedido.EstadoDelPedido.AGUARDANDO_PREPARACION, Pedido.EstadoDelPedido.EN_PREPARACION, Pedido.EstadoDelPedido.LISTO_PARA_RETIRAR);
+        if (!estadosPosibles.contains(this.estado)) {
+            throw  new RuntimeException("No se puede cancelar dicho pedido ya que el mismo no se encuentra aguardando preparación, en preparación ni listo para retirar.");
+        }
+
+        // En función del plan del cliente y el estado del pedido se devuelven pdc y/o saldo.
         if (!cliente.esPrime()) {
             // En caso de que el estado sea AGUARDANDO_PREPARACION, entonces el cliente pierde puntos de confianza (levemente, un 5% del total que del pedido) pero recupera su dinero.
             if (this.getEstado() == Pedido.EstadoDelPedido.AGUARDANDO_PREPARACION) {
@@ -159,6 +172,11 @@ public void confirmarRetiroDelPedido(PuntosDeConfianza pdcRecompensa, LocalDate 
     }
 
     public void solicitarDevolucion() {
+        // Corroboramos que el pedido se encuentre en el estado adecuado.
+        if (this.estado != Pedido.EstadoDelPedido.RETIRADO) {
+            throw  new RuntimeException("No se puede solicitar la devolución de dicho pedido ya que el mismo no se encontraba retirado.");
+        }
+
         // Corroboramos si el cliente tiene plan prime.
         if (!this.getCliente().esPrime()) {
             // Verificamos si pasaron menos de 5 minutos desde su retiro.
@@ -178,6 +196,11 @@ public void confirmarRetiroDelPedido(PuntosDeConfianza pdcRecompensa, LocalDate 
     }
 
     public void aceptarDevolucion() {
+        // Corroboramos que el pedido se encuentre en el estado adecuado.
+        if (this.estado != Pedido.EstadoDelPedido.DEVOLUCION_SOLICITADA) {
+            throw  new RuntimeException("No se puede aceptar la devolución de dicho pedido ya que el mismo no se encuentra solicitando devolución.");
+        }
+
         // El cliente obtiene su dinero nuevamente y sus pdc no se ven afectados.
         cliente.setSaldo(cliente.getSaldo().plus(this.getPrecioTotal()));
 
@@ -186,6 +209,11 @@ public void confirmarRetiroDelPedido(PuntosDeConfianza pdcRecompensa, LocalDate 
     }
 
     public void denegarDevolucion() {
+        // Corroboramos que el pedido se encuentre en el estado adecuado.
+        if (this.estado != Pedido.EstadoDelPedido.DEVOLUCION_SOLICITADA) {
+            throw  new RuntimeException("No se puede denegar la devolución de dicho pedido ya que el mismo no se encuentra solicitando devolución.");
+        }
+
         // El cliente no obtiene su dinero nuevamente ni sus pdc no se ven afectados y dado que no se devuelve el pedido, el stock queda tal cual.
         // Actualizamos el estado del pedido.
         this.setEstado(Pedido.EstadoDelPedido.DEVOLUCION_DENEGADA);
