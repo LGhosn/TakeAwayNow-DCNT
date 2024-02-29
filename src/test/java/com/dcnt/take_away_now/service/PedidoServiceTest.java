@@ -769,7 +769,7 @@ class PedidoServiceTest {
         clienteRepository.save(cliente);
         clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
         LocalDate hoy = LocalDate.now();
-        clienteService.establecerFechaDeNacimiento(cliente.getId(), 1987,hoy.getMonth().getValue(), hoy.getDayOfMonth());
+        clienteService.establecerFechaDeNacimiento(cliente.getId(), 1996,hoy.getMonth().getValue(), hoy.getDayOfMonth());
 
         Long stockInicial = 10L;
         InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(stockInicial, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(40.0));
@@ -809,7 +809,7 @@ class PedidoServiceTest {
         clienteRepository.save(cliente);
         clienteService.cargarSaldo(cliente.getId(), BigDecimal.valueOf(1000));
         LocalDate hoy = LocalDate.now();
-        clienteService.establecerFechaDeNacimiento(cliente.getId(), 1987,hoy.getMonth().getValue(), hoy.getDayOfMonth());
+        clienteService.establecerFechaDeNacimiento(cliente.getId(), 1996,hoy.getMonth().getValue(), hoy.getDayOfMonth());
 
         Long stockInicial = 10L;
         InventarioRegistroDto inventarioRegistroDto = new InventarioRegistroDto(stockInicial, new Dinero(100), new PuntosDeConfianza(20.0),new PuntosDeConfianza(40.0));
